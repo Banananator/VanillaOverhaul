@@ -1,0 +1,8 @@
+name: "duoempire",
+displayName: "DuoDustry",
+description: "THE DUO SHALL RISE!",
+author: "Banananator",
+version: "Duo V1",
+minGameVersion: 145,
+main: "DuoDustry.DuoDustryLoader",
+java: true,
