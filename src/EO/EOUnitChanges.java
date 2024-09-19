@@ -44,11 +44,11 @@ public class EOUnitChanges {
         UnitTypes.zenith.weapons.get(0).shoot = new ShootAlternate(2){{shots = 2;}};
         UnitTypes.zenith.weapons.get(0).bullet.trailWidth = 2.4f;
         UnitTypes.zenith.weapons.get(0).bullet.trailLength = 3;
-        UnitTypes.antumbra.weapons.get(4).bullet.hitEffect = new MultiEffect(Fx.shootBig, Fx.hitBulletSmall);
+        UnitTypes.antumbra.weapons.get(2).bullet.hitEffect = new MultiEffect(Fx.shootBig, Fx.hitBulletSmall);
         UnitTypes.antumbra.weapons.get(0).bullet.trailWidth = UnitTypes.antumbra.weapons.get(1).bullet.trailWidth = 2.4f;
-        UnitTypes.antumbra.weapons.get(2).bullet.trailWidth = UnitTypes.antumbra.weapons.get(3).bullet.trailWidth = 2.4f;
+        UnitTypes.antumbra.weapons.get(1).bullet.trailWidth = UnitTypes.antumbra.weapons.get(3).bullet.trailWidth = 2.4f;
         UnitTypes.antumbra.weapons.get(0).bullet.trailLength = UnitTypes.antumbra.weapons.get(1).bullet.trailLength = 3;
-        UnitTypes.antumbra.weapons.get(2).bullet.trailLength = UnitTypes.antumbra.weapons.get(3).bullet.trailLength = 3;
+        UnitTypes.antumbra.weapons.get(1).bullet.trailLength = UnitTypes.antumbra.weapons.get(3).bullet.trailLength = 3;
 
         UnitTypes.poly.weapons.get(0).bullet.despawnHit = true;
         UnitTypes.poly.weapons.get(0).bullet.hitEffect = hitLaserBoltGreen;
@@ -73,13 +73,15 @@ public class EOUnitChanges {
         });
 
         UnitTypes.risso.weapons.get(0).bullet.hitEffect = new MultiEffect(Fx.shootSmall, Fx.hitBulletSmall);
-        UnitTypes.risso.weapons.get(2).bullet.trailWidth = 2.4f; UnitTypes.risso.weapons.get(2).bullet.trailLength = 4;
-        UnitTypes.risso.weapons.get(2).bullet.trailColor = Pal.bulletYellowBack;
-        UnitTypes.bryde.weapons.get(1).bullet.trailWidth = UnitTypes.risso.weapons.get(2).bullet.trailWidth = 2.4f;
-        UnitTypes.bryde.weapons.get(1).bullet.trailLength = UnitTypes.risso.weapons.get(2).bullet.trailLength = 4;
-        UnitTypes.bryde.weapons.get(1).bullet.trailColor = UnitTypes.risso.weapons.get(2).bullet.trailColor = Pal.bulletYellowBack;
+        UnitTypes.risso.weapons.get(1).bullet.trailWidth = 2.4f;
+        UnitTypes.risso.weapons.get(1).bullet.trailLength = 4;
+        UnitTypes.risso.weapons.get(1).bullet.trailColor = Pal.bulletYellowBack;
+        UnitTypes.bryde.weapons.get(1).bullet.trailWidth = 2.4f;
+        UnitTypes.bryde.weapons.get(1).bullet.trailLength =  4;
+        UnitTypes.bryde.weapons.get(1).bullet.trailColor = Pal.bulletYellowBack;
         UnitTypes.sei.weapons.get(1).bullet.hitEffect = new MultiEffect(Fx.shootBig, Fx.hitBulletSmall);
-        UnitTypes.sei.weapons.get(0).bullet.trailWidth = 2.4f; UnitTypes.sei.weapons.get(0).bullet.trailLength = 3;
+        UnitTypes.sei.weapons.get(0).bullet.trailWidth = 2.4f;
+        UnitTypes.sei.weapons.get(0).bullet.trailLength = 3;
         UnitTypes.sei.weapons.get(0).bullet.trailColor = Pal.bulletYellowBack;
         BulletType omuraShot = new RailBulletType(){{
             length = 500;
