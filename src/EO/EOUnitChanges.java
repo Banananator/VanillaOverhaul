@@ -12,7 +12,7 @@ import mindustry.graphics.Pal;
 public class EOUnitChanges {
     public static void load(){
 
-        Effect hitLaserBoltGreen = new MultiEffect(new WrapEffect(Fx.shootSmallColor, Pal.heal), new WrapEffect(Fx.shootSmallColor, Pal.heal, 90), new WrapEffect(Fx.shootSmallColor, Pal.heal, 180), new WrapEffect(Fx.shootSmallColor, Pal.heal, 270), Fx.hitLaser); UnitTypes.poly.weapons.get(0).bullet.despawnEffect = Fx.none;
+        Effect hitLaserBoltGreen = new MultiEffect(new WrapEffect(Fx.shootSmallColor, Pal.heal), new WrapEffect(Fx.shootSmallColor, Pal.heal, 90), new WrapEffect(Fx.shootSmallColor, Pal.heal, 180), new WrapEffect(Fx.shootSmallColor, Pal.heal, 270), Fx.hitLaser);
 
         UnitTypes.alpha.trailLength = 40;
         UnitTypes.beta.trailLength = 50;
@@ -37,6 +37,7 @@ public class EOUnitChanges {
         UnitTypes.nova.weapons.get(0).bullet.despawnHit = true;
         UnitTypes.nova.weapons.get(0).bullet.shootEffect = Fx.shootHeal;
         UnitTypes.nova.weapons.get(0).bullet.hitEffect = hitLaserBoltGreen;
+        UnitTypes.nova.weapons.get(0).bullet.despawnEffect = Fx.none;
 
         UnitTypes.atrax.weapons.get(0).shootY = 5.5f;
 
@@ -52,14 +53,17 @@ public class EOUnitChanges {
 
         UnitTypes.poly.weapons.get(0).bullet.despawnHit = true;
         UnitTypes.poly.weapons.get(0).bullet.hitEffect = hitLaserBoltGreen;
+        UnitTypes.poly.weapons.get(0).bullet.despawnEffect = Fx.none;
         UnitTypes.poly.weapons.get(0).bullet.trailWidth = 2;
         UnitTypes.poly.weapons.get(0).bullet.trailLength = 4;
         UnitTypes.mega.weapons.get(0).bullet.despawnHit = true;
         UnitTypes.mega.weapons.get(0).bullet.shootEffect = Fx.shootHeal;
         UnitTypes.mega.weapons.get(0).bullet.hitEffect = hitLaserBoltGreen;
+        UnitTypes.mega.weapons.get(0).bullet.despawnEffect = Fx.none;
         UnitTypes.mega.weapons.get(1).bullet.despawnHit = true;
         UnitTypes.mega.weapons.get(1).bullet.shootEffect = Fx.shootHeal;
         UnitTypes.mega.weapons.get(1).bullet.hitEffect = hitLaserBoltGreen;
+        UnitTypes.mega.weapons.get(1).bullet.despawnEffect = Fx.none;
         UnitTypes.quad.weapons.get(0).bullet.hitEffect = new MultiEffect(Fx.massiveExplosion, EOEffects.greenBombPlus, 
             new ParticleEffect(){{
                 lifetime = 120;
@@ -107,6 +111,8 @@ public class EOUnitChanges {
                 colorTo = Pal.heal;
             }}
         );
+        UnitTypes.navanax.weapons.get(4).bullet.shootEffect = new MultiEffect(Fx.shootBigColor, Fx.hitEmpSpark);
+        UnitTypes.navanax.weapons.get(4).bullet.smokeEffect = new MultiEffect(Fx.shootBigSmoke2, Fx.hitLaser);
         UnitTypes.navanax.weapons.get(4).bullet.lightning = 9;
         UnitTypes.navanax.weapons.get(4).bullet.lightningDamage = 0;
         UnitTypes.navanax.weapons.get(4).bullet.lightningLength = 16;
