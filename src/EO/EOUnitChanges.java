@@ -69,8 +69,8 @@ public class EOUnitChanges {
                 sizeTo = 70;
                 colorFrom = Color.valueOf("98ffa915");
                 colorTo = Color.valueOf("98ffa905");
-            }
-        });
+            }}
+        );
 
         UnitTypes.risso.weapons.get(0).bullet.hitEffect = new MultiEffect(Fx.shootSmall, Fx.hitBulletSmall);
         UnitTypes.risso.weapons.get(1).bullet.trailWidth = 2.4f;
@@ -96,8 +96,41 @@ public class EOUnitChanges {
         }};
         UnitTypes.omura.weapons.get(0).bullet = omuraShot;
 
-        UnitTypes.retusa.weapons.get(1).bullet.hitEffect = new MultiEffect(new WrapEffect(Fx.shootBigColor, Pal.heal), new WrapEffect(Fx.shootBigColor, Pal.heal, 90), new WrapEffect(Fx.shootBigColor, Pal.heal, 180), new WrapEffect(Fx.shootBigColor, Pal.heal, 270), new WaveEffect(){{}});
-
+        UnitTypes.retusa.weapons.get(1).bullet.hitEffect = new MultiEffect(new WrapEffect(Fx.shootBigColor, Pal.heal), new WrapEffect(Fx.shootBigColor, Pal.heal, 90), new WrapEffect(Fx.shootBigColor, Pal.heal, 180), new WrapEffect(Fx.shootBigColor, Pal.heal, 270),
+            new WaveEffect(){{
+                lifetime = 10;
+                sizeFrom =  1;
+                sizeTo =  32;
+                strokeFrom =  2.5f;
+                strokeTo =  0;
+                colorFrom = Pal.heal;
+                colorTo = Pal.heal;
+            }}
+        );
+        UnitTypes.navanax.weapons.get(4).bullet.lightning = 9;
+        UnitTypes.navanax.weapons.get(4).bullet.lightningDamage = 0;
+        UnitTypes.navanax.weapons.get(4).bullet.lightningLength = 16;
+        UnitTypes.navanax.weapons.get(4).bullet.lightningLengthRand = 0;
+        UnitTypes.navanax.weapons.get(4).bullet.lightningColor = Pal.heal;
+        UnitTypes.navanax.weapons.get(4).bullet.lightningType = new LightningBulletType(){{
+            lifetime = 20;
+            lightningLength = 16;
+            lightningLengthRand = 0;
+            collides = collidesTiles = collidesAir = collidesGround = false;
+            damage = 0;
+            lightningColor = Pal.heal;
+        }};
+        UnitTypes.navanax.weapons.get(4).bullet.hitEffect = new MultiEffect(EOEffects.navanaxHit, 
+            new ParticleEffect(){{
+                lifetime = 120;
+                particles = 1;
+                length = 0;
+                sizeFrom = 100;
+                sizeTo = 100;
+                colorFrom = Color.valueOf("98ffa915");
+                colorTo = Color.valueOf("98ffa905");
+            }}
+        );
 
         UnitTypes.stell.weapons.get(0).bullet.hitEffect = new MultiEffect(Fx.shootSmallColor, Fx.hitBulletColor);
         UnitTypes.precept.weapons.get(0).bullet.fragBullet.hitEffect = new MultiEffect(Fx.shootSmallColor, Fx.hitBulletColor);
