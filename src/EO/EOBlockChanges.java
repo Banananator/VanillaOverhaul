@@ -11,7 +11,7 @@ import arc.util.Structs;
 import mindustry.Vars;
 import mindustry.content.*;
 import mindustry.entities.bullet.*;
-import mindustry.entities.effect.*;
+import mindustry.entities.effect.ParticleEffect;
 import mindustry.game.SpawnGroup;
 import mindustry.game.Waves;
 import mindustry.gen.Bullet;
@@ -20,7 +20,8 @@ import mindustry.type.Item;
 import mindustry.type.ItemStack;
 import mindustry.type.UnitType;
 import mindustry.world.Block;
-import mindustry.world.blocks.defense.turrets.*;
+import mindustry.world.blocks.defense.turrets.ItemTurret;
+import mindustry.world.blocks.defense.turrets.LaserTurret;
 import mindustry.world.blocks.logic.CanvasBlock;
 import mindustry.world.blocks.production.GenericCrafter;
 import mindustry.world.blocks.storage.CoreBlock;
@@ -32,8 +33,65 @@ import java.util.Arrays;
 import static mindustry.content.UnitTypes.*;
 
 public class EOBlockChanges {
+
+    private static void addReq(Block target, ItemStack... items){
+		ItemStack[] newReq = new ItemStack[items.length + target.requirements.length];
+		
+		System.arraycopy(target.requirements, 0, newReq, 0, target.requirements.length);
+		System.arraycopy(items, 0, newReq, target.requirements.length, items.length);
+		
+		target.requirements = newReq;
+		Arrays.sort(target.requirements, Structs.comparingInt((j) -> j.item.id));
+	}
+	
+	private static void removeReq(Block target, Item... items){
+		Seq<ItemStack> req = new Seq<>(ItemStack.class);
+		req.addAll(target.requirements);
+		
+		for(Item item : items)req.each(itemReq -> itemReq.item == item, req::remove);
+		
+		target.requirements = req.shrink();
+	}
+    
     public static void load(){
-        Blocks.duo.ammoTypes.put(Items.copper, new BasicBulletType(2.5f, 9){{
+        spectre: {
+			if(!(Blocks.spectre instanceof ItemTurret))break spectre;
+			ItemTurret block = (ItemTurret)Blocks.spectre;
+			block.range += 80;
+			block.health *= 1.5f;
+			addReq(Blocks.spectre,
+				new ItemStack(Items.lead, 220)
+			);
+			removeReq(Blocks.spectre, Items.silicon, Items.surgeAlloy, Items.graphite);
+			for(Item item : block.ammoTypes.keys()){
+				BulletType type = block.ammoTypes.get(item);
+				type.damage *= 2f;
+				type.pierceCap *= 1.5f;
+				type.lifetime += 8f;
+			}
+			
+			block.ammoTypes.put(Items.copper, new BasicBulletType(){{
+				lightningColor = trailColor = hitColor = lightColor = backColor = Pal.heal;
+				frontColor = Color.white;
+				speed= 10;
+				lifetime= 30;
+				knockback= 1.8f;
+				width= 18;
+				height= 20;
+				damage= 175;
+				splashDamageRadius= 38;
+				reloadMultiplier = 1.2f;
+				splashDamage= 35;
+				shootEffect= Fx.shootBig;
+				ammoMultiplier= 2;
+				lightningDamage= 50;
+				lightning= 1;
+				lightningLengthRand = 3;
+				lightningLength = 3;
+			}});
+		}
+
+        /*Blocks.duo.ammoTypes.put(Items.copper, new BasicBulletType(2.5f, 9){{
             lifetime = 60;
             ammoMultiplier = 2;
             width = 7;
@@ -273,6 +331,6 @@ public class EOBlockChanges {
             trailRotation = true;
             rotationOffset = 90;
         }});
-        Blocks.disperse.limitRange(5);
+        Blocks.disperse.limitRange(5);*/
     }
 }
