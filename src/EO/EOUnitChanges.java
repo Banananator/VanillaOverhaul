@@ -112,14 +112,6 @@ public class EOUnitChanges {
         UnitTypes.navanax.weapons.get(4).bullet.lightningLength = 16;
         UnitTypes.navanax.weapons.get(4).bullet.lightningLengthRand = 0;
         UnitTypes.navanax.weapons.get(4).bullet.lightningColor = Pal.heal;
-        UnitTypes.navanax.weapons.get(4).bullet.lightningType = new LightningBulletType(){{
-            lifetime = 20;
-            lightningLength = 16;
-            lightningLengthRand = 0;
-            collides = collidesTiles = collidesAir = collidesGround = false;
-            damage = 0;
-            lightningColor = Pal.heal;
-        }};
         UnitTypes.navanax.weapons.get(4).bullet.hitEffect = new MultiEffect(EOEffects.navanaxHit, 
             new ParticleEffect(){{
                 lifetime = 120;
@@ -127,7 +119,7 @@ public class EOUnitChanges {
                 length = 0;
                 sizeFrom = 100;
                 sizeTo = 100;
-                colorFrom = Color.valueOf("98ffa915");
+                colorFrom = Color.valueOf("98ffa920");
                 colorTo = Color.valueOf("98ffa905");
             }}
         );
