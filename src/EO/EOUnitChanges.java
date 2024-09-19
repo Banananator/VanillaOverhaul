@@ -45,15 +45,15 @@ public class EOUnitChanges {
         UnitTypes.zenith.weapons.get(0).bullet.trailWidth = 2.4f;
         UnitTypes.zenith.weapons.get(0).bullet.trailLength = 3;
         UnitTypes.antumbra.weapons.get(2).bullet.hitEffect = new MultiEffect(Fx.shootBig, Fx.hitBulletSmall);
-        UnitTypes.antumbra.weapons.get(0).bullet.trailWidth = UnitTypes.antumbra.weapons.get(1).bullet.trailWidth = 2.4f;
-        UnitTypes.antumbra.weapons.get(1).bullet.trailWidth = UnitTypes.antumbra.weapons.get(3).bullet.trailWidth = 2.4f;
-        UnitTypes.antumbra.weapons.get(0).bullet.trailLength = UnitTypes.antumbra.weapons.get(1).bullet.trailLength = 3;
-        UnitTypes.antumbra.weapons.get(1).bullet.trailLength = UnitTypes.antumbra.weapons.get(3).bullet.trailLength = 3;
+        UnitTypes.antumbra.weapons.get(0).bullet.trailWidth = 2.4f;
+        UnitTypes.antumbra.weapons.get(1).bullet.trailWidth = 2.4f;
+        UnitTypes.antumbra.weapons.get(0).bullet.trailLength = 3;
+        UnitTypes.antumbra.weapons.get(1).bullet.trailLength = 3;
 
         UnitTypes.poly.weapons.get(0).bullet.despawnHit = true;
         UnitTypes.poly.weapons.get(0).bullet.hitEffect = hitLaserBoltGreen;
-        UnitTypes.poly.weapons.get(0).bullet.trailWidth = UnitTypes.poly.weapons.get(1).bullet.trailWidth = 2;
-        UnitTypes.poly.weapons.get(0).bullet.trailLength = UnitTypes.poly.weapons.get(1).bullet.trailLength = 4;
+        UnitTypes.poly.weapons.get(0).bullet.trailWidth = 2;
+        UnitTypes.poly.weapons.get(0).bullet.trailLength = 4;
         UnitTypes.mega.weapons.get(0).bullet.despawnHit = true;
         UnitTypes.mega.weapons.get(0).bullet.shootEffect = Fx.shootHeal;
         UnitTypes.mega.weapons.get(0).bullet.hitEffect = hitLaserBoltGreen;
