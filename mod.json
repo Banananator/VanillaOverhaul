@@ -7,5 +7,5 @@
     "minGameVersion": 145,
     "main": "EO.EOLoader",
     "java": true,
-    "hidden": true
+    "hidden": false
 }
