@@ -7,7 +7,7 @@ public class EOLoader extends Mod{
 	public EOLoader(){}
 
     @Override
-    public void loadContent(){
+    public void init(){
         EOUnitChanges.load();
         EOBlockChanges.load();
     }
