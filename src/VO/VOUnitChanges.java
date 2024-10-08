@@ -75,7 +75,7 @@ public class VOUnitChanges {
         UnitTypes.atrax.weapons.get(0).bullet.trailWidth = 3.1f;
         UnitTypes.atrax.weapons.get(0).bullet.trailLength = 4;
         UnitTypes.arkyid.weapons.get(3).bullet.hitEffect = new MultiEffect(Fx.sapExplosion, new ParticleEffect(){{
-            lifetime = 80;
+            lifetime = 90;
             particles = 7;
             length = 60;
             sizeFrom = 7;
@@ -83,10 +83,10 @@ public class VOUnitChanges {
             colorFrom = Pal.sap.cpy().a(0.5f);
             colorTo = Pal.sap.cpy().a(0.3f);
             interp = Interp.pow5Out;
-            sizeInterp = Interp.pow4In;
+            sizeInterp = Interp.pow3In;
         }},
         new ParticleEffect(){{
-            lifetime = 80;
+            lifetime = 110;
             particles = 7;
             length = 60;
             sizeFrom = 12;
@@ -94,7 +94,7 @@ public class VOUnitChanges {
             colorFrom = Pal.sap.cpy().a(0.5f);
             colorTo = Pal.sap.cpy().a(0.3f);
             interp = Interp.pow5Out;
-            sizeInterp = Interp.pow4In;
+            sizeInterp = Interp.pow3In;
         }});
 
         UnitTypes.flare.weapons.get(0).bullet.hitEffect = new MultiEffect(Fx.shootSmall, Fx.hitBulletSmall);
