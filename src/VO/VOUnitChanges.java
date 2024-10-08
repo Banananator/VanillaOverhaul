@@ -1,7 +1,7 @@
 package VO;
 
 import arc.graphics.Color;
-import arc.math.Interp;
+import arc.math.*;
 import mindustry.content.*;
 import mindustry.entities.Effect;
 import mindustry.entities.bullet.*;
@@ -72,6 +72,19 @@ public class VOUnitChanges {
         UnitTypes.nova.weapons.get(0).bullet.despawnEffect = Fx.none;
 
         UnitTypes.atrax.weapons.get(0).shootY = 5.5f;
+        UnitTypes.atrax.weapons.get(0).bullet.trailWidth = 3.1f;
+        UnitTypes.atrax.weapons.get(0).bullet.trailLength = 4;
+        UnitTypes.arkyid.weapons.get(3).bullet.hitEffect = new MultiEffect(Fx.sapExplosion, new ParticleEffect(){{
+            lifetime = 80;
+            particles = 7;
+            length = 60;
+            sizeFrom = 12;
+            sizeTo = 0;
+            colorFrom = Pal.sap.cpy().a(0.4f);
+            colorTo = Pal.sap.cpy().a(0.3f);
+            interp = Interp.pow4Out;
+            sizeInterp = Interp.pow4In;
+        }});
 
         UnitTypes.flare.weapons.get(0).bullet.hitEffect = new MultiEffect(Fx.shootSmall, Fx.hitBulletSmall);
         UnitTypes.zenith.weapons.get(0).shoot = new ShootAlternate(2){{shots = 2;}};
