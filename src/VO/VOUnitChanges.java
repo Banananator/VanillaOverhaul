@@ -36,13 +36,13 @@ public class VOUnitChanges {
         UnitTypes.mace.weapons.clear();
         UnitTypes.mace.weapons.add(new Weapon("flamethrower"){{
             top = false;
-            reload = 11;//5;
+            reload = 5;
             shootY = 2;
-            shootY = 5.8f;
-            recoil = 0.5f;
+            shootY = 5.9f;
+            recoil = 0;
             ejectEffect = Fx.none;
             shootSound = Sounds.flame;
-            bullet = new VOFlameBulletType(4.2f, 37/*17*/){{
+            bullet = new VOFlameBulletType(4.2f, 17){{
                 lifetime = 13;
                 hitSize = 7;
                 ammoMultiplier = 3;
@@ -53,10 +53,10 @@ public class VOUnitChanges {
                 pierceCap = 2;
                 status = StatusEffects.burning;
                 statusDuration = 60 * 4;
-                particleAmount = 14;
-                particleSizeScl = 1.25f;
+                particleAmount = 20;
+                particleSizeScl = 1.6f;
                 particleSpread = 10f;
-                hitEffect = Fx.hitFlameSmall;
+                //hitEffect = Fx.hitFlameSmall;
                 despawnEffect = Fx.none;
                 smokeColors = new Color[]{Pal.darkFlame, Color.darkGray, Color.gray};
                 colors = new Color[]{Color.white, Color.valueOf("fff4ac"), Pal.lightFlame, Pal.darkFlame, Color.gray};

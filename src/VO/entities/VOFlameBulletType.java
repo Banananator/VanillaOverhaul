@@ -54,8 +54,8 @@ public class VOFlameBulletType extends BulletType{
                 float slope = (0.5f - Math.abs(e.fin(Interp.pow2InInverse) - 0.5f)) * 2f;
 
                 Angles.randLenVectors(e.id, particleAmount, e.fin(Interp.pow5Out) * ((range * 1.125f) + 15f), e.rotation, particleSpread, (x, y) -> {
-                    Fill.circle(e.x + x, e.y + y, 0.65f + slope * particleSizeScl);
-                    Fill.circle(e.x + (x / 2f), e.y + (y / 2f), 0.5f + slope * (particleSizeScl / 2f));
+                    Fill.circle(e.x + x, e.y + y, slope * (particleSizeScl * 1.5f));
+                    Fill.circle(e.x + (x / 2f), e.y + (y / 2f), slope * (particleSizeScl / (4 / 3)));
                 });
             }).followParent(false).layer(layer - 0.001f);
         }
