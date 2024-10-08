@@ -31,12 +31,13 @@ public class VOUnitChanges {
         UnitTypes.gamma.weapons.get(0).bullet.hitEffect = new MultiEffect(Fx.shootSmall, Fx.hitBulletSmall);
 
         UnitTypes.dagger.weapons.get(0).bullet.hitEffect = new MultiEffect(Fx.shootSmall, Fx.hitBulletSmall);
-        UnitTypes.mace.weapons.clear();//get(0).shootY = 5.5f;
+        UnitTypes.mace.weapons.clear();
         UnitTypes.mace.weapons.add(new Weapon("flamethrower"){{
             top = false;
             reload = 5;
             shootY = 2;
-            recoil = 1;
+            shootY = 5.8f;
+            recoil = 0.5f;
             ejectEffect = Fx.none;
             shootSound = Sounds.flame;
             bullet = new BulletType(4.2f, 17){{

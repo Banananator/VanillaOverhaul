@@ -38,15 +38,15 @@ public class VOFx {
         color(Pal.lightFlame, Pal.darkFlame, Color.gray, e.fin());
 
         randLenVectors(e.id, 8, e.finpow() * 60f, e.rotation, 10f, (x, y) -> {
-            Fill.circle(e.x + x, e.y + y, 0.65f + e.fout() * 1.5f);
+            Fill.circle(e.x + x, e.y + y, e.fout() * 1.75f);
         });
     }),
 
     shootSmallFlameSmoke = new Effect(70f, 80f, e -> {
-        color(Pal.darkFlame.cpy().a(0.5f), /*Color.gray.cpy().a(0.3f), */Color.gray.cpy().a(0f), e.fin());
+        color(Pal.darkFlame.cpy().a(0.5f), Color.gray.cpy().a(0f), e.fin());
 
-        randLenVectors(e.id, 6, e.finpow() * 60f, e.rotation, 10f, (x, y) -> {
-            Fill.circle(e.x + x, e.y + y, 1f + e.fout() * 1.6f);
+        randLenVectors(e.id, 8, e.finpow() * 60f, e.rotation, 10f, (x, y) -> {
+            Fill.circle(e.x + x, e.y + y, e.fout() * 2.2f);
         });
     }),
 
