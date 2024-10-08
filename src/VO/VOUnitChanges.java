@@ -11,6 +11,8 @@ import mindustry.gen.Sounds;
 import mindustry.graphics.Pal;
 import mindustry.type.Weapon;
 
+import VO.entities.*;
+
 public class VOUnitChanges {
     public static void load(){
 
@@ -34,14 +36,14 @@ public class VOUnitChanges {
         UnitTypes.mace.weapons.clear();
         UnitTypes.mace.weapons.add(new Weapon("flamethrower"){{
             top = false;
-            reload = 5;
+            reload = 11;//5;
             shootY = 2;
             shootY = 5.8f;
             recoil = 0.5f;
             ejectEffect = Fx.none;
             shootSound = Sounds.flame;
-            bullet = new BulletType(4.2f, 17){{
-                lifetime = 13;
+            bullet = new VOFlameBulletType(4.2f, 37/*17*/){{
+                lifetime = 32;
                 hitSize = 7;
                 ammoMultiplier = 3;
                 keepVelocity = false;
@@ -51,8 +53,9 @@ public class VOUnitChanges {
                 pierceCap = 2;
                 status = StatusEffects.burning;
                 statusDuration = 60 * 4;
-                shootEffect = VOFx.shootSmallFlameVariant;
-                smokeEffect = VOFx.shootSmallFlameSmoke;
+                particleAmount = 8;
+                particleSizeScl = 1.25f;
+                particleSpread = 10f;
                 hitEffect = Fx.hitFlameSmall;
                 despawnEffect = Fx.none;
             }};
