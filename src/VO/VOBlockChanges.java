@@ -1,40 +1,16 @@
 package VO;
 
-import arc.func.Cons;
-import arc.func.Intc;
-import arc.graphics.Color;
-import arc.math.Mathf;
-import arc.math.Rand;
-import arc.struct.ObjectSet;
-import arc.struct.Seq;
-import arc.util.Structs;
-import mindustry.Vars;
 import mindustry.content.*;
 import mindustry.entities.bullet.*;
-import mindustry.entities.effect.ParticleEffect;
-import mindustry.game.SpawnGroup;
-import mindustry.game.Waves;
-import mindustry.gen.Bullet;
 import mindustry.graphics.Pal;
-import mindustry.type.Item;
-import mindustry.type.ItemStack;
-import mindustry.type.UnitType;
-import mindustry.world.Block;
 import mindustry.world.blocks.defense.turrets.ItemTurret;
-import mindustry.world.blocks.defense.turrets.LaserTurret;
-import mindustry.world.blocks.logic.CanvasBlock;
-import mindustry.world.blocks.production.GenericCrafter;
-import mindustry.world.blocks.storage.CoreBlock;
-import mindustry.world.meta.BuildVisibility;
 
-import java.lang.reflect.Field;
-import java.util.Arrays;
-
-import static mindustry.content.UnitTypes.*;
+import VO.entities.*;
+import arc.graphics.Color;
 
 public class VOBlockChanges {
 
-    private static void addReq(Block target, ItemStack... items){
+    /*private static void addReq(Block target, ItemStack... items){
 		ItemStack[] newReq = new ItemStack[items.length + target.requirements.length];
 		
 		System.arraycopy(target.requirements, 0, newReq, 0, target.requirements.length);
@@ -51,44 +27,40 @@ public class VOBlockChanges {
 		for(Item item : items)req.each(itemReq -> itemReq.item == item, req::remove);
 		
 		target.requirements = req.shrink();
-	}
+	}*/
     
     public static void load(){
-        spectre: {
-			if(!(Blocks.spectre instanceof ItemTurret))break spectre;
-			ItemTurret block = (ItemTurret)Blocks.spectre;
-			block.range += 80;
-			block.health *= 1.5f;
-			addReq(Blocks.spectre,
-				new ItemStack(Items.lead, 220)
-			);
-			removeReq(Blocks.spectre, Items.silicon, Items.surgeAlloy, Items.graphite);
-			for(Item item : block.ammoTypes.keys()){
-				BulletType type = block.ammoTypes.get(item);
-				type.damage *= 2f;
-				type.pierceCap *= 1.5f;
-				type.lifetime += 8f;
-			}
+        scorch: {
+			if(!(Blocks.scorch instanceof ItemTurret))break scorch;
+			ItemTurret block = (ItemTurret)Blocks.scorch;
 			
-			block.ammoTypes.put(Items.copper, new BasicBulletType(){{
-				lightningColor = trailColor = hitColor = lightColor = backColor = Pal.heal;
-				frontColor = Color.white;
-				speed = 10;
-				lifetime = 30;
-				knockback = 1.8f;
-				width = 18;
-				height = 20;
-				damage = 175;
-				splashDamageRadius = 38;
-				reloadMultiplier = 1.2f;
-				splashDamage = 35;
-				shootEffect = Fx.shootBig;
-				ammoMultiplier = 2;
-				lightningDamage = 50;
-				lightning = 1;
-				lightningLengthRand = 3;
-				lightningLength = 3;
-			}});
+			block.ammoTypes.put(Items.coal, new VOFlameBulletType(3.35f, 17f){{
+                lifetime = 18f;
+                hitSize = 7f;
+                ammoMultiplier = 3f;
+                pierce = true;
+                status = StatusEffects.burning;
+                statusDuration = 60f * 4;
+                particleAmount = 20;
+                particleSizeScl = 1.6f;
+                particleSpread = 10f;
+                smokeColors = new Color[]{Pal.darkFlame, Color.darkGray, Color.gray};
+                colors = new Color[]{Color.white, Color.valueOf("fff4ac"), Pal.lightFlame, Pal.darkFlame, Color.gray};
+            }});
+            block.ammoTypes.put(Items.pyratite, new VOFlameBulletType(4f, 60f){{
+                lifetime = 18f;
+                hitSize = 7f;
+                ammoMultiplier = 6f;
+                rangeChange = 8;
+                pierce = true;
+                status = StatusEffects.burning;
+                statusDuration = 60f * 10;
+                particleAmount = 20;
+                particleSizeScl = 1.6f;
+                particleSpread = 10f;
+                smokeColors = new Color[]{Pal.darkPyraFlame, Color.darkGray, Color.gray};
+                colors = new Color[]{Color.white, Color.valueOf("fff4ac"), Pal.lightPyraFlame, Pal.darkPyraFlame, Color.gray};
+            }});
 		}
 
         /*Blocks.duo.ammoTypes.put(Items.copper, new BasicBulletType(2.5f, 9){{

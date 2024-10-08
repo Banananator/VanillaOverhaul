@@ -39,6 +39,7 @@ public class VOUnitChanges {
             reload = 5;
             shootY = 2;
             shootY = 5.9f;
+            shootX = 0.1f;
             recoil = 0;
             ejectEffect = Fx.none;
             shootSound = Sounds.flame;
@@ -48,6 +49,7 @@ public class VOUnitChanges {
                 ammoMultiplier = 3;
                 keepVelocity = false;
                 hittable = false;
+                collidesAir = true;
                 pierce = true;
                 pierceBuilding = true;
                 pierceCap = 2;
@@ -56,8 +58,6 @@ public class VOUnitChanges {
                 particleAmount = 20;
                 particleSizeScl = 1.6f;
                 particleSpread = 10f;
-                //hitEffect = Fx.hitFlameSmall;
-                despawnEffect = Fx.none;
                 smokeColors = new Color[]{Pal.darkFlame, Color.darkGray, Color.gray};
                 colors = new Color[]{Color.white, Color.valueOf("fff4ac"), Pal.lightFlame, Pal.darkFlame, Color.gray};
             }};
