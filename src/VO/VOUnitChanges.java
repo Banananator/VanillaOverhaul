@@ -43,7 +43,7 @@ public class VOUnitChanges {
             ejectEffect = Fx.none;
             shootSound = Sounds.flame;
             bullet = new VOFlameBulletType(4.2f, 37/*17*/){{
-                lifetime = 32;
+                lifetime = 13;
                 hitSize = 7;
                 ammoMultiplier = 3;
                 keepVelocity = false;
@@ -53,11 +53,13 @@ public class VOUnitChanges {
                 pierceCap = 2;
                 status = StatusEffects.burning;
                 statusDuration = 60 * 4;
-                particleAmount = 8;
+                particleAmount = 14;
                 particleSizeScl = 1.25f;
                 particleSpread = 10f;
                 hitEffect = Fx.hitFlameSmall;
                 despawnEffect = Fx.none;
+                smokeColors = new Color[]{Pal.darkFlame, Color.darkGray, Color.gray};
+                colors = new Color[]{Color.white, Color.valueOf("fff4ac"), Pal.lightFlame, Pal.darkFlame, Color.gray};
             }};
         }});
         UnitTypes.scepter.weapons.get(0).bullet.hitEffect = new MultiEffect(Fx.shootBig, Fx.hitBulletSmall);
