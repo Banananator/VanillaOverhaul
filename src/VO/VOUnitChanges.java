@@ -78,11 +78,22 @@ public class VOUnitChanges {
             lifetime = 80;
             particles = 7;
             length = 60;
+            sizeFrom = 7;
+            sizeTo = 0;
+            colorFrom = Pal.sap.cpy().a(0.5f);
+            colorTo = Pal.sap.cpy().a(0.3f);
+            interp = Interp.pow5Out;
+            sizeInterp = Interp.pow4In;
+        }},
+        new ParticleEffect(){{
+            lifetime = 80;
+            particles = 7;
+            length = 60;
             sizeFrom = 12;
             sizeTo = 0;
-            colorFrom = Pal.sap.cpy().a(0.4f);
+            colorFrom = Pal.sap.cpy().a(0.5f);
             colorTo = Pal.sap.cpy().a(0.3f);
-            interp = Interp.pow4Out;
+            interp = Interp.pow5Out;
             sizeInterp = Interp.pow4In;
         }});
 
