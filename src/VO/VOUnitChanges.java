@@ -131,6 +131,16 @@ public class VOUnitChanges {
                 colorTo = Color.valueOf("98ffa905");
             }}
         );
+        UnitTypes.oct.weapons.add(new Weapon(){{
+            controllable = aiControllable = display = false;
+            reload = 1;
+            shootOnDeath = true;
+            bullet = new ExplosionBulletType(1350, 1200){{
+                shootEffect = Fx.greenBomb;
+                smokeEffect = hitEffect = despawnEffect = Fx.none;
+                healPercent = 100;
+            }};
+        }});
 
         UnitTypes.risso.weapons.get(0).bullet.hitEffect = new MultiEffect(Fx.shootSmall, Fx.hitBulletSmall);
         UnitTypes.risso.weapons.get(1).bullet.trailWidth = 2.4f;
