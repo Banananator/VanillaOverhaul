@@ -1,4 +1,4 @@
-package EO;
+package VO;
 
 import arc.graphics.Color;
 import arc.math.Interp;
@@ -7,9 +7,11 @@ import mindustry.entities.Effect;
 import mindustry.entities.bullet.*;
 import mindustry.entities.effect.*;
 import mindustry.entities.pattern.*;
+import mindustry.gen.Sounds;
 import mindustry.graphics.Pal;
+import mindustry.type.Weapon;
 
-public class EOUnitChanges {
+public class VOUnitChanges {
     public static void load(){
 
         Effect hitLaserBoltGreen = new MultiEffect(new WrapEffect(Fx.shootSmallColor, Pal.heal), new WrapEffect(Fx.shootSmallColor, Pal.heal, 90), new WrapEffect(Fx.shootSmallColor, Pal.heal, 180), new WrapEffect(Fx.shootSmallColor, Pal.heal, 270), Fx.hitLaser);
@@ -29,7 +31,31 @@ public class EOUnitChanges {
         UnitTypes.gamma.weapons.get(0).bullet.hitEffect = new MultiEffect(Fx.shootSmall, Fx.hitBulletSmall);
 
         UnitTypes.dagger.weapons.get(0).bullet.hitEffect = new MultiEffect(Fx.shootSmall, Fx.hitBulletSmall);
-        UnitTypes.mace.weapons.get(0).shootY = 5.5f;
+        UnitTypes.mace.weapons.clear();//get(0).shootY = 5.5f;
+        UnitTypes.mace.weapons.add(new Weapon("flamethrower"){{
+            top = false;
+            reload = 5;
+            shootY = 2;
+            recoil = 1;
+            ejectEffect = Fx.none;
+            shootSound = Sounds.flame;
+            bullet = new BulletType(4.2f, 17){{
+                lifetime = 13;
+                hitSize = 7;
+                ammoMultiplier = 3;
+                keepVelocity = false;
+                hittable = false;
+                pierce = true;
+                pierceBuilding = true;
+                pierceCap = 2;
+                status = StatusEffects.burning;
+                statusDuration = 60 * 4;
+                shootEffect = VOFx.shootSmallFlameVariant;
+                smokeEffect = VOFx.shootSmallFlameSmoke;
+                hitEffect = Fx.hitFlameSmall;
+                despawnEffect = Fx.none;
+            }};
+        }});
         UnitTypes.scepter.weapons.get(0).bullet.hitEffect = new MultiEffect(Fx.shootBig, Fx.hitBulletSmall);
         UnitTypes.scepter.weapons.get(1).bullet.hitEffect = new MultiEffect(Fx.shootSmall, Fx.hitBulletSmall);
         UnitTypes.scepter.weapons.get(2).bullet.hitEffect = new MultiEffect(Fx.shootSmall, Fx.hitBulletSmall);
@@ -64,7 +90,7 @@ public class EOUnitChanges {
         UnitTypes.mega.weapons.get(1).bullet.shootEffect = Fx.shootHeal;
         UnitTypes.mega.weapons.get(1).bullet.hitEffect = hitLaserBoltGreen;
         UnitTypes.mega.weapons.get(1).bullet.despawnEffect = Fx.none;
-        UnitTypes.quad.weapons.get(0).bullet.hitEffect = new MultiEffect(Fx.massiveExplosion, EOEffects.greenBombPlus, 
+        UnitTypes.quad.weapons.get(0).bullet.hitEffect = new MultiEffect(Fx.massiveExplosion, VOFx.greenBombPlus, 
             new ParticleEffect(){{
                 lifetime = 120;
                 particles = 1;
@@ -118,7 +144,7 @@ public class EOUnitChanges {
         UnitTypes.navanax.weapons.get(4).bullet.lightningLength = 16;
         UnitTypes.navanax.weapons.get(4).bullet.lightningLengthRand = 0;
         UnitTypes.navanax.weapons.get(4).bullet.lightningColor = Pal.heal;
-        UnitTypes.navanax.weapons.get(4).bullet.hitEffect = new MultiEffect(EOEffects.navanaxHit, 
+        UnitTypes.navanax.weapons.get(4).bullet.hitEffect = new MultiEffect(VOFx.navanaxHit, 
             new ParticleEffect(){{
                 lifetime = 120;
                 particles = 1;

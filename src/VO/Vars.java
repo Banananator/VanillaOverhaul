@@ -1,4 +1,4 @@
-package EO;
+package VO;
 
 import arc.assets.Loadable;
 

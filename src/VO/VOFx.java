@@ -1,4 +1,4 @@
-package EO;
+package VO;
 
 import arc.graphics.*;
 import arc.graphics.g2d.*;
@@ -28,11 +28,27 @@ import static arc.math.Angles.*;
 import static mindustry.Vars.*;
 
 @SuppressWarnings("unused")
-public class EOEffects {
+public class VOFx {
     public static final Rand rand = new Rand();
     public static final Vec2 v = new Vec2();
 
     public static final Effect
+
+    shootSmallFlameVariant = new Effect(32f, 80f, e -> {
+        color(Pal.lightFlame, Pal.darkFlame, Color.gray, e.fin());
+
+        randLenVectors(e.id, 8, e.finpow() * 60f, e.rotation, 10f, (x, y) -> {
+            Fill.circle(e.x + x, e.y + y, 0.65f + e.fout() * 1.5f);
+        });
+    }),
+
+    shootSmallFlameSmoke = new Effect(70f, 80f, e -> {
+        color(Pal.darkFlame.cpy().a(0.5f), /*Color.gray.cpy().a(0.3f), */Color.gray.cpy().a(0f), e.fin());
+
+        randLenVectors(e.id, 6, e.finpow() * 60f, e.rotation, 10f, (x, y) -> {
+            Fill.circle(e.x + x, e.y + y, 1f + e.fout() * 1.6f);
+        });
+    }),
 
     greenBombPlus = new Effect(40f, 100f, e -> {
         color(Pal.heal);

@@ -1,4 +1,4 @@
-package EO;
+package VO;
 
 import arc.func.Cons;
 import arc.func.Intc;
@@ -32,7 +32,7 @@ import java.util.Arrays;
 
 import static mindustry.content.UnitTypes.*;
 
-public class EOBlockChanges {
+public class VOBlockChanges {
 
     private static void addReq(Block target, ItemStack... items){
 		ItemStack[] newReq = new ItemStack[items.length + target.requirements.length];
@@ -73,19 +73,19 @@ public class EOBlockChanges {
 			block.ammoTypes.put(Items.copper, new BasicBulletType(){{
 				lightningColor = trailColor = hitColor = lightColor = backColor = Pal.heal;
 				frontColor = Color.white;
-				speed= 10;
-				lifetime= 30;
-				knockback= 1.8f;
-				width= 18;
-				height= 20;
-				damage= 175;
-				splashDamageRadius= 38;
+				speed = 10;
+				lifetime = 30;
+				knockback = 1.8f;
+				width = 18;
+				height = 20;
+				damage = 175;
+				splashDamageRadius = 38;
 				reloadMultiplier = 1.2f;
-				splashDamage= 35;
-				shootEffect= Fx.shootBig;
-				ammoMultiplier= 2;
-				lightningDamage= 50;
-				lightning= 1;
+				splashDamage = 35;
+				shootEffect = Fx.shootBig;
+				ammoMultiplier = 2;
+				lightningDamage = 50;
+				lightning = 1;
 				lightningLengthRand = 3;
 				lightningLength = 3;
 			}});
