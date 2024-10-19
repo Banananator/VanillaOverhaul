@@ -286,8 +286,7 @@ public class VOUnitChanges {
         BulletType tecta = UnitTypes.tecta.weapons.get(0).bullet;
         tecta.homingPower = 0.1f;
         tecta.homingDelay = 10;
-        tecta.splashDamageRadius = 37;
-        tecta.hitEffect = new MultiEffect(new WrapEffect(Fx.dynamicSpikes, Pal.techBlue, 24f), new WaveEffect(){{
+        tecta.hitEffect = new MultiEffect(new WrapEffect(Fx.dynamicSpikes, Pal.techBlue, 27f), new WaveEffect(){{
             colorFrom = colorTo = Pal.techBlue;
             sizeTo = 40f;
             lifetime = 12f;
