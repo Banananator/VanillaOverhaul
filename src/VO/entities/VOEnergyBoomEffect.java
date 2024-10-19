@@ -25,6 +25,12 @@ public class VOEnergyBoomEffect extends Effect{
         lifetime = 30;
     }
 
+    @Override
+    public void init(){
+        clip = Math.max(clip, waveSize + waveStroke);
+    }
+
+    @Override
     public void render(EffectContainer e){
         if(waveSize > 0 && waveStroke > 0){
             /*color(waveColorFrom, waveColorTo, e.fin(waveInterp));
