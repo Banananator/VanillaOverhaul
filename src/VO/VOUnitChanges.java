@@ -132,11 +132,20 @@ public class VOUnitChanges {
             }}
         );
         UnitTypes.oct.weapons.add(new Weapon(){{
-            controllable = aiControllable = display = false;
+            controllable = aiControllable = display = mirror = false;
             reload = 1;
+            shootCone = 360;
             shootOnDeath = true;
-            bullet = new ExplosionBulletType(1350, 1200){{
-                shootEffect = Fx.greenBomb;
+            bullet = new ExplosionBulletType(1350, 160){{
+                shootEffect = new VOEnergyBoomEffect(){{
+                    lifetime = 150;
+                    waveSize = 160;
+                    length = 85;
+                    midLength = 35;
+                    width = 9;
+                    midWidth = 5;
+                    color = waveColorFrom = waveColorTo = Pal.heal;
+                }};
                 smokeEffect = hitEffect = despawnEffect = Fx.none;
                 healPercent = 100;
             }};
