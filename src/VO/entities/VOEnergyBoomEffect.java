@@ -35,16 +35,18 @@ public class VOEnergyBoomEffect extends Effect{
             Lines.circle(e.x, e.y, circleRad);*/
 
             float fin = e.fin();
-            float ifin = e.fin(interp);
+            float ifin = e.fin(waveInterp);
             float ox = e.x + Angles.trnsx(e.rotation, 0, 0), oy = e.y + Angles.trnsy(e.rotation, 0, 0);
 
             Draw.color(waveColorFrom, waveColorTo, ifin);
-            Lines.stroke(interp.apply(waveStroke, 0, fin));
+            if(interpStroke = true){
+                stroke(waveInterp.apply(waveStroke, 0, fin));
+            } else stroke(Interp.linear.apply(waveStroke, 0, fin));
 
-            float rad = interp.apply(0, waveSize, fin);
+            float rad = waveInterp.apply(0, waveSize, fin);
             Lines.poly(ox, oy, sides <= 0 ? Lines.circleVertices(rad) : sides, rad, polygonRotation + e.rotation);
 
-            Drawf.light(ox, oy, rad * 3, Draw.getColor(), 0.8f * e.fin(waveInterp));
+            Drawf.light(ox, oy, rad * 3, Draw.getColor(), 0.8f * ifin);
         }
 
         if(width > 0 && length > 0){
