@@ -140,12 +140,13 @@ public class VOUnitChanges {
                 shootEffect = new VOEnergyBoomEffect(){{
                     lifetime = 150;
                     waveSize = 160;
+                    waveStroke = 7;
                     length = 190;
                     midLength = 75;
                     width = 9;
                     midWidth = 5;
                     interp = Interp.pow3In;
-                    waveInterp = Interp.pow4Out;
+                    waveInterp = Interp.pow5Out;
                     color = waveColorFrom = waveColorTo = Pal.heal;
                 }};
                 smokeEffect = hitEffect = despawnEffect = Fx.none;
