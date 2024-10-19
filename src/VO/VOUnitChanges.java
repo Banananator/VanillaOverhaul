@@ -267,7 +267,7 @@ public class VOUnitChanges {
         BulletType cleroi = UnitTypes.cleroi.weapons.get(0).bullet;
         cleroi.splashDamage = 10f; cleroi.splashDamageRadius = 16f;
         cleroi.hitEffect = cleroi.despawnEffect = new MultiEffect(Fx.hitBulletColor, new WaveEffect(){{
-            lifetime = 12f;
+            lifetime = 9f;
             sizeTo = 19f;
             strokeFrom = 3f;
             colorFrom = colorTo = Pal.techBlue;
@@ -275,9 +275,9 @@ public class VOUnitChanges {
         cleroi.fragAngle = cleroi.fragSpread = cleroi.fragRandomSpread = 0;
         cleroi.fragOnAbsorb = false;
         cleroi.fragBullets = 1; cleroi.fragBullet = new LaserBulletType(33){{
-            lifetime = 12;
-            length = 28;
-            width = 7;
+            lifetime = 30;
+            length = 25;
+            width = 12;
             pierceArmor = true;
             hitEffect = Fx.hitBulletColor;
             hitColor = Pal.techBlue;
