@@ -20,30 +20,30 @@ public class VOEnergyBoomEffect extends Effect{
     public VOEnergyBoomEffect(){
         clip = 100;
         lifetime = 30;
+    }
 
-        renderer = e -> {
-            if(waveSize > 0 && waveStroke > 0){
-                color(waveColorFrom, waveColorTo, e.fin(waveInterp));
-                if(interpStroke = true){
-                    stroke(waveInterp.apply(waveStroke, 0, e.fin()));
-                } else stroke(Interp.linear.apply(waveStroke, 0, e.fin()));
-                float circleRad = waveInterp.apply(0, waveSize, e.fin());
-                Lines.circle(e.x, e.y, circleRad);
-            }
+    public void render(EffectContainer e){
+        if(waveSize > 0 && waveStroke > 0){
+            color(waveColorFrom, waveColorTo, e.fin(waveInterp));
+            if(interpStroke = true){
+                stroke(waveInterp.apply(waveStroke, 0, e.fin()));
+            } else stroke(Interp.linear.apply(waveStroke, 0, e.fin()));
+            float circleRad = waveInterp.apply(0, waveSize, e.fin());
+            Lines.circle(e.x, e.y, circleRad);
+        }
 
-            if(width > 0 && length > 0){
-                color(color);
-                for(int i = 0; i < 4; i++){
-                    Drawf.tri(e.x, e.y, width, length * e.fout(interp), (i * 90) + baseRotation);
-                }
+        if(width > 0 && length > 0){
+            color(color);
+            for(int i = 0; i < 4; i++){
+                Drawf.tri(e.x, e.y, width, length * e.fout(interp), (i * 90) + baseRotation);
             }
+        }
     
-            if(midWidth > 0 && midLength > 0){
-                color(midColor);
-                for(int i = 0; i < 4; i++){
-                    Drawf.tri(e.x, e.y, midWidth, midLength * e.fout(interp), (i * 90) + baseRotation);
-                }
+        if(midWidth > 0 && midLength > 0){
+            color(midColor);
+            for(int i = 0; i < 4; i++){
+                Drawf.tri(e.x, e.y, midWidth, midLength * e.fout(interp), (i * 90) + baseRotation);
             }
-        };
+        }
     }
 }

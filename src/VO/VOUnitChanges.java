@@ -145,8 +145,8 @@ public class VOUnitChanges {
                     midLength = 75;
                     width = 9;
                     midWidth = 5;
-                    interp = Interp.pow3In;
-                    waveInterp = Interp.pow5Out;
+                    interp = Interp.pow5In;
+                    waveInterp = Interp.pow10Out;
                     color = waveColorFrom = waveColorTo = Pal.heal;
                 }};
                 smokeEffect = hitEffect = despawnEffect = Fx.none;
