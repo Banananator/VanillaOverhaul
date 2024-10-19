@@ -213,37 +213,45 @@ public class VOUnitChanges {
             targetBuildings = false;
             targetUnits = true;
             beamWidth = 0.5f;
-            x = 0;
-            y = 6.5f;
+            x = y = 0;
             shootY = 0f;
             rotate = true;
             mirror = false;
             repairSpeed = 0.1f / 3f;
             laserColor = healColor = Pal.accent;
+            bullet = new BulletType(){{
+                maxRange = 60f;
+            }};
         }});
         UnitTypes.incite.weapons.add(new RepairBeamWeapon(){{
             targetBuildings = false;
             targetUnits = true;
             beamWidth = 0.5f;
             x = 0;
-            y = 7.5f;
+            y = -0.75f;
             shootY = 0f;
             rotate = true;
             mirror = false;
             repairSpeed = (0.1f / 3f) * 2;
             laserColor = healColor = Pal.accent;
+            bullet = new BulletType(){{
+                maxRange = 60f;
+            }};
         }});
         UnitTypes.emanate.weapons.add(new RepairBeamWeapon(){{
             targetBuildings = false;
             targetUnits = true;
             beamWidth = 0.5f;
-            x = 19f / 4f;
-            y = 19f / 4f;
+            x = 0;
+            y = -2;
             shootY = 0f;
             rotate = true;
-            mirror = true;
-            repairSpeed = (0.1f / 3f) * 2;
+            mirror = false;
+            repairSpeed = (0.1f / 3f) * 4;
             laserColor = healColor = Pal.accent;
+            bullet = new BulletType(){{
+                maxRange = 65f;
+            }};
         }});
         UnitTypes.stell.weapons.get(0).bullet.hitEffect = new MultiEffect(Fx.shootSmallColor, Fx.hitBulletColor);
         UnitTypes.precept.weapons.get(0).bullet.hitEffect = new MultiEffect(Fx.shootBigColor, Fx.blastExplosion);
