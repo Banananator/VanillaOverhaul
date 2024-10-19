@@ -265,7 +265,7 @@ public class VOUnitChanges {
         UnitTypes.vanquish.weapons.get(2).bullet.hitEffect = new MultiEffect(Fx.shootSmallColor, Fx.hitBulletColor);
 
         BulletType cleroi = UnitTypes.cleroi.weapons.get(0).bullet;
-        cleroi.splashDamage = 10f; cleroi.splashDamageRadius = 16f;
+        cleroi.splashDamage = 18f; cleroi.splashDamageRadius = 16f;
         cleroi.hitEffect = cleroi.despawnEffect = new MultiEffect(Fx.hitBulletColor, new WaveEffect(){{
             lifetime = 9f;
             sizeTo = 19f;
@@ -274,17 +274,30 @@ public class VOUnitChanges {
         }});
         cleroi.fragAngle = cleroi.fragSpread = cleroi.fragRandomSpread = 0;
         cleroi.fragOnAbsorb = false;
-        cleroi.fragBullets = 1; cleroi.fragBullet = new LaserBulletType(33){{
-            lifetime = 30;
-            length = 25;
+        cleroi.fragBullets = 1; cleroi.fragBullet = new LaserBulletType(25){{
+            lifetime = 20;
+            length = 18;
             width = 12;
             pierceArmor = true;
             hitEffect = Fx.hitBulletColor;
             hitColor = Pal.techBlue;
             colors = new Color[]{Pal.techBlue.cpy().a(0.4f), Pal.techBlue, Color.white};
         }};
+        BulletType tecta = UnitTypes.tecta.weapons.get(0).bullet;
+        tecta.homingPower = 0.1f;
+        tecta.homingDelay = 10;
+        tecta.splashDamageRadius = 37;
+        tecta.hitEffect = new MultiEffect(new WrapEffect(Fx.dynamicSpikes, Pal.techBlue, 24f), new WaveEffect(){{
+            colorFrom = colorTo = Pal.techBlue;
+            sizeTo = 40f;
+            lifetime = 12f;
+            strokeFrom = 4f;
+        }});
 
         UnitTypes.elude.weapons.get(0).bullet.hitEffect = new MultiEffect(Fx.shootSmallColor, Fx.hitBulletColor);
-        UnitTypes.avert.weapons.get(0).bullet.hitEffect = new MultiEffect(Fx.shootSmallColor, Fx.hitBulletColor);
+        Weapon avert = UnitTypes.avert.weapons.get(0);
+        avert.shoot = new ShootHelix(){{mag = 1; scl = 4.3f;}};
+        avert.bullet.homingPower = 0.02f; avert.bullet.homingRange = 1; 
+        avert.bullet.hitEffect = new MultiEffect(Fx.shootSmallColor, Fx.hitBulletColor);
     }
 }
