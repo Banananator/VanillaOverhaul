@@ -9,6 +9,7 @@ import mindustry.entities.effect.*;
 import mindustry.entities.pattern.*;
 import mindustry.gen.Sounds;
 import mindustry.graphics.Pal;
+import mindustry.type.UnitType;
 import mindustry.type.Weapon;
 import mindustry.type.weapons.RepairBeamWeapon;
 import VO.entities.*;
@@ -218,10 +219,10 @@ public class VOUnitChanges {
             rotate = true;
             rotateSpeed = 360;
             mirror = false;
-            repairSpeed = 0.1f;
+            repairSpeed = 0.3f;
             laserColor = healColor = Pal.accent;
             bullet = new BulletType(){{
-                maxRange = 60f;
+                maxRange = 100f;
             }};
         }});
         UnitTypes.incite.weapons.add(new RepairBeamWeapon(){{
@@ -234,10 +235,10 @@ public class VOUnitChanges {
             rotate = true;
             rotateSpeed = 100;
             mirror = false;
-            repairSpeed = 0.15f;
+            repairSpeed = 0.45f;
             laserColor = healColor = Pal.accent;
             bullet = new BulletType(){{
-                maxRange = 60f;
+                maxRange = 115f;
             }};
         }});
         UnitTypes.emanate.weapons.add(new RepairBeamWeapon(){{
@@ -250,10 +251,10 @@ public class VOUnitChanges {
             rotate = true;
             rotateSpeed = 100;
             mirror = false;
-            repairSpeed = 0.25f;
+            repairSpeed = 0.75f;
             laserColor = healColor = Pal.accent;
             bullet = new BulletType(){{
-                maxRange = 65f;
+                maxRange = 130f;
             }};
         }});
         UnitTypes.stell.weapons.get(0).bullet.hitEffect = new MultiEffect(Fx.shootSmallColor, Fx.hitBulletColor);
@@ -262,6 +263,27 @@ public class VOUnitChanges {
         UnitTypes.vanquish.weapons.get(0).bullet.hitEffect = new MultiEffect(Fx.shootBigColor, Fx.hitBulletColor);
         UnitTypes.vanquish.weapons.get(1).bullet.hitEffect = new MultiEffect(Fx.shootSmallColor, Fx.hitBulletColor);
         UnitTypes.vanquish.weapons.get(2).bullet.hitEffect = new MultiEffect(Fx.shootSmallColor, Fx.hitBulletColor);
+
+        BulletType cleroi = UnitTypes.cleroi.weapons.get(0).bullet;
+        cleroi.splashDamage = 10f; cleroi.splashDamageRadius = 16f;
+        cleroi.hitEffect = cleroi.despawnEffect = new MultiEffect(Fx.hitBulletColor, new WaveEffect(){{
+            lifetime = 12f;
+            sizeTo = 19f;
+            strokeFrom = 3f;
+            colorFrom = colorTo = Pal.techBlue;
+        }});
+        cleroi.fragAngle = cleroi.fragSpread = cleroi.fragRandomSpread = 0;
+        cleroi.fragOnAbsorb = false;
+        cleroi.fragBullets = 1; cleroi.fragBullet = new LaserBulletType(33){{
+            lifetime = 12;
+            length = 28;
+            width = 7;
+            pierceArmor = true;
+            hitEffect = Fx.hitBulletColor;
+            hitColor = Pal.techBlue;
+            colors = new Color[]{Pal.techBlue.cpy().a(0.4f), Pal.techBlue, Color.white};
+        }};
+
         UnitTypes.elude.weapons.get(0).bullet.hitEffect = new MultiEffect(Fx.shootSmallColor, Fx.hitBulletColor);
         UnitTypes.avert.weapons.get(0).bullet.hitEffect = new MultiEffect(Fx.shootSmallColor, Fx.hitBulletColor);
     }
