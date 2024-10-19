@@ -32,6 +32,10 @@ public class VOEnergyBoomEffect extends Effect{
 
     @Override
     public void render(EffectContainer e){
+        float fin = e.fin();
+        float ifin = e.fin(waveInterp);
+        float ox = e.x + Angles.trnsx(e.rotation, 0, 0), oy = e.y + Angles.trnsy(e.rotation, 0, 0);
+        
         if(waveSize > 0 && waveStroke > 0){
             /*color(waveColorFrom, waveColorTo, e.fin(waveInterp));
             if(interpStroke = true){
@@ -39,10 +43,6 @@ public class VOEnergyBoomEffect extends Effect{
             } else stroke(Interp.linear.apply(waveStroke, 0, e.fin()));
             float circleRad = waveInterp.apply(0, waveSize, e.fin());
             Lines.circle(e.x, e.y, circleRad);*/
-
-            float fin = e.fin();
-            float ifin = e.fin(waveInterp);
-            float ox = e.x + Angles.trnsx(e.rotation, 0, 0), oy = e.y + Angles.trnsy(e.rotation, 0, 0);
 
             Draw.color(waveColorFrom, waveColorTo, ifin);
             if(interpStroke = true){

@@ -10,7 +10,7 @@ import mindustry.entities.pattern.*;
 import mindustry.gen.Sounds;
 import mindustry.graphics.Pal;
 import mindustry.type.Weapon;
-
+import mindustry.type.weapons.RepairBeamWeapon;
 import VO.entities.*;
 
 public class VOUnitChanges {
@@ -209,6 +209,42 @@ public class VOUnitChanges {
             }}
         );
 
+        UnitTypes.evoke.weapons.add(new RepairBeamWeapon(){{
+            targetBuildings = false;
+            targetUnits = true;
+            beamWidth = 0.5f;
+            x = 0;
+            y = 6.5f;
+            shootY = 0f;
+            rotate = true;
+            mirror = false;
+            repairSpeed = 0.1f / 3f;
+            laserColor = healColor = Pal.accent;
+        }});
+        UnitTypes.incite.weapons.add(new RepairBeamWeapon(){{
+            targetBuildings = false;
+            targetUnits = true;
+            beamWidth = 0.5f;
+            x = 0;
+            y = 7.5f;
+            shootY = 0f;
+            rotate = true;
+            mirror = false;
+            repairSpeed = (0.1f / 3f) * 2;
+            laserColor = healColor = Pal.accent;
+        }});
+        UnitTypes.emanate.weapons.add(new RepairBeamWeapon(){{
+            targetBuildings = false;
+            targetUnits = true;
+            beamWidth = 0.5f;
+            x = 19f / 4f;
+            y = 19f / 4f;
+            shootY = 0f;
+            rotate = true;
+            mirror = true;
+            repairSpeed = (0.1f / 3f) * 2;
+            laserColor = healColor = Pal.accent;
+        }});
         UnitTypes.stell.weapons.get(0).bullet.hitEffect = new MultiEffect(Fx.shootSmallColor, Fx.hitBulletColor);
         UnitTypes.precept.weapons.get(0).bullet.hitEffect = new MultiEffect(Fx.shootBigColor, Fx.blastExplosion);
         UnitTypes.precept.weapons.get(0).bullet.fragBullet.hitEffect = new MultiEffect(Fx.shootSmallColor, Fx.hitBulletColor);

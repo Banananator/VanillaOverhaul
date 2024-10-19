@@ -61,6 +61,26 @@ public class VOFx {
             Drawf.tri(e.x, e.y, 2.5f, 15f * e.fout(), i*90 + 45f);
         }
     }),
+
+    octDeathEffect = new Effect(120f, 300f, e -> {
+        color(Pal.heal);
+        stroke(Interp.pow10Out.apply(1, 0, e.fin()));
+
+        float circleRad = 4f + e.finpow() * 156f;
+        Lines.circle(e.x, e.y, circleRad);
+
+        Drawf.light(e.x, e.y, circleRad * 2, Pal.heal, 0.8f * e.fin(Interp.pow10Out));
+
+        color(Pal.heal);
+        for(int i = 0; i < 4; i++){
+            Drawf.tri(e.x, e.y, 5f, 40f * e.fout(), i*90 + 45f);
+        }
+
+        color();
+        for(int i = 0; i < 4; i++){
+            Drawf.tri(e.x, e.y, 2.5f, 15f * e.fout(), i*90 + 45f);
+        }
+    }),
     
     navanaxHit = new Effect(50f, 100f, e -> {
         e.scaled(7f, b -> {
