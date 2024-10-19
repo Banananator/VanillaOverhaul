@@ -9,7 +9,6 @@ import mindustry.entities.effect.*;
 import mindustry.entities.pattern.*;
 import mindustry.gen.Sounds;
 import mindustry.graphics.Pal;
-import mindustry.type.UnitType;
 import mindustry.type.Weapon;
 import mindustry.type.weapons.RepairBeamWeapon;
 import VO.entities.*;
@@ -284,9 +283,22 @@ public class VOUnitChanges {
             colors = new Color[]{Pal.techBlue.cpy().a(0.4f), Pal.techBlue, Color.white};
         }};
         BulletType tecta = UnitTypes.tecta.weapons.get(0).bullet;
-        tecta.homingPower = 0.1f;
+        tecta.homingPower = 0.08f;
         tecta.homingDelay = 10;
         tecta.hitEffect = new WrapEffect(Fx.dynamicSpikes, Pal.techBlue, 27f);
+
+        UnitTypes.collaris.weapons.get(0).bullet.fragBullet.hitEffect = UnitTypes.collaris.weapons.get(0).bullet.fragBullet.despawnEffect = new MultiEffect(new ExplosionEffect(){{
+            lifetime = 30f;
+            waveStroke = 2f;
+            waveColor = sparkColor = Pal.techBlue;
+            waveRad = 5f;
+            smokeSize = 0f;
+            smokeSizeBase = 0f;
+            sparks = 5;
+            sparkRad = 20f;
+            sparkLen = 6f;
+            sparkStroke = 2f;
+        }}, Fx.blastExplosion, Fx.shootBigColor);
 
         UnitTypes.elude.weapons.get(0).bullet.hitEffect = new MultiEffect(Fx.shootSmallColor, Fx.hitBulletColor);
         Weapon avert = UnitTypes.avert.weapons.get(0);
