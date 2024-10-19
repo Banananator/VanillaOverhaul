@@ -216,8 +216,9 @@ public class VOUnitChanges {
             x = y = 0;
             shootY = 0f;
             rotate = true;
+            rotateSpeed = 360;
             mirror = false;
-            repairSpeed = 0.1f / 3f;
+            repairSpeed = 0.1f;
             laserColor = healColor = Pal.accent;
             bullet = new BulletType(){{
                 maxRange = 60f;
@@ -231,8 +232,9 @@ public class VOUnitChanges {
             y = -0.75f;
             shootY = 0f;
             rotate = true;
+            rotateSpeed = 100;
             mirror = false;
-            repairSpeed = (0.1f / 3f) * 2;
+            repairSpeed = 0.15f;
             laserColor = healColor = Pal.accent;
             bullet = new BulletType(){{
                 maxRange = 60f;
@@ -246,8 +248,9 @@ public class VOUnitChanges {
             y = -2;
             shootY = 0f;
             rotate = true;
+            rotateSpeed = 100;
             mirror = false;
-            repairSpeed = (0.1f / 3f) * 4;
+            repairSpeed = 0.25f;
             laserColor = healColor = Pal.accent;
             bullet = new BulletType(){{
                 maxRange = 65f;
