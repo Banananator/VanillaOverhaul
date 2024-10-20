@@ -294,7 +294,7 @@ public class VOBlockChanges {
                         Fill.circle(e.x + x, e.y + y, e.fout() * 4f + 0.5f);
                     });
                     color(Pal.lightishOrange);
-                    stroke(e.fout() * 1.25f);
+                    stroke(e.fout() * 2.5f);
                     randLenVectors(e.id + 1, 8, 1f + (splash + 4f) * e.finpow(), (x, y) -> {
                         lineAngle(e.x + x, e.y + y, Mathf.angle(x, y), 1f + e.fout() * 3f);
                     });
