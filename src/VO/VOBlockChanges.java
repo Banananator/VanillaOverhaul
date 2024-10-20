@@ -401,7 +401,8 @@ public class VOBlockChanges {
                     Drawf.light(e.x, e.y, 60f, Pal.missileYellowBack, 0.8f * e.fout());
                 });
                 despawnEffect = Fx.none;
-                despawnHit = true;
+                frontColor = Pal.bulletYellow;
+                backColor = Pal.bulletYellowBack;
                 lightning = 2;
                 lightningDamage = 10;
                 lightningLength = 10;
