@@ -86,7 +86,7 @@ public class VOBlockChanges {
                 hitColor = Pal.berylShot;
                 shootEffect = new MultiEffect(Fx.shootBigColor, Fx.colorSparkBig);
                 smokeEffect = Fx.shootBigSmoke;
-                hitEffect = new MultiEffect(Fx.shootSmallColor, Fx.hitBulletColor);
+                hitEffect = new MultiEffect(Fx.shootBigColor, Fx.hitBulletColor);
                 despawnEffect = Fx.hitBulletColor;
                 trailWidth = 2.1f;
                 trailLength = 10;
@@ -106,7 +106,7 @@ public class VOBlockChanges {
                 hitColor = Pal.tungstenShot;
                 shootEffect = new MultiEffect(Fx.shootBigColor, Fx.colorSparkBig);
                 smokeEffect = Fx.shootBigSmoke;
-                hitEffect = new MultiEffect(Fx.shootSmallColor, Fx.hitBulletColor);
+                hitEffect = new MultiEffect(Fx.shootBigColor, Fx.hitBulletColor);
                 despawnEffect = Fx.hitBulletColor;
                 trailWidth = 2.2f;
                 trailLength = 11;
