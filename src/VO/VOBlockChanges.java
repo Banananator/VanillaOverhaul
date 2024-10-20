@@ -287,7 +287,7 @@ public class VOBlockChanges {
                     color(Pal.missileYellow);
                     e.scaled(6, i -> {
                         stroke(3f * i.fout());
-                        Lines.circle(e.x, e.y, 3f + i.fin() * splash);
+                        Lines.circle(e.x, e.y, 2f + i.fin() * splash);
                     });
                     color(Color.gray);
                     randLenVectors(e.id, 6, 2f + (splash + 4f) * e.finpow(), (x, y) -> {
@@ -295,10 +295,10 @@ public class VOBlockChanges {
                     });
                     color(Pal.lightishOrange);
                     stroke(e.fout() * 2.5f);
-                    randLenVectors(e.id + 1, 8, 1f + (splash + 4f) * e.finpow(), (x, y) -> {
+                    randLenVectors(e.id + 1, 8, 2f + (splash + 4f) * e.finpow(), (x, y) -> {
                         lineAngle(e.x + x, e.y + y, Mathf.angle(x, y), 1f + e.fout() * 3f);
                     });
-                    Drawf.light(e.x, e.y, 50f, Pal.missileYellowBack, 0.8f * e.fout());
+                    Drawf.light(e.x, e.y, 50f, Pal.lightishOrange, 0.8f * e.fout());
                 });
                 despawnEffect = Fx.none;
             }});
@@ -317,8 +317,24 @@ public class VOBlockChanges {
                 splashDamageRadius = 30;
                 splashDamage = 45;
                 ammoMultiplier = 5;
-                hitEffect = Fx.blastExplosion;
-                despawnEffect = Fx.blastExplosion;
+                hitEffect = new Effect(22, e -> {
+                    color(Pal.missileYellow);
+                    e.scaled(6, i -> {
+                        stroke(3f * i.fout());
+                        Lines.circle(e.x, e.y, 2f + i.fin() * 30f);
+                    });
+                    color(Color.gray);
+                    randLenVectors(e.id, 6, 2f + 34f * e.finpow(), (x, y) -> {
+                        Fill.circle(e.x + x, e.y + y, e.fout() * 4f + 0.5f);
+                    });
+                    color(Pal.missileYellowBack);
+                    stroke(e.fout() * 1.5f);
+                    randLenVectors(e.id + 1, 6, 2f + 34f * e.finpow(), (x, y) -> {
+                        lineAngle(e.x + x, e.y + y, Mathf.angle(x, y), 1f + e.fout() * 3f);
+                    });
+                    Drawf.light(e.x, e.y, 60f, Pal.missileYellowBack, 0.8f * e.fout());
+                });
+                despawnEffect = Fx.none;
                 status = StatusEffects.blasted;
                 statusDuration = 60;
                 trailWidth = 2.4f;
@@ -333,8 +349,24 @@ public class VOBlockChanges {
                 splashDamage = 45;
                 ammoMultiplier = 5;
                 homingPower = 0.08f;
-                hitEffect = Fx.blastExplosion;
-                despawnEffect = Fx.blastExplosion;
+                hitEffect = new Effect(22, e -> {
+                    color(Pal.missileYellow);
+                    e.scaled(6, i -> {
+                        stroke(3f * i.fout());
+                        Lines.circle(e.x, e.y, 2f + i.fin() * 20f);
+                    });
+                    color(Color.gray);
+                    randLenVectors(e.id, 6, 2f + 24f * e.finpow(), (x, y) -> {
+                        Fill.circle(e.x + x, e.y + y, e.fout() * 4f + 0.5f);
+                    });
+                    color(Pal.lightishOrange);
+                    stroke(e.fout() * 2.5f);
+                    randLenVectors(e.id + 1, 8, 2f + 24f * e.finpow(), (x, y) -> {
+                        lineAngle(e.x + x, e.y + y, Mathf.angle(x, y), 1f + e.fout() * 3f);
+                    });
+                    Drawf.light(e.x, e.y, 50f, Pal.lightishOrange, 0.8f * e.fout());
+                });
+                despawnEffect = Fx.none;
                 frontColor = Pal.lightishOrange;
                 backColor = Pal.lightOrange;
                 status = StatusEffects.burning;
@@ -351,8 +383,24 @@ public class VOBlockChanges {
                 splashDamageRadius = 25;
                 splashDamage = 35;
                 ammoMultiplier = 4;
-                hitEffect = Fx.blastExplosion;
-                despawnEffect = Fx.blastExplosion;
+                hitEffect = new Effect(22, e -> {
+                    color(Pal.missileYellow);
+                    e.scaled(6, i -> {
+                        stroke(3f * i.fout());
+                        Lines.circle(e.x, e.y, 2f + i.fin() * 25f);
+                    });
+                    color(Color.gray);
+                    randLenVectors(e.id, 5, 2f + 29f * e.finpow(), (x, y) -> {
+                        Fill.circle(e.x + x, e.y + y, e.fout() * 4f + 0.5f);
+                    });
+                    color(Pal.missileYellowBack);
+                    stroke(e.fout());
+                    randLenVectors(e.id + 1, 10, 2f + 29f * e.finpow(), (x, y) -> {
+                        lineAngle(e.x + x, e.y + y, Mathf.angle(x, y), 1f + e.fout() * 4f);
+                    });
+                    Drawf.light(e.x, e.y, 60f, Pal.missileYellowBack, 0.8f * e.fout());
+                });
+                despawnEffect = Fx.none;
                 despawnHit = true;
                 lightning = 2;
                 lightningDamage = 10;
