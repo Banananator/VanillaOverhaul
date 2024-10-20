@@ -132,7 +132,7 @@ public class VOBlockChanges {
                 hitColor = backColor = trailColor = Color.valueOf("ea8878");
                 shootEffect = Fx.shootBigColor;
                 smokeEffect = Fx.shootSmokeSquareSparse;
-                hitEffect = new MultiEffect(Fx.shootSmallColor, Fx.hitSquaresColor);
+                hitEffect = new MultiEffect(VOFx.shootMediumColor, Fx.hitSquaresColor);
                 despawnEffect = Fx.hitSquaresColor;
             }});
             block.limitRange(25f);
