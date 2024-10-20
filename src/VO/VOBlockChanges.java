@@ -32,11 +32,42 @@ public class VOBlockChanges {
 	}*/
     
     public static void load(){
+        duo: {
+			if(!(Blocks.duo instanceof ItemTurret))break duo;
+			ItemTurret block = (ItemTurret)Blocks.duo;
+			
+			block.ammoTypes.putAll(Items.copper, new BasicBulletType(2.5f, 9){{
+                lifetime = 60;
+                ammoMultiplier = 2;
+                width = 7;
+                height = 9;
+                hitEffect = new MultiEffect(Fx.shootSmall, Fx.hitBulletSmall);
+            }},
+            Items.graphite, new BasicBulletType(3.5f, 18){{
+                lifetime = 60;
+                ammoMultiplier = 4;
+                width = 9;
+                height = 12;
+                reloadMultiplier = 0.6f;
+                hitEffect = new MultiEffect(Fx.shootSmall, Fx.hitBulletSmall);
+            }},
+            Items.silicon, new BasicBulletType(3, 12){{
+                lifetime = 60;
+                ammoMultiplier = 5;
+                width = 7;
+                height = 9;
+                homingPower = 0.1f;
+                reloadMultiplier = 1.5f;
+                hitEffect = new MultiEffect(Fx.shootSmall, Fx.hitBulletSmall);
+            }});
+            block.limitRange();
+		}
+
         scorch: {
 			if(!(Blocks.scorch instanceof ItemTurret))break scorch;
 			ItemTurret block = (ItemTurret)Blocks.scorch;
 			
-			block.ammoTypes.put(Items.coal, new VOFlameBulletType(3.35f, 17f){{
+			block.ammoTypes.putAll(Items.coal, new VOFlameBulletType(3.35f, 17f){{
                 lifetime = 18f;
                 hitSize = 7f;
                 ammoMultiplier = 3f;
@@ -48,8 +79,8 @@ public class VOBlockChanges {
                 particleSpread = 10f;
                 smokeColors = new Color[]{Pal.darkFlame, Color.darkGray, Color.gray};
                 colors = new Color[]{Color.white, Color.valueOf("fff4ac"), Pal.lightFlame, Pal.darkFlame, Color.gray};
-            }});
-            block.ammoTypes.put(Items.pyratite, new VOFlameBulletType(4f, 60f){{
+            }},
+            Items.pyratite, new VOFlameBulletType(4f, 60f){{
                 lifetime = 18f;
                 hitSize = 7f;
                 ammoMultiplier = 6f;
@@ -64,6 +95,186 @@ public class VOBlockChanges {
                 colors = new Color[]{Color.white, Color.valueOf("fff4ac"), Pal.lightPyraFlame, Pal.darkPyraFlame, Color.gray};
             }});
 		}
+
+        swarmer: {
+			if(!(Blocks.swarmer instanceof ItemTurret))break swarmer;
+			ItemTurret block = (ItemTurret)Blocks.swarmer;
+			
+			block.ammoTypes.putAll(Items.blastCompound, new MissileBulletType(3.7f, 10){{
+                lifetime = 60;
+                width = 8;
+                height = 8;
+                shrinkY = 0;
+                splashDamageRadius = 30;
+                splashDamage = 45;
+                ammoMultiplier = 5;
+                hitEffect = Fx.blastExplosion;
+                despawnEffect = Fx.blastExplosion;
+                status = StatusEffects.blasted;
+                statusDuration = 60;
+                trailWidth = 2.4f;
+                trailLength = 3;
+            }},
+            Items.pyratite, new MissileBulletType(3.7f, 12){{
+                lifetime = 60;
+                width = 7;
+                height = 8;
+                shrinkY = 0;
+                splashDamageRadius = 20;
+                splashDamage = 45;
+                ammoMultiplier = 5;
+                homingPower = 0.08f;
+                hitEffect = Fx.blastExplosion;
+                despawnEffect = Fx.blastExplosion;
+                frontColor = Pal.lightishOrange;
+                backColor = Pal.lightOrange;
+                status = StatusEffects.burning;
+                makeFire = true;
+                trailWidth = 2.1f;
+                trailLength = 3;
+                trailColor = Pal.lightOrange;
+            }},
+            Items.surgeAlloy, new MissileBulletType(3.7f, 18){{
+                lifetime = 60;
+                width = 8;
+                height = 8;
+                shrinkY = 0;
+                splashDamageRadius = 25;
+                splashDamage = 35;
+                ammoMultiplier = 4;
+                hitEffect = Fx.blastExplosion;
+                despawnEffect = Fx.blastExplosion;
+                despawnHit = true;
+                lightning = 2;
+                lightningDamage = 10;
+                lightningLength = 10;
+                trailWidth = 2.4f;
+                trailLength = 3;
+            }});
+            block.limitRange(5);
+		}
+
+        salvo: {
+			if(!(Blocks.salvo instanceof ItemTurret))break salvo;
+			ItemTurret block = (ItemTurret)Blocks.salvo;
+			
+			block.ammoTypes.putAll(Items.copper, new BasicBulletType(2.5f, 11){{
+                lifetime = 60;
+                ammoMultiplier = 2;
+                width = 7;
+                height = 9;
+                hitEffect = new MultiEffect(Fx.shootSmall, Fx.hitBulletSmall);
+            }},
+            Items.graphite, new BasicBulletType(3.5f, 20){{
+                lifetime = 60;
+                ammoMultiplier = 4;
+                width = 9;
+                height = 12;
+                reloadMultiplier = 0.6f;
+                hitEffect = new MultiEffect(Fx.shootSmall, Fx.hitBulletSmall);
+            }},
+            Items.pyratite, new BasicBulletType(3.2f, 18){{
+                lifetime = 60;
+                ammoMultiplier = 5;
+                width = 10;
+                height = 12;
+                splashDamage = 12;
+                splashDamageRadius = 22;
+                status = StatusEffects.burning;
+                makeFire = true;
+                frontColor = Pal.lightishOrange;
+                backColor = Pal.lightOrange;
+                hitEffect = new MultiEffect(new ExplosionEffect(){{
+                    lifetime = 18;
+                    waveRad = 0;
+                    waveColor = Pal.lightishOrange;
+                    smokes = 0;
+                    sparks = 5;
+                    sparkRad = 24;
+                    sparkStroke = 2.5f;
+                }}, Fx.fireHit);
+            }},
+            Items.silicon, new BasicBulletType(3, 15){{
+                lifetime = 60;
+                ammoMultiplier = 5;
+                width = 7;
+                height = 9;
+                homingPower = 0.1f;
+                reloadMultiplier = 1.5f;
+                hitEffect = new MultiEffect(Fx.shootSmall, Fx.hitBulletSmall);
+            }},
+            Items.thorium, new BasicBulletType(4, 29){{
+                lifetime = 60;
+                ammoMultiplier = 4;
+                width = 10;
+                height = 13;
+                shootEffect = Fx.shootBig;
+                smokeEffect = Fx.shootBigSmoke;
+                hitEffect = new MultiEffect(Fx.shootSmall, Fx.hitBulletSmall);
+            }});
+            block.limitRange();
+		}
+
+        spectre: {
+            if(!(Blocks.spectre instanceof ItemTurret))break spectre;
+			ItemTurret block = (ItemTurret)Blocks.spectre;
+			
+			block.ammoTypes.putAll(Items.graphite, new BasicBulletType(7.5f, 50){{
+                lifetime = 60;
+                ammoMultiplier = 4;
+                width = 15;
+                height = 21;
+                hitSize = 4.8f;
+                reloadMultiplier = 1.7f;
+                knockback = 0.7f;
+                shootEffect = Fx.shootBig;
+                smokeEffect = Fx.shootBigSmoke;
+                hitEffect = new MultiEffect(Fx.shootBig, Fx.hitBulletBig);
+            }},
+            Items.thorium, new BasicBulletType(8, 80){{
+                lifetime = 60;
+                ammoMultiplier = 5;
+                width = 16;
+                height = 23;
+                hitSize = 5;
+                pierce = true;
+                pierceBuilding = true;
+                pierceCap = 2;
+                knockback = 0.7f;
+                shootEffect = Fx.shootBig;
+                smokeEffect = Fx.shootBigSmoke;
+                hitEffect = new MultiEffect(Fx.shootBig, Fx.hitBulletBig);
+            }},
+            Items.pyratite, new BasicBulletType(7, 70){{
+                lifetime = 60;
+                ammoMultiplier = 5;
+                width = 16;
+                height = 21;
+                hitSize = 5;
+                splashDamage = 20;
+                splashDamageRadius = 25;
+                pierce = true;
+                pierceBuilding = true;
+                pierceCap = 2;
+                status = StatusEffects.burning;
+                makeFire = true;
+                knockback = 0.6f;
+                frontColor = Pal.lightishOrange;
+                backColor = Pal.lightOrange;
+                shootEffect = Fx.shootBig;
+                smokeEffect = Fx.shootBigSmoke;
+                hitEffect = new MultiEffect(new ExplosionEffect(){{
+                    lifetime = 18;
+                    waveRad = 0;
+                    waveColor = Pal.lightishOrange;
+                    smokes = 0;
+                    sparks = 7;
+                    sparkRad = 27;
+                    sparkStroke = 2.6f;
+                }}, Fx.fireHit);
+            }});
+            block.limitRange();
+        }
 
 
 
