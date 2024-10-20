@@ -1,14 +1,24 @@
 package VO;
 
 import mindustry.content.*;
+import mindustry.entities.Effect;
 import mindustry.entities.bullet.*;
 import mindustry.entities.effect.*;
 import mindustry.gen.Sounds;
 import mindustry.graphics.*;
 import mindustry.world.blocks.defense.turrets.*;
+import arc.graphics.Color;
+import arc.graphics.g2d.Fill;
+import arc.graphics.g2d.Lines;
+import arc.math.Mathf;
+
+import static arc.graphics.g2d.Draw.rect;
+import static arc.graphics.g2d.Draw.*;
+import static arc.graphics.g2d.Lines.*;
+import static arc.math.Angles.*;
+import static mindustry.Vars.*;
 
 import VO.entities.*;
-import arc.graphics.Color;
 
 public class VOBlockChanges {
 
@@ -61,6 +71,108 @@ public class VOBlockChanges {
                 hitEffect = new MultiEffect(Fx.shootSmall, Fx.hitBulletSmall);
             }});
             block.limitRange();
+		}
+
+        scatter: {
+			if(!(Blocks.scatter instanceof ItemTurret))break scatter;
+			ItemTurret block = (ItemTurret)Blocks.scatter;
+			
+			block.ammoTypes.putAll(Items.scrap, new FlakBulletType(4f, 3){{
+                lifetime = 60f;
+                width = 6f;
+                height = 8f;
+                ammoMultiplier = 5f;
+                reloadMultiplier = 0.5f;
+                splashDamage = 22f * 1.5f;
+                splashDamageRadius = 24f;
+                shootEffect = Fx.shootSmall;
+                hitEffect = new Effect(20, e -> {
+                    color(Pal.bulletYellow);
+                    e.scaled(6, i -> {
+                        stroke(3f * i.fout());
+                        Lines.circle(e.x, e.y, 2f + i.fin() * 24f);
+                    });
+                    color(Color.gray);
+                    randLenVectors(e.id, 5, 2f + 28f * e.finpow(), (x, y) -> {
+                        Fill.circle(e.x + x, e.y + y, e.fout() * 3f + 0.5f);
+                    });
+                    color(Pal.lighterOrange);
+                    stroke(e.fout());
+                    randLenVectors(e.id + 1, 6, 2f + 28f * e.finpow(), (x, y) -> {
+                        lineAngle(e.x + x, e.y + y, Mathf.angle(x, y), 1f + e.fout() * 3f);
+                    });
+                    Drawf.light(e.x, e.y, 60f, Pal.lighterOrange, 0.8f * e.fout());
+                });
+                despawnEffect = Fx.none;
+            }},
+            Items.lead, new FlakBulletType(4.2f, 3){{
+                lifetime = 60f;
+                width = 6f;
+                height = 8f;
+                ammoMultiplier = 4f;
+                splashDamage = 27f * 1.5f;
+                splashDamageRadius = 15f;
+                shootEffect = Fx.shootSmall;
+                hitEffect = new Effect(20, e -> {
+                    color(Pal.bulletYellow);
+                    e.scaled(6, i -> {
+                        stroke(3f * i.fout());
+                        Lines.circle(e.x, e.y, 2f + i.fin() * 15f);
+                    });
+                    color(Color.gray);
+                    randLenVectors(e.id, 5, 2f + 19f * e.finpow(), (x, y) -> {
+                        Fill.circle(e.x + x, e.y + y, e.fout() * 3f + 0.5f);
+                    });
+                    color(Pal.lighterOrange);
+                    stroke(e.fout());
+                    randLenVectors(e.id + 1, 5, 2f + 19f * e.finpow(), (x, y) -> {
+                        lineAngle(e.x + x, e.y + y, Mathf.angle(x, y), 1f + e.fout() * 3f);
+                    });
+                    Drawf.light(e.x, e.y, 45f, Pal.lighterOrange, 0.8f * e.fout());
+                });
+                despawnEffect = Fx.none;
+            }},
+            Items.metaglass, new FlakBulletType(4f, 3){{
+                lifetime = 60f;
+                width = 6f;
+                height = 8f;
+                ammoMultiplier = 5f;
+                reloadMultiplier = 0.8f;
+                splashDamage = 30f * 1.5f;
+                splashDamageRadius = 20f;
+                shootEffect = Fx.shootSmall;
+                hitEffect = new Effect(20, e -> {
+                    color(Pal.bulletYellow);
+                    e.scaled(6, i -> {
+                        stroke(3f * i.fout());
+                        Lines.circle(e.x, e.y, 2f + i.fin() * 20f);
+                    });
+                    color(Color.gray);
+                    randLenVectors(e.id, 5, 2f + 24f * e.finpow(), (x, y) -> {
+                        Fill.circle(e.x + x, e.y + y, e.fout() * 3f + 0.5f);
+                    });
+                    color(Pal.lighterOrange);
+                    stroke(e.fout());
+                    randLenVectors(e.id + 1, 6, 2f + 24f * e.finpow(), (x, y) -> {
+                        lineAngle(e.x + x, e.y + y, Mathf.angle(x, y), 1f + e.fout() * 3f);
+                    });
+                    Drawf.light(e.x, e.y, 50f, Pal.lighterOrange, 0.8f * e.fout());
+                });
+                despawnEffect = Fx.none;
+
+                fragBullets = 6;
+                fragBullet = new BasicBulletType(3f, 5){{
+                    lifetime = 20f;
+                    width = 5f;
+                    height = 12f;
+                    collidesGround = false;
+                    shrinkY = 1f;
+                    frontColor = Color.white;
+                    backColor = Pal.gray;
+                    despawnEffect = Fx.none;
+                }};
+            }});
+            block.limitRange(2f);
 		}
 
         scorch: {
