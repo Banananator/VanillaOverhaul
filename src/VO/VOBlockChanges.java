@@ -313,10 +313,11 @@ public class VOBlockChanges {
                 lifetime = 60;
                 width = 8;
                 height = 8;
-                shrinkY = 0;
+                ammoMultiplier = 5;
                 splashDamageRadius = 30;
                 splashDamage = 45;
-                ammoMultiplier = 5;
+                homingDelay = 5;
+                shrinkY = 0;
                 hitEffect = new Effect(22, e -> {
                     color(Pal.missileYellow);
                     e.scaled(6, i -> {
@@ -344,11 +345,12 @@ public class VOBlockChanges {
                 lifetime = 60;
                 width = 7;
                 height = 8;
-                shrinkY = 0;
+                ammoMultiplier = 5;
                 splashDamageRadius = 20;
                 splashDamage = 45;
-                ammoMultiplier = 5;
                 homingPower = 0.08f;
+                homingDelay = 5;
+                shrinkY = 0;
                 hitEffect = new Effect(22, e -> {
                     color(Pal.missileYellow);
                     e.scaled(6, i -> {
@@ -379,10 +381,11 @@ public class VOBlockChanges {
                 lifetime = 60;
                 width = 8;
                 height = 8;
-                shrinkY = 0;
+                ammoMultiplier = 4;
                 splashDamageRadius = 25;
                 splashDamage = 35;
-                ammoMultiplier = 4;
+                homingDelay = 5;
+                shrinkY = 0;
                 hitEffect = new Effect(22, e -> {
                     color(Pal.missileYellow);
                     e.scaled(6, i -> {
@@ -402,7 +405,7 @@ public class VOBlockChanges {
                 });
                 despawnEffect = Fx.none;
                 frontColor = Pal.bulletYellow;
-                backColor = Pal.bulletYellowBack;
+                backColor = trailColor = Pal.bulletYellowBack;
                 lightning = 2;
                 lightningDamage = 10;
                 lightningLength = 10;
