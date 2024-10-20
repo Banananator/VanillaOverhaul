@@ -263,6 +263,7 @@ public class VOUnitChanges {
         UnitTypes.vanquish.weapons.get(1).bullet.hitEffect = new MultiEffect(Fx.shootSmallColor, Fx.hitBulletColor);
         UnitTypes.vanquish.weapons.get(2).bullet.hitEffect = new MultiEffect(Fx.shootSmallColor, Fx.hitBulletColor);
 
+        UnitTypes.merui.weapons.get(0).bullet.recoil = 1;
         BulletType cleroi = UnitTypes.cleroi.weapons.get(0).bullet;
         cleroi.splashDamage = 18f; cleroi.splashDamageRadius = 16f;
         cleroi.hitEffect = cleroi.despawnEffect = new MultiEffect(Fx.hitBulletColor, new WaveEffect(){{
@@ -303,7 +304,7 @@ public class VOUnitChanges {
         UnitTypes.elude.weapons.get(0).bullet.hitEffect = new MultiEffect(Fx.shootSmallColor, Fx.hitBulletColor);
         Weapon avert = UnitTypes.avert.weapons.get(0);
         avert.shoot = new ShootHelix(){{mag = 1; scl = 4.3f;}};
-        avert.bullet.homingPower = 0.02f; avert.bullet.homingRange = 1; 
+        avert.bullet.homingPower = 0.08f; avert.bullet.homingRange = 1;
         avert.bullet.hitEffect = new MultiEffect(Fx.shootSmallColor, Fx.hitBulletColor);
     }
 }
