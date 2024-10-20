@@ -50,6 +50,13 @@ public class VOFx {
         });
     }),
 
+    shootMediumColor = new Effect(9, e -> {
+        color(e.color, Color.gray, e.fin());
+        float w = 1.1f + 6.5f * e.fout();
+        Drawf.tri(e.x, e.y, w, 22f * e.fout(), e.rotation);
+        Drawf.tri(e.x, e.y, w, 4f * e.fout(), e.rotation + 180f);
+    }),
+
     greenBombPlus = new Effect(40f, 100f, e -> {
         color(Pal.heal);
         for(int i = 0; i < 4; i++){
