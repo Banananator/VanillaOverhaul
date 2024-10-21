@@ -7,16 +7,15 @@ import mindustry.entities.effect.*;
 import mindustry.gen.Sounds;
 import mindustry.graphics.*;
 import mindustry.world.blocks.defense.turrets.*;
+import mindustry.world.blocks.distribution.DirectionalUnloader;
 import arc.graphics.Color;
 import arc.graphics.g2d.Fill;
 import arc.graphics.g2d.Lines;
 import arc.math.Mathf;
 
-import static arc.graphics.g2d.Draw.rect;
 import static arc.graphics.g2d.Draw.*;
 import static arc.graphics.g2d.Lines.*;
 import static arc.math.Angles.*;
-import static mindustry.Vars.*;
 
 import VO.entities.*;
 
@@ -42,6 +41,8 @@ public class VOBlockChanges {
 	}*/
     
     public static void load(){
+        ductUnloader: {if(!(Blocks.ductUnloader instanceof DirectionalUnloader))break ductUnloader; DirectionalUnloader block = (DirectionalUnloader)Blocks.ductUnloader; block.speed = 60 / 16;}
+
         duo: {
 			if(!(Blocks.duo instanceof ItemTurret))break duo;
 			ItemTurret block = (ItemTurret)Blocks.duo;
@@ -316,6 +317,8 @@ public class VOBlockChanges {
                 ammoMultiplier = 5;
                 splashDamageRadius = 30;
                 splashDamage = 45;
+                status = StatusEffects.blasted;
+                statusDuration = 60;
                 homingDelay = 5;
                 shrinkY = 0;
                 hitEffect = new Effect(22, e -> {
@@ -336,8 +339,6 @@ public class VOBlockChanges {
                     Drawf.light(e.x, e.y, 60f, Pal.missileYellowBack, 0.8f * e.fout());
                 });
                 despawnEffect = Fx.none;
-                status = StatusEffects.blasted;
-                statusDuration = 60;
                 trailWidth = 2.4f;
                 trailLength = 3;
             }},
@@ -348,6 +349,8 @@ public class VOBlockChanges {
                 ammoMultiplier = 5;
                 splashDamageRadius = 20;
                 splashDamage = 45;
+                status = StatusEffects.burning;
+                makeFire = true;
                 homingPower = 0.08f;
                 homingDelay = 5;
                 shrinkY = 0;
@@ -371,8 +374,6 @@ public class VOBlockChanges {
                 despawnEffect = Fx.none;
                 frontColor = Pal.lightishOrange;
                 backColor = Pal.lightOrange;
-                status = StatusEffects.burning;
-                makeFire = true;
                 trailWidth = 2.1f;
                 trailLength = 3;
                 trailColor = Pal.lightOrange;
@@ -396,7 +397,7 @@ public class VOBlockChanges {
                     randLenVectors(e.id, 5, 2f + 29f * e.finpow(), (x, y) -> {
                         Fill.circle(e.x + x, e.y + y, e.fout() * 4f + 0.5f);
                     });
-                    color(Pal.missileYellowBack);
+                    color(Pal.bulletYellowBack);
                     stroke(e.fout());
                     randLenVectors(e.id + 1, 10, 2f + 29f * e.finpow(), (x, y) -> {
                         lineAngle(e.x + x, e.y + y, Mathf.angle(x, y), 1f + e.fout() * 4f);
@@ -416,6 +417,7 @@ public class VOBlockChanges {
 		}
 
         salvo: {
+
 			if(!(Blocks.salvo instanceof ItemTurret))break salvo;
 			ItemTurret block = (ItemTurret)Blocks.salvo;
 			
@@ -474,6 +476,133 @@ public class VOBlockChanges {
                 hitEffect = new MultiEffect(Fx.shootSmall, Fx.hitBulletSmall);
             }});
             block.limitRange();
+		}
+
+        ripple: {
+			if(!(Blocks.ripple instanceof ItemTurret))break ripple;
+			ItemTurret block = (ItemTurret)Blocks.ripple;
+            float splash1 = 25f * 0.75f, splash2 = 45f * 0.75f;
+			
+			block.ammoTypes.putAll(Items.graphite, new ArtilleryBulletType(3f, 20){{
+                lifetime = 80f;
+                width = height = 11f;
+                collidesTiles = false;
+                splashDamage = 33f;
+                splashDamageRadius = splash1;
+                knockback = 0.8f;
+                hitEffect = new Effect(20, e -> {
+                    color(Pal.bulletYellow);
+                    e.scaled(6, i -> {
+                        stroke(3f * i.fout());
+                        Lines.circle(e.x, e.y, 2f + i.fin() * splash1);
+                    });
+                    color(Color.gray);
+                    randLenVectors(e.id, 5, 2f + (splash1 + 4) * e.finpow(), (x, y) -> {
+                        Fill.circle(e.x + x, e.y + y, e.fout() * 3f + 0.5f);
+                    });
+                    color(Pal.lighterOrange);
+                    stroke(e.fout());
+                    randLenVectors(e.id + 1, 6, 2f + (splash1 + 4) * e.finpow(), (x, y) -> {
+                        lineAngle(e.x + x, e.y + y, Mathf.angle(x, y), 1f + e.fout() * 3f);
+                    });
+                    Drawf.light(e.x, e.y, 50f, Pal.lighterOrange, 0.8f * e.fout());
+                });
+                despawnEffect = Fx.none;
+            }},
+            Items.silicon, new ArtilleryBulletType(3f, 20){{
+                lifetime = 80f;
+                width = height = 11f;
+                ammoMultiplier = 3f;
+                reloadMultiplier = 1.2f;
+                collidesTiles = false;
+                splashDamage = 33f;
+                splashDamageRadius = splash1;
+                homingPower = 0.08f;
+                homingRange = 50f;
+                knockback = 0.8f;
+                hitEffect = new Effect(20, e -> {
+                    color(Pal.bulletYellow);
+                    e.scaled(6, i -> {
+                        stroke(3f * i.fout());
+                        Lines.circle(e.x, e.y, 2f + i.fin() * splash1);
+                    });
+                    color(Color.gray);
+                    randLenVectors(e.id, 5, 2f + (splash1 + 4) * e.finpow(), (x, y) -> {
+                        Fill.circle(e.x + x, e.y + y, e.fout() * 3f + 0.5f);
+                    });
+                    color(Pal.lighterOrange);
+                    stroke(e.fout());
+                    randLenVectors(e.id + 1, 6, 2f + (splash1 + 4) * e.finpow(), (x, y) -> {
+                        lineAngle(e.x + x, e.y + y, Mathf.angle(x, y), 1f + e.fout() * 3f);
+                    });
+                    Drawf.light(e.x, e.y, 50f, Pal.lighterOrange, 0.8f * e.fout());
+                });
+                despawnEffect = Fx.none;
+            }},
+            Items.pyratite, new ArtilleryBulletType(3f, 24){{
+                lifetime = 80f;
+                width = height = 13f;
+                ammoMultiplier = 4f;
+                collidesTiles = false;
+                splashDamage = 45f;
+                splashDamageRadius = splash1;
+                status = StatusEffects.burning;
+                statusDuration = 60f * 12f;
+                makeFire = true;
+                knockback = 0.8f;
+                frontColor = Pal.lightishOrange;
+                backColor = Pal.lightOrange;
+                trailEffect = Fx.incendTrail;
+                hitEffect = new Effect(22, e -> {
+                    color(Pal.missileYellow);
+                    e.scaled(6, i -> {
+                        stroke(3f * i.fout());
+                        Lines.circle(e.x, e.y, 2f + i.fin() * splash1);
+                    });
+                    color(Color.gray);
+                    randLenVectors(e.id, 6, 2f + (splash1 + 4) * e.finpow(), (x, y) -> {
+                        Fill.circle(e.x + x, e.y + y, e.fout() * 4f + 0.5f);
+                    });
+                    color(Pal.lightishOrange);
+                    stroke(e.fout() * 2.5f);
+                    randLenVectors(e.id + 1, 8, 2f + (splash1 + 4) * e.finpow(), (x, y) -> {
+                        lineAngle(e.x + x, e.y + y, Mathf.angle(x, y), 1f + e.fout() * 3f);
+                    });
+                    Drawf.light(e.x, e.y, 50f, Pal.lightishOrange, 0.8f * e.fout());
+                });
+                despawnEffect = Fx.none;
+            }},
+            Items.blastCompound, new ArtilleryBulletType(2f, 20, "shell"){{
+                lifetime = 80f;
+                width = height = 14f;
+                ammoMultiplier = 4f;
+                collidesTiles = false;
+                splashDamage = 55f;
+                splashDamageRadius = splash2;
+                status = StatusEffects.blasted;
+                knockback = 0.8f;
+                frontColor = Pal.missileYellow;
+                backColor = Pal.missileYellowBack;
+                hitEffect = new Effect(22, e -> {
+                    color(Pal.missileYellow);
+                    e.scaled(6, i -> {
+                        stroke(3f * i.fout());
+                        Lines.circle(e.x, e.y, 2f + i.fin() * splash2);
+                    });
+                    color(Color.gray);
+                    randLenVectors(e.id, 6, 2f + (splash2 + 4) * e.finpow(), (x, y) -> {
+                        Fill.circle(e.x + x, e.y + y, e.fout() * 4f + 0.5f);
+                    });
+                    color(Pal.missileYellowBack);
+                    stroke(e.fout() * 1.5f);
+                    randLenVectors(e.id + 1, 6, 2f + (splash2 + 4) * e.finpow(), (x, y) -> {
+                        lineAngle(e.x + x, e.y + y, Mathf.angle(x, y), 1f + e.fout() * 3f);
+                    });
+                    Drawf.light(e.x, e.y, 65f, Pal.missileYellowBack, 0.8f * e.fout());
+                });
+                despawnEffect = Fx.none;
+            }});
+            block.limitRange(5);
 		}
 
         spectre: {
