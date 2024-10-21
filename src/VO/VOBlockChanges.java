@@ -631,7 +631,6 @@ public class VOBlockChanges {
         cyclone: {
 			if(!(Blocks.cyclone instanceof ItemTurret))break cyclone;
 			ItemTurret block = (ItemTurret)Blocks.cyclone;
-            float splash1 = 25f * 0.75f, splash2 = 45f * 0.75f;
 			
 			block.ammoTypes.putAll(Items.metaglass, new FlakBulletType(4f, 6){{
                 width = 6f;
@@ -763,7 +762,7 @@ public class VOBlockChanges {
                     randLenVectors(e.id + 1, 7, 2f + 48f * e.finpow(), (x, y) -> {
                         lineAngle(e.x + x, e.y + y, Mathf.angle(x, y), 1f + e.fout() * 3f);
                     });
-                    Drawf.light(e.x, e.y, 65f, Pal.missileYellowBack, 0.8f * e.fout());
+                    Drawf.light(e.x, e.y, 90f, Pal.missileYellowBack, 0.8f * e.fout());
                 });
                 despawnEffect = Fx.none;
             }});

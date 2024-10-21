@@ -1,6 +1,8 @@
 package VO;
 
 import arc.graphics.Color;
+import arc.graphics.g2d.Fill;
+import arc.graphics.g2d.Lines;
 import arc.math.*;
 import mindustry.content.*;
 import mindustry.entities.Effect;
@@ -8,25 +10,67 @@ import mindustry.entities.bullet.*;
 import mindustry.entities.effect.*;
 import mindustry.entities.pattern.*;
 import mindustry.gen.Sounds;
+import mindustry.graphics.Drawf;
 import mindustry.graphics.Pal;
 import mindustry.type.Weapon;
 import mindustry.type.weapons.RepairBeamWeapon;
 import VO.entities.*;
 
+import static arc.graphics.g2d.Draw.*;
+import static arc.graphics.g2d.Lines.*;
+import static arc.math.Angles.*;
+
 public class VOUnitChanges {
     public static void load(){
 
-        Effect hitLaserBoltGreen = new MultiEffect(new WrapEffect(Fx.shootSmallColor, Pal.heal), new WrapEffect(Fx.shootSmallColor, Pal.heal, 90), new WrapEffect(Fx.shootSmallColor, Pal.heal, 180), new WrapEffect(Fx.shootSmallColor, Pal.heal, 270), Fx.hitLaser);
+        Effect hitLaserBoltGreen = new MultiEffect(
+            new WrapEffect(Fx.shootSmallColor, Pal.heal),
+            new WrapEffect(Fx.shootSmallColor, Pal.heal, 90),
+            new WrapEffect(Fx.shootSmallColor, Pal.heal, 180),
+            new WrapEffect(Fx.shootSmallColor, Pal.heal, 270),
+            Fx.hitLaser
+        );
+        Effect sapExplosionCloud = new MultiEffect(Fx.sapExplosion, new ParticleEffect(){{
+            lifetime = 90;
+            particles = 7;
+            length = 60;
+            sizeFrom = 7;
+            sizeTo = 0;
+            colorFrom = Pal.sap.cpy().a(0.5f);
+            colorTo = Pal.sap.cpy().a(0.3f);
+            interp = Interp.pow5Out;
+            sizeInterp = Interp.pow3In;
+        }},
+        new ParticleEffect(){{
+            lifetime = 110;
+            particles = 7;
+            length = 60;
+            sizeFrom = 12;
+            sizeTo = 0;
+            colorFrom = Pal.sap.cpy().a(0.5f);
+            colorTo = Pal.sap.cpy().a(0.3f);
+            interp = Interp.pow5Out;
+            sizeInterp = Interp.pow3In;
+        }});
 
         UnitTypes.alpha.trailLength = 40;
         UnitTypes.beta.trailLength = 50;
         UnitTypes.gamma.trailLength = 60;
         UnitTypes.incite.trailLength = 30;
         UnitTypes.emanate.trailLength = 35;
+        UnitTypes.flare.trailLength = 9;
+        UnitTypes.horizon.trailLength = 12;
+        UnitTypes.zenith.engineSize = 4.5f;
+        UnitTypes.zenith.trailLength = 15;
+        UnitTypes.antumbra.engineSize = 6.5f;
+        UnitTypes.antumbra.trailLength = 35;
+        UnitTypes.eclipse.engineSize = 8;
+        UnitTypes.eclipse.trailLength = 65;
         UnitTypes.mono.trailLength = 10;
         UnitTypes.poly.trailLength = 10;
         UnitTypes.mega.trailLength = 10;
         UnitTypes.quad.trailLength = 30;
+        UnitTypes.elude.trailLength = 18;
 
         UnitTypes.alpha.weapons.get(0).bullet.hitEffect = new MultiEffect(Fx.shootSmall, Fx.hitBulletSmall);
         UnitTypes.beta.weapons.get(0).bullet.hitEffect = new MultiEffect(Fx.shootSmall, Fx.hitBulletSmall);
@@ -62,6 +106,23 @@ public class VOUnitChanges {
                 colors = new Color[]{Color.white, Color.valueOf("fff4ac"), Pal.lightFlame, Pal.darkFlame, Color.gray};
             }};
         }});
+        UnitTypes.fortress.weapons.get(0).bullet.hitEffect = new Effect(22, e -> {
+            color(Pal.missileYellow);
+            e.scaled(8, i -> {
+                stroke(3f * i.fout());
+                Lines.circle(e.x, e.y, 2f + i.fin() * 35f);
+            });
+            color(Color.gray);
+            randLenVectors(e.id, 6, 2f + 39f * e.finpow(), (x, y) -> {
+                Fill.circle(e.x + x, e.y + y, e.fout() * 4f + 0.5f);
+            });
+            color(Pal.missileYellowBack);
+            stroke(e.fout());
+            randLenVectors(e.id + 1, 6, 2f + 39f * e.finpow(), (x, y) -> {
+                lineAngle(e.x + x, e.y + y, Mathf.angle(x, y), 1f + e.fout() * 3f);
+            });
+            Drawf.light(e.x, e.y, 45f, Pal.missileYellowBack, 0.8f * e.fout());
+        }); UnitTypes.fortress.weapons.get(0).bullet.despawnEffect = Fx.none;
         UnitTypes.scepter.weapons.get(0).bullet.hitEffect = new MultiEffect(Fx.shootBig, Fx.hitBulletSmall);
         UnitTypes.scepter.weapons.get(1).bullet.hitEffect = new MultiEffect(Fx.shootSmall, Fx.hitBulletSmall);
         UnitTypes.scepter.weapons.get(2).bullet.hitEffect = new MultiEffect(Fx.shootSmall, Fx.hitBulletSmall);
@@ -71,31 +132,50 @@ public class VOUnitChanges {
         UnitTypes.nova.weapons.get(0).bullet.hitEffect = hitLaserBoltGreen;
         UnitTypes.nova.weapons.get(0).bullet.despawnEffect = Fx.none;
 
+        UnitTypes.crawler.weapons.get(0).bullet.hitEffect = new Effect(25, e -> {
+            color(Pal.missileYellow);
+            e.scaled(6, i -> {
+                stroke(3f * i.fout());
+                Lines.circle(e.x, e.y, 2f + i.fin() * 55f);
+            });
+            color(Color.gray);
+            randLenVectors(e.id, 7, 2f + 48f * e.finpow(), (x, y) -> {
+                Fill.circle(e.x + x, e.y + y, e.fout() * 4f + 0.5f);
+            });
+            color(Pal.missileYellowBack);
+            stroke(e.fout());
+            randLenVectors(e.id + 1, 6, 2f + 48f * e.finpow(), (x, y) -> {
+                lineAngle(e.x + x, e.y + y, Mathf.angle(x, y), 1f + e.fout() * 3f);
+            });
+            Drawf.light(e.x, e.y, 85f, Pal.missileYellowBack, 0.8f * e.fout());
+        });
         UnitTypes.atrax.weapons.get(0).shootY = 5.5f;
         UnitTypes.atrax.weapons.get(0).bullet.trailWidth = 3.1f;
         UnitTypes.atrax.weapons.get(0).bullet.trailLength = 4;
-        UnitTypes.arkyid.weapons.get(3).bullet.hitEffect = new MultiEffect(Fx.sapExplosion, new ParticleEffect(){{
-            lifetime = 90;
-            particles = 7;
+        UnitTypes.arkyid.weapons.get(3).bullet.hitEffect = sapExplosionCloud; UnitTypes.arkyid.weapons.get(3).bullet.despawnEffect = Fx.none;
+        UnitTypes.toxopid.weapons.get(2).bullet.hitEffect = new MultiEffect(Fx.sapExplosion, new ParticleEffect(){{
+            lifetime = 120;
+            particles = 12;
             length = 60;
             sizeFrom = 7;
             sizeTo = 0;
-            colorFrom = Pal.sap.cpy().a(0.5f);
+            colorFrom = Pal.sap.cpy().a(0.6f);
             colorTo = Pal.sap.cpy().a(0.3f);
             interp = Interp.pow5Out;
             sizeInterp = Interp.pow3In;
         }},
         new ParticleEffect(){{
-            lifetime = 110;
-            particles = 7;
+            lifetime = 150;
+            particles = 12;
             length = 60;
             sizeFrom = 12;
             sizeTo = 0;
-            colorFrom = Pal.sap.cpy().a(0.5f);
+            colorFrom = Pal.sap.cpy().a(0.6f);
             colorTo = Pal.sap.cpy().a(0.3f);
             interp = Interp.pow5Out;
             sizeInterp = Interp.pow3In;
-        }});
+        }}); UnitTypes.toxopid.weapons.get(2).bullet.despawnEffect = Fx.none;
+        UnitTypes.toxopid.weapons.get(2).bullet.fragBullet.hitEffect = sapExplosionCloud; UnitTypes.toxopid.weapons.get(2).bullet.fragBullet.despawnEffect = Fx.none;
 
         UnitTypes.flare.weapons.get(0).bullet.hitEffect = new MultiEffect(Fx.shootSmall, Fx.hitBulletSmall);
         UnitTypes.zenith.weapons.get(0).shoot = new ShootAlternate(2){{shots = 2;}};
