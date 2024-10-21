@@ -696,7 +696,7 @@ public class VOBlockChanges {
                     randLenVectors(e.id + 1, 4, 2f + 44f * e.finpow(), (x, y) -> {
                         lineAngle(e.x + x, e.y + y, Mathf.angle(x, y), 1f + e.fout() * 3f);
                     });
-                    Drawf.light(e.x, e.y, 75f, Pal.plastaniumBack, 0.8f * e.fout());
+                    Drawf.light(e.x, e.y, 80f, Pal.plastaniumBack, 0.8f * e.fout());
                 });
                 despawnEffect = Fx.none;
 
