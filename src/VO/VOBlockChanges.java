@@ -748,19 +748,19 @@ public class VOBlockChanges {
                 status = StatusEffects.blasted;
                 statusDuration = 60f;
                 shootEffect = Fx.shootBig;
-                hitEffect = new Effect(22, e -> {
+                hitEffect = new Effect(25, e -> {
                     color(Pal.missileYellow);
-                    e.scaled(8, i -> {
-                        stroke(3.5f * i.fout());
+                    e.scaled(6, i -> {
+                        stroke(3f * i.fout());
                         Lines.circle(e.x, e.y, 2f + i.fin() * 60f);
                     });
                     color(Color.gray);
-                    randLenVectors(e.id, 8, 2f + 64f * e.finpow(), (x, y) -> {
+                    randLenVectors(e.id, 8, 2f + 48f * e.finpow(), (x, y) -> {
                         Fill.circle(e.x + x, e.y + y, e.fout() * 4f + 0.5f);
                     });
                     color(Pal.missileYellowBack);
                     stroke(e.fout());
-                    randLenVectors(e.id + 1, 7, 2f + 64f * e.finpow(), (x, y) -> {
+                    randLenVectors(e.id + 1, 7, 2f + 48f * e.finpow(), (x, y) -> {
                         lineAngle(e.x + x, e.y + y, Mathf.angle(x, y), 1f + e.fout() * 3f);
                     });
                     Drawf.light(e.x, e.y, 65f, Pal.missileYellowBack, 0.8f * e.fout());
