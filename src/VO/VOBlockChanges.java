@@ -601,8 +601,173 @@ public class VOBlockChanges {
                     Drawf.light(e.x, e.y, 65f, Pal.missileYellowBack, 0.8f * e.fout());
                 });
                 despawnEffect = Fx.none;
+            }},
+            Items.plastanium, new ArtilleryBulletType(3.4f, 20, "shell"){{
+                lifetime = 80f;
+                width = height = 13f;
+                collidesTiles = false;
+                splashDamage = 45f;
+                splashDamageRadius = 35f * 0.75f;
+                knockback = 1f;
+                frontColor = Pal.plastaniumFront;
+                backColor = Pal.plastaniumBack;
+                hitEffect = Fx.plasticExplosion;
+                despawnEffect = Fx.none;
+
+                fragBullets = 10;
+                fragBullet = new BasicBulletType(2.5f, 10, "bullet"){{
+                    lifetime = 15f;
+                    width = 10f;
+                    height = 12f;
+                    collidesAir = false;
+                    shrinkY = 1f;
+                    frontColor = Pal.plastaniumFront;
+                    backColor = Pal.plastaniumBack;
+                    despawnEffect = Fx.none;
+                }};
             }});
-            block.limitRange(5);
+		}
+
+        cyclone: {
+			if(!(Blocks.cyclone instanceof ItemTurret))break cyclone;
+			ItemTurret block = (ItemTurret)Blocks.cyclone;
+            float splash1 = 25f * 0.75f, splash2 = 45f * 0.75f;
+			
+			block.ammoTypes.putAll(Items.metaglass, new FlakBulletType(4f, 6){{
+                width = 6f;
+                height = 8f;
+                ammoMultiplier = 2f;
+                reloadMultiplier = 0.8f;
+                collidesGround = true;
+                splashDamage = 45f;
+                splashDamageRadius = 25f;
+                explodeRange = 20f;
+                shootEffect = Fx.shootSmall;
+                hitEffect = new Effect(20, e -> {
+                    color(Pal.bulletYellow);
+                    e.scaled(6, i -> {
+                        stroke(3f * i.fout());
+                        Lines.circle(e.x, e.y, 2f + i.fin() * 25f);
+                    });
+                    color(Color.gray);
+                    randLenVectors(e.id, 5, 2f + 29f * e.finpow(), (x, y) -> {
+                        Fill.circle(e.x + x, e.y + y, e.fout() * 3f + 0.5f);
+                    });
+                    color(Pal.lighterOrange);
+                    stroke(e.fout());
+                    randLenVectors(e.id + 1, 6, 2f + 29f * e.finpow(), (x, y) -> {
+                        lineAngle(e.x + x, e.y + y, Mathf.angle(x, y), 1f + e.fout() * 3f);
+                    });
+                    Drawf.light(e.x, e.y, 50f, Pal.lighterOrange, 0.8f * e.fout());
+                });
+                despawnEffect = Fx.none;
+
+                fragBullets = 4;
+                fragBullet = new BasicBulletType(3f, 12, "bullet"){{
+                    lifetime = 20f;
+                    width = 5f;
+                    height = 12f;
+                    shrinkY = 1f;
+                    frontColor = Color.white;
+                    backColor = Pal.gray;
+                    despawnEffect = Fx.none;
+                }};
+            }},
+            Items.plastanium, new FlakBulletType(4f, 8){{
+                ammoMultiplier = 4f;
+                collidesGround = true;
+                splashDamage = 37.5f;
+                splashDamageRadius = 40f;
+                explodeRange = 20f;
+                frontColor = Pal.plastaniumFront;
+                backColor = Pal.plastaniumBack;
+                shootEffect = Fx.shootBig;
+                hitEffect = new Effect(24, e -> {
+                    color(Pal.plastaniumFront);
+                    e.scaled(8, i -> {
+                        stroke(3f * i.fout());
+                        Lines.circle(e.x, e.y, 2f + i.fin() * 40f);
+                    });
+                    color(Color.gray);
+                    randLenVectors(e.id, 7, 2f + 44f * e.finpow(), (x, y) -> {
+                        Fill.circle(e.x + x, e.y + y, e.fout() * 4f + 0.5f);
+                    });
+                    color(Pal.plastaniumBack);
+                    stroke(e.fout());
+                    randLenVectors(e.id + 1, 4, 2f + 44f * e.finpow(), (x, y) -> {
+                        lineAngle(e.x + x, e.y + y, Mathf.angle(x, y), 1f + e.fout() * 3f);
+                    });
+                    Drawf.light(e.x, e.y, 75f, Pal.plastaniumBack, 0.8f * e.fout());
+                });
+                despawnEffect = Fx.none;
+
+                fragBullets = 6;
+                fragBullet = new BasicBulletType(2.5f, 12, "bullet"){{
+                    width = 10f;
+                    height = 12f;
+                    shrinkY = 1f;
+                    lifetime = 15f;
+                    backColor = Pal.plastaniumBack;
+                    frontColor = Pal.plastaniumFront;
+                    despawnEffect = Fx.none;
+                }};
+            }},
+            Items.surgeAlloy, new FlakBulletType(4.5f, 13){{
+                ammoMultiplier = 5f;
+                collidesGround = true;
+                splashDamage = 75;
+                splashDamageRadius = 38f;
+                lightning = 2;
+                lightningLength = 7;
+                explodeRange = 20f;
+                shootEffect = Fx.shootBig;
+                hitEffect = new Effect(22, e -> {
+                    color(Pal.missileYellow);
+                    e.scaled(6, i -> {
+                        stroke(3f * i.fout());
+                        Lines.circle(e.x, e.y, 2f + i.fin() * 38f);
+                    });
+                    color(Color.gray);
+                    randLenVectors(e.id, 6, 2f + 42f * e.finpow(), (x, y) -> {
+                        Fill.circle(e.x + x, e.y + y, e.fout() * 4f + 0.5f);
+                    });
+                    color(Pal.bulletYellowBack);
+                    stroke(e.fout());
+                    randLenVectors(e.id + 1, 10, 2f + 42f * e.finpow(), (x, y) -> {
+                        lineAngle(e.x + x, e.y + y, Mathf.angle(x, y), 1f + e.fout() * 4f);
+                    });
+                    Drawf.light(e.x, e.y, 60f, Pal.missileYellowBack, 0.8f * e.fout());
+                });
+                despawnEffect = Fx.none;
+            }},
+            Items.blastCompound, new FlakBulletType(4f, 8){{
+                ammoMultiplier = 5f;
+                collidesGround = true;
+                splashDamage = 45f;
+                splashDamageRadius = 60f;
+                status = StatusEffects.blasted;
+                statusDuration = 60f;
+                shootEffect = Fx.shootBig;
+                hitEffect = new Effect(22, e -> {
+                    color(Pal.missileYellow);
+                    e.scaled(8, i -> {
+                        stroke(3.5f * i.fout());
+                        Lines.circle(e.x, e.y, 2f + i.fin() * 60f);
+                    });
+                    color(Color.gray);
+                    randLenVectors(e.id, 8, 2f + 64f * e.finpow(), (x, y) -> {
+                        Fill.circle(e.x + x, e.y + y, e.fout() * 4f + 0.5f);
+                    });
+                    color(Pal.missileYellowBack);
+                    stroke(e.fout());
+                    randLenVectors(e.id + 1, 7, 2f + 64f * e.finpow(), (x, y) -> {
+                        lineAngle(e.x + x, e.y + y, Mathf.angle(x, y), 1f + e.fout() * 3f);
+                    });
+                    Drawf.light(e.x, e.y, 65f, Pal.missileYellowBack, 0.8f * e.fout());
+                });
+                despawnEffect = Fx.none;
+            }});
+            block.limitRange();
 		}
 
         spectre: {
