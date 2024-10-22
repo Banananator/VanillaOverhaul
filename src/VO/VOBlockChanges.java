@@ -248,7 +248,7 @@ public class VOBlockChanges {
                             lineAngle(e.x + x, e.y + y, Mathf.angle(x, y), 1f + i.fout() * 3f);
                         });
                     });
-                    Drawf.light(e.x, e.y, splash * 2f, Pal.lighterOrange, 0.8f * e.fout());
+                    Drawf.light(e.x, e.y, splash * 2f, Pal.missileYellowBack, 0.8f * e.fout());
                 });
                 despawnEffect = Fx.none;
             }},
@@ -279,7 +279,7 @@ public class VOBlockChanges {
                             lineAngle(e.x + x, e.y + y, Mathf.angle(x, y), 1f + i.fout() * 3f);
                         });
                     });
-                    Drawf.light(e.x, e.y, splash * 2f, Pal.lighterOrange, 0.8f * e.fout());
+                    Drawf.light(e.x, e.y, splash * 2f, Pal.missileYellowBack, 0.8f * e.fout());
                 });
                 despawnEffect = Fx.none;
             }},
@@ -313,7 +313,7 @@ public class VOBlockChanges {
                             lineAngle(e.x + x, e.y + y, Mathf.angle(x, y), 1f + i.fout() * 3f);
                         });
                     });
-                    Drawf.light(e.x, e.y, splash * 2f, Pal.lightishOrange, 0.8f * e.fout());
+                    Drawf.light(e.x, e.y, splash * 2f, Pal.missileYellowBack, 0.8f * e.fout());
                 });
                 despawnEffect = Fx.none;
             }});
@@ -431,7 +431,6 @@ public class VOBlockChanges {
 		}
 
         salvo: {
-
 			if(!(Blocks.salvo instanceof ItemTurret))break salvo;
 			ItemTurret block = (ItemTurret)Blocks.salvo;
 			
@@ -461,15 +460,13 @@ public class VOBlockChanges {
                 makeFire = true;
                 frontColor = Pal.lightishOrange;
                 backColor = Pal.lightOrange;
-                hitEffect = new MultiEffect(new ExplosionEffect(){{
-                    lifetime = 18;
-                    waveRad = 0;
-                    waveColor = Pal.lightishOrange;
-                    smokes = 0;
-                    sparks = 5;
-                    sparkRad = 24;
-                    sparkStroke = 2.5f;
-                }}, Fx.fireHit);
+                hitEffect = new MultiEffect(new Effect(18, e -> {
+                    color(Pal.lightishOrange); stroke(e.fout() * 2.5f);
+                    randLenVectors(e.id + 1, 5, 2f + 22f * e.finpow(), (x, y) -> {
+                        lineAngle(e.x + x, e.y + y, Mathf.angle(x, y), 1f + e.fout() * 3f);
+                        Drawf.light(e.x + x, e.y + y, e.fout() * 3f * 4f, Pal.lightishOrange, 0.7f);
+                    });
+                }), Fx.fireHit);
             }},
             Items.silicon, new BasicBulletType(3, 15){{
                 lifetime = 60;
@@ -831,15 +828,14 @@ public class VOBlockChanges {
                 backColor = Pal.lightOrange;
                 shootEffect = Fx.shootBig;
                 smokeEffect = Fx.shootBigSmoke;
-                hitEffect = new MultiEffect(new ExplosionEffect(){{
-                    lifetime = 18;
-                    waveRad = 0;
-                    waveColor = Pal.lightishOrange;
-                    smokes = 0;
-                    sparks = 7;
-                    sparkRad = 27;
-                    sparkStroke = 2.6f;
-                }}, Fx.fireHit);
+                hitEffect = new MultiEffect(new Effect(18, e -> {
+                    color(Pal.lightishOrange); stroke(e.fout() * 2.6f);
+                    randLenVectors(e.id + 1, 7, 2f + 25f * e.finpow(), (x, y) -> {
+                        lineAngle(e.x + x, e.y + y, Mathf.angle(x, y), 1f + e.fout() * 3f);
+                        Drawf.light(e.x + x, e.y + y, e.fout() * 3f * 4f, Pal.lightishOrange, 0.7f);
+                    });
+                }), Fx.fireHit);
+                despawnEffect = Fx.none;
             }});
             block.limitRange();
         }
