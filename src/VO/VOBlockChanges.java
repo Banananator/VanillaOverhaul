@@ -233,7 +233,7 @@ public class VOBlockChanges {
                 splashDamageRadius = splash;
                 knockback = 0.8f;
                 hitEffect = new Effect(30, e -> {
-                    color(Pal.bulletYellow);
+                    color(Pal.missileYellow);
                     e.scaled(6, i -> {
                         stroke((wstroke(33)) * i.fout());
                         Lines.circle(e.x, e.y, 2f + i.fin() * splash);
@@ -242,7 +242,7 @@ public class VOBlockChanges {
                     randLenVectors(e.id, 5, 2f + (splash - 5f) * e.finpow(), (x, y) -> {
                         Fill.circle(e.x + x, e.y + y, e.fout() * 3.5f + 0.5f);
                     });
-                    color(Pal.lighterOrange);
+                    color(Pal.missileYellowBack);
                     e.scaled(20, i -> {stroke(i.fout());
                         randLenVectors(e.id + 1, 6, 2f + (splash + 4f) * i.finpow(), (x, y) -> {
                             lineAngle(e.x + x, e.y + y, Mathf.angle(x, y), 1f + i.fout() * 3f);
@@ -264,7 +264,7 @@ public class VOBlockChanges {
                 splashDamageRadius = splash;
                 knockback = 0.8f;
                 hitEffect = new Effect(30, e -> {
-                    color(Pal.bulletYellow);
+                    color(Pal.missileYellow);
                     e.scaled(6, i -> {
                         stroke((wstroke(33)) * i.fout());
                         Lines.circle(e.x, e.y, 2f + i.fin() * splash);
@@ -273,7 +273,7 @@ public class VOBlockChanges {
                     randLenVectors(e.id, 5, 2f + (splash - 5f) * e.finpow(), (x, y) -> {
                         Fill.circle(e.x + x, e.y + y, e.fout() * 3.5f + 0.5f);
                     });
-                    color(Pal.lighterOrange);
+                    color(Pal.missileYellowBack);
                     e.scaled(20, i -> {stroke(i.fout());
                         randLenVectors(e.id + 1, 6, 2f + (splash + 4f) * i.finpow(), (x, y) -> {
                             lineAngle(e.x + x, e.y + y, Mathf.angle(x, y), 1f + i.fout() * 3f);
@@ -303,12 +303,12 @@ public class VOBlockChanges {
                         stroke(wstroke(45) * i.fout());
                         Lines.circle(e.x, e.y, 2f + i.fin() * splash);
                     });
-                    color(Color.darkGray);
+                    color(Color.gray);
                     randLenVectors(e.id, 6, 2f + (splash - 5f) * e.finpow(), (x, y) -> {
-                        Fill.circle(e.x + x, e.y + y, e.fout() * 3.5f + 0.5f);
+                        Fill.circle(e.x + x, e.y + y, e.fout() * 4.5f + 0.5f);
                     });
                     color(Pal.lightishOrange);
-                    e.scaled(20, i -> {stroke(i.fout() * 2.5f);
+                    e.scaled(22, i -> {stroke(i.fout() * 2.5f);
                         randLenVectors(e.id + 1, 8, 2f + (splash + 4f) * i.finpow(), (x, y) -> {
                             lineAngle(e.x + x, e.y + y, Mathf.angle(x, y), 1f + i.fout() * 3f);
                         });
