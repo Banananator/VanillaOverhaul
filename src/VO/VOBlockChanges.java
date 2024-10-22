@@ -92,20 +92,21 @@ public class VOBlockChanges {
                 splashDamageRadius = 24f;
                 shrinkY = 0;
                 shootEffect = Fx.shootSmall;
-                hitEffect = new Effect(20, e -> {
+                hitEffect = new Effect(30, e -> {
                     color(Pal.bulletYellow);
                     e.scaled(6, i -> {
                         stroke((2f + estroke(33)) * i.fout());
                         Lines.circle(e.x, e.y, 2f + i.fin() * 24f);
                     });
                     color(Color.gray);
-                    randLenVectors(e.id, 5, 2f + 20f * e.finpow(), (x, y) -> {
-                        Fill.circle(e.x + x, e.y + y, e.fout() * 3f + 0.5f);
+                    randLenVectors(e.id, 5, 2f + 18f * e.finpow(), (x, y) -> {
+                        Fill.circle(e.x + x, e.y + y, e.fout() * 4.5f + 0.5f);
                     });
                     color(Pal.lighterOrange);
-                    stroke(e.fout());
-                    randLenVectors(e.id + 1, 6, 2f + 28f * e.finpow(), (x, y) -> {
-                        lineAngle(e.x + x, e.y + y, Mathf.angle(x, y), 1f + e.fout() * 3f);
+                    e.scaled(20, i -> {stroke(i.fout());
+                        randLenVectors(e.id + 1, 6, 2f + 28f * i.finpow(), (x, y) -> {
+                            lineAngle(e.x + x, e.y + y, Mathf.angle(x, y), 1f + i.fout() * 3f);
+                        });
                     });
                     Drawf.light(e.x, e.y, 48f, Pal.lighterOrange, 0.8f * e.fout());
                 });
