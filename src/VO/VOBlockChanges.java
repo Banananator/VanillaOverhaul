@@ -467,6 +467,7 @@ public class VOBlockChanges {
                         Drawf.light(e.x + x, e.y + y, e.fout() * 3f * 4f, Pal.lightishOrange, 0.7f);
                     });
                 }), Fx.fireHit);
+                despawnEffect = Fx.none;
             }},
             Items.silicon, new BasicBulletType(3, 15){{
                 lifetime = 60;
@@ -829,10 +830,10 @@ public class VOBlockChanges {
                 shootEffect = Fx.shootBig;
                 smokeEffect = Fx.shootBigSmoke;
                 hitEffect = new MultiEffect(new Effect(18, e -> {
-                    color(Pal.lightishOrange); stroke(e.fout() * 2.6f);
+                    color(Pal.lightishOrange); stroke(e.fout() * 3.8f);
                     randLenVectors(e.id + 1, 7, 2f + 25f * e.finpow(), (x, y) -> {
-                        lineAngle(e.x + x, e.y + y, Mathf.angle(x, y), 1f + e.fout() * 3f);
-                        Drawf.light(e.x + x, e.y + y, e.fout() * 3f * 4f, Pal.lightishOrange, 0.7f);
+                        lineAngle(e.x + x, e.y + y, Mathf.angle(x, y), 1f + e.fout() * 4f);
+                        Drawf.light(e.x + x, e.y + y, e.fout() * 4f * 4f, Pal.lightishOrange, 0.7f);
                     });
                 }), Fx.fireHit);
                 despawnEffect = Fx.none;
