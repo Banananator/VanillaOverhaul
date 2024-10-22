@@ -95,7 +95,7 @@ public class VOBlockChanges {
                 hitEffect = new Effect(20, e -> {
                     color(Pal.bulletYellow);
                     e.scaled(6, i -> {
-                        stroke(2f + estroke(33) * i.fout());
+                        stroke((2f + estroke(33)) * i.fout());
                         Lines.circle(e.x, e.y, 2f + i.fin() * 24f);
                     });
                     color(Color.gray);
