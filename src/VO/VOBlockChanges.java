@@ -39,6 +39,10 @@ public class VOBlockChanges {
 		
 		target.requirements = req.shrink();
 	}*/
+
+    private static float estroke(float value){
+        return value / 100;
+    }
     
     public static void load(){
         ductUnloader: {if(!(Blocks.ductUnloader instanceof DirectionalUnloader))break ductUnloader; DirectionalUnloader block = (DirectionalUnloader)Blocks.ductUnloader; block.speed = 60 / 16;}
@@ -84,17 +88,18 @@ public class VOBlockChanges {
                 height = 8f;
                 ammoMultiplier = 5f;
                 reloadMultiplier = 0.5f;
-                splashDamage = 22f * 1.5f;
+                splashDamage = 33f;
                 splashDamageRadius = 24f;
+                shrinkY = 0;
                 shootEffect = Fx.shootSmall;
                 hitEffect = new Effect(20, e -> {
                     color(Pal.bulletYellow);
                     e.scaled(6, i -> {
-                        stroke(3f * i.fout());
+                        stroke(2f + estroke(33) * i.fout());
                         Lines.circle(e.x, e.y, 2f + i.fin() * 24f);
                     });
                     color(Color.gray);
-                    randLenVectors(e.id, 5, 2f + 28f * e.finpow(), (x, y) -> {
+                    randLenVectors(e.id, 5, 2f + 20f * e.finpow(), (x, y) -> {
                         Fill.circle(e.x + x, e.y + y, e.fout() * 3f + 0.5f);
                     });
                     color(Pal.lighterOrange);
@@ -102,7 +107,7 @@ public class VOBlockChanges {
                     randLenVectors(e.id + 1, 6, 2f + 28f * e.finpow(), (x, y) -> {
                         lineAngle(e.x + x, e.y + y, Mathf.angle(x, y), 1f + e.fout() * 3f);
                     });
-                    Drawf.light(e.x, e.y, 60f, Pal.lighterOrange, 0.8f * e.fout());
+                    Drawf.light(e.x, e.y, 48f, Pal.lighterOrange, 0.8f * e.fout());
                 });
                 despawnEffect = Fx.none;
             }},
@@ -111,8 +116,9 @@ public class VOBlockChanges {
                 width = 6f;
                 height = 8f;
                 ammoMultiplier = 4f;
-                splashDamage = 27f * 1.5f;
+                splashDamage = 40.5f;
                 splashDamageRadius = 15f;
+                shrinkY = 0;
                 shootEffect = Fx.shootSmall;
                 hitEffect = new Effect(20, e -> {
                     color(Pal.bulletYellow);
@@ -129,7 +135,7 @@ public class VOBlockChanges {
                     randLenVectors(e.id + 1, 5, 2f + 19f * e.finpow(), (x, y) -> {
                         lineAngle(e.x + x, e.y + y, Mathf.angle(x, y), 1f + e.fout() * 3f);
                     });
-                    Drawf.light(e.x, e.y, 45f, Pal.lighterOrange, 0.8f * e.fout());
+                    Drawf.light(e.x, e.y, 30f, Pal.lighterOrange, 0.8f * e.fout());
                 });
                 despawnEffect = Fx.none;
             }},
@@ -141,6 +147,7 @@ public class VOBlockChanges {
                 reloadMultiplier = 0.8f;
                 splashDamage = 30f * 1.5f;
                 splashDamageRadius = 20f;
+                shrinkY = 0;
                 shootEffect = Fx.shootSmall;
                 hitEffect = new Effect(20, e -> {
                     color(Pal.bulletYellow);
@@ -157,7 +164,7 @@ public class VOBlockChanges {
                     randLenVectors(e.id + 1, 6, 2f + 24f * e.finpow(), (x, y) -> {
                         lineAngle(e.x + x, e.y + y, Mathf.angle(x, y), 1f + e.fout() * 3f);
                     });
-                    Drawf.light(e.x, e.y, 50f, Pal.lighterOrange, 0.8f * e.fout());
+                    Drawf.light(e.x, e.y, 40f, Pal.lighterOrange, 0.8f * e.fout());
                 });
                 despawnEffect = Fx.none;
 
@@ -236,7 +243,7 @@ public class VOBlockChanges {
                     randLenVectors(e.id + 1, 6, 2f + (splash + 4f) * e.finpow(), (x, y) -> {
                         lineAngle(e.x + x, e.y + y, Mathf.angle(x, y), 1f + e.fout() * 3f);
                     });
-                    Drawf.light(e.x, e.y, 50f, Pal.lighterOrange, 0.8f * e.fout());
+                    Drawf.light(e.x, e.y, splash * 2f, Pal.lighterOrange, 0.8f * e.fout());
                 });
                 despawnEffect = Fx.none;
             }},
@@ -266,7 +273,7 @@ public class VOBlockChanges {
                     randLenVectors(e.id + 1, 6, 2f + (splash + 4f) * e.finpow(), (x, y) -> {
                         lineAngle(e.x + x, e.y + y, Mathf.angle(x, y), 1f + e.fout() * 3f);
                     });
-                    Drawf.light(e.x, e.y, 50f, Pal.lighterOrange, 0.8f * e.fout());
+                    Drawf.light(e.x, e.y, splash * 2f, Pal.lighterOrange, 0.8f * e.fout());
                 });
                 despawnEffect = Fx.none;
             }},
@@ -299,7 +306,7 @@ public class VOBlockChanges {
                     randLenVectors(e.id + 1, 8, 2f + (splash + 4f) * e.finpow(), (x, y) -> {
                         lineAngle(e.x + x, e.y + y, Mathf.angle(x, y), 1f + e.fout() * 3f);
                     });
-                    Drawf.light(e.x, e.y, 50f, Pal.lightishOrange, 0.8f * e.fout());
+                    Drawf.light(e.x, e.y, splash * 2f, Pal.lightishOrange, 0.8f * e.fout());
                 });
                 despawnEffect = Fx.none;
             }});
@@ -369,7 +376,7 @@ public class VOBlockChanges {
                     randLenVectors(e.id + 1, 8, 2f + 24f * e.finpow(), (x, y) -> {
                         lineAngle(e.x + x, e.y + y, Mathf.angle(x, y), 1f + e.fout() * 3f);
                     });
-                    Drawf.light(e.x, e.y, 50f, Pal.lightishOrange, 0.8f * e.fout());
+                    Drawf.light(e.x, e.y, 40f, Pal.lightishOrange, 0.8f * e.fout());
                 });
                 despawnEffect = Fx.none;
                 frontColor = Pal.lightishOrange;
@@ -402,7 +409,7 @@ public class VOBlockChanges {
                     randLenVectors(e.id + 1, 10, 2f + 29f * e.finpow(), (x, y) -> {
                         lineAngle(e.x + x, e.y + y, Mathf.angle(x, y), 1f + e.fout() * 4f);
                     });
-                    Drawf.light(e.x, e.y, 60f, Pal.missileYellowBack, 0.8f * e.fout());
+                    Drawf.light(e.x, e.y, 50f, Pal.missileYellowBack, 0.8f * e.fout());
                 });
                 despawnEffect = Fx.none;
                 frontColor = Pal.bulletYellow;
@@ -505,7 +512,7 @@ public class VOBlockChanges {
                     randLenVectors(e.id + 1, 6, 2f + (splash1 + 4) * e.finpow(), (x, y) -> {
                         lineAngle(e.x + x, e.y + y, Mathf.angle(x, y), 1f + e.fout() * 3f);
                     });
-                    Drawf.light(e.x, e.y, 50f, Pal.lighterOrange, 0.8f * e.fout());
+                    Drawf.light(e.x, e.y, splash1 * 2f, Pal.lighterOrange, 0.8f * e.fout());
                 });
                 despawnEffect = Fx.none;
             }},
@@ -535,7 +542,7 @@ public class VOBlockChanges {
                     randLenVectors(e.id + 1, 6, 2f + (splash1 + 4) * e.finpow(), (x, y) -> {
                         lineAngle(e.x + x, e.y + y, Mathf.angle(x, y), 1f + e.fout() * 3f);
                     });
-                    Drawf.light(e.x, e.y, 50f, Pal.lighterOrange, 0.8f * e.fout());
+                    Drawf.light(e.x, e.y, splash1 * 2f, Pal.lighterOrange, 0.8f * e.fout());
                 });
                 despawnEffect = Fx.none;
             }},
@@ -568,7 +575,7 @@ public class VOBlockChanges {
                     randLenVectors(e.id + 1, 8, 2f + (splash1 + 4) * e.finpow(), (x, y) -> {
                         lineAngle(e.x + x, e.y + y, Mathf.angle(x, y), 1f + e.fout() * 3f);
                     });
-                    Drawf.light(e.x, e.y, 50f, Pal.lightishOrange, 0.8f * e.fout());
+                    Drawf.light(e.x, e.y, splash1 * 2f, Pal.lightishOrange, 0.8f * e.fout());
                 });
                 despawnEffect = Fx.none;
             }},
@@ -598,7 +605,7 @@ public class VOBlockChanges {
                     randLenVectors(e.id + 1, 6, 2f + (splash2 + 4) * e.finpow(), (x, y) -> {
                         lineAngle(e.x + x, e.y + y, Mathf.angle(x, y), 1f + e.fout() * 3f);
                     });
-                    Drawf.light(e.x, e.y, 65f, Pal.missileYellowBack, 0.8f * e.fout());
+                    Drawf.light(e.x, e.y, splash2 * 2f, Pal.missileYellowBack, 0.8f * e.fout());
                 });
                 despawnEffect = Fx.none;
             }},
@@ -735,7 +742,7 @@ public class VOBlockChanges {
                     randLenVectors(e.id + 1, 10, 2f + 42f * e.finpow(), (x, y) -> {
                         lineAngle(e.x + x, e.y + y, Mathf.angle(x, y), 1f + e.fout() * 4f);
                     });
-                    Drawf.light(e.x, e.y, 60f, Pal.missileYellowBack, 0.8f * e.fout());
+                    Drawf.light(e.x, e.y, 76f, Pal.missileYellowBack, 0.8f * e.fout());
                 });
                 despawnEffect = Fx.none;
             }},
@@ -762,7 +769,7 @@ public class VOBlockChanges {
                     randLenVectors(e.id + 1, 7, 2f + 48f * e.finpow(), (x, y) -> {
                         lineAngle(e.x + x, e.y + y, Mathf.angle(x, y), 1f + e.fout() * 3f);
                     });
-                    Drawf.light(e.x, e.y, 90f, Pal.missileYellowBack, 0.8f * e.fout());
+                    Drawf.light(e.x, e.y, 120f, Pal.missileYellowBack, 0.8f * e.fout());
                 });
                 despawnEffect = Fx.none;
             }});

@@ -121,7 +121,7 @@ public class VOUnitChanges {
             randLenVectors(e.id + 1, 10, 2f + 39f * e.finpow(), (x, y) -> {
                 lineAngle(e.x + x, e.y + y, Mathf.angle(x, y), 1f + e.fout() * 3f);
             });
-            Drawf.light(e.x, e.y, 45f, Pal.missileYellowBack, 0.8f * e.fout());
+            Drawf.light(e.x, e.y, 70f, Pal.missileYellowBack, 0.8f * e.fout());
         }); UnitTypes.fortress.weapons.get(0).bullet.despawnEffect = Fx.none;
         UnitTypes.scepter.weapons.get(0).bullet.hitEffect = new MultiEffect(Fx.shootBig, Fx.hitBulletSmall);
         UnitTypes.scepter.weapons.get(1).bullet.hitEffect = new MultiEffect(Fx.shootSmall, Fx.hitBulletSmall);
@@ -147,7 +147,7 @@ public class VOUnitChanges {
             randLenVectors(e.id + 1, 6, 2f + 48f * e.finpow(), (x, y) -> {
                 lineAngle(e.x + x, e.y + y, Mathf.angle(x, y), 1f + e.fout() * 3f);
             });
-            Drawf.light(e.x, e.y, 85f, Pal.missileYellowBack, 0.8f * e.fout());
+            Drawf.light(e.x, e.y, 110f, Pal.missileYellowBack, 0.8f * e.fout());
         });
         UnitTypes.atrax.weapons.get(0).shootY = 5.5f;
         UnitTypes.atrax.weapons.get(0).bullet.trailWidth = 3.1f;
@@ -193,7 +193,7 @@ public class VOUnitChanges {
             randLenVectors(e.id + 1, 6, 2f + 27f * e.finpow(), (x, y) -> {
                 lineAngle(e.x + x, e.y + y, Mathf.angle(x, y), 1f + e.fout() * 3f);
             });
-            Drawf.light(e.x, e.y, 60f, Pal.missileYellowBack, 0.8f * e.fout());
+            Drawf.light(e.x, e.y, 50f, Pal.missileYellowBack, 0.8f * e.fout());
         }); UnitTypes.horizon.weapons.get(0).bullet.despawnEffect = Fx.none;
         UnitTypes.zenith.weapons.get(0).shoot = new ShootAlternate(2){{shots = 2;}};
         UnitTypes.zenith.weapons.get(0).bullet.trailWidth = 2.4f;
@@ -213,7 +213,7 @@ public class VOUnitChanges {
             randLenVectors(e.id + 1, 5, 2f + 29f * e.finpow(), (x, y) -> {
                 lineAngle(e.x + x, e.y + y, Mathf.angle(x, y), 1f + e.fout() * 3f);
             });
-            Drawf.light(e.x, e.y, 60f, Pal.missileYellowBack, 0.8f * e.fout());
+            Drawf.light(e.x, e.y, 50f, Pal.missileYellowBack, 0.8f * e.fout());
         }); UnitTypes.zenith.weapons.get(0).bullet.despawnEffect = Fx.none;
         UnitTypes.antumbra.weapons.get(2).bullet.hitEffect = new MultiEffect(Fx.shootBig, Fx.hitBulletSmall);
         UnitTypes.antumbra.weapons.get(0).bullet.trailWidth = 2.4f;
@@ -235,7 +235,7 @@ public class VOUnitChanges {
             randLenVectors(e.id + 1, 5, 2f + 24f * e.finpow(), (x, y) -> {
                 lineAngle(e.x + x, e.y + y, Mathf.angle(x, y), 1f + e.fout() * 3f);
             });
-            Drawf.light(e.x, e.y, 50f, Pal.missileYellowBack, 0.8f * e.fout());
+            Drawf.light(e.x, e.y, 40f, Pal.missileYellowBack, 0.8f * e.fout());
         }); UnitTypes.antumbra.weapons.get(0).bullet.despawnEffect = UnitTypes.antumbra.weapons.get(1).bullet.despawnEffect = Fx.none;
         UnitTypes.eclipse.weapons.get(1).bullet.despawnEffect = UnitTypes.eclipse.weapons.get(2).bullet.despawnEffect = Fx.none;
 
@@ -306,7 +306,7 @@ public class VOUnitChanges {
             randLenVectors(e.id + 1, 6, 2f + 27f * e.finpow(), (x, y) -> {
                 lineAngle(e.x + x, e.y + y, Mathf.angle(x, y), 1f + e.fout() * 3f);
             });
-            Drawf.light(e.x, e.y, 60f, Pal.missileYellowBack, 0.8f * e.fout());
+            Drawf.light(e.x, e.y, 50f, Pal.missileYellowBack, 0.8f * e.fout());
         }); UnitTypes.risso.weapons.get(1).bullet.despawnEffect = Fx.none;
         UnitTypes.minke.weapons.get(0).bullet.hitEffect = new Effect(20, e -> {
             color(Pal.bulletYellow);
@@ -323,7 +323,7 @@ public class VOUnitChanges {
             randLenVectors(e.id + 1, 4, 2f + 19f * e.finpow(), (x, y) -> {
                 lineAngle(e.x + x, e.y + y, Mathf.angle(x, y), 1f + e.fout() * 3f);
             });
-            Drawf.light(e.x, e.y, 50f, Pal.lighterOrange, 0.8f * e.fout());
+            Drawf.light(e.x, e.y, 30f, Pal.lighterOrange, 0.8f * e.fout());
         }); UnitTypes.minke.weapons.get(0).bullet.despawnEffect = Fx.none;
         float size1 = 30f * 0.75f;
         UnitTypes.minke.weapons.get(1).bullet.hitEffect = new Effect(20, e -> {
@@ -341,7 +341,7 @@ public class VOUnitChanges {
             randLenVectors(e.id + 1, 5, 2f + (size1 + 4) * e.finpow(), (x, y) -> {
                 lineAngle(e.x + x, e.y + y, Mathf.angle(x, y), 1f + e.fout() * 3.5f);
             });
-            Drawf.light(e.x, e.y, 65f, Pal.lighterOrange, 0.8f * e.fout());
+            Drawf.light(e.x, e.y, size1 * 2f, Pal.lighterOrange, 0.8f * e.fout());
         }); UnitTypes.minke.weapons.get(1).bullet.despawnEffect = Fx.none;
         UnitTypes.bryde.weapons.get(1).bullet.trailWidth = 2.4f;
         UnitTypes.bryde.weapons.get(1).bullet.trailLength =  4;
@@ -379,7 +379,7 @@ public class VOUnitChanges {
             randLenVectors(e.id + 1, 6, 2f + 27f * e.finpow(), (x, y) -> {
                 lineAngle(e.x + x, e.y + y, Mathf.angle(x, y), 1f + e.fout() * 3f);
             });
-            Drawf.light(e.x, e.y, 60f, Pal.missileYellowBack, 0.8f * e.fout());
+            Drawf.light(e.x, e.y, 50f, Pal.missileYellowBack, 0.8f * e.fout());
         }); UnitTypes.bryde.weapons.get(1).bullet.despawnEffect = Fx.none;
         UnitTypes.sei.weapons.get(1).bullet.hitEffect = new MultiEffect(Fx.shootBig, Fx.hitBulletSmall);
         UnitTypes.sei.weapons.get(0).bullet.trailWidth = 2.4f;
@@ -510,7 +510,7 @@ public class VOUnitChanges {
         }});
         cleroi.fragAngle = cleroi.fragSpread = cleroi.fragRandomSpread = 0;
         cleroi.fragOnAbsorb = false;
-        cleroi.fragBullets = 1; cleroi.fragBullet = new LaserBulletType(25){{
+        cleroi.fragBullets = 1; cleroi.fragBullet = new LaserBulletType(20){{
             lifetime = 20;
             length = 18;
             width = 12;
