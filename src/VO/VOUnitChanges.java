@@ -21,6 +21,11 @@ import static arc.graphics.g2d.Lines.*;
 import static arc.math.Angles.*;
 
 public class VOUnitChanges {
+
+    private static float wstroke(float val){
+        return 2 + (val / 100);
+    }
+
     public static void load(){
 
         Effect hitLaserBoltGreen = new MultiEffect(
@@ -106,20 +111,21 @@ public class VOUnitChanges {
                 colors = new Color[]{Color.white, Color.valueOf("fff4ac"), Pal.lightFlame, Pal.darkFlame, Color.gray};
             }};
         }});
-        UnitTypes.fortress.weapons.get(0).bullet.hitEffect = new Effect(22, e -> {
+        UnitTypes.fortress.weapons.get(0).bullet.hitEffect = new Effect(30, e -> {
             color(Pal.missileYellow);
-            e.scaled(8, i -> {
-                stroke(3f * i.fout());
+            e.scaled(6, i -> {
+                stroke((wstroke(80)) * i.fout());
                 Lines.circle(e.x, e.y, 2f + i.fin() * 35f);
             });
             color(Color.gray);
-            randLenVectors(e.id, 8, 2f + 39f * e.finpow(), (x, y) -> {
-                Fill.circle(e.x + x, e.y + y, e.fout() * 5.5f + 0.5f);
+            randLenVectors(e.id, 6, 2f + 30f * e.finpow(), (x, y) -> {
+                Fill.circle(e.x + x, e.y + y, e.fout() * 4f + 0.5f);
             });
             color(Pal.missileYellowBack);
-            stroke(e.fout());
-            randLenVectors(e.id + 1, 10, 2f + 39f * e.finpow(), (x, y) -> {
-                lineAngle(e.x + x, e.y + y, Mathf.angle(x, y), 1f + e.fout() * 3f);
+            e.scaled(20, i -> {stroke(i.fout() * 1.5f);
+                randLenVectors(e.id + 1, 6, 2f + 39f * i.finpow(), (x, y) -> {
+                    lineAngle(e.x + x, e.y + y, Mathf.angle(x, y), 1f + i.fout() * 3.5f);
+                });
             });
             Drawf.light(e.x, e.y, 70f, Pal.missileYellowBack, 0.8f * e.fout());
         }); UnitTypes.fortress.weapons.get(0).bullet.despawnEffect = Fx.none;
@@ -132,20 +138,21 @@ public class VOUnitChanges {
         UnitTypes.nova.weapons.get(0).bullet.hitEffect = hitLaserBoltGreen;
         UnitTypes.nova.weapons.get(0).bullet.despawnEffect = Fx.none;
 
-        UnitTypes.crawler.deathExplosionEffect = new Effect(25, e -> {
+        UnitTypes.crawler.deathExplosionEffect = new Effect(30, e -> {
             color(Pal.missileYellow);
             e.scaled(6, i -> {
-                stroke(3f * i.fout());
+                stroke((wstroke(90)) * i.fout());
                 Lines.circle(e.x, e.y, 2f + i.fin() * 55f);
             });
             color(Color.gray);
-            randLenVectors(e.id, 7, 2f + 48f * e.finpow(), (x, y) -> {
-                Fill.circle(e.x + x, e.y + y, e.fout() * 4f + 0.5f);
+            randLenVectors(e.id, 7, 2f + 40f * e.finpow(), (x, y) -> {
+                Fill.circle(e.x + x, e.y + y, e.fout() * 6f + 0.5f);
             });
             color(Pal.missileYellowBack);
-            stroke(e.fout());
-            randLenVectors(e.id + 1, 6, 2f + 48f * e.finpow(), (x, y) -> {
-                lineAngle(e.x + x, e.y + y, Mathf.angle(x, y), 1f + e.fout() * 3f);
+            e.scaled(20, i -> {stroke(i.fout() * 1.5f);
+                randLenVectors(e.id + 1, 7, 2f + 59f * i.finpow(), (x, y) -> {
+                    lineAngle(e.x + x, e.y + y, Mathf.angle(x, y), 1f + i.fout() * 3.5f);
+                });
             });
             Drawf.light(e.x, e.y, 110f, Pal.missileYellowBack, 0.8f * e.fout());
         });
@@ -178,40 +185,42 @@ public class VOUnitChanges {
         UnitTypes.toxopid.weapons.get(1).bullet.fragBullet.hitEffect = sapExplosionCloud; UnitTypes.toxopid.weapons.get(1).bullet.fragBullet.despawnEffect = Fx.none;
 
         UnitTypes.flare.weapons.get(0).bullet.hitEffect = new MultiEffect(Fx.shootSmall, Fx.hitBulletSmall);
-        UnitTypes.horizon.weapons.get(0).bullet.hitEffect = new Effect(22, e -> {
+        UnitTypes.horizon.weapons.get(0).bullet.hitEffect = new Effect(30, e -> {
             color(Pal.missileYellow);
             e.scaled(6, i -> {
-                stroke(3f * i.fout());
+                stroke((wstroke(27)) * i.fout());
                 Lines.circle(e.x, e.y, 2f + i.fin() * 25f);
             });
             color(Color.gray);
-            randLenVectors(e.id, 6, 2f + 24f * e.finpow(), (x, y) -> {
-                Fill.circle(e.x + x, e.y + y, e.fout() * 4.5f + 0.5f);
+            randLenVectors(e.id, 5, 2f + 20f * e.finpow(), (x, y) -> {
+                Fill.circle(e.x + x, e.y + y, e.fout() * 4f + 0.5f);
             });
             color(Pal.missileYellowBack);
-            stroke(e.fout());
-            randLenVectors(e.id + 1, 6, 2f + 27f * e.finpow(), (x, y) -> {
-                lineAngle(e.x + x, e.y + y, Mathf.angle(x, y), 1f + e.fout() * 3f);
+            e.scaled(20, i -> {stroke(i.fout());
+                randLenVectors(e.id + 1, 6, 2f + 29f * i.finpow(), (x, y) -> {
+                    lineAngle(e.x + x, e.y + y, Mathf.angle(x, y), 1f + i.fout() * 3f);
+                });
             });
             Drawf.light(e.x, e.y, 50f, Pal.missileYellowBack, 0.8f * e.fout());
         }); UnitTypes.horizon.weapons.get(0).bullet.despawnEffect = Fx.none;
         UnitTypes.zenith.weapons.get(0).shoot = new ShootAlternate(2){{shots = 2;}};
         UnitTypes.zenith.weapons.get(0).bullet.trailWidth = 2.4f;
         UnitTypes.zenith.weapons.get(0).bullet.trailLength = 3;
-        UnitTypes.zenith.weapons.get(0).bullet.hitEffect = new Effect(22, e -> {
+        UnitTypes.zenith.weapons.get(0).bullet.hitEffect = new Effect(30, e -> {
             color(Pal.missileYellow);
             e.scaled(6, i -> {
-                stroke(3f * i.fout());
+                stroke((wstroke(15)) * i.fout());
                 Lines.circle(e.x, e.y, 2f + i.fin() * 25f);
             });
             color(Color.gray);
-            randLenVectors(e.id, 6, 2f + 29f * e.finpow(), (x, y) -> {
-                Fill.circle(e.x + x, e.y + y, e.fout() * 4.5f + 0.5f);
+            randLenVectors(e.id, 5, 2f + 20f * e.finpow(), (x, y) -> {
+                Fill.circle(e.x + x, e.y + y, e.fout() * 4f + 0.5f);
             });
             color(Pal.missileYellowBack);
-            stroke(e.fout());
-            randLenVectors(e.id + 1, 5, 2f + 29f * e.finpow(), (x, y) -> {
-                lineAngle(e.x + x, e.y + y, Mathf.angle(x, y), 1f + e.fout() * 3f);
+            e.scaled(20, i -> {stroke(i.fout());
+                randLenVectors(e.id + 1, 6, 2f + 29f * i.finpow(), (x, y) -> {
+                    lineAngle(e.x + x, e.y + y, Mathf.angle(x, y), 1f + i.fout() * 3f);
+                });
             });
             Drawf.light(e.x, e.y, 50f, Pal.missileYellowBack, 0.8f * e.fout());
         }); UnitTypes.zenith.weapons.get(0).bullet.despawnEffect = Fx.none;
