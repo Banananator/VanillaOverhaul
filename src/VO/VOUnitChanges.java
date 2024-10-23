@@ -24,7 +24,7 @@ import static arc.math.Angles.*;
 public class VOUnitChanges {
 
     private static float wstroke(float val){
-        return 2 + (val / 100);
+        return 2 + (val / 50);
     }
 
     public static void load(){
