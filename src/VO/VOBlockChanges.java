@@ -462,7 +462,7 @@ public class VOBlockChanges {
                 status = StatusEffects.burning;
                 makeFire = true;
                 frontColor = Pal.lightishOrange;
-                backColor = Pal.lightOrange;
+                backColor = trailColor = Pal.lightOrange;
                 hitEffect = new MultiEffect(new Effect(18, e -> {
                     color(Pal.lightishOrange); stroke(e.fout() * 2.5f);
                     randLenVectors(e.id + 1, 5, 2f + 22f * e.finpow(), (x, y) -> {
@@ -471,6 +471,8 @@ public class VOBlockChanges {
                     });
                 }), Fx.fireHit);
                 despawnEffect = Fx.none;
+                trailWidth = 3f;
+                trailLength = 3;
             }},
             Items.silicon, new BasicBulletType(3, 15){{
                 lifetime = 60;
