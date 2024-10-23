@@ -407,7 +407,7 @@ public class VOBlockChanges {
                     color(Pal.bulletYellow);
                     e.scaled(6, i -> {
                         stroke((wstroke(35)) * i.fout());
-                        Lines.circle(e.x, e.y, 2f + i.fin() * 25);
+                        Lines.circle(e.x, e.y, 2f + i.fin() * 25f);
                     });
                     color(Color.gray);
                     randLenVectors(e.id, 5, 2f + 20f * e.finpow(), (x, y) -> {
@@ -419,7 +419,7 @@ public class VOBlockChanges {
                             lineAngle(e.x + x, e.y + y, Mathf.angle(x, y), 1.5f + i.fout() * 5f);
                         });
                     });
-                    Drawf.light(e.x, e.y, 50f, Pal.bulletYellowBack, 0.8f * e.fout());
+                    Drawf.light(e.x, e.y, 75f, Pal.bulletYellowBack, 0.8f * e.fout());
                 });
                 despawnEffect = Fx.none;
                 frontColor = Pal.bulletYellow;
@@ -678,20 +678,21 @@ public class VOBlockChanges {
                 splashDamageRadius = 25f;
                 explodeRange = 20f;
                 shootEffect = Fx.shootSmall;
-                hitEffect = new Effect(20, e -> {
+                hitEffect = new Effect(30, e -> {
                     color(Pal.bulletYellow);
                     e.scaled(6, i -> {
-                        stroke(3f * i.fout());
+                        stroke((wstroke(45)) * i.fout());
                         Lines.circle(e.x, e.y, 2f + i.fin() * 25f);
                     });
                     color(Color.gray);
-                    randLenVectors(e.id, 5, 2f + 29f * e.finpow(), (x, y) -> {
-                        Fill.circle(e.x + x, e.y + y, e.fout() * 3f + 0.5f);
+                    randLenVectors(e.id, 5, 2f + 20f * e.finpow(), (x, y) -> {
+                        Fill.circle(e.x + x, e.y + y, e.fout() * 3.5f + 0.5f);
                     });
                     color(Pal.lighterOrange);
-                    stroke(e.fout());
-                    randLenVectors(e.id + 1, 6, 2f + 29f * e.finpow(), (x, y) -> {
-                        lineAngle(e.x + x, e.y + y, Mathf.angle(x, y), 1f + e.fout() * 3f);
+                    e.scaled(20, i -> {stroke(i.fout());
+                        randLenVectors(e.id + 1, 6, 2f + 29f * i.finpow(), (x, y) -> {
+                            lineAngle(e.x + x, e.y + y, Mathf.angle(x, y), 1f + i.fout() * 3f);
+                        });
                     });
                     Drawf.light(e.x, e.y, 50f, Pal.lighterOrange, 0.8f * e.fout());
                 });
@@ -705,7 +706,7 @@ public class VOBlockChanges {
                     shrinkY = 1f;
                     frontColor = Color.white;
                     backColor = Pal.gray;
-                    despawnEffect = Fx.none;
+                    hitEffect = despawnEffect = Fx.none;
                 }};
             }},
             Items.plastanium, new FlakBulletType(4f, 8){{
@@ -717,20 +718,21 @@ public class VOBlockChanges {
                 frontColor = Pal.plastaniumFront;
                 backColor = Pal.plastaniumBack;
                 shootEffect = Fx.shootBig;
-                hitEffect = new Effect(24, e -> {
+                hitEffect = new Effect(28, e -> {
                     color(Pal.plastaniumFront);
-                    e.scaled(8, i -> {
-                        stroke(3f * i.fout());
-                        Lines.circle(e.x, e.y, 2f + i.fin() * 40f);
+                    e.scaled(7, i -> {
+                        stroke(wstroke(37.5f) * i.fout());
+                        Lines.circle(e.x, e.y, 3f + i.fin() * 40f);
                     });
                     color(Color.gray);
-                    randLenVectors(e.id, 7, 2f + 44f * e.finpow(), (x, y) -> {
+                    randLenVectors(e.id, 7, 2f + 35f * e.finpow(), (x, y) -> {
                         Fill.circle(e.x + x, e.y + y, e.fout() * 4f + 0.5f);
                     });
                     color(Pal.plastaniumBack);
-                    stroke(e.fout());
-                    randLenVectors(e.id + 1, 4, 2f + 44f * e.finpow(), (x, y) -> {
-                        lineAngle(e.x + x, e.y + y, Mathf.angle(x, y), 1f + e.fout() * 3f);
+                    e.scaled(24, i -> {stroke(e.fout());
+                        randLenVectors(e.id + 1, 4, 1f + 42f * e.finpow(), (x, y) -> {
+                            lineAngle(e.x + x, e.y + y, Mathf.angle(x, y), 1f + e.fout() * 3f);
+                        });
                     });
                     Drawf.light(e.x, e.y, 80f, Pal.plastaniumBack, 0.8f * e.fout());
                 });
@@ -744,7 +746,7 @@ public class VOBlockChanges {
                     lifetime = 15f;
                     backColor = Pal.plastaniumBack;
                     frontColor = Pal.plastaniumFront;
-                    despawnEffect = Fx.none;
+                    hitEffect = despawnEffect = Fx.none;
                 }};
             }},
             Items.surgeAlloy, new FlakBulletType(4.5f, 13){{
@@ -756,22 +758,23 @@ public class VOBlockChanges {
                 lightningLength = 7;
                 explodeRange = 20f;
                 shootEffect = Fx.shootBig;
-                hitEffect = new Effect(22, e -> {
-                    color(Pal.missileYellow);
+                hitEffect = new Effect(30, e -> {
+                    color(Pal.bulletYellow);
                     e.scaled(6, i -> {
-                        stroke(3f * i.fout());
+                        stroke((wstroke(75)) * i.fout());
                         Lines.circle(e.x, e.y, 2f + i.fin() * 38f);
                     });
                     color(Color.gray);
-                    randLenVectors(e.id, 6, 2f + 42f * e.finpow(), (x, y) -> {
+                    randLenVectors(e.id, 5, 2f + 33f * e.finpow(), (x, y) -> {
                         Fill.circle(e.x + x, e.y + y, e.fout() * 4f + 0.5f);
                     });
                     color(Pal.bulletYellowBack);
-                    stroke(e.fout());
-                    randLenVectors(e.id + 1, 10, 2f + 42f * e.finpow(), (x, y) -> {
-                        lineAngle(e.x + x, e.y + y, Mathf.angle(x, y), 1f + e.fout() * 4f);
+                    e.scaled(20, i -> {stroke(i.fout());
+                        randLenVectors(e.id + 1, 8, 2f + 44f * i.finpow(), (x, y) -> {
+                            lineAngle(e.x + x, e.y + y, Mathf.angle(x, y), 1.5f + i.fout() * 5f);
+                        });
                     });
-                    Drawf.light(e.x, e.y, 76f, Pal.missileYellowBack, 0.8f * e.fout());
+                    Drawf.light(e.x, e.y, 114f, Pal.bulletYellowBack, 0.8f * e.fout());
                 });
                 despawnEffect = Fx.none;
             }},
@@ -783,20 +786,21 @@ public class VOBlockChanges {
                 status = StatusEffects.blasted;
                 statusDuration = 60f;
                 shootEffect = Fx.shootBig;
-                hitEffect = new Effect(25, e -> {
+                hitEffect = new Effect(30, e -> {
                     color(Pal.missileYellow);
-                    e.scaled(6, i -> {
-                        stroke(3f * i.fout());
+                    e.scaled(8, i -> {
+                        stroke((wstroke(45)) * i.fout());
                         Lines.circle(e.x, e.y, 2f + i.fin() * 60f);
                     });
                     color(Color.gray);
-                    randLenVectors(e.id, 8, 2f + 48f * e.finpow(), (x, y) -> {
-                        Fill.circle(e.x + x, e.y + y, e.fout() * 4f + 0.5f);
+                    randLenVectors(e.id, 6, 2f + 52f * e.finpow(), (x, y) -> {
+                        Fill.circle(e.x + x, e.y + y, e.fout() * 5.5f + 0.5f);
                     });
                     color(Pal.missileYellowBack);
-                    stroke(e.fout());
-                    randLenVectors(e.id + 1, 7, 2f + 48f * e.finpow(), (x, y) -> {
-                        lineAngle(e.x + x, e.y + y, Mathf.angle(x, y), 1f + e.fout() * 3f);
+                    e.scaled(20, i -> {stroke(i.fout() * 2f);
+                        randLenVectors(e.id + 1, 7, 2f + 64f * i.finpow(), (x, y) -> {
+                            lineAngle(e.x + x, e.y + y, Mathf.angle(x, y), 1f + i.fout() * 4f);
+                        });
                     });
                     Drawf.light(e.x, e.y, 120f, Pal.missileYellowBack, 0.8f * e.fout());
                 });
