@@ -91,7 +91,7 @@ public class VOBlockChanges {
                 reloadMultiplier = 0.5f;
                 splashDamage = 33f;
                 splashDamageRadius = 24f;
-                shrinkY = -0.1f;
+                shrinkY = -0.4f;
                 shootEffect = Fx.shootSmall;
                 hitEffect = new Effect(30, e -> {
                     color(Pal.bulletYellow);
@@ -120,7 +120,7 @@ public class VOBlockChanges {
                 ammoMultiplier = 4f;
                 splashDamage = 40.5f;
                 splashDamageRadius = 15f;
-                shrinkY = -0.1f;
+                shrinkY = -0.4f;
                 shootEffect = Fx.shootSmall;
                 hitEffect = new Effect(30, e -> {
                     color(Pal.bulletYellow);
@@ -150,7 +150,7 @@ public class VOBlockChanges {
                 reloadMultiplier = 0.8f;
                 splashDamage = 45f;
                 splashDamageRadius = 20f;
-                shrinkY = -0.1f;
+                shrinkY = -0.4f;
                 shootEffect = Fx.shootSmall;
                 hitEffect = new Effect(30, e -> {
                     color(Pal.bulletYellow);
