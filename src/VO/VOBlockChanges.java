@@ -471,7 +471,7 @@ public class VOBlockChanges {
                     });
                 }), Fx.fireHit);
                 despawnEffect = Fx.none;
-                trailWidth = 3f;
+                trailWidth = 2.7f;
                 trailLength = 3;
             }},
             Items.silicon, new BasicBulletType(3, 15){{
@@ -856,7 +856,7 @@ public class VOBlockChanges {
                 makeFire = true;
                 knockback = 0.6f;
                 frontColor = Pal.lightishOrange;
-                backColor = Pal.lightOrange;
+                backColor = trailColor = Pal.lightOrange;
                 shootEffect = Fx.shootBig;
                 smokeEffect = Fx.shootBigSmoke;
                 hitEffect = new MultiEffect(new Effect(18, e -> {
@@ -867,6 +867,8 @@ public class VOBlockChanges {
                     });
                 }), Fx.fireHit);
                 despawnEffect = Fx.none;
+                trailWidth = 4.3f;
+                trailLength = 3;
             }});
             block.limitRange();
         }
