@@ -867,7 +867,7 @@ public class VOBlockChanges {
                     });
                 }), Fx.fireHit);
                 despawnEffect = Fx.none;
-                trailWidth = 4.3f;
+                trailWidth = 4f;
                 trailLength = 3;
             }});
             block.limitRange();
