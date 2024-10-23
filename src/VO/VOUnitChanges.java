@@ -545,17 +545,11 @@ public class VOUnitChanges {
         }};
         UnitType anthicus = UnitTypes.anthicus.weapons.get(0).bullet.spawnUnit;
         anthicus.deathExplosionEffect = anthicus.weapons.get(0).bullet.hitEffect = anthicus.weapons.get(0).bullet.despawnEffect = Fx.none;
-        anthicus.weapons.get(0).bullet.shootEffect = new MultiEffect(new Effect(30, e -> {
+        anthicus.weapons.get(0).bullet.shootEffect = new MultiEffect(new Effect(40, e -> {
             color(Pal.techBlue);
-            e.scaled(6, i -> {
-                stroke((wstroke(140)) * i.fout());
-                Lines.circle(e.x, e.y, 2f + i.fin() * 25f);
-            });
-            color(Pal.techBlue);
-            e.scaled(20, i -> {stroke(i.fout() * 1.5f);
-                randLenVectors(e.id + 1, 8, 5f + 24f * i.finpow(), (x, y) -> {
-                    lineAngle(e.x + x, e.y + y, Mathf.angle(x, y), 1f + i.fout() * 3.5f);
-                });
+            stroke(e.fout() * 2.25f);
+            randLenVectors(e.id + 1, 9, 5f + 24f * e.finpow(), (x, y) -> {
+                lineAngle(e.x + x, e.y + y, Mathf.angle(x, y), 1f + e.fout() * 5f);
             });
         }), new WrapEffect(Fx.dynamicSpikes, Pal.techBlue, 24f));
         BulletType tecta = UnitTypes.tecta.weapons.get(0).bullet;
