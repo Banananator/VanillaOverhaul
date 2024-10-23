@@ -603,18 +603,18 @@ public class VOBlockChanges {
                 backColor = Pal.missileYellowBack;
                 hitEffect = new Effect(30, e -> {
                     color(Pal.missileYellow);
-                    e.scaled(6, i -> {
+                    e.scaled(7, i -> {
                         stroke((wstroke(55)) * i.fout());
                         Lines.circle(e.x, e.y, 2f + i.fin() * splash3);
                     });
                     color(Color.gray);
                     randLenVectors(e.id, 6, 2f + (splash3 - 5f) * e.finpow(), (x, y) -> {
-                        Fill.circle(e.x + x, e.y + y, e.fout() * 4f + 0.5f);
+                        Fill.circle(e.x + x, e.y + y, e.fout() * 5f + 0.5f);
                     });
                     color(Pal.missileYellowBack);
-                    e.scaled(20, i -> {stroke(i.fout());
+                    e.scaled(20, i -> {stroke(i.fout() * 1.75f);
                         randLenVectors(e.id + 1, 7, 2f + (splash3 + 4f) * i.finpow(), (x, y) -> {
-                            lineAngle(e.x + x, e.y + y, Mathf.angle(x, y), 1f + i.fout() * 3f);
+                            lineAngle(e.x + x, e.y + y, Mathf.angle(x, y), 1f + i.fout() * 3.5f);
                         });
                     });
                     Drawf.light(e.x, e.y, splash3 * 2f, Pal.missileYellowBack, 0.8f * e.fout());
