@@ -12,6 +12,7 @@ import mindustry.entities.pattern.*;
 import mindustry.gen.Sounds;
 import mindustry.graphics.Drawf;
 import mindustry.graphics.Pal;
+import mindustry.type.UnitType;
 import mindustry.type.Weapon;
 import mindustry.type.weapons.RepairBeamWeapon;
 import VO.entities.*;
@@ -542,10 +543,25 @@ public class VOUnitChanges {
             hitColor = Pal.techBlue;
             colors = new Color[]{Pal.techBlue.cpy().a(0.4f), Pal.techBlue, Color.white};
         }};
+        UnitType anthicus = UnitTypes.anthicus.weapons.get(0).bullet.spawnUnit;
+        anthicus.deathExplosionEffect = anthicus.weapons.get(0).bullet.hitEffect = anthicus.weapons.get(0).bullet.despawnEffect = Fx.none;
+        anthicus.weapons.get(0).bullet.shootEffect = new MultiEffect(new Effect(30, e -> {
+            color(Pal.missileYellow);
+            e.scaled(6, i -> {
+                stroke((wstroke(140)) * i.fout());
+                Lines.circle(e.x, e.y, 2f + i.fin() * 25f);
+            });
+            color(Pal.missileYellowBack);
+            e.scaled(20, i -> {stroke(i.fout() * 1.25f);
+                randLenVectors(e.id + 1, 7, 2f + 29f * i.finpow(), (x, y) -> {
+                    lineAngle(e.x + x, e.y + y, Mathf.angle(x, y), 1f + i.fout() * 3.5f);
+                });
+            });
+        }), new WrapEffect(Fx.dynamicSpikes, Pal.techBlue, 24f));
         BulletType tecta = UnitTypes.tecta.weapons.get(0).bullet;
         tecta.homingPower = 0.08f;
         tecta.homingDelay = 10;
-        tecta.hitEffect = new WrapEffect(Fx.dynamicSpikes, Pal.techBlue, 27f);
+        tecta.hitEffect = new WrapEffect(Fx.dynamicSpikes, Pal.techBlue, 29f);
 
         UnitTypes.collaris.weapons.get(0).bullet.fragBullet.hitEffect = UnitTypes.collaris.weapons.get(0).bullet.fragBullet.despawnEffect = new MultiEffect(new ExplosionEffect(){{
             lifetime = 30f;
