@@ -793,7 +793,7 @@ public class VOBlockChanges {
                         Lines.circle(e.x, e.y, 2f + i.fin() * 60f);
                     });
                     color(Color.gray);
-                    randLenVectors(e.id, 6, 2f + 52f * e.finpow(), (x, y) -> {
+                    randLenVectors(e.id, 6, 2f + 48f * e.finpow(), (x, y) -> {
                         Fill.circle(e.x + x, e.y + y, e.fout() * 5.5f + 0.5f);
                     });
                     color(Pal.missileYellowBack);
