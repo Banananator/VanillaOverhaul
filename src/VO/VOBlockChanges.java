@@ -471,7 +471,7 @@ public class VOBlockChanges {
                     });
                 }), Fx.fireHit);
                 despawnEffect = Fx.none;
-                trailWidth = 2.7f;
+                trailWidth = 2.6f;
                 trailLength = 3;
             }},
             Items.silicon, new BasicBulletType(3, 15){{
