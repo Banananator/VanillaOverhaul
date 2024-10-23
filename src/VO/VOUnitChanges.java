@@ -547,14 +547,19 @@ public class VOUnitChanges {
         anthicus.deathExplosionEffect = anthicus.weapons.get(0).bullet.hitEffect = anthicus.weapons.get(0).bullet.despawnEffect = Fx.none;
         anthicus.weapons.get(0).bullet.shootEffect = new MultiEffect(new Effect(30, e -> {
             color(Pal.techBlue); stroke(e.fout() * 2.25f);
-            randLenVectors(e.id + 1, 9, 3f, 32f * e.finpow(), (x, y) -> {
+            randLenVectors(e.id + 1, 9, 3f, 30f * e.finpow(), (x, y) -> {
                 lineAngle(e.x + x, e.y + y, Mathf.angle(x, y), 1f + e.fout() * 5f);
             });
         }), new WrapEffect(Fx.dynamicSpikes, Pal.techBlue, 24f));
         BulletType tecta = UnitTypes.tecta.weapons.get(0).bullet;
         tecta.homingPower = 0.08f;
         tecta.homingDelay = 10;
-        tecta.hitEffect = new WrapEffect(Fx.dynamicSpikes, Pal.techBlue, 29f);
+        tecta.hitEffect = new MultiEffect(new Effect(30, e -> {
+            color(Pal.techBlue); stroke(e.fout() * 2.25f);
+            randLenVectors(e.id + 1, 9, 3f, 35f * e.finpow(), (x, y) -> {
+                lineAngle(e.x + x, e.y + y, Mathf.angle(x, y), 1f + e.fout() * 5f);
+            });
+        }), new WrapEffect(Fx.dynamicSpikes, Pal.techBlue, 29f));
 
         UnitTypes.collaris.weapons.get(0).bullet.fragBullet.hitEffect = UnitTypes.collaris.weapons.get(0).bullet.fragBullet.despawnEffect = new MultiEffect(new ExplosionEffect(){{
             lifetime = 30f;
