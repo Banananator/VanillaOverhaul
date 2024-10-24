@@ -80,15 +80,15 @@ public class VOFx {
 
         float spikeLen = Interp.pow3In.apply(190f, 0f, e.fin());
         for(int i = 0; i < 4; i++){
-            Drawf.tri(e.x, e.y, 9f, spikeLen, i*90 + 45f);
+            Drawf.tri(e.x, e.y, 14f, spikeLen, i*90);
         }
 
         color(Color.white);
         for(int i = 0; i < 4; i++){
-            Drawf.tri(e.x, e.y, 5f, spikeLen * (80/190), i*90 + 45f);
+            Drawf.tri(e.x, e.y, 8f, spikeLen * (80/190), i*90);
         }
 
-        e.scaled(80f, i -> {
+        e.scaled(90f, i -> {
             float sparkLen = Interp.pow3Out.apply(0f, 180f, i.fin());
             color(Pal.heal); stroke(i.fout() * 5f);
             randLenVectors(e.id + 1, 37, 25f + sparkLen, (x, y) -> {
