@@ -292,12 +292,7 @@ public class VOUnitChanges {
                     waveInterp = Interp.pow10Out;
                     color = waveColorFrom = waveColorTo = Pal.heal;
                 }};*/
-                shootEffect = new MultiEffect(new Effect(60, e -> {
-                    color(Pal.heal); stroke(e.fout() * 4f);
-                    randLenVectors(e.id + 1, 37, 5f, 170f * e.finpow(), (x, y) -> {
-                        lineAngle(e.x + x, e.y + y, Mathf.angle(x, y), 1f + e.fout() * 11f);
-                    });
-                }), new WrapEffect(Fx.dynamicSpikes, Pal.heal, 160f));
+                shootEffect = VOFx.octDeathEffect;
                 smokeEffect = hitEffect = despawnEffect = Fx.none;
                 healPercent = 100;
             }};
