@@ -280,7 +280,7 @@ public class VOUnitChanges {
             shootCone = 360;
             shootOnDeath = true;
             bullet = new ExplosionBulletType(1350, 160){{
-                shootEffect = new VOEnergyBoomEffect(){{
+                /*shootEffect = new VOEnergyBoomEffect(){{
                     lifetime = 120;
                     waveSize = 160;
                     waveStroke = 7;
@@ -291,7 +291,13 @@ public class VOUnitChanges {
                     interp = Interp.pow3Out;
                     waveInterp = Interp.pow10Out;
                     color = waveColorFrom = waveColorTo = Pal.heal;
-                }};
+                }};*/
+                shootEffect = new MultiEffect(new Effect(60, e -> {
+                    color(Pal.heal); stroke(e.fout() * 4f);
+                    randLenVectors(e.id + 1, 37, 5f, 170f * e.finpow(), (x, y) -> {
+                        lineAngle(e.x + x, e.y + y, Mathf.angle(x, y), 1f + e.fout() * 11f);
+                    });
+                }), new WrapEffect(Fx.dynamicSpikes, Pal.heal, 160f));
                 smokeEffect = hitEffect = despawnEffect = Fx.none;
                 healPercent = 100;
             }};
@@ -472,6 +478,7 @@ public class VOUnitChanges {
         UnitTypes.evoke.weapons.add(new RepairBeamWeapon(){{
             targetBuildings = false;
             targetUnits = true;
+            targetSwitchInterval = 0;
             beamWidth = 0.5f;
             x = y = 0;
             shootY = 0f;
@@ -487,6 +494,7 @@ public class VOUnitChanges {
         UnitTypes.incite.weapons.add(new RepairBeamWeapon(){{
             targetBuildings = false;
             targetUnits = true;
+            targetSwitchInterval = 0;
             beamWidth = 0.5f;
             x = 0;
             y = -0.75f;
@@ -503,6 +511,7 @@ public class VOUnitChanges {
         UnitTypes.emanate.weapons.add(new RepairBeamWeapon(){{
             targetBuildings = false;
             targetUnits = true;
+            targetSwitchInterval = 0;
             beamWidth = 0.5f;
             x = 0;
             y = -2;
