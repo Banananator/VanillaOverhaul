@@ -89,9 +89,9 @@ public class VOFx {
         }
 
         e.scaled(80f, i -> {
-            float sparkLen = Interp.pow3Out.apply(0f, 160f, i.fin());
+            float sparkLen = Interp.pow3Out.apply(0f, 180f, i.fin());
             color(Pal.heal); stroke(i.fout() * 4f);
-            randLenVectors(e.id + 1, 37, 20f + sparkLen, (x, y) -> {
+            randLenVectors(e.id + 1, 37, 25f + sparkLen, (x, y) -> {
                 lineAngle(e.x + x, e.y + y, Mathf.angle(x, y), 1f + i.fout() * 11f);
             });
         });
