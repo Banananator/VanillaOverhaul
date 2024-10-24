@@ -71,14 +71,14 @@ public class VOFx {
 
     octDeathEffect = new Effect(120f, 300f, e -> {
         color(Pal.heal);
-        stroke(Interp.pow10Out.apply(1, 0, e.fin()));
+        stroke(Interp.pow5In.apply(1, 0, e.fin()));
 
         float circleRad = Interp.pow10Out.apply(5f, 160f, e.fin());
         Lines.circle(e.x, e.y, circleRad);
 
         Drawf.light(e.x, e.y, circleRad * 2, Pal.heal, 0.8f * e.fin(Interp.pow10Out));
 
-        float spikeLen = Interp.pow3Out.apply(190f, 0f, e.fin());
+        float spikeLen = Interp.pow5In.apply(190f, 0f, e.fin());
         for(int i = 0; i < 4; i++){
             Drawf.tri(e.x, e.y, 9f, spikeLen, i*90 + 45f);
         }
@@ -88,10 +88,11 @@ public class VOFx {
             Drawf.tri(e.x, e.y, 5f, spikeLen * (80/190), i*90 + 45f);
         }
 
-        e.scaled(100f, i -> {
-            color(Pal.heal); stroke(e.fout() * 4f);
-            randLenVectors(e.id + 1, 37, 5f + 170f * e.finpow(), (x, y) -> {
-                lineAngle(e.x + x, e.y + y, Mathf.angle(x, y), 1f + e.fout() * 11f);
+        e.scaled(80f, i -> {
+            float sparkLen = Interp.pow5Out.apply(0f, 170f, i.fin());
+            color(Pal.heal); stroke(i.fout() * 4f);
+            randLenVectors(e.id + 1, 37, 5f + sparkLen, (x, y) -> {
+                lineAngle(e.x + x, e.y + y, Mathf.angle(x, y), 1f + i.fout() * 11f);
             });
         });
     }),
