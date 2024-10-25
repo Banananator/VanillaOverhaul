@@ -263,7 +263,7 @@ public class VOUnitChanges {
         UnitTypes.mega.weapons.get(1).bullet.shootEffect = Fx.shootHeal;
         UnitTypes.mega.weapons.get(1).bullet.hitEffect = hitLaserBoltGreen;
         UnitTypes.mega.weapons.get(1).bullet.despawnEffect = Fx.none;
-        UnitTypes.quad.weapons.get(0).bullet.hitEffect = new MultiEffect(Fx.massiveExplosion, VOFx.greenBombPlus, 
+        UnitTypes.quad.weapons.get(0).bullet.hitEffect = new MultiEffect(Fx.greenBomb, VOFx.greenBombPlus, 
             new ParticleEffect(){{
                 lifetime = 120;
                 particles = 1;
@@ -273,7 +273,7 @@ public class VOUnitChanges {
                 colorFrom = Color.valueOf("98ffa915");
                 colorTo = Color.valueOf("98ffa905");
             }}
-        );
+        ); UnitTypes.quad.weapons.get(0).bullet.despawnEffect = Fx.none;
         UnitTypes.oct.weapons.add(new Weapon(){{
             controllable = aiControllable = mirror = useAttackRange = false;
             reload = 1;
