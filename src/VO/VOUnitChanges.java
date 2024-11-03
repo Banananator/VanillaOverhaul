@@ -568,10 +568,10 @@ public class VOUnitChanges {
         UnitTypes.avert.engines.clear();
         float x1 = 35f / 4f, x2 = 39f / 4f, y1 = -38f / 4f, y2 = -16 / 4f;
         UnitTypes.avert.abilities.addAll(
-            new VOFlameEngineAbility(x1-1f, y1+0.75f, 1.5f, 6.5f, 225f, 5f, 1, 15f),
-            new VOFlameEngineAbility(-x1+1f, y1+0.75f, 1.5f, 6.5f, 135f, 5f, 1, 15f),
-            new VOFlameEngineAbility(x2-1f, y2+1f, 1.5f, 6.5f, 225f, 5f, 1, 15f),
-            new VOFlameEngineAbility(-x2+1f, y2+1f, 1.5f, 6.5f, 135f, 5f, 1, 15f)
+            new VOFlameEngineAbility(x1-1f, y1+0.75f, 1.75f, 7f, 225f, 5f, 1, 15f),
+            new VOFlameEngineAbility(-x1+1f, y1+0.75f, 1.75f, 7f, 135f, 5f, 1, 15f),
+            new VOFlameEngineAbility(x2-1f, y2+1f, 1.2f, 6f, 225f, 5f, 1, 15f),
+            new VOFlameEngineAbility(-x2+1f, y2+1f, 1.2f, 6f, 135f, 5f, 1, 15f)
         );
         Weapon avert = UnitTypes.avert.weapons.get(0);
         avert.shoot = new ShootHelix(){{mag = 1; scl = 4.3f;}};
