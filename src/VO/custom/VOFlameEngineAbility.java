@@ -79,7 +79,7 @@ public class VOFlameEngineAbility extends Ability{
         Draw.z(110);
         for(int i = 0; i < colors.length; i++){
             Draw.color(colors[i].write(Tmp.c1).mul(0.9f).mul(1f + Mathf.absin(Time.time, 1f, 0.1f)));
-            Drawf.flame(unit.x + x, unit.y = y, divisions, rotation + unit.rotation,
+            Drawf.flame(unit.x + x, unit.y + y, divisions, rotation + unit.rotation,
                 length * lengthWidthPans[i * 3] * (1f - sin),
                 width * lengthWidthPans[i * 3 + 1] * (1f + sin),
                 lengthWidthPans[i * 3 + 2]
