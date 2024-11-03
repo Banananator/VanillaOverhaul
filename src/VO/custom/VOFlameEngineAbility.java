@@ -65,10 +65,10 @@ public class VOFlameEngineAbility extends Ability{
             counter %= effectInterval;
             Effect effect = new Effect(30f, length * 2f, e -> {
                 color(); stroke(e.fout() * (width / 5f));
-                randLenVectors(e.id + 1, particles, (length / 3f) + length * e.finpow(), (x, y) -> {
+                randLenVectors(e.id + 1, particles, (length / 3f) + length * e.finpow(), e.rotation, 20f, (x, y) -> {
                     lineAngle(e.x + x, e.y + y, Mathf.angle(x, y), 1f + e.fout() * (length / 10f));
                 });
-            });
+            }).layer(110);
             effect.at(Tmp.v1.x + unit.x, Tmp.v1.y + unit.y, (rotateEffect ? unit.rotation : effectParam) + rotation, teamColor ? unit.team.color : color, parentizeEffects ? unit : null);
         }
     }  
@@ -78,10 +78,10 @@ public class VOFlameEngineAbility extends Ability{
 
         float sin = Mathf.sin(Time.time, oscScl, oscMag);
 
-        Color[] colors = {unit.team.color.a(0.5f), unit.team.color.a(0.75f), unit.team.color, Color.white.cpy()};
+        Color[] colors = {unit.team.color.cpy().a(0.5f), unit.team.color.cpy().a(0.75f), unit.team.color.cpy(), Color.white.cpy()};
         for(int i = 0; i < colors.length; i++){
             Draw.color(colors[i].write(Tmp.c1).mul(0.9f).mul(1f + Mathf.absin(Time.time, 1f, 0.1f)));
-            Drawf.flame(Tmp.v1.x + unit.x, Tmp.v1.y + unit.y, divisions, rotation,
+            Drawf.flame(unit.x, unit.y, divisions, rotation + unit.rotation,
                 length * lengthWidthPans[i * 3] * (1f - sin),
                 width * lengthWidthPans[i * 3 + 1] * (1f + sin),
                 lengthWidthPans[i * 3 + 2]
