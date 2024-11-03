@@ -87,7 +87,7 @@ public class VOFlameEngineAbility extends Ability{
         }
 
         Tmp.v1.trns(rotation, length * 1.1f);
-        Drawf.light(unit.x + x, unit.y = y, lightStroke, Pal.powerLight, 0.3f);
+        Drawf.light(unit.x + x, unit.y + y, lightStroke, Pal.powerLight, 0.3f);
         Draw.reset();
     }
 }
