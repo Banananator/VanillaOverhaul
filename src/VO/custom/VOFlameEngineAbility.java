@@ -65,7 +65,7 @@ public class VOFlameEngineAbility extends Ability{
                 randLenVectors(e.id + 1, particles, (length / 2.5f) + length * e.finpow(), e.rotation, cone, (x, y) -> {
                     lineAngle(e.x + x, e.y + y, Mathf.angle(x, y), 1f + e.fout() * (length / 10f));
                 });
-            }).layer(110);
+            }).layer(109.9f);
             effect.at(Tmp.v1.x + unit.x, Tmp.v1.y + unit.y, unit.rotation + rotation);
         }
     }  
@@ -75,19 +75,19 @@ public class VOFlameEngineAbility extends Ability{
         float sin = Mathf.sin(Time.time, oscScl, oscMag);
 
         Color[] colors = {unit.team.color.cpy().a(0.5f), unit.team.color.cpy(), Color.white.cpy()};
-        Tmp.v1.trns(unit.rotation - 90f, x, y);
+        Tmp.v2.trns(unit.rotation - 90f, x, y);
         Draw.z(110);
         for(int i = 0; i < colors.length; i++){
-            Draw.color(colors[i].write(Tmp.c1).mul(0.9f).mul(1f + Mathf.absin(Time.time, 1f, 0.3f)));
-            Drawf.flame(Tmp.v1.x + unit.x, Tmp.v1.y + unit.y, divisions, rotation + unit.rotation,
+            Draw.color(colors[i].write(Tmp.c1).mul(0.9f).mul(1f + Mathf.absin(Time.time, 1f, 1f)));
+            Drawf.flame(Tmp.v2.x + unit.x, Tmp.v2.y + unit.y, divisions, rotation + unit.rotation,
                 length * lengthWidthPans[i * 3] * (1f - sin),
                 width * lengthWidthPans[i * 3 + 1] * (1f + sin),
                 lengthWidthPans[i * 3 + 2]
             );
         }
 
-        Tmp.v1.trns(rotation, length * 1.1f);
-        Drawf.light(Tmp.v1.x + unit.x, Tmp.v1.y + unit.y, lightStroke, Pal.powerLight, 0.3f);
+        Tmp.v2.trns(rotation, length * 1.1f);
+        Drawf.light(Tmp.v2.x + unit.x, Tmp.v2.y + unit.y, lightStroke, Pal.powerLight, 0.3f);
         Draw.reset();
     }
 }
