@@ -25,7 +25,6 @@ public class VOFlameEngineAbility extends Ability{
     public boolean rotateEffect = false;
 
     public float lightStroke = 40f;
-    public float oscScl = 1.2f, oscMag = 0.02f;
     public int divisions = 25;
 
     public boolean rotateFlare = false;
@@ -72,13 +71,13 @@ public class VOFlameEngineAbility extends Ability{
 
     @Override
     public void draw(Unit unit){
-        float sin = Mathf.sin(Time.time, oscScl, oscMag);
+        float sin = Mathf.sin(Time.time, 1.2f, 0.1f);
 
         Color[] colors = {unit.team.color.cpy().a(0.5f), unit.team.color.cpy(), Color.white.cpy()};
         Tmp.v2.trns(unit.rotation - 90f, x, y);
         Draw.z(110);
         for(int i = 0; i < colors.length; i++){
-            Draw.color(colors[i].write(Tmp.c1).mul(0.9f).mul(1f + Mathf.absin(Time.time, 1f, 1f)));
+            Draw.color(colors[i].write(Tmp.c1).mul(0.9f).mul(1f + Mathf.absin(Time.time, 1f, 0.1f)));
             Drawf.flame(Tmp.v2.x + unit.x, Tmp.v2.y + unit.y, divisions, rotation + unit.rotation,
                 length * lengthWidthPans[i * 3] * (1f - sin),
                 width * lengthWidthPans[i * 3 + 1] * (1f + sin),
