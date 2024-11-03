@@ -20,13 +20,9 @@ import static arc.math.Angles.randLenVectors;
 public class VOFlameEngineAbility extends Ability{
 
     public float effectInterval = 3f;
-    public float x, y, rotation, width, length;
+    public float x, y, rotation, width, length, cone = 15f;
     public int particles = 1;
     public boolean rotateEffect = false;
-    public float effectParam = 3f;
-    public boolean teamColor = true;
-    public boolean parentizeEffects;
-    public Color color = Color.white;
 
     public float lightStroke = 40f;
     public float oscScl = 1.2f, oscMag = 0.02f;
@@ -45,13 +41,14 @@ public class VOFlameEngineAbility extends Ability{
 
     protected float counter;
 
-    public VOFlameEngineAbility(float x, float y, float width, float length, float rotation, float effectInterval, int particles){
+    public VOFlameEngineAbility(float x, float y, float width, float length, float rotation, float effectInterval, int particles, float cone){
         this.x = x; this.y = y;
         this.width = width;
         this.length = length;
         this.rotation = rotation;
         this.effectInterval = effectInterval;
         this.particles = particles;
+        this.cone = cone;
         display = false;
     }
 
@@ -64,12 +61,12 @@ public class VOFlameEngineAbility extends Ability{
             Tmp.v1.trns(unit.rotation - 90f, x, y);
             counter %= effectInterval;
             Effect effect = new Effect(30f, length * 2f, e -> {
-                color(); stroke(e.fout() * (width / 5f));
-                randLenVectors(e.id + 1, particles, (length / 3f) + length * e.finpow(), e.rotation, 20f, (x, y) -> {
+                color(unit.team.color); stroke(e.fout() * (width / 5f));
+                randLenVectors(e.id + 1, particles, (length / 3f) + length * e.finpow(), e.rotation, cone, (x, y) -> {
                     lineAngle(e.x + x, e.y + y, Mathf.angle(x, y), 1f + e.fout() * (length / 10f));
                 });
             }).layer(110);
-            effect.at(Tmp.v1.x + unit.x, Tmp.v1.y + unit.y, (rotateEffect ? unit.rotation : effectParam) + rotation, teamColor ? unit.team.color : color, parentizeEffects ? unit : null);
+            effect.at(Tmp.v1.x + unit.x, Tmp.v1.y + unit.y, unit.rotation + rotation, unit);
         }
     }  
 
