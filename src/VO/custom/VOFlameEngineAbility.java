@@ -62,11 +62,11 @@ public class VOFlameEngineAbility extends Ability{
             counter %= effectInterval;
             Effect effect = new Effect(30f, length * 2f, e -> {
                 color(unit.team.color); stroke(e.fout() * (width / 3f));
-                randLenVectors(e.id + 1, particles, (length / 3f) + length * e.finpow(), e.rotation, cone, (x, y) -> {
+                randLenVectors(e.id + 1, particles, (length / 2.5f) + length * e.finpow(), e.rotation, cone, (x, y) -> {
                     lineAngle(e.x + x, e.y + y, Mathf.angle(x, y), 1f + e.fout() * (length / 10f));
                 });
             }).layer(110);
-            effect.at(Tmp.v1.x + unit.x, Tmp.v1.y + unit.y, unit.rotation + rotation, unit);
+            effect.at(Tmp.v1.x + unit.x, Tmp.v1.y + unit.y, unit.rotation + rotation);
         }
     }  
 
@@ -75,10 +75,11 @@ public class VOFlameEngineAbility extends Ability{
 
         float sin = Mathf.sin(Time.time, oscScl, oscMag);
 
-        Color[] colors = {unit.team.color.cpy().a(0.5f), unit.team.color.cpy().a(0.75f), unit.team.color.cpy(), Color.white.cpy()};
+        Color[] colors = {unit.team.color.cpy().a(0.5f), unit.team.color.cpy(), Color.white.cpy()};
+        Draw.z(110);
         for(int i = 0; i < colors.length; i++){
             Draw.color(colors[i].write(Tmp.c1).mul(0.9f).mul(1f + Mathf.absin(Time.time, 1f, 0.1f)));
-            Drawf.flame(unit.x, unit.y, divisions, rotation + unit.rotation,
+            Drawf.flame(unit.x + x, unit.y = y, divisions, rotation + unit.rotation,
                 length * lengthWidthPans[i * 3] * (1f - sin),
                 width * lengthWidthPans[i * 3 + 1] * (1f + sin),
                 lengthWidthPans[i * 3 + 2]
@@ -86,7 +87,7 @@ public class VOFlameEngineAbility extends Ability{
         }
 
         Tmp.v1.trns(rotation, length * 1.1f);
-        Drawf.light(unit.x + Tmp.v1.x, unit.y + Tmp.v1.y, lightStroke, Pal.powerLight, 0.3f);
+        Drawf.light(unit.x + x, unit.y = y, lightStroke, Pal.powerLight, 0.3f);
         Draw.reset();
     }
 }
