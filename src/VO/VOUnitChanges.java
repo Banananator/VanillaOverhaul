@@ -565,10 +565,11 @@ public class VOUnitChanges {
         }}, Fx.blastExplosion, Fx.shootBigColor);
 
         UnitTypes.elude.weapons.get(0).bullet.hitEffect = new MultiEffect(Fx.shootSmallColor, Fx.hitBulletColor);
+        UnitTypes.avert.abilities.add(new VOFlameEngineAbility(0f, 0f, 3f, 30f, 180f, 5f, 1));
         Weapon avert = UnitTypes.avert.weapons.get(0);
         avert.shoot = new ShootHelix(){{mag = 1; scl = 4.3f;}};
         avert.bullet.homingPower = 0.08f; avert.bullet.homingRange = 1;
         avert.bullet.hitEffect = new MultiEffect(Fx.shootSmallColor, Fx.hitBulletColor);
-        UnitTypes.avert.weapons.add(new VOFlameEngine(0, 0, 2, 5, 180));
+        //UnitTypes.avert.weapons.add(new VOFlameEngine(0, 0, 2, 5, 180));
     }
 }
