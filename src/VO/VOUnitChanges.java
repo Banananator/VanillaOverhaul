@@ -15,11 +15,12 @@ import mindustry.graphics.Pal;
 import mindustry.type.UnitType;
 import mindustry.type.Weapon;
 import mindustry.type.weapons.RepairBeamWeapon;
-import VO.entities.*;
 
 import static arc.graphics.g2d.Draw.*;
 import static arc.graphics.g2d.Lines.*;
 import static arc.math.Angles.*;
+
+import VO.custom.*;
 
 public class VOUnitChanges {
 
@@ -459,8 +460,7 @@ public class VOUnitChanges {
         );
 
         UnitTypes.evoke.weapons.add(new RepairBeamWeapon(){{
-            targetBuildings = false;
-            targetUnits = true;
+            targetBuildings = targetUnits = true;
             targetSwitchInterval = 0;
             beamWidth = 0.5f;
             x = y = 0;
@@ -468,15 +468,14 @@ public class VOUnitChanges {
             rotate = true;
             rotateSpeed = 360;
             mirror = false;
-            repairSpeed = 0.3f;
+            repairSpeed = 0.5f;
             laserColor = healColor = Pal.accent;
             bullet = new BulletType(){{
                 maxRange = 100f;
             }};
         }});
         UnitTypes.incite.weapons.add(new RepairBeamWeapon(){{
-            targetBuildings = false;
-            targetUnits = true;
+            targetBuildings = targetUnits = true;
             targetSwitchInterval = 0;
             beamWidth = 0.5f;
             x = 0;
@@ -485,15 +484,14 @@ public class VOUnitChanges {
             rotate = true;
             rotateSpeed = 100;
             mirror = false;
-            repairSpeed = 0.45f;
+            repairSpeed = 0.75f;
             laserColor = healColor = Pal.accent;
             bullet = new BulletType(){{
                 maxRange = 115f;
             }};
         }});
         UnitTypes.emanate.weapons.add(new RepairBeamWeapon(){{
-            targetBuildings = false;
-            targetUnits = true;
+            targetBuildings = targetUnits = true;
             targetSwitchInterval = 0;
             beamWidth = 0.5f;
             x = 0;
@@ -502,7 +500,7 @@ public class VOUnitChanges {
             rotate = true;
             rotateSpeed = 100;
             mirror = false;
-            repairSpeed = 0.75f;
+            repairSpeed = 1f;
             laserColor = healColor = Pal.accent;
             bullet = new BulletType(){{
                 maxRange = 130f;
@@ -571,5 +569,6 @@ public class VOUnitChanges {
         avert.shoot = new ShootHelix(){{mag = 1; scl = 4.3f;}};
         avert.bullet.homingPower = 0.08f; avert.bullet.homingRange = 1;
         avert.bullet.hitEffect = new MultiEffect(Fx.shootSmallColor, Fx.hitBulletColor);
+        UnitTypes.avert.weapons.add(new VOFlameEngine(0, 0, 2, 5, 180));
     }
 }

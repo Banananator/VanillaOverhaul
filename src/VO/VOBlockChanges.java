@@ -17,7 +17,7 @@ import static arc.graphics.g2d.Draw.*;
 import static arc.graphics.g2d.Lines.*;
 import static arc.math.Angles.*;
 
-import VO.entities.*;
+import VO.custom.*;
 
 public class VOBlockChanges {
 

@@ -1,4 +1,4 @@
-package VO.entities;
+package VO.custom;
 
 import arc.graphics.*;
 import arc.graphics.g2d.*;
