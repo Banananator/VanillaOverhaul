@@ -567,10 +567,10 @@ public class VOUnitChanges {
         UnitTypes.elude.weapons.get(0).bullet.hitEffect = new MultiEffect(Fx.shootSmallColor, Fx.hitBulletColor);
         UnitTypes.avert.engines.clear();
         UnitTypes.avert.abilities.addAll(
-            new VOFlameEngineAbility(35 / 4f, -38 / 4f, 1.5f, 7.5f, 315f, 5f, 1, 15f),
-            new VOFlameEngineAbility(-35 / 4f, -38 / 4f, 1.5f, 7.5f, 45f, 5f, 1, 15f),
-            new VOFlameEngineAbility(39 / 4f, -16 / 4f, 1.5f, 7.5f, 315f, 5f, 1, 15f),
-            new VOFlameEngineAbility(-39 / 4f, -16 / 4f, 1.5f, 7.5f, 45f, 5f, 1, 15f)
+            new VOFlameEngineAbility(35 / 4f, -38 / 4f, 1.5f, 7.5f, 225f, 5f, 1, 15f),
+            new VOFlameEngineAbility(-35 / 4f, -38 / 4f, 1.5f, 7.5f, 135f, 5f, 1, 15f),
+            new VOFlameEngineAbility(39 / 4f, -16 / 4f, 1.5f, 7.5f, 225f, 5f, 1, 15f),
+            new VOFlameEngineAbility(-39 / 4f, -16 / 4f, 1.5f, 7.5f, 135f, 5f, 1, 15f)
         );
         Weapon avert = UnitTypes.avert.weapons.get(0);
         avert.shoot = new ShootHelix(){{mag = 1; scl = 4.3f;}};
