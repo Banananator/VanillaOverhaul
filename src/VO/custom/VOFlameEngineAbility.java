@@ -72,14 +72,14 @@ public class VOFlameEngineAbility extends Ability{
 
     @Override
     public void draw(Unit unit){
-
         float sin = Mathf.sin(Time.time, oscScl, oscMag);
 
         Color[] colors = {unit.team.color.cpy().a(0.5f), unit.team.color.cpy(), Color.white.cpy()};
+        Tmp.v1.trns(unit.rotation - 90f, x, y);
         Draw.z(110);
         for(int i = 0; i < colors.length; i++){
-            Draw.color(colors[i].write(Tmp.c1).mul(0.9f).mul(1f + Mathf.absin(Time.time, 1f, 0.1f)));
-            Drawf.flame(unit.x, unit.y, divisions, rotation + unit.rotation,
+            Draw.color(colors[i].write(Tmp.c1).mul(0.9f).mul(1f + Mathf.absin(Time.time, 1f, 0.3f)));
+            Drawf.flame(Tmp.v1.x + unit.x, Tmp.v1.y + unit.y, divisions, rotation + unit.rotation,
                 length * lengthWidthPans[i * 3] * (1f - sin),
                 width * lengthWidthPans[i * 3 + 1] * (1f + sin),
                 lengthWidthPans[i * 3 + 2]
@@ -87,7 +87,7 @@ public class VOFlameEngineAbility extends Ability{
         }
 
         Tmp.v1.trns(rotation, length * 1.1f);
-        Drawf.light(unit.x, unit.y, lightStroke, Pal.powerLight, 0.3f);
+        Drawf.light(Tmp.v1.x + unit.x, Tmp.v1.y + unit.y, lightStroke, Pal.powerLight, 0.3f);
         Draw.reset();
     }
 }
