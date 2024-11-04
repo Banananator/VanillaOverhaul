@@ -7,16 +7,16 @@ import arc.math.Mathf;
 import arc.util.*;
 import mindustry.Vars;
 import mindustry.entities.Effect;
-import mindustry.entities.abilities.Ability;
 import mindustry.gen.Unit;
 import mindustry.graphics.Drawf;
 import mindustry.graphics.Pal;
+import mindustry.type.UnitType;
 
 import static arc.graphics.g2d.Draw.*;
 import static arc.graphics.g2d.Lines.*;
 import static arc.math.Angles.*;
 
-public class VOFlameEngineAbility extends Ability{
+public class VOFlameEngine extends UnitType.UnitEngine{
 
     public float effectInterval = 3f;
     public float x, y, rotation, width, length, cone = 15f;
@@ -39,7 +39,7 @@ public class VOFlameEngineAbility extends Ability{
 
     protected float counter;
 
-    public VOFlameEngineAbility(float x, float y, float width, float length, float rotation, float effectInterval, int particles, float cone){
+    public VOFlameEngine(float x, float y, float width, float length, float rotation, float effectInterval, int particles, float cone){
         this.x = x; this.y = y;
         this.width = width;
         this.length = length;
@@ -47,26 +47,7 @@ public class VOFlameEngineAbility extends Ability{
         this.effectInterval = effectInterval;
         this.particles = particles;
         this.cone = cone;
-        display = false;
     }
-
-    @Override
-    public void update(Unit unit){
-        if(Vars.headless) return;
-
-        counter += Time.delta;
-        if((counter >= effectInterval) && !unit.inFogTo(Vars.player.team())){
-            Tmp.v1.trns(unit.rotation - 90f, x, y);
-            counter %= effectInterval;
-            Effect effect = new Effect(30f, length * 2f, e -> {
-                color(unit.team.color); stroke(e.fout() * (width / 3f));
-                randLenVectors(e.id + 1, particles, (length / 2.5f) + length * e.finpow(), e.rotation, cone, (x, y) -> {
-                    lineAngle(e.x + x, e.y + y, Mathf.angle(x, y), 1f + e.fout() * (length / 10f));
-                });
-            }).layer(109.9f);
-            effect.at(Tmp.v1.x + unit.x, Tmp.v1.y + unit.y, unit.rotation + rotation);
-        }
-    }  
 
     @Override
     public void draw(Unit unit){
@@ -87,5 +68,19 @@ public class VOFlameEngineAbility extends Ability{
         Tmp.v2.trns(rotation, length * 1.1f);
         Drawf.light(Tmp.v2.x + unit.x, Tmp.v2.y + unit.y, lightStroke, Pal.powerLight, 0.2f);
         Draw.reset();
+
+        if(Vars.headless) return;
+
+        counter += Time.delta;
+        if((counter >= effectInterval) && !unit.inFogTo(Vars.player.team())){
+            counter %= effectInterval;
+            Effect effect = new Effect(30f, length * 2f, e -> {
+                color(unit.team.color); stroke(e.fout() * (width / 3f));
+                randLenVectors(e.id + 1, particles, (length / 2.5f) + length * e.finpow(), e.rotation, cone, (x, y) -> {
+                    lineAngle(e.x + x, e.y + y, Mathf.angle(x, y), 1f + e.fout() * (length / 10f));
+                });
+            }).layer(109.9f);
+            effect.at(Tmp.v2.x + unit.x, Tmp.v2.y + unit.y, unit.rotation + rotation);
+        }
     }
 }
