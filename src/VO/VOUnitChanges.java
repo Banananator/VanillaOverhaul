@@ -11,6 +11,7 @@ import mindustry.entities.effect.*;
 import mindustry.entities.pattern.*;
 import mindustry.gen.Sounds;
 import mindustry.graphics.Drawf;
+import mindustry.graphics.Layer;
 import mindustry.graphics.Pal;
 import mindustry.type.UnitType;
 import mindustry.type.Weapon;
@@ -579,9 +580,9 @@ public class VOUnitChanges {
         UnitTypes.obviate.engines.clear();
         UnitTypes.obviate.engineSize = 0;
         UnitTypes.obviate.abilities.addAll(
-            new VOFlameEngineAbility(0f, -54f / 4f, 1.2f, 6f, 180f, 5f, 1, 15f),
-            new VOFlameEngineAbility(38f / 4f, -46f / 4f, 1.75f, 7f, 225f, 5f, 1, 15f),
-            new VOFlameEngineAbility(-38f / 4f, -46f / 4f, 1.75f, 7f, 135f, 5f, 1, 15f)
+            new VOFlameEngineAbility(0f, -12f, 2.5f, 15f, 180f, 5f, 1, 15f){{layer = Layer.flyingUnitLow - 5f;}},
+            new VOFlameEngineAbility(7.5f, -10.5f, 1.25f, 5f, 225f, 5f, 1, 15f){{layer = Layer.flyingUnitLow - 5f;}},
+            new VOFlameEngineAbility(-7.5f, -10.5f, 1.25f, 5f, 135f, 5f, 1, 15f){{layer = Layer.flyingUnitLow - 5f;}}
         );
     }
 }
