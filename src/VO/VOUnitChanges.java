@@ -11,7 +11,6 @@ import mindustry.entities.effect.*;
 import mindustry.entities.pattern.*;
 import mindustry.gen.Sounds;
 import mindustry.graphics.Drawf;
-import mindustry.graphics.Layer;
 import mindustry.graphics.Pal;
 import mindustry.type.UnitType;
 import mindustry.type.Weapon;
@@ -580,11 +579,11 @@ public class VOUnitChanges {
         UnitTypes.quell.engines.clear();
         UnitTypes.quell.engineSize = 0;
         UnitTypes.quell.abilities.addAll(
-            new VOFlameEngineAbility(0f, -12f, 4.5f, 15f, 180f, 5f, 1, 15f),
-            new VOFlameEngineAbility(18f, -7.25f, 2.25f, 8f, 225f, 5f, 1, 15f),
-            new VOFlameEngineAbility(-18f, -7.25f, 2.25f, 8f, 135f, 5f, 1, 15f),
-            new VOFlameEngineAbility(15.5f, -15f, 2.25f, 8f, 225f, 5f, 1, 15f),
-            new VOFlameEngineAbility(-15.5f, -15f, 2.25f, 8f, 135f, 5f, 1, 15f)
+            new VOFlameEngineAbility(0f, -13f, 4.5f, 15f, 180f, 5f, 2, 20f),
+            new VOFlameEngineAbility(17f, -6.25f, 2.25f, 8.5f, 225f, 5f, 1, 20f),
+            new VOFlameEngineAbility(-17f, -6.25f, 2.25f, 8.5f, 135f, 5f, 1, 20f),
+            new VOFlameEngineAbility(14.5f, -14f, 1.75f, 6.5f, 225f, 5f, 1, 20f),
+            new VOFlameEngineAbility(-14.5f, -14f, 1.75f, 6.5f, 135f, 5f, 1, 20f)
         );
     }
 }
