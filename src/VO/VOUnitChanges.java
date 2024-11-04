@@ -567,8 +567,8 @@ public class VOUnitChanges {
         UnitTypes.avert.engines.clear();
         float x1 = 35f / 4f, x2 = 39f / 4f, y1 = -38f / 4f, y2 = -16f / 4f;
         UnitTypes.avert.abilities.addAll(
-            new VOFlameEngineAbility(x1-1f, y1+0.75f, 1.75f, 7f, 225f, 5f, 1, 15f),
-            new VOFlameEngineAbility(-x1+1f, y1+0.75f, 1.75f, 7f, 135f, 5f, 1, 15f),
+            new VOFlameEngineAbility(x1-1f, y1+0.75f, 1.75f, 7f, 225f, 5f, 1, 17f),
+            new VOFlameEngineAbility(-x1+1f, y1+0.75f, 1.75f, 7f, 135f, 5f, 1, 17f),
             new VOFlameEngineAbility(x2-1f, y2+1f, 1.2f, 6f, 225f, 5f, 1, 15f),
             new VOFlameEngineAbility(-x2+1f, y2+1f, 1.2f, 6f, 135f, 5f, 1, 15f)
         );
@@ -579,7 +579,7 @@ public class VOUnitChanges {
         UnitTypes.quell.engines.clear();
         UnitTypes.quell.engineSize = 0;
         UnitTypes.quell.abilities.addAll(
-            new VOFlameEngineAbility(0f, -13f, 4.25f, 15f, 180f, 5f, 2, 24f),
+            new VOFlameEngineAbility(0f, -13f, 4f, 13.5f, 180f, 5f, 2, 24f),
             new VOFlameEngineAbility(14f, -13.5f, 2.25f, 8.5f, 225f, 5f, 1, 20f),
             new VOFlameEngineAbility(-14f, -13.5f, 2.25f, 8.5f, 135f, 5f, 1, 20f),
             new VOFlameEngineAbility(17f, -6.25f, 1.75f, 6.5f, 225f, 5f, 1, 20f),

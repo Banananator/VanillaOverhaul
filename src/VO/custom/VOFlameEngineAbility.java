@@ -57,7 +57,7 @@ public class VOFlameEngineAbility extends Ability{
         if((counter >= effectInterval) && !unit.inFogTo(Vars.player.team())){
             Tmp.v1.trns(unit.rotation - 90f, x, y);
             counter %= effectInterval;
-            Effect effect = new Effect(30f, length * 2f, e -> {
+            Effect effect = new Effect(25f, length * 2f, e -> {
                 color(unit.team.color); stroke(e.fout() * (width / 3f));
                 randLenVectors(e.id + 1, particles, (length / 2.5f) + length * e.finpow(), e.rotation, cone, (x, y) -> {
                     lineAngle(e.x + x, e.y + y, Mathf.angle(x, y), 1f + e.fout() * (length / 10f));
