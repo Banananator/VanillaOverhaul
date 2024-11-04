@@ -576,5 +576,12 @@ public class VOUnitChanges {
         avert.shoot = new ShootHelix(){{mag = 1; scl = 4.3f;}};
         avert.bullet.homingPower = 0.08f; avert.bullet.homingRange = 1;
         avert.bullet.hitEffect = new MultiEffect(Fx.shootSmallColor, Fx.hitBulletColor);
+        UnitTypes.obviate.engines.clear();
+        UnitTypes.obviate.engineSize = 0;
+        UnitTypes.obviate.abilities.addAll(
+            new VOFlameEngineAbility(0f, -54f / 4f, 1.2f, 6f, 180f, 5f, 1, 15f),
+            new VOFlameEngineAbility(38f / 4f, -46f / 4f, 1.75f, 7f, 225f, 5f, 1, 15f),
+            new VOFlameEngineAbility(-38f / 4f, -46f / 4f, 1.75f, 7f, 135f, 5f, 1, 15f)
+        );
     }
 }

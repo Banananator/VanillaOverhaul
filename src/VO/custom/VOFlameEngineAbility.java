@@ -70,7 +70,7 @@ public class VOFlameEngineAbility extends Ability{
 
     @Override
     public void draw(Unit unit){
-        float sin = Mathf.sin(Time.time, 2f, 0.015f);
+        float sin = Mathf.sin(Time.time, 2f, 0.01f + (length / 2000));
 
         Color[] colors = {unit.team.color.cpy().a(0.5f), unit.team.color.cpy(), Color.white.cpy()};
         Tmp.v2.trns(unit.rotation - 90f, x, y);
