@@ -18,7 +18,7 @@ import static arc.math.Angles.*;
 
 public class VOFlameEngineAbility extends Ability{
 
-    public float x, y, rotation, width, length, effectInterval, cone = 15f, layer = 110f;
+    public float x, y, rotation, width, length, effectInterval, cone = 15f;
     public int particles = 1;
     public boolean rotateEffect = false;
 
@@ -62,7 +62,7 @@ public class VOFlameEngineAbility extends Ability{
                 randLenVectors(e.id + 1, particles, (length / 2.5f) + length * e.finpow(), e.rotation, cone, (x, y) -> {
                     lineAngle(e.x + x, e.y + y, Mathf.angle(x, y), 1f + e.fout() * (length / 10f));
                 });
-            }).layer(layer - 0.1f);
+            }).layer(109.9f);
             effect.at(Tmp.v1.x + unit.x, Tmp.v1.y + unit.y, unit.rotation + rotation);
         }
     }  
@@ -73,7 +73,7 @@ public class VOFlameEngineAbility extends Ability{
 
         Color[] colors = {unit.team.color.cpy().a(0.5f), unit.team.color.cpy(), Color.white.cpy()};
         Tmp.v2.trns(unit.rotation - 90f, x, y);
-        Draw.z(layer);
+        Draw.z(110);
         for(int i = 0; i < colors.length; i++){
             Draw.color(colors[i].write(Tmp.c1).mul(0.9f).mul(1f + Mathf.absin(Time.time, 1f, 0.1f)));
             Drawf.flame(Tmp.v2.x + unit.x, Tmp.v2.y + unit.y, divisions, rotation + unit.rotation,

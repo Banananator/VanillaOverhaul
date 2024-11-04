@@ -577,12 +577,14 @@ public class VOUnitChanges {
         avert.shoot = new ShootHelix(){{mag = 1; scl = 4.3f;}};
         avert.bullet.homingPower = 0.08f; avert.bullet.homingRange = 1;
         avert.bullet.hitEffect = new MultiEffect(Fx.shootSmallColor, Fx.hitBulletColor);
-        UnitTypes.obviate.engines.clear();
-        UnitTypes.obviate.engineSize = 0;
-        UnitTypes.obviate.abilities.addAll(
-            new VOFlameEngineAbility(0f, -12f, 2.5f, 15f, 180f, 5f, 1, 15f){{layer = Layer.flyingUnitLow - 5f;}},
-            new VOFlameEngineAbility(7.5f, -10.5f, 1.25f, 5f, 225f, 5f, 1, 15f){{layer = Layer.flyingUnitLow - 5f;}},
-            new VOFlameEngineAbility(-7.5f, -10.5f, 1.25f, 5f, 135f, 5f, 1, 15f){{layer = Layer.flyingUnitLow - 5f;}}
+        UnitTypes.quell.engines.clear();
+        UnitTypes.quell.engineSize = 0;
+        UnitTypes.quell.abilities.addAll(
+            new VOFlameEngineAbility(0f, -12f, 4.5f, 15f, 180f, 5f, 1, 15f),
+            new VOFlameEngineAbility(18f, -7.25f, 2.25f, 8f, 225f, 5f, 1, 15f),
+            new VOFlameEngineAbility(-18f, -7.25f, 2.25f, 8f, 135f, 5f, 1, 15f),
+            new VOFlameEngineAbility(15.5f, -15f, 2.25f, 8f, 225f, 5f, 1, 15f),
+            new VOFlameEngineAbility(-15.5f, -15f, 2.25f, 8f, 135f, 5f, 1, 15f)
         );
     }
 }
