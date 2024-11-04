@@ -580,8 +580,8 @@ public class VOUnitChanges {
         UnitTypes.quell.engineSize = 0;
         UnitTypes.quell.abilities.addAll(
             new VOFlameEngineAbility(0f, -13f, 4.25f, 15f, 180f, 5f, 2, 24f),
-            new VOFlameEngineAbility(14.5f, -14f, 2.25f, 8.5f, 225f, 5f, 1, 20f),
-            new VOFlameEngineAbility(-14.5f, -14f, 2.25f, 8.5f, 135f, 5f, 1, 20f),
+            new VOFlameEngineAbility(14f, -13.5f, 2.25f, 8.5f, 225f, 5f, 1, 20f),
+            new VOFlameEngineAbility(-14f, -13.5f, 2.25f, 8.5f, 135f, 5f, 1, 20f),
             new VOFlameEngineAbility(17f, -6.25f, 1.75f, 6.5f, 225f, 5f, 1, 20f),
             new VOFlameEngineAbility(-17f, -6.25f, 1.75f, 6.5f, 135f, 5f, 1, 20f)
         );
