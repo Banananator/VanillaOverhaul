@@ -69,7 +69,7 @@ public class VOFlameEngineAbility extends Ability{
 
     @Override
     public void draw(Unit unit){
-        float sin = Mathf.sin(Time.time, 2f, 0.01f - (length / 1000));
+        float sin = Mathf.sin(Time.time, 2f, 0.01f - (length / 10000));
 
         Color[] colors = {unit.team.color.cpy().a(0.5f), unit.team.color.cpy(), Color.white.cpy()};
         Tmp.v2.trns(unit.rotation - 90f, x, y);
@@ -83,8 +83,8 @@ public class VOFlameEngineAbility extends Ability{
             );
         }
 
-        Tmp.v2.trns(rotation, length * 1.1f);
-        Drawf.light(Tmp.v2.x + unit.x, Tmp.v2.y + unit.y, lightStroke, Pal.powerLight, 0.1f);
+        Tmp.v2.trns(rotation, length);
+        Drawf.light(Tmp.v2.x + unit.x, Tmp.v2.y + unit.y, lightStroke, Pal.powerLight, 0.3f);
         Draw.reset();
     }
 }
