@@ -565,12 +565,11 @@ public class VOUnitChanges {
 
         UnitTypes.elude.weapons.get(0).bullet.hitEffect = new MultiEffect(Fx.shootSmallColor, Fx.hitBulletColor);
         UnitTypes.avert.engines.clear();
-        float x1 = 35f / 4f, x2 = 39f / 4f, y1 = -38f / 4f, y2 = -16f / 4f;
         UnitTypes.avert.abilities.addAll(
-            new VOFlameEngineAbility(x1-1f, y1+0.75f, 1.75f, 7f, 225f, 5f, 1, 17f),
-            new VOFlameEngineAbility(-x1+1f, y1+0.75f, 1.75f, 7f, 135f, 5f, 1, 17f),
-            new VOFlameEngineAbility(x2-1f, y2+1f, 1.2f, 6f, 225f, 5f, 1, 15f),
-            new VOFlameEngineAbility(-x2+1f, y2+1f, 1.2f, 6f, 135f, 5f, 1, 15f)
+            new VOFlameEngineAbility(7.75f, -8.75f, 1.75f, 7f, 225f, 4f, 1, 17f),
+            new VOFlameEngineAbility(-7.75f, -8.75f, 1.75f, 7f, 135f, 4f, 1, 17f),
+            new VOFlameEngineAbility(8.75f, -3f, 1.2f, 6f, 225f, 4f, 1, 15f),
+            new VOFlameEngineAbility(-8.75f, -3f, 1.2f, 6f, 135f, 4f, 1, 15f)
         );
         Weapon avert = UnitTypes.avert.weapons.get(0);
         avert.shoot = new ShootHelix(){{mag = 1; scl = 4.3f;}};
@@ -579,11 +578,20 @@ public class VOUnitChanges {
         UnitTypes.quell.engines.clear();
         UnitTypes.quell.engineSize = 0;
         UnitTypes.quell.abilities.addAll(
-            new VOFlameEngineAbility(0f, -13f, 4f, 13.5f, 180f, 5f, 2, 24f),
-            new VOFlameEngineAbility(14f, -13.5f, 2.25f, 8.5f, 225f, 5f, 1, 20f),
-            new VOFlameEngineAbility(-14f, -13.5f, 2.25f, 8.5f, 135f, 5f, 1, 20f),
-            new VOFlameEngineAbility(17f, -6.25f, 1.75f, 6.5f, 225f, 5f, 1, 20f),
-            new VOFlameEngineAbility(-17f, -6.25f, 1.75f, 6.5f, 135f, 5f, 1, 20f)
+            new VOFlameEngineAbility(0f, -13f, 4f, 13.5f, 180f, 2f, 1, 24f),
+            new VOFlameEngineAbility(14f, -13.5f, 2.25f, 8.5f, 225f, 4f, 1, 20f),
+            new VOFlameEngineAbility(-14f, -13.5f, 2.25f, 8.5f, 135f, 4f, 1, 20f),
+            new VOFlameEngineAbility(17f, -6.25f, 1.75f, 6.5f, 225f, 4f, 1, 20f),
+            new VOFlameEngineAbility(-17f, -6.25f, 1.75f, 6.5f, 135f, 4f, 1, 20f)
+        );
+        UnitTypes.disrupt.engines.clear();
+        UnitTypes.disrupt.engineSize = 0;
+        UnitTypes.disrupt.abilities.addAll(
+            new VOFlameEngineAbility(0f, -23f, 5.5f, 19f, 180f, 2f, 1, 28f),
+            new VOFlameEngineAbility(23.75f, -14f, 2.25f, 8.5f, 240f, 3f, 1, 20f),
+            new VOFlameEngineAbility(-23.75f, -14f, 2.25f, 8.5f, 120f, 3f, 1, 20f),
+            new VOFlameEngineAbility(22.25f, -23.75f, 1.75f, 6.5f, 225f, 3f, 1, 20f),
+            new VOFlameEngineAbility(-22.25f, -23.75f, 1.75f, 6.5f, 135f, 3f, 1, 20f)
         );
     }
 }
