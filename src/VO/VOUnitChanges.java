@@ -588,10 +588,10 @@ public class VOUnitChanges {
         UnitTypes.disrupt.engineSize = 0;
         UnitTypes.disrupt.abilities.addAll(
             new VOFlameEngineAbility(0f, -23f, 5.5f, 17f, 180f, 2f, 1, 28f),
-            new VOFlameEngineAbility(22.75f, -13f, 3f, 10.5f, 240f, 3f, 1, 24f),
-            new VOFlameEngineAbility(-22.75f, -13f, 3f, 10.5f, 120f, 3f, 1, 24f),
-            new VOFlameEngineAbility(21f, -21.75f, 2.5f, 8f, 210f, 3f, 1, 20f),
-            new VOFlameEngineAbility(-21f, -22.75f, 2.5f, 8f, 150f, 3f, 1, 20f)
+            new VOFlameEngineAbility(21.75f, -13.25f, 3f, 12f, 255f, 3f, 1, 24f),
+            new VOFlameEngineAbility(-21.75f, -13.25f, 3f, 12f, 105f, 3f, 1, 24f),
+            new VOFlameEngineAbility(21f, -21.75f, 2.75f, 9f, 210f, 3f, 1, 20f),
+            new VOFlameEngineAbility(-21f, -22.75f, 2.75f, 9f, 150f, 3f, 1, 20f)
         );
     }
 }
