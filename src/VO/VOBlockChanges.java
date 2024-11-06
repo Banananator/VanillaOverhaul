@@ -950,7 +950,7 @@ public class VOBlockChanges {
             if(!(Blocks.disperse instanceof ItemTurret))break disperse;
 			ItemTurret block = (ItemTurret)Blocks.disperse;
 
-            block.ammoTypes.put(Items.tungsten, new BasicBulletType(8.5f, 65){{
+            block.ammoTypes.putAll(Items.tungsten, new BasicBulletType(8.5f, 65){{
                 lifetime = 34;
                 width = 16;
                 height = 16;
@@ -968,8 +968,32 @@ public class VOBlockChanges {
                 trailChance = 0.44f;
                 trailRotation = true;
                 rotationOffset = 90;
+            }},
+            Items.carbide, new BasicBulletType(8.5f, 92){{
+                lifetime = 34;
+                width = 16;
+                height = 16;
+                shrinkY = 0.3f;
+                ammoMultiplier = 15;
+                reloadMultiplier = 0.8f;
+                rangeChange = 44;
+                collidesGround = false;
+                collidesTiles = false;
+                pierce = true;
+                pierceBuilding = false;
+                pierceCap = 2;
+                frontColor = Color.white;
+                hitColor = backColor = trailColor = Color.valueOf("c9a5c8");
+                shootEffect = Fx.shootBig2;
+                smokeEffect = Fx.shootSmokeDisperse;
+                hitEffect = new MultiEffect(Fx.shootSmallColor, Fx.hitBulletColor);
+                despawnEffect = Fx.hitBulletColor;
+                trailEffect = Fx.disperseTrail;
+                trailChance = 0.44f;
+                trailRotation = true;
+                rotationOffset = 90;
             }});
-            block.limitRange(5f);
+            block.limitRange(-5f);
         }
 
         afflict: {
