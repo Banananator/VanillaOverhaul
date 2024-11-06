@@ -975,7 +975,7 @@ public class VOBlockChanges {
                 width = 16;
                 height = 16;
                 shrinkY = 0.3f;
-                ammoMultiplier = 10;
+                ammoMultiplier = 6;
                 reloadMultiplier = 0.8f;
                 rangeChange = 44;
                 collidesGround = false;
