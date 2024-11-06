@@ -982,7 +982,7 @@ public class VOBlockChanges {
                 pierce = true;
                 pierceBuilding = false;
                 pierceCap = 2;
-                frontColor = Color.white;
+                frontColor = Color.valueOf("c9a5c8");
                 hitColor = backColor = trailColor = Color.valueOf("89769a");
                 shootEffect = Fx.shootBig2;
                 smokeEffect = Fx.shootSmokeDisperse;
