@@ -566,8 +566,8 @@ public class VOUnitChanges {
         UnitTypes.elude.weapons.get(0).bullet.hitEffect = new MultiEffect(Fx.shootSmallColor, Fx.hitBulletColor);
         UnitTypes.avert.engines.clear();
         UnitTypes.avert.abilities.addAll(
-            new VOFlameEngineAbility(7.75f, -8.75f, 1.75f, 7f, 225f, 4f, 1, 17f),
-            new VOFlameEngineAbility(-7.75f, -8.75f, 1.75f, 7f, 135f, 4f, 1, 17f),
+            new VOFlameEngineAbility(7.75f, -8.75f, 1.75f, 7f, 225f, 4f, 1, 18f),
+            new VOFlameEngineAbility(-7.75f, -8.75f, 1.75f, 7f, 135f, 4f, 1, 18f),
             new VOFlameEngineAbility(8.75f, -3f, 1.2f, 6f, 225f, 4f, 1, 15f),
             new VOFlameEngineAbility(-8.75f, -3f, 1.2f, 6f, 135f, 4f, 1, 15f)
         );
@@ -581,17 +581,17 @@ public class VOUnitChanges {
             new VOFlameEngineAbility(0f, -13f, 4f, 13.5f, 180f, 2f, 1, 24f),
             new VOFlameEngineAbility(14f, -13.5f, 2.25f, 8.5f, 225f, 4f, 1, 20f),
             new VOFlameEngineAbility(-14f, -13.5f, 2.25f, 8.5f, 135f, 4f, 1, 20f),
-            new VOFlameEngineAbility(17f, -6.25f, 1.75f, 6.5f, 225f, 4f, 1, 20f),
-            new VOFlameEngineAbility(-17f, -6.25f, 1.75f, 6.5f, 135f, 4f, 1, 20f)
+            new VOFlameEngineAbility(17f, -6.25f, 1.75f, 6.5f, 225f, 4f, 1, 18f),
+            new VOFlameEngineAbility(-17f, -6.25f, 1.75f, 6.5f, 135f, 4f, 1, 18f)
         );
         UnitTypes.disrupt.engines.clear();
         UnitTypes.disrupt.engineSize = 0;
         UnitTypes.disrupt.abilities.addAll(
-            new VOFlameEngineAbility(0f, -23f, 5.5f, 19f, 180f, 2f, 1, 28f),
-            new VOFlameEngineAbility(23.75f, -14f, 2.25f, 8.5f, 240f, 3f, 1, 20f),
-            new VOFlameEngineAbility(-23.75f, -14f, 2.25f, 8.5f, 120f, 3f, 1, 20f),
-            new VOFlameEngineAbility(22.25f, -23.75f, 1.75f, 6.5f, 225f, 3f, 1, 20f),
-            new VOFlameEngineAbility(-22.25f, -23.75f, 1.75f, 6.5f, 135f, 3f, 1, 20f)
+            new VOFlameEngineAbility(0f, -23f, 5.5f, 17f, 180f, 2f, 1, 28f),
+            new VOFlameEngineAbility(22.75f, -13f, 3f, 10.5f, 240f, 3f, 1, 24f),
+            new VOFlameEngineAbility(-22.75f, -13f, 3f, 10.5f, 120f, 3f, 1, 24f),
+            new VOFlameEngineAbility(21f, -21.75f, 2.5f, 8f, 210f, 3f, 1, 20f),
+            new VOFlameEngineAbility(-21f, -22.75f, 2.5f, 8f, 150f, 3f, 1, 20f)
         );
     }
 }
