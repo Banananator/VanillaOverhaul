@@ -950,6 +950,7 @@ public class VOBlockChanges {
             if(!(Blocks.disperse instanceof ItemTurret))break disperse;
 			ItemTurret block = (ItemTurret)Blocks.disperse;
 
+            block.targetInterval = 0;
             block.ammoTypes.putAll(Items.tungsten, new BasicBulletType(8.5f, 65){{
                 lifetime = 34;
                 width = 16;
