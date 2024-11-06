@@ -974,7 +974,7 @@ public class VOBlockChanges {
                 width = 16;
                 height = 16;
                 shrinkY = 0.3f;
-                ammoMultiplier = 15;
+                ammoMultiplier = 10;
                 reloadMultiplier = 0.8f;
                 rangeChange = 44;
                 collidesGround = false;
@@ -983,7 +983,7 @@ public class VOBlockChanges {
                 pierceBuilding = false;
                 pierceCap = 2;
                 frontColor = Color.white;
-                hitColor = backColor = trailColor = Color.valueOf("c9a5c8");
+                hitColor = backColor = trailColor = Color.valueOf("89769a");
                 shootEffect = Fx.shootBig2;
                 smokeEffect = Fx.shootSmokeDisperse;
                 hitEffect = new MultiEffect(Fx.shootSmallColor, Fx.hitBulletColor);
