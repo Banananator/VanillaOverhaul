@@ -2,6 +2,7 @@ package VO;
 
 import arc.Core;
 import arc.scene.actions.RunnableAction;
+import arc.scene.style.TextureRegionDrawable;
 import arc.scene.ui.*;
 import arc.scene.ui.layout.Table;
 import arc.struct.Seq;
@@ -34,7 +35,7 @@ public class VOSettings {
 	}
 
 	public static void loadUI(){
-		Vars.ui.settings.addCategory("@mod.ui.vo-settings", VOSettings::buildTable);
+		Vars.ui.settings.addCategory("@mod.ui.vo-settings", new TextureRegionDrawable(Core.atlas.find(VOLoader.name("icon-white"))), VOSettings::buildTable);
 	}
 	
 	public static void buildTable(Table table){

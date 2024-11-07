@@ -5,6 +5,10 @@ import mindustry.mod.*;
 
 public class VOLoader extends Mod{
 
+    public static String name(String name){
+		return "bettervanillamod" + "-" + name;
+	}
+
 	public VOLoader(){}
 
     @Override
