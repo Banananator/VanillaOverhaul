@@ -564,17 +564,20 @@ public class VOUnitChanges {
         }}, Fx.blastExplosion, Fx.shootBigColor);
 
         UnitTypes.elude.weapons.get(0).bullet.hitEffect = new MultiEffect(Fx.shootSmallColor, Fx.hitBulletColor);
-        UnitTypes.avert.engines.clear();
-        UnitTypes.avert.setEnginesMirror(
-            new VOFlameEngine(7.75f, -8.75f, 1.75f, 7f, 225f, 4f, 1, 18f),
-            new VOFlameEngine(-7.75f, -8.75f, 1.75f, 7f, 135f, 4f, 1, 18f),
-            new VOFlameEngine(8.75f, -3f, 1.4f, 6f, 225f, 4f, 1, 15f),
-            new VOFlameEngine(-8.75f, -3f, 1.4f, 6f, 135f, 4f, 1, 15f)
-        );
         Weapon avert = UnitTypes.avert.weapons.get(0);
         avert.shoot = new ShootHelix(){{mag = 1; scl = 4.3f;}};
         avert.bullet.homingPower = 0.08f; avert.bullet.homingRange = 1;
         avert.bullet.hitEffect = new MultiEffect(Fx.shootSmallColor, Fx.hitBulletColor);
+    }
+
+    public static void loadNewEngines(){
+        UnitTypes.avert.engines.clear();
+        UnitTypes.avert.abilities.addAll(
+            new VOFlameEngineAbility(7.75f, -8.75f, 1.75f, 7f, 225f, 4f, 1, 18f),
+            new VOFlameEngineAbility(-7.75f, -8.75f, 1.75f, 7f, 135f, 4f, 1, 18f),
+            new VOFlameEngineAbility(8.75f, -3f, 1.4f, 6f, 225f, 4f, 1, 15f),
+            new VOFlameEngineAbility(-8.75f, -3f, 1.4f, 6f, 135f, 4f, 1, 15f)
+        );
         UnitTypes.quell.engines.clear();
         UnitTypes.quell.engineSize = 0;
         UnitTypes.quell.abilities.addAll(
