@@ -2,9 +2,7 @@ package VO;
 
 import arc.Core;
 import arc.scene.actions.RunnableAction;
-import arc.scene.ui.Button;
-import arc.scene.ui.CheckBox;
-import arc.scene.ui.Dialog;
+import arc.scene.ui.*;
 import arc.scene.ui.layout.Table;
 import arc.struct.Seq;
 import mindustry.Vars;
