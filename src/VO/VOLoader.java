@@ -14,9 +14,10 @@ public class VOLoader extends Mod{
 
     @Override
     public void loadContent(){
-        VOUnitChanges.load();
+        VOUnitChanges.loadDefault();
         VOBlockChanges.load();
         VOSettings.load();
         if(Vars.headless || VOSettings.getBool(VOSettings.ENABLE_BETTER_ENGINES))VOUnitChanges.loadNewEngines();
+        if(Vars.headless || VOSettings.getBool(VOSettings.ENABLE_UNIT_STAT_OVERRIDES))VOUnitChanges.loadOverrides();
     }
 }

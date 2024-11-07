@@ -16,7 +16,8 @@ import static arc.Core.settings;
 
 public class VOSettings {
     public static final String
-        ENABLE_BETTER_ENGINES = "vo_newengines"
+        ENABLE_BETTER_ENGINES = "vo_newengines",
+        ENABLE_UNIT_STAT_OVERRIDES = "vo_changeunits"
     ;
 
     public static boolean changed = false;
@@ -25,7 +26,8 @@ public class VOSettings {
 
     public static void load(){
 		all.addAll(
-			new BoolSetting(ENABLE_BETTER_ENGINES, true, true)
+			new BoolSetting(ENABLE_BETTER_ENGINES, true, true),
+            new BoolSetting(ENABLE_UNIT_STAT_OVERRIDES, true, true)
 		);
 		
 		all.each(SettingKey::setDefault);

@@ -28,7 +28,7 @@ public class VOUnitChanges {
         return 2 + (val / 50);
     }
 
-    public static void load(){
+    public static void loadDefault(){
         Effect hitLaserBoltGreen = new MultiEffect(
             new WrapEffect(Fx.shootSmallColor, Pal.heal),
             new WrapEffect(Fx.shootSmallColor, Pal.heal, 90),
@@ -274,18 +274,6 @@ public class VOUnitChanges {
                 colorTo = Color.valueOf("98ffa905");
             }}
         ); UnitTypes.quad.weapons.get(0).bullet.despawnEffect = Fx.none;
-        UnitTypes.oct.weapons.add(new Weapon(){{
-            controllable = aiControllable = mirror = useAttackRange = false;
-            reload = 1;
-            shootCone = 360;
-            shootOnDeath = true;
-            bullet = new ExplosionBulletType(1350, 160){{
-                shootEffect = VOFx.octDeathEffect;
-                smokeEffect = hitEffect = despawnEffect = Fx.none;
-                healPercent = 100;
-            }};
-        }});
-        UnitTypes.oct.deathExplosionEffect = Fx.none;
 
         UnitTypes.risso.weapons.get(0).bullet.hitEffect = new MultiEffect(Fx.shootSmall, Fx.hitBulletSmall);
         UnitTypes.risso.weapons.get(1).bullet.trailWidth = 2.4f;
@@ -458,53 +446,8 @@ public class VOUnitChanges {
             }}
         );
 
-        UnitTypes.evoke.weapons.add(new RepairBeamWeapon(){{
-            targetBuildings = targetUnits = true;
-            targetSwitchInterval = 0;
-            beamWidth = 0.5f;
-            x = y = 0;
-            shootY = 0f;
-            rotate = true;
-            rotateSpeed = 360;
-            mirror = false;
-            repairSpeed = 0.5f;
-            laserColor = healColor = Pal.accent;
-            bullet = new BulletType(){{
-                maxRange = 100f;
-            }};
-        }});
-        UnitTypes.incite.weapons.add(new RepairBeamWeapon(){{
-            targetBuildings = targetUnits = true;
-            targetSwitchInterval = 0;
-            beamWidth = 0.5f;
-            x = 0;
-            y = -0.75f;
-            shootY = 0f;
-            rotate = true;
-            rotateSpeed = 100;
-            mirror = false;
-            repairSpeed = 0.75f;
-            laserColor = healColor = Pal.accent;
-            bullet = new BulletType(){{
-                maxRange = 115f;
-            }};
-        }});
-        UnitTypes.emanate.weapons.add(new RepairBeamWeapon(){{
-            targetBuildings = targetUnits = true;
-            targetSwitchInterval = 0;
-            beamWidth = 0.5f;
-            x = 0;
-            y = -2;
-            shootY = 0f;
-            rotate = true;
-            rotateSpeed = 100;
-            mirror = false;
-            repairSpeed = 1f;
-            laserColor = healColor = Pal.accent;
-            bullet = new BulletType(){{
-                maxRange = 130f;
-            }};
-        }});
+
+        
         UnitTypes.stell.weapons.get(0).bullet.hitEffect = new MultiEffect(Fx.shootSmallColor, Fx.hitBulletColor);
         UnitTypes.precept.weapons.get(0).bullet.hitEffect = new MultiEffect(Fx.shootBigColor, Fx.blastExplosion);
         UnitTypes.precept.weapons.get(0).bullet.fragBullet.hitEffect = new MultiEffect(Fx.shootSmallColor, Fx.hitBulletColor);
@@ -513,25 +456,6 @@ public class VOUnitChanges {
         UnitTypes.vanquish.weapons.get(2).bullet.hitEffect = new MultiEffect(Fx.shootSmallColor, Fx.hitBulletColor);
 
         UnitTypes.merui.weapons.get(0).bullet.recoil = 1;
-        BulletType cleroi = UnitTypes.cleroi.weapons.get(0).bullet;
-        cleroi.splashDamage = 18f; cleroi.splashDamageRadius = 16f;
-        cleroi.hitEffect = cleroi.despawnEffect = new MultiEffect(Fx.hitBulletColor, new WaveEffect(){{
-            lifetime = 9f;
-            sizeTo = 19f;
-            strokeFrom = 3f;
-            colorFrom = colorTo = Pal.techBlue;
-        }});
-        cleroi.fragAngle = cleroi.fragSpread = cleroi.fragRandomSpread = 0;
-        cleroi.fragOnAbsorb = false;
-        cleroi.fragBullets = 1; cleroi.fragBullet = new LaserBulletType(20){{
-            lifetime = 20;
-            length = 18;
-            width = 12;
-            pierceArmor = true;
-            hitEffect = Fx.hitBulletColor;
-            hitColor = Pal.techBlue;
-            colors = new Color[]{Pal.techBlue.cpy().a(0.4f), Pal.techBlue, Color.white};
-        }};
         UnitType anthicus = UnitTypes.anthicus.weapons.get(0).bullet.spawnUnit;
         anthicus.deathExplosionEffect = anthicus.weapons.get(0).bullet.hitEffect = anthicus.weapons.get(0).bullet.despawnEffect = Fx.none;
         anthicus.weapons.get(0).bullet.shootEffect = new MultiEffect(new Effect(30, e -> {
@@ -568,6 +492,94 @@ public class VOUnitChanges {
         avert.shoot = new ShootHelix(){{mag = 1; scl = 4.3f;}};
         avert.bullet.homingPower = 0.08f; avert.bullet.homingRange = 1;
         avert.bullet.hitEffect = new MultiEffect(Fx.shootSmallColor, Fx.hitBulletColor);
+    }
+
+    public static void loadOverrides(){
+        UnitTypes.oct.weapons.add(new Weapon(){{
+            controllable = aiControllable = mirror = useAttackRange = false;
+            reload = 1;
+            shootCone = 360;
+            shootOnDeath = true;
+            bullet = new ExplosionBulletType(1350, 160){{
+                shootEffect = VOFx.octDeathEffect;
+                smokeEffect = hitEffect = despawnEffect = Fx.none;
+                healPercent = 100;
+            }};
+        }});
+        UnitTypes.oct.deathExplosionEffect = Fx.none;
+
+
+
+        UnitTypes.evoke.weapons.add(new RepairBeamWeapon(){{
+            targetBuildings = targetUnits = true;
+            targetSwitchInterval = 0;
+            beamWidth = 0.5f;
+            x = y = 0;
+            shootY = 0f;
+            reload = 30f;
+            rotate = true;
+            rotateSpeed = 360;
+            mirror = false;
+            repairSpeed = 0.5f;
+            laserColor = healColor = Pal.accent;
+            bullet = new BulletType(){{
+                maxRange = 100f;
+            }};
+        }});
+        UnitTypes.incite.weapons.add(new RepairBeamWeapon(){{
+            targetBuildings = targetUnits = true;
+            targetSwitchInterval = 0;
+            beamWidth = 0.5f;
+            x = 0;
+            y = -0.75f;
+            shootY = 0f;
+            reload = 30f;
+            rotate = true;
+            rotateSpeed = 100;
+            mirror = false;
+            repairSpeed = 0.75f;
+            laserColor = healColor = Pal.accent;
+            bullet = new BulletType(){{
+                maxRange = 115f;
+            }};
+        }});
+        UnitTypes.emanate.weapons.add(new RepairBeamWeapon(){{
+            targetBuildings = targetUnits = true;
+            targetSwitchInterval = 0;
+            beamWidth = 0.5f;
+            x = 0;
+            y = -2;
+            shootY = 0f;
+            reload = 30f;
+            rotate = true;
+            rotateSpeed = 100;
+            mirror = false;
+            repairSpeed = 1f;
+            laserColor = healColor = Pal.accent;
+            bullet = new BulletType(){{
+                maxRange = 130f;
+            }};
+        }});
+        
+        BulletType cleroi = UnitTypes.cleroi.weapons.get(0).bullet;
+        cleroi.splashDamage = 18f; cleroi.splashDamageRadius = 16f;
+        cleroi.hitEffect = cleroi.despawnEffect = new MultiEffect(Fx.hitBulletColor, new WaveEffect(){{
+            lifetime = 9f;
+            sizeTo = 19f;
+            strokeFrom = 3f;
+            colorFrom = colorTo = Pal.techBlue;
+        }});
+        cleroi.fragAngle = cleroi.fragSpread = cleroi.fragRandomSpread = 0;
+        cleroi.fragOnAbsorb = false;
+        cleroi.fragBullets = 1; cleroi.fragBullet = new LaserBulletType(20){{
+            lifetime = 20;
+            length = 18;
+            width = 12;
+            pierceArmor = true;
+            hitEffect = Fx.hitBulletColor;
+            hitColor = Pal.techBlue;
+            colors = new Color[]{Pal.techBlue.cpy().a(0.4f), Pal.techBlue, Color.white};
+        }};
     }
 
     public static void loadNewEngines(){
