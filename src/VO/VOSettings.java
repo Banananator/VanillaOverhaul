@@ -32,7 +32,7 @@ public class VOSettings {
 	}
 
 	public static void loadUI(){
-		Vars.ui.settings.addCategory("@mod.ui.vo-extra-menu", VOSettings::buildTable);
+		Vars.ui.settings.addCategory("@mod.ui.vo-settings", VOSettings::buildTable);
 	}
 	
 	public static void buildTable(Table table){
