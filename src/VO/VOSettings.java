@@ -34,7 +34,7 @@ public class VOSettings {
 	}
 
 	public static void loadUI(){
-		Vars.ui.settings.addCategory("@mod.ui.nh-extra-menu", VOSettings::buildTable);
+		Vars.ui.settings.addCategory("@mod.ui.vo-extra-menu", VOSettings::buildTable);
 	}
 	
 	public static void buildTable(Table table){
@@ -44,7 +44,7 @@ public class VOSettings {
 	}
 	
 	public static void showDialog(){
-		new BaseDialog("@nh.setting"){{
+		new BaseDialog("@vo.setting"){{
 			buildTable(cont);
 			addCloseButton();
 		}
@@ -66,8 +66,6 @@ public class VOSettings {
 		public SettingKey(String key){
 			this.key = key;
 		}
-		
-		
 		
 		public final String key;
 		public boolean requireReload = false;
