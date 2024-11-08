@@ -263,16 +263,17 @@ public class VOUnitChanges {
         UnitTypes.mega.weapons.get(1).bullet.shootEffect = Fx.shootHeal;
         UnitTypes.mega.weapons.get(1).bullet.hitEffect = hitLaserBoltGreen;
         UnitTypes.mega.weapons.get(1).bullet.despawnEffect = Fx.none;
-        UnitTypes.quad.weapons.get(0).bullet.hitEffect = new MultiEffect(VOFx.greenBombPlus, 
-            new ParticleEffect(){{
-                lifetime = 120;
+        UnitTypes.quad.weapons.get(0).bullet.hitEffect = new MultiEffect(VOFx.greenBombPlus
+            /*new ParticleEffect(){{
+                startDelay = 59;
+                lifetime = 120 - 59;
                 particles = 1;
                 length = 0;
                 sizeFrom = 80;
                 sizeTo = 80;
-                colorFrom = Color.valueOf("98ffa915");
-                colorTo = Color.valueOf("98ffa905");
-            }}
+                colorFrom = Pal.heal.cpy().a(0);
+                colorTo = Pal.heal.cpy().a(0);
+            }}*/
         ); UnitTypes.quad.weapons.get(0).bullet.despawnEffect = Fx.none;
 
         UnitTypes.risso.weapons.get(0).bullet.hitEffect = new MultiEffect(Fx.shootSmall, Fx.hitBulletSmall);

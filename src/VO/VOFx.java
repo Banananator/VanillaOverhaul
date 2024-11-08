@@ -58,10 +58,12 @@ public class VOFx {
     }),
 
     greenBombPlus = new Effect(60f, 100f, e -> {
+        float circleRad = Interp.pow5Out.apply(5f, 80f, e.fin());
+        e.scaled(120f, i -> {color(Pal.heal.cpy().a(0.3f), Pal.heal.cpy().a(0f), i.fin());
+            Fill.circle(e.x, e.y, circleRad);
+        });
         color(Pal.heal);
         stroke(Interp.pow3In.apply(2.5f, 0, e.fin()));
-
-        float circleRad = Interp.pow5Out.apply(5f, 80f, e.fin());
         Lines.circle(e.x, e.y, circleRad);
 
         Drawf.light(e.x, e.y, circleRad * 2, Pal.heal, 0.8f * e.fin(Interp.pow10Out));
