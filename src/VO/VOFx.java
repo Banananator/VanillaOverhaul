@@ -3,6 +3,7 @@ package VO;
 import arc.graphics.*;
 import arc.graphics.g2d.*;
 import arc.math.*;
+import arc.math.Interp.PowOut;
 import arc.math.geom.*;
 import arc.struct.*;
 import arc.util.*;
@@ -57,18 +58,18 @@ public class VOFx {
         Drawf.tri(e.x, e.y, w, 4f * e.fout(), e.rotation + 180f);
     }),
 
-    greenBombPlus = new Effect(120f, 180f, e -> {
-        float fillCircleRad = Interp.pow10Out.apply(5f, 80f, e.fin());
+    greenBombPlus = new Effect(180f, 150f, e -> {
+        float fillCircleRad = new PowOut(15).apply(5f, 80f, e.fin());
         color(Pal.heal.cpy().a(0.15f), Pal.heal.cpy().a(0f), e.fin());
         Fill.circle(e.x, e.y, fillCircleRad);
-        
+
         e.scaled(60f, i -> {
             float circleRad = Interp.pow5Out.apply(5f, 80f, i.fin());
             color(Pal.heal);
             stroke(Interp.pow3In.apply(2.5f, 0, i.fin()));
             Lines.circle(e.x, e.y, circleRad);
 
-            Drawf.light(e.x, e.y, circleRad * 2, Pal.heal, 0.8f * i.fin(Interp.pow10Out));
+            Drawf.light(e.x, e.y, circleRad * 2, Pal.heal, 0.8f * i.fin(Interp.pow5Out));
 
             float spikeLen = Interp.pow3In.apply(110f, 0f, i.fin());
             for(int ii = 0; ii < 4; ii++){
@@ -90,24 +91,30 @@ public class VOFx {
         });
     }),
 
-    octDeathEffect = new Effect(120f, 300f, e -> {
-        color(Pal.heal);
-        stroke(Interp.pow3In.apply(4.5f, 0, e.fin()));
+    octDeathEffect = new Effect(360f, 300f, e -> {
+        float fillCircleRad = new PowOut(15).apply(5f, 80f, e.fin());
+        color(Pal.heal.cpy().a(0.2f), Pal.heal.cpy().a(0f), e.fin());
+        Fill.circle(e.x, e.y, fillCircleRad);
+        
+        e.scaled(120f, i -> {
+            color(Pal.heal);
+            stroke(Interp.pow3In.apply(4.5f, 0, i.fin()));
 
-        float circleRad = Interp.pow5Out.apply(5f, 160f, e.fin());
-        Lines.circle(e.x, e.y, circleRad);
+            float circleRad = Interp.pow5Out.apply(5f, 160f, i.fin());
+            Lines.circle(e.x, e.y, circleRad);
 
-        Drawf.light(e.x, e.y, circleRad * 2, Pal.heal, 0.8f * e.fin(Interp.pow10Out));
+            Drawf.light(e.x, e.y, circleRad * 2, Pal.heal, 0.8f * i.fin(Interp.pow10Out));
 
-        float spikeLen = Interp.pow3In.apply(190f, 0f, e.fin());
-        for(int i = 0; i < 4; i++){
-            Drawf.tri(e.x, e.y, 14f, spikeLen, i*90);
-        }
+            float spikeLen = Interp.pow3In.apply(190f, 0f, i.fin());
+            for(int ii = 0; ii < 4; ii++){
+                Drawf.tri(e.x, e.y, 14f, spikeLen, ii*90);
+            }
 
-        color(Color.white);
-        for(int i = 0; i < 4; i++){
-            Drawf.tri(e.x, e.y, 8f, spikeLen * (80/190), i*90);
-        }
+            color(Color.white);
+            for(int ii = 0; ii < 4; ii++){
+                Drawf.tri(e.x, e.y, 8f, spikeLen * (80/190), ii*90);
+            }
+        });
 
         e.scaled(90f, i -> {
             float sparkLen = Interp.pow3Out.apply(0f, 180f, i.fin());
