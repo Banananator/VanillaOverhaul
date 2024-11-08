@@ -263,18 +263,8 @@ public class VOUnitChanges {
         UnitTypes.mega.weapons.get(1).bullet.shootEffect = Fx.shootHeal;
         UnitTypes.mega.weapons.get(1).bullet.hitEffect = hitLaserBoltGreen;
         UnitTypes.mega.weapons.get(1).bullet.despawnEffect = Fx.none;
-        UnitTypes.quad.weapons.get(0).bullet.hitEffect = new MultiEffect(VOFx.greenBombPlus
-            /*new ParticleEffect(){{
-                startDelay = 59;
-                lifetime = 120 - 59;
-                particles = 1;
-                length = 0;
-                sizeFrom = 80;
-                sizeTo = 80;
-                colorFrom = Pal.heal.cpy().a(0);
-                colorTo = Pal.heal.cpy().a(0);
-            }}*/
-        ); UnitTypes.quad.weapons.get(0).bullet.despawnEffect = Fx.none;
+        UnitTypes.quad.weapons.get(0).bullet.hitEffect = VOFx.greenBombPlus;
+        UnitTypes.quad.weapons.get(0).bullet.despawnEffect = Fx.none;
 
         UnitTypes.risso.weapons.get(0).bullet.hitEffect = new MultiEffect(Fx.shootSmall, Fx.hitBulletSmall);
         UnitTypes.risso.weapons.get(1).bullet.trailWidth = 2.4f;
@@ -502,16 +492,7 @@ public class VOUnitChanges {
             shootCone = 360;
             shootOnDeath = true;
             bullet = new ExplosionBulletType(1350, 160){{
-                shootEffect = new MultiEffect(VOFx.octDeathEffect,
-                new ParticleEffect(){{
-                    lifetime = 240;
-                    particles = 1;
-                    length = 0;
-                    sizeFrom = 160;
-                    sizeTo = 160;
-                    colorFrom = Color.valueOf("98ffa935");
-                    colorTo = Color.valueOf("98ffa905");
-                }});
+                shootEffect = VOFx.octDeathEffect;
                 smokeEffect = hitEffect = despawnEffect = Fx.none;
                 healPercent = 100;
             }};
