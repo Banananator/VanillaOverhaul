@@ -263,13 +263,13 @@ public class VOUnitChanges {
         UnitTypes.mega.weapons.get(1).bullet.shootEffect = Fx.shootHeal;
         UnitTypes.mega.weapons.get(1).bullet.hitEffect = hitLaserBoltGreen;
         UnitTypes.mega.weapons.get(1).bullet.despawnEffect = Fx.none;
-        UnitTypes.quad.weapons.get(0).bullet.hitEffect = new MultiEffect(Fx.greenBomb, VOFx.greenBombPlus, 
+        UnitTypes.quad.weapons.get(0).bullet.hitEffect = new MultiEffect(VOFx.greenBombPlus, 
             new ParticleEffect(){{
                 lifetime = 120;
                 particles = 1;
                 length = 0;
-                sizeFrom = 70;
-                sizeTo = 70;
+                sizeFrom = 80;
+                sizeTo = 80;
                 colorFrom = Color.valueOf("98ffa915");
                 colorTo = Color.valueOf("98ffa905");
             }}
@@ -426,7 +426,7 @@ public class VOUnitChanges {
                 colorFrom = Pal.heal;
                 colorTo = Pal.heal;
             }}
-        );
+        );UnitTypes.retusa.weapons.get(1).bullet.despawnEffect = Fx.none;
         UnitTypes.navanax.weapons.get(4).bullet.shootEffect = new MultiEffect(Fx.shootBigColor, Fx.hitEmpSpark);
         UnitTypes.navanax.weapons.get(4).bullet.smokeEffect = new MultiEffect(Fx.shootBigSmoke2, Fx.hitLaser);
         UnitTypes.navanax.weapons.get(4).bullet.lightning = 9;
@@ -501,7 +501,16 @@ public class VOUnitChanges {
             shootCone = 360;
             shootOnDeath = true;
             bullet = new ExplosionBulletType(1350, 160){{
-                shootEffect = VOFx.octDeathEffect;
+                shootEffect = new MultiEffect(VOFx.octDeathEffect,
+                new ParticleEffect(){{
+                    lifetime = 240;
+                    particles = 1;
+                    length = 0;
+                    sizeFrom = 160;
+                    sizeTo = 160;
+                    colorFrom = Color.valueOf("98ffa935");
+                    colorTo = Color.valueOf("98ffa905");
+                }});
                 smokeEffect = hitEffect = despawnEffect = Fx.none;
                 healPercent = 100;
             }};
