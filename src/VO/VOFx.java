@@ -94,8 +94,8 @@ public class VOFx {
     octDeathEffect = new Effect(360f, 300f, e -> {
         float fillCircleRad = new PowOut(15).apply(5f, 80f, e.fin());
         color(Pal.heal.cpy().a(0.2f), Pal.heal.cpy().a(0f), e.fin());
-        Fill.circle(e.x, e.y, fillCircleRad);
-        
+        Fill.circle(e.x, e.y, fillCircleRad);;
+
         e.scaled(120f, i -> {
             color(Pal.heal);
             stroke(Interp.pow3In.apply(4.5f, 0, i.fin()));
