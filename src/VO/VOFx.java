@@ -57,7 +57,7 @@ public class VOFx {
         Drawf.tri(e.x, e.y, w, 4f * e.fout(), e.rotation + 180f);
     }),
 
-    greenBombPlus = new Effect(50f, 100f, e -> {
+    greenBombPlus = new Effect(60f, 100f, e -> {
         color(Pal.heal);
         stroke(Interp.pow3In.apply(2.5f, 0, e.fin()));
 
@@ -68,18 +68,18 @@ public class VOFx {
 
         float spikeLen = Interp.pow3In.apply(110f, 0f, e.fin());
         for(int i = 0; i < 4; i++){
-            Drawf.tri(e.x, e.y, 14f, spikeLen, i*90);
+            Drawf.tri(e.x, e.y, 7f, spikeLen, i*90);
         }
 
         color(Color.white);
         for(int i = 0; i < 4; i++){
-            Drawf.tri(e.x, e.y, 8f, spikeLen * (80/180), i*90);
+            Drawf.tri(e.x, e.y, 4f, spikeLen * (80/180), i*90);
         }
 
-        e.scaled(35f, i -> {
-            float sparkLen = Interp.pow3Out.apply(0f, 100f, i.fin());
+        e.scaled(40f, i -> {
+            float sparkLen = Interp.pow3Out.apply(0f, 95f, i.fin());
             color(Pal.heal); stroke(i.fout() * 3.5f);
-            randLenVectors(e.id + 1, 24, 20f + sparkLen, (x, y) -> {
+            randLenVectors(e.id + 1, 24, 15f + sparkLen, (x, y) -> {
                 lineAngle(e.x + x, e.y + y, Mathf.angle(x, y), 1f + i.fout() * 13f);
             });
         });
