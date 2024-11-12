@@ -1060,12 +1060,12 @@ public class VOBlockChanges {
             if(!(Blocks.breach instanceof ItemTurret))break breach;
 			ItemTurret block = (ItemTurret)Blocks.breach;
 
-            block.ammoTypes.put(Items.carbide, new BasicBulletType(12f, 860){{
+            block.ammoTypes.put(Items.carbide, new BasicBulletType(12f, 465){{
                 width = 14;
                 height = 33;
                 hitSize = 7;
-                ammoMultiplier = 1;
-                reloadMultiplier = -1.35f;
+                ammoMultiplier = 2;
+                reloadMultiplier = 0.25f;
                 rangeChange = 152;
                 pierce = true;
                 pierceBuilding = false;
