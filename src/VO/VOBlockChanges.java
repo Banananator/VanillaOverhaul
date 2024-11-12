@@ -8,6 +8,7 @@ import mindustry.gen.Sounds;
 import mindustry.graphics.*;
 import mindustry.world.blocks.defense.Wall;
 import mindustry.world.blocks.defense.turrets.*;
+import mindustry.world.blocks.distribution.ArmoredConveyor;
 import mindustry.world.blocks.distribution.Conveyor;
 import mindustry.world.blocks.distribution.DirectionalUnloader;
 import arc.graphics.Color;
@@ -48,9 +49,9 @@ public class VOBlockChanges {
     
     public static void load(){
 
-        copperWall: {
-			if(!(Blocks.copperWall instanceof Wall))break copperWall;
-			Conveyor block = (Conveyor)Blocks.copperWall;;
+        conveyor : {
+			if(!(Blocks.conveyor  instanceof Wall))break conveyor ;
+			Conveyor block = (ArmoredConveyor)Blocks.conveyor;;
         }
 
         duo: {
