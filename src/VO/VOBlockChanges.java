@@ -4,15 +4,9 @@ import mindustry.content.*;
 import mindustry.entities.Effect;
 import mindustry.entities.bullet.*;
 import mindustry.entities.effect.*;
-import mindustry.gen.Building;
 import mindustry.gen.Sounds;
 import mindustry.graphics.*;
-import mindustry.world.blocks.defense.Wall;
 import mindustry.world.blocks.defense.turrets.*;
-import mindustry.world.blocks.distribution.ArmoredConveyor;
-import mindustry.world.blocks.distribution.Conveyor;
-import mindustry.world.blocks.distribution.DirectionalUnloader;
-import arc.func.Prov;
 import arc.graphics.Color;
 import arc.graphics.g2d.Fill;
 import arc.graphics.g2d.Lines;
@@ -954,12 +948,6 @@ public class VOBlockChanges {
 
             block.targetInterval = 0;
             block.ammoTypes.put(Items.tungsten, new BasicBulletType(8.5f, 65){{
-                block.targetGround = false;
-                block.targetAir = true;
-                block.inaccuracy = 8;
-                block.velocityRnd = 0.11f;
-                block.shootCone = 30;
-
                 lifetime = 34;
                 width = 16;
                 height = 16;
@@ -1068,17 +1056,39 @@ public class VOBlockChanges {
     }
 
     public static void loadNew(){
+        breach: {
+            if(!(Blocks.breach instanceof ItemTurret))break breach;
+			ItemTurret block = (ItemTurret)Blocks.breach;
+
+            block.ammoTypes.put(Items.carbide, new BasicBulletType(12f, 460){{
+                width = 14;
+                height = 28;
+                hitSize = 7;
+                ammoMultiplier = 1;
+                reloadMultiplier = 0.25f;
+                rangeChange = 190;
+                pierce = true;
+                pierceBuilding = false;
+                pierceArmor = true;
+                pierceCap = 6;
+                buildingDamageMultiplier = 0.3f;
+                frontColor = Color.valueOf("c9a5c8");
+                hitColor = backColor = trailColor = Color.valueOf("89769a");
+                shootEffect = new MultiEffect(Fx.shootBigColor, Fx.colorSparkBig, VOFx.shootBreach);
+                smokeEffect = Fx.shootBigSmoke;
+                hitEffect = new MultiEffect(Fx.shootBigColor, Fx.hitBulletBig);
+                despawnEffect = Fx.hitBulletColor;
+                trailWidth = 2.1f;
+                trailLength = 12;
+            }});
+            block.limitRange(12f);
+        }
+
         disperse: {
             if(!(Blocks.disperse instanceof ItemTurret))break disperse;
 			ItemTurret block = (ItemTurret)Blocks.disperse;
 
-            block.ammoTypes.putAll(Items.carbide, new BasicBulletType(8.5f, 92){{
-                block.targetGround = false;
-                block.targetAir = true;
-                block.inaccuracy = 8;
-                block.velocityRnd = 0.11f;
-                block.shootCone = 30;
-
+            block.ammoTypes.put(Items.carbide, new BasicBulletType(8.5f, 92){{
                 lifetime = 34;
                 width = 16;
                 height = 16;
@@ -1102,31 +1112,6 @@ public class VOBlockChanges {
                 trailChance = 0.44f;
                 trailRotation = true;
                 rotationOffset = 90;
-            }},
-            Items.thorium, new ArtilleryBulletType(5, 15){{
-                block.targetGround = true;
-                block.targetAir = false;
-                block.inaccuracy = 10;
-                block.velocityRnd = 0.2f;
-                block.shootCone = 5;
-
-                lifetime = 34;
-                width = 14;
-                height = 20;
-                ammoMultiplier = 3;
-                reloadMultiplier = 0.5f;
-                rangeChange = -10;
-                collides = collidesAir = false;
-                collidesTiles = true;
-                splashDamage = 110;
-                splashDamageRadius = 24;
-                scaledSplashDamage = true;
-                frontColor = Color.valueOf("f9a3c7");
-                hitColor = backColor = trailColor = Color.valueOf("cb8ebf");
-                shootEffect = Fx.shootBig2;
-                smokeEffect = Fx.shootSmokeDisperse;
-                hitEffect = VOFx.disperseExplosion;
-                despawnEffect = Fx.none;
             }});
             block.limitRange(-5f);
         }

@@ -149,6 +149,13 @@ public class VOFx {
         Fill.circle(e.x, e.y, 6f * e.fout());
         Drawf.light(e.x, e.y, 100f * 1.6f, Pal.heal, e.fout());
     }),
+
+    shootBreach = new Effect(15f, 16f, e ->{
+        color(e.color);
+        stroke(e.fout() * 4f);
+        float circleRad = 2f + e.finpow() * 7f;
+        Lines.circle(e.x, e.y, circleRad);
+    }),
     
     disperseExplosion = new Effect(80f, 160f, e -> {
         color(Color.valueOf("ea8878").lerp(Pal.redLight, 0.5f));
