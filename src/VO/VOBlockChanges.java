@@ -6,7 +6,9 @@ import mindustry.entities.bullet.*;
 import mindustry.entities.effect.*;
 import mindustry.gen.Sounds;
 import mindustry.graphics.*;
+import mindustry.world.blocks.defense.Wall;
 import mindustry.world.blocks.defense.turrets.*;
+import mindustry.world.blocks.distribution.Conveyor;
 import mindustry.world.blocks.distribution.DirectionalUnloader;
 import arc.graphics.Color;
 import arc.graphics.g2d.Fill;
@@ -46,7 +48,10 @@ public class VOBlockChanges {
     
     public static void load(){
 
-        ductUnloader: {if(!(Blocks.ductUnloader instanceof DirectionalUnloader))break ductUnloader; DirectionalUnloader block = (DirectionalUnloader)Blocks.ductUnloader; block.speed = 60 / 16;}
+        copperWall: {
+			if(!(Blocks.copperWall instanceof Wall))break copperWall;
+			Conveyor block = (Conveyor)Blocks.copperWall;
+        }
 
         duo: {
 			if(!(Blocks.duo instanceof ItemTurret))break duo;
@@ -1084,8 +1089,7 @@ public class VOBlockChanges {
                 ammoMultiplier = 6;
                 reloadMultiplier = 0.8f;
                 rangeChange = 44;
-                collidesGround = false;
-                collidesTiles = false;
+                collidesGround = collidesTiles = false;
                 pierce = true;
                 pierceBuilding = false;
                 pierceCap = 2;
@@ -1105,7 +1109,7 @@ public class VOBlockChanges {
             Items.thorium, new ArtilleryBulletType(5, 15){{
                 block.targetGround = true;
                 block.targetAir = false;
-                block.inaccuracy = 12;
+                block.inaccuracy = 10;
                 block.velocityRnd = 0.2f;
                 block.shootCone = 5;
 
@@ -1115,7 +1119,7 @@ public class VOBlockChanges {
                 ammoMultiplier = 3;
                 reloadMultiplier = 0.5f;
                 rangeChange = -10;
-                collidesAir = collidesGround = false;
+                collides = collidesAir = false;
                 collidesTiles = true;
                 splashDamage = 110;
                 splashDamageRadius = 24;
