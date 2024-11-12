@@ -49,14 +49,7 @@ public class VOBlockChanges {
         return 2 + (val / 50);
     }
     
-    public static void load(){
-
-        conveyor : {
-			if(!(Blocks.conveyor  instanceof Conveyor))break conveyor ;
-			ArmoredConveyor block = (ArmoredConveyor)Blocks.conveyor;
-            //block.buildType = test;
-        }
-        
+    public static void load(){        
         duo: {
 			if(!(Blocks.duo instanceof ItemTurret))break duo;
 			ItemTurret block = (ItemTurret)Blocks.duo;
