@@ -150,11 +150,17 @@ public class VOFx {
         Drawf.light(e.x, e.y, 100f * 1.6f, Pal.heal, e.fout());
     }),
 
-    shootBreach = new Effect(15f, 16f, e ->{
+    shootBreach = new Effect(30f, 16f, e ->{
         color(e.color);
         stroke(e.fout() * 4f);
-        float circleRad = 2f + e.finpow() * 7f;
+        float circleRad = 3f + e.finpow() * 12f;
         Lines.circle(e.x, e.y, circleRad);
+
+        color(Color.white, e.color, e.fin());
+        stroke(e.fout() * 1.3f + 0.7f);
+        randLenVectors(e.id, 10, 60f * e.fin(), e.rotation, 10f, (x, y) -> {
+            lineAngle(e.x + x, e.y + y, Mathf.angle(x, y), e.fslope() * 7.5f + 1f);
+        });
     }),
     
     disperseExplosion = new Effect(80f, 160f, e -> {

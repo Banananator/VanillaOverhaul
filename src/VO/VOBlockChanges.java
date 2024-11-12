@@ -1066,7 +1066,7 @@ public class VOBlockChanges {
                 hitSize = 7;
                 ammoMultiplier = 1;
                 reloadMultiplier = 0.25f;
-                rangeChange = 190;
+                rangeChange = 152;
                 pierce = true;
                 pierceBuilding = false;
                 pierceArmor = true;
@@ -1074,12 +1074,12 @@ public class VOBlockChanges {
                 buildingDamageMultiplier = 0.3f;
                 frontColor = Color.valueOf("c9a5c8");
                 hitColor = backColor = trailColor = Color.valueOf("89769a");
-                shootEffect = new MultiEffect(Fx.shootBigColor, Fx.colorSparkBig, VOFx.shootBreach);
+                shootEffect = new MultiEffect(Fx.shootBigColor, VOFx.shootBreach);
                 smokeEffect = Fx.shootBigSmoke;
-                hitEffect = new MultiEffect(Fx.shootBigColor, Fx.hitBulletBig);
+                hitEffect = new MultiEffect(Fx.colorSparkBig, Fx.shootBigColor, Fx.hitBulletColor);
                 despawnEffect = Fx.hitBulletColor;
                 trailWidth = 2.1f;
-                trailLength = 12;
+                trailLength = 18;
             }});
             block.limitRange(12f);
         }
