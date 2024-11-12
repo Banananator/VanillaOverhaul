@@ -151,11 +151,6 @@ public class VOFx {
     }),
 
     shootBreach = new Effect(30f, 16f, e ->{
-        color(e.color);
-        stroke(e.fout() * 4f);
-        float circleRad = 3f + e.finpow() * 12f;
-        Lines.circle(e.x, e.y, circleRad);
-
         color(Color.white, e.color, e.fin());
         stroke(e.fout() * 1.3f + 0.7f);
         randLenVectors(e.id, 10, 60f * e.fin(), e.rotation, 10f, (x, y) -> {
