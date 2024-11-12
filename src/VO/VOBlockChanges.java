@@ -51,7 +51,7 @@ public class VOBlockChanges {
 
         conveyor : {
 			if(!(Blocks.conveyor  instanceof Wall))break conveyor ;
-			Conveyor block = (ArmoredConveyor)Blocks.conveyor;;
+			ArmoredConveyor block = (ArmoredConveyor)Blocks.conveyor;
         }
 
         duo: {
