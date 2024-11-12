@@ -50,7 +50,7 @@ public class VOBlockChanges {
 
         copperWall: {
 			if(!(Blocks.copperWall instanceof Wall))break copperWall;
-			Conveyor block = (Conveyor)Blocks.copperWall;
+			Conveyor block = (Conveyor)Blocks.copperWall;;
         }
 
         duo: {
