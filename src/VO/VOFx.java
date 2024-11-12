@@ -150,8 +150,8 @@ public class VOFx {
         Drawf.light(e.x, e.y, 100f * 1.6f, Pal.heal, e.fout());
     }),
     
-    disperseExplosion = new Effect(100f, 160f, e -> {
-        color(e.color);
+    disperseExplosion = new Effect(80f, 160f, e -> {
+        color(Color.valueOf("ea8878").lerp(Pal.redLight, 0.5f));
         e.scaled(20, a -> {
             stroke(a.fout());
             float circleRad = 4f + a.finpow() * 20f;
@@ -165,7 +165,7 @@ public class VOFx {
             }
         });
 
-        float intensity = 1.1f;
+        float intensity = 1f;
 
         color(e.color, 0.7f);
         for(int i = 0; i < 4; i++){

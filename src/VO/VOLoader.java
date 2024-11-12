@@ -24,7 +24,9 @@ public class VOLoader extends Mod{
 
         if(Vars.headless || VOSettings.getBool(VOSettings.ENABLE_BETTER_ENGINES))VOUnitChanges.loadNewEngines();
 
-        if(Vars.headless || VOSettings.getBool(VOSettings.ENABLE_UNIT_STAT_OVERRIDES))VOUnitChanges.loadOverrides();
-        if(Vars.headless || VOSettings.getBool(VOSettings.ENABLE_UNIT_STAT_OVERRIDES))VOBlockChanges.loadNew();
+        if(Vars.headless || VOSettings.getBool(VOSettings.ENABLE_UNIT_STAT_OVERRIDES)){
+            VOUnitChanges.loadOverrides();
+            VOBlockChanges.loadNew();
+        }
     }
 }

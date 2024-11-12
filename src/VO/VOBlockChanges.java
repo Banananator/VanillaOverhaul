@@ -952,6 +952,12 @@ public class VOBlockChanges {
 
             block.targetInterval = 0;
             block.ammoTypes.put(Items.tungsten, new BasicBulletType(8.5f, 65){{
+                block.targetGround = false;
+                block.targetAir = true;
+                block.inaccuracy = 8;
+                block.velocityRnd = 0.11f;
+                block.shootCone = 30;
+
                 lifetime = 34;
                 width = 16;
                 height = 16;
@@ -1065,6 +1071,12 @@ public class VOBlockChanges {
 			ItemTurret block = (ItemTurret)Blocks.disperse;
 
             block.ammoTypes.putAll(Items.carbide, new BasicBulletType(8.5f, 92){{
+                block.targetGround = false;
+                block.targetAir = true;
+                block.inaccuracy = 8;
+                block.velocityRnd = 0.11f;
+                block.shootCone = 30;
+
                 lifetime = 34;
                 width = 16;
                 height = 16;
@@ -1090,14 +1102,19 @@ public class VOBlockChanges {
                 trailRotation = true;
                 rotationOffset = 90;
             }},
-            Items.thorium, new ArtilleryBulletType(6, 15){{
+            Items.thorium, new ArtilleryBulletType(5, 15){{
+                block.targetGround = true;
+                block.targetAir = false;
+                block.inaccuracy = 12;
+                block.velocityRnd = 0.2f;
+                block.shootCone = 5;
+
                 lifetime = 34;
-                width = 16;
-                height = 16;
-                shrinkY = 0.3f;
-                ammoMultiplier = 6;
+                width = 14;
+                height = 20;
+                ammoMultiplier = 3;
                 reloadMultiplier = 0.5f;
-                rangeChange = -8;
+                rangeChange = -10;
                 collidesAir = collidesGround = false;
                 collidesTiles = true;
                 splashDamage = 110;
