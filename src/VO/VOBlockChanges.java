@@ -4,6 +4,7 @@ import mindustry.content.*;
 import mindustry.entities.Effect;
 import mindustry.entities.bullet.*;
 import mindustry.entities.effect.*;
+import mindustry.gen.Building;
 import mindustry.gen.Sounds;
 import mindustry.graphics.*;
 import mindustry.world.blocks.defense.Wall;
@@ -11,6 +12,7 @@ import mindustry.world.blocks.defense.turrets.*;
 import mindustry.world.blocks.distribution.ArmoredConveyor;
 import mindustry.world.blocks.distribution.Conveyor;
 import mindustry.world.blocks.distribution.DirectionalUnloader;
+import arc.func.Prov;
 import arc.graphics.Color;
 import arc.graphics.g2d.Fill;
 import arc.graphics.g2d.Lines;
@@ -50,10 +52,11 @@ public class VOBlockChanges {
     public static void load(){
 
         conveyor : {
-			if(!(Blocks.conveyor  instanceof Wall))break conveyor ;
+			if(!(Blocks.conveyor  instanceof Conveyor))break conveyor ;
 			ArmoredConveyor block = (ArmoredConveyor)Blocks.conveyor;
+            //block.buildType = test;
         }
-
+        
         duo: {
 			if(!(Blocks.duo instanceof ItemTurret))break duo;
 			ItemTurret block = (ItemTurret)Blocks.duo;
