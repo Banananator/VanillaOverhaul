@@ -1064,7 +1064,7 @@ public class VOBlockChanges {
                 width = 14;
                 height = 33;
                 hitSize = 7;
-                ammoMultiplier = 2;
+                ammoMultiplier = 1;
                 reloadMultiplier = -1.35f;
                 rangeChange = 152;
                 pierce = true;
