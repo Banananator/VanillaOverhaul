@@ -951,40 +951,17 @@ public class VOBlockChanges {
 			ItemTurret block = (ItemTurret)Blocks.disperse;
 
             block.targetInterval = 0;
-            block.ammoTypes.putAll(Items.tungsten, new BasicBulletType(8.5f, 65){{
+            block.ammoTypes.put(Items.tungsten, new BasicBulletType(8.5f, 65){{
                 lifetime = 34;
                 width = 16;
                 height = 16;
                 shrinkY = 0.3f;
                 ammoMultiplier = 3;
-                collidesGround = false;
-                collidesTiles = false;
+                collidesGround = collidesTiles = false;
+                sprite = "mine-bullet";
+                backSprite = "large-bomb-back";
                 frontColor = Color.white;
                 hitColor = backColor = trailColor = Color.sky;
-                shootEffect = Fx.shootBig2;
-                smokeEffect = Fx.shootSmokeDisperse;
-                hitEffect = new MultiEffect(Fx.shootSmallColor, Fx.hitBulletColor);
-                despawnEffect = Fx.hitBulletColor;
-                trailEffect = Fx.disperseTrail;
-                trailChance = 0.44f;
-                trailRotation = true;
-                rotationOffset = 90;
-            }},
-            Items.carbide, new BasicBulletType(8.5f, 92){{
-                lifetime = 34;
-                width = 16;
-                height = 16;
-                shrinkY = 0.3f;
-                ammoMultiplier = 6;
-                reloadMultiplier = 0.8f;
-                rangeChange = 44;
-                collidesGround = false;
-                collidesTiles = false;
-                pierce = true;
-                pierceBuilding = false;
-                pierceCap = 2;
-                frontColor = Color.valueOf("c9a5c8");
-                hitColor = backColor = trailColor = Color.valueOf("89769a");
                 shootEffect = Fx.shootBig2;
                 smokeEffect = Fx.shootSmokeDisperse;
                 hitEffect = new MultiEffect(Fx.shootSmallColor, Fx.hitBulletColor);
@@ -1079,6 +1056,61 @@ public class VOBlockChanges {
             }};
             block.shootSound = Sounds.cannon;
             block.limitRange(9f);
+        }
+    }
+
+    public static void loadNew(){
+        disperse: {
+            if(!(Blocks.disperse instanceof ItemTurret))break disperse;
+			ItemTurret block = (ItemTurret)Blocks.disperse;
+
+            block.ammoTypes.putAll(Items.carbide, new BasicBulletType(8.5f, 92){{
+                lifetime = 34;
+                width = 16;
+                height = 16;
+                shrinkY = 0.3f;
+                ammoMultiplier = 6;
+                reloadMultiplier = 0.8f;
+                rangeChange = 44;
+                collidesGround = false;
+                collidesTiles = false;
+                pierce = true;
+                pierceBuilding = false;
+                pierceCap = 2;
+                sprite = "mine-bullet";
+                backSprite = "large-bomb-back";
+                frontColor = Color.valueOf("c9a5c8");
+                hitColor = backColor = trailColor = Color.valueOf("89769a");
+                shootEffect = Fx.shootBig2;
+                smokeEffect = Fx.shootSmokeDisperse;
+                hitEffect = new MultiEffect(Fx.shootSmallColor, Fx.hitBulletColor);
+                despawnEffect = Fx.hitBulletColor;
+                trailEffect = Fx.disperseTrail;
+                trailChance = 0.44f;
+                trailRotation = true;
+                rotationOffset = 90;
+            }},
+            Items.thorium, new ArtilleryBulletType(6, 15){{
+                lifetime = 34;
+                width = 16;
+                height = 16;
+                shrinkY = 0.3f;
+                ammoMultiplier = 6;
+                reloadMultiplier = 0.5f;
+                rangeChange = -8;
+                collidesAir = collidesGround = false;
+                collidesTiles = true;
+                splashDamage = 110;
+                splashDamageRadius = 24;
+                scaledSplashDamage = true;
+                frontColor = Color.valueOf("f9a3c7");
+                hitColor = backColor = trailColor = Color.valueOf("cb8ebf");
+                shootEffect = Fx.shootBig2;
+                smokeEffect = Fx.shootSmokeDisperse;
+                hitEffect = VOFx.disperseExplosion;
+                despawnEffect = Fx.none;
+            }});
+            block.limitRange(-5f);
         }
     }
 }

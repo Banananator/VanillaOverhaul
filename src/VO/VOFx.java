@@ -148,5 +148,39 @@ public class VOFx {
         color();
         Fill.circle(e.x, e.y, 6f * e.fout());
         Drawf.light(e.x, e.y, 100f * 1.6f, Pal.heal, e.fout());
+    }),
+    
+    disperseExplosion = new Effect(100f, 160f, e -> {
+        color(e.color);
+        e.scaled(20, a -> {
+            stroke(a.fout());
+            float circleRad = 4f + a.finpow() * 20f;
+            Lines.circle(e.x, e.y, circleRad);
+
+            rand.setSeed(e.id);
+            for(int i = 0; i < 9; i++){
+                float angle = rand.random(360f);
+                float lenRand = rand.random(0.5f, 1f);
+                Lines.lineAngle(e.x, e.y, angle, a.foutpow() * 20f * rand.random(1f, 0.6f) + 2f, a.finpow() * 30f * lenRand + 6f);
+            }
+        });
+
+        float intensity = 1.1f;
+
+        color(e.color, 0.7f);
+        for(int i = 0; i < 4; i++){
+            rand.setSeed(e.id*2 + i);
+            float lenScl = rand.random(0.5f, 1f);
+            int fi = i;
+            e.scaled(e.lifetime * lenScl, b -> {
+                randLenVectors(e.id + fi - 1, b.fin(Interp.pow10Out), (int)(2.9f * intensity), 22f * intensity, (x, y, in, out) -> {
+                    float fout = b.fout(Interp.pow5Out) * rand.random(0.5f, 1f);
+                    float rad = fout * ((2f + intensity) * 2.35f);
+
+                    Fill.circle(b.x + x, b.y + y, rad);
+                    Drawf.light(b.x + x, b.y + y, rad * 1.5f, e.color, 0.5f);
+                });
+            });
+        }
     });
 }
