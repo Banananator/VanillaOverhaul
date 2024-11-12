@@ -1070,7 +1070,7 @@ public class VOBlockChanges {
                 pierce = true;
                 pierceBuilding = false;
                 pierceCap = 6;
-                pierceDamageFactor = 0.025f;
+                pierceDamageFactor = 0.03f;
                 buildingDamageMultiplier = 0.3f;
                 frontColor = Color.valueOf("c9a5c8");
                 hitColor = backColor = trailColor = Color.valueOf("89769a");
