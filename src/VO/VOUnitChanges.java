@@ -243,24 +243,8 @@ public class VOUnitChanges {
         UnitTypes.zenith.weapons.get(0).shoot = new ShootAlternate(2){{shots = 2;}};
         UnitTypes.zenith.weapons.get(0).bullet.trailWidth = 2.4f;
         UnitTypes.zenith.weapons.get(0).bullet.trailLength = 3;
-        UnitTypes.zenith.weapons.get(0).bullet.hitEffect = new Effect(30, e -> {
-            color(Pal.missileYellow);
-            e.scaled(6, i -> {
-                stroke((wstroke(15)) * i.fout());
-                Lines.circle(e.x, e.y, 2f + i.fin() * 25f);
-            });
-            color(Color.gray);
-            randLenVectors(e.id, 5, 2f + 20f * e.finpow(), (x, y) -> {
-                Fill.circle(e.x + x, e.y + y, e.fout() * 3f + 0.5f);
-            });
-            color(Pal.missileYellowBack);
-            e.scaled(20, i -> {stroke(i.fout());
-                randLenVectors(e.id + 1, 6, 2f + 29f * i.finpow(), (x, y) -> {
-                    lineAngle(e.x + x, e.y + y, Mathf.angle(x, y), 1f + i.fout() * 3f);
-                });
-            });
-            Drawf.light(e.x, e.y, 50f, Pal.missileYellowBack, 0.8f * e.fout());
-        }); UnitTypes.zenith.weapons.get(0).bullet.despawnEffect = new VOExplosionEffect(25, 15, "blast");
+        UnitTypes.zenith.weapons.get(0).bullet.hitEffect = new VOExplosionEffect(25, 15, "blast");
+        UnitTypes.zenith.weapons.get(0).bullet.despawnEffect = Fx.none;
         UnitTypes.antumbra.weapons.get(2).bullet.hitEffect = new MultiEffect(Fx.shootBig, Fx.hitBulletSmall);
         UnitTypes.antumbra.weapons.get(0).bullet.trailWidth = 2.4f;
         UnitTypes.antumbra.weapons.get(1).bullet.trailWidth = 2.4f;

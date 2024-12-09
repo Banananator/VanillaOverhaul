@@ -87,26 +87,11 @@ public class VOBlockChanges {
                 reloadMultiplier = 0.5f;
                 splashDamage = 33f;
                 splashDamageRadius = 24f;
+                explodeRange = 24f;
+                explodeDelay = 6f;
                 shrinkY = -0.4f;
                 shootEffect = Fx.shootSmall;
-                hitEffect = new Effect(30, e -> {
-                    color(Pal.bulletYellow);
-                    e.scaled(6, i -> {
-                        stroke((wstroke(33)) * i.fout());
-                        Lines.circle(e.x, e.y, 2f + i.fin() * 24f);
-                    });
-                    color(Color.gray);
-                    randLenVectors(e.id, 5, 2f + 18f * e.finpow(), (x, y) -> {
-                        Fill.circle(e.x + x, e.y + y, e.fout() * 4f + 0.5f);
-                    });
-                    color(Pal.lighterOrange);
-                    e.scaled(20, i -> {stroke(i.fout());
-                        randLenVectors(e.id + 1, 6, 2f + 28f * i.finpow(), (x, y) -> {
-                            lineAngle(e.x + x, e.y + y, Mathf.angle(x, y), 1f + i.fout() * 3.5f);
-                        });
-                    });
-                    Drawf.light(e.x, e.y, 48f, Pal.lighterOrange, 0.8f * e.fout());
-                });
+                hitEffect = new VOExplosionEffect(24, 33, "flak");
                 despawnEffect = Fx.none;
             }},
             Items.lead, new FlakBulletType(4.2f, 3){{
@@ -718,7 +703,7 @@ public class VOBlockChanges {
                 shootEffect = Fx.shootBig;
                 hitEffect = new VOExplosionEffect(40f, 37.5f, "plast");
                 despawnEffect = Fx.none;
-                
+
                 fragBullets = 6;
                 fragBullet = new BasicBulletType(2.5f, 12, "bullet"){{
                     width = 10f;
