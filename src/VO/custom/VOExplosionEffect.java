@@ -30,7 +30,7 @@ public class VOExplosionEffect extends Effect{
     /** Explosion value. If not 0, overrides itself in auto-setup. If negative, effect will be inverted. */
     public float sparkLife = 0f, sparkStroke = 0f, sparkRad = 0f, sparkLen = 0f;
     /** Explosion value. If not 0, overrides itself in auto-setup. If negative, effect will be inverted. */
-    public float smokeSize = 0f, smokeRad = 0f;
+    public float smokeLife = 0f, smokeSize = 0f, smokeRad = 0f;
     /** Amount of particles. Set to 0 to disable particle. */
     public int smokes = -1, sparks = -1;
 
@@ -108,8 +108,8 @@ public class VOExplosionEffect extends Effect{
             float r = rad > 0 ? rad : -rad;
             float m = 0f;
 
-            m = flak || plast ? 0.8f : pyra ? 1.2f : 1f;
-            if(lifetime == 0) lifetime = (30f + (power > 0 ? ((r + power) / 30f) : (r / 20f))) * m;
+            m = flak || plast ? 0.9f : pyra ? 1.2f : 1f;
+            if(smokeLife == 0) smokeLife = (30f + (power > 0 ? ((r + power) / 30f) : (r / 20f))) * m;
             m = flak || plast ? 5f : surge ? 4f : 3f;
             if(waveLife == 0) waveLife = r / (m * (1 + rad / 120f));
             if(sparkLife == 0) sparkLife = lifetime - (lifetime / 3f + (rad / 40f));
@@ -162,6 +162,11 @@ public class VOExplosionEffect extends Effect{
         return result;
     }
 
+    public float maxx(float a, float b, float c){
+        return Math.max(a, Math.max(b, c));
+    }
+
+
     @Override
     public void render(EffectContainer e){
         if(drawWave){
@@ -182,8 +187,10 @@ public class VOExplosionEffect extends Effect{
         }
         if(smokes > 0){
             color(smokeColor);
-            randLenVectors(e.id, smokes, smokeRad * (smokeRad > 0 ? e.finpow() : e.foutpow()), (x, y) -> {
-                Fill.circle(e.x + x, e.y + y, smokeSize * (smokeSize > 0 ? e.fout() : e.fin()));
+            e.scaled(smokeLife, i -> {
+                randLenVectors(e.id, smokes, smokeRad * (smokeRad > 0 ? e.finpow() : e.foutpow()), (x, y) -> {
+                    Fill.circle(e.x + x, e.y + y, smokeSize * (smokeSize > 0 ? e.fout() : e.fin()));
+                });
             });
         }
         float lightRad = 2f * (drawWave ? (waveRad > 0 ? waveRad : -waveRad) : sparks > 0 ? (sparkRad > 0 ? sparkRad : -sparkRad) : 0f);
