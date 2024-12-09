@@ -108,10 +108,10 @@ public class VOExplosionEffect extends Effect{
             float r = rad > 0 ? rad : -rad;
             float m = 0f;
 
+            m = flak || plast ? 5f : surge ? 4f : 3f;
+            if(waveLife == 0) waveLife = r / ((rad <= 20f ? 3f : m) * (1 + rad / 120f));
             m = flak || plast ? 0.9f : pyra ? 1.2f : 1f;
             if(smokeLife == 0) smokeLife = (30f + (power > 0 ? ((r + power) / 30f) : (r / 20f))) * m;
-            m = flak || plast ? 5f : surge ? 4f : 3f;
-            if(waveLife == 0) waveLife = r / (m * (1 + rad / 120f));
             lifetime = maxx(lifetime, smokeLife, waveLife);
             if(sparkLife == 0) sparkLife = lifetime - (lifetime / 3f + (rad / 40f));
 
@@ -134,7 +134,7 @@ public class VOExplosionEffect extends Effect{
             if(smokes < 0) smokes = round((4f + (power > 0 ? power / 40f : r / 15f)) * m);
             if(smokeRad == 0) smokeRad = r >= 15f ? r - 5f : r >= 10f ? r - 3f : Math.max(r - 1f, 2f);
             m = blast ? 1.25f : pyra ? 1.5f : 1f;
-            if(smokeSize == 0) smokeSize = (1f + (power > 0 ? (r / 30f) + (power / 7f) : r / 10f)) * m;
+            if(smokeSize == 0) smokeSize = ((power > 0 ? (r / 20f) + (power / 20f) : r / 10f)) * m;
         }
 
         if(lifetime == 0) lifetime = 30f;
