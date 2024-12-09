@@ -108,15 +108,15 @@ public class VOExplosionEffect extends Effect{
             float r = rad > 0 ? rad : -rad;
             float m = 0f;
 
-            m = pyra ? 1.2f : 1f;
+            m = flak || plast ? 0.8f : pyra ? 1.2f : 1f;
             if(lifetime == 0) lifetime = (30f + (power > 0 ? ((r + power) / 30f) : (r / 20f))) * m;
-            m = flak && plast ? 5f : surge ? 4f : 3f;
-            if(waveLife == 0) waveLife = r / m;
-            if(sparkLife == 0) sparkLife = lifetime - (lifetime / 3f);
+            m = flak || plast ? 5f : surge ? 4f : 3f;
+            if(waveLife == 0) waveLife = r / (m * (1 + rad / 120f));
+            if(sparkLife == 0) sparkLife = lifetime - (lifetime / 3f + (rad / 40f));
 
             m = flak ? 1f : plast ? 2f : 0f;
             if(waveRad == 0) waveRad = r + 2 + m;
-            m = blast || pyra ? 1f : plast ? 2f : 0f;
+            m = blast || pyra ? 1f : 0f;
             if(waveStroke == 0) waveStroke = 2 + (power > 0 ? (power / 35f) : (r / 20f)) + m;
 
             m = flak ? 0.85f : plast ? 2f/3f : surge ? 1.5f : 1f;
@@ -129,11 +129,11 @@ public class VOExplosionEffect extends Effect{
             m = flak ? 1 : blast ? 1.3f : pyra ? 2.2f : 0.75f;
             if(sparkStroke == 0) sparkStroke = (1f + (power > 0 ? (r / 100f) + (power / 45f) : (r / 40f))) * m;
 
-            m = blast ? 1.1f : pyra && plast ? 1.25f : 1f;
+            m = blast ? 1.1f : pyra || plast ? 1.25f : 1f;
             if(smokes < 0) smokes = round((4f + (power > 0 ? power / 40f : r / 15f)) * m);
             if(smokeRad == 0) smokeRad = r > 8f ? r - 5f : r > 5f ? r - 3f : r;
             m = blast ? 1.25f : pyra ? 1.5f : 1f;
-            if(smokeSize == 0) smokeSize = (1f + (power > 0 ? (r / 20f) + (power / 8f) : r / 5f)) * m;
+            if(smokeSize == 0) smokeSize = (1f + (power > 0 ? (r / 30f) + (power / 7f) : r / 10f)) * m;
         }
 
         if(lifetime == 0) lifetime = 30f;

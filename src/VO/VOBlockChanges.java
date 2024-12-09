@@ -718,7 +718,7 @@ public class VOBlockChanges {
                 shootEffect = Fx.shootBig;
                 hitEffect = new VOExplosionEffect(40f, 37.5f, "plast");
                 despawnEffect = Fx.none;
-
+                
                 fragBullets = 6;
                 fragBullet = new BasicBulletType(2.5f, 12, "bullet"){{
                     width = 10f;
