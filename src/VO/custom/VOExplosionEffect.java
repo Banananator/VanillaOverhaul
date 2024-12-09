@@ -189,8 +189,8 @@ public class VOExplosionEffect extends Effect{
         if(smokes > 0){
             color(smokeColor);
             e.scaled(smokeLife, i -> {
-                randLenVectors(e.id, smokes, smokeRad * (smokeRad > 0 ? e.finpow() : e.foutpow()), (x, y) -> {
-                    Fill.circle(e.x + x, e.y + y, smokeSize * (smokeSize > 0 ? e.fout() : e.fin()));
+                randLenVectors(e.id, smokes, smokeRad * (smokeRad > 0 ? i.finpow() : i.foutpow()), (x, y) -> {
+                    Fill.circle(e.x + x, e.y + y, smokeSize * (smokeSize > 0 ? i.fout() : i.fin()));
                 });
             });
         }
