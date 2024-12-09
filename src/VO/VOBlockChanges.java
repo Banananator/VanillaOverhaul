@@ -87,7 +87,7 @@ public class VOBlockChanges {
                 reloadMultiplier = 0.5f;
                 splashDamage = 33f;
                 splashDamageRadius = 24f;
-                explodeRange = 28f;
+                explodeRange = 26f;
                 explodeDelay = 6f;
                 shrinkY = -0.4f;
                 shootEffect = Fx.shootSmall;
@@ -101,7 +101,7 @@ public class VOBlockChanges {
                 ammoMultiplier = 4f;
                 splashDamage = 40.5f;
                 splashDamageRadius = 15f;
-                explodeRange = 19f;
+                explodeRange = 17f;
                 explodeDelay = 15f / 4.2f;
                 shrinkY = -0.4f;
                 shootEffect = Fx.shootSmall;
@@ -116,7 +116,7 @@ public class VOBlockChanges {
                 reloadMultiplier = 0.8f;
                 splashDamage = 45f;
                 splashDamageRadius = 20f;
-                explodeRange = 24f;
+                explodeRange = 22f;
                 explodeDelay = 5.5f;
                 shrinkY = -0.4f;
                 shootEffect = Fx.shootSmall;
