@@ -110,17 +110,17 @@ public class VOExplosionEffect extends Effect{
 
             m = pyra ? 1.2f : 1f;
             if(lifetime == 0) lifetime = (30f + (power > 0 ? ((r + power) / 30f) : (r / 20f))) * m;
-            m = flak ? 6f : surge ? 5f : 4f;
+            m = flak && plast ? 5f : surge ? 4f : 3f;
             if(waveLife == 0) waveLife = r / m;
             if(sparkLife == 0) sparkLife = lifetime - (lifetime / 3f);
 
-            m = flak ? 1f : 0f;
+            m = flak ? 1f : plast ? 2f : 0f;
             if(waveRad == 0) waveRad = r + 2 + m;
-            m = blast || pyra ? 1f : 0f;
+            m = blast || pyra ? 1f : plast ? 2f : 0f;
             if(waveStroke == 0) waveStroke = 2 + (power > 0 ? (power / 35f) : (r / 20f)) + m;
 
-            m = flak ? 0.85f : surge ? 1.5f : 1f;
-            if(sparks < 0) sparks = round((5f + (power > 0 ? power / 25f : r / 20f)) * m);
+            m = flak ? 0.85f : plast ? 2f/3f : surge ? 1.5f : 1f;
+            if(sparks < 0) sparks = round((5f + (power > 0 ? power / 20f + r / 60f : r / 20f)) * m);
             m = flak || blast ? 1f : pyra ? 1.1f : 1.25f;
             if(sparkRad == 0) sparkRad = (r + (4f + r / 20f)) * m;
             m = flak || blast ? 1f : pyra ? 0.8f : 2f;
@@ -129,7 +129,7 @@ public class VOExplosionEffect extends Effect{
             m = flak ? 1 : blast ? 1.3f : pyra ? 2.2f : 0.75f;
             if(sparkStroke == 0) sparkStroke = (1f + (power > 0 ? (r / 100f) + (power / 45f) : (r / 40f))) * m;
 
-            m = blast ? 1.1f : pyra ? 1.25f : 1f;
+            m = blast ? 1.1f : pyra && plast ? 1.25f : 1f;
             if(smokes < 0) smokes = round((4f + (power > 0 ? power / 40f : r / 15f)) * m);
             if(smokeRad == 0) smokeRad = r > 8f ? r - 5f : r > 5f ? r - 3f : r;
             m = blast ? 1.25f : pyra ? 1.5f : 1f;
@@ -157,7 +157,8 @@ public class VOExplosionEffect extends Effect{
         int result = 0;
         float reminder = 0f;
         reminder = value % 1;
-        result = (int)(value - reminder);
+        if(reminder < 0.5f) result = (int)(value - reminder);
+        else result = (int)(value + 1 - reminder);
         return result;
     }
 

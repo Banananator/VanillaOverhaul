@@ -716,24 +716,7 @@ public class VOBlockChanges {
                 frontColor = Pal.plastaniumFront;
                 backColor = Pal.plastaniumBack;
                 shootEffect = Fx.shootBig;
-                hitEffect = new Effect(28, e -> {
-                    color(Pal.plastaniumFront);
-                    e.scaled(7, i -> {
-                        stroke(wstroke(37.5f) * i.fout());
-                        Lines.circle(e.x, e.y, 3f + i.fin() * 40f);
-                    });
-                    color(Color.gray);
-                    randLenVectors(e.id, 7, 2f + 35f * e.finpow(), (x, y) -> {
-                        Fill.circle(e.x + x, e.y + y, e.fout() * 4f + 0.5f);
-                    });
-                    color(Pal.plastaniumBack);
-                    e.scaled(24, i -> {stroke(e.fout());
-                        randLenVectors(e.id + 1, 4, 1f + 42f * e.finpow(), (x, y) -> {
-                            lineAngle(e.x + x, e.y + y, Mathf.angle(x, y), 1f + e.fout() * 3f);
-                        });
-                    });
-                    Drawf.light(e.x, e.y, 80f, Pal.plastaniumBack, 0.8f * e.fout());
-                });
+                hitEffect = new VOExplosionEffect(40f, 37.5f, "plast");
                 despawnEffect = Fx.none;
 
                 fragBullets = 6;
