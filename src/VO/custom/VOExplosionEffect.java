@@ -112,6 +112,7 @@ public class VOExplosionEffect extends Effect{
             if(smokeLife == 0) smokeLife = (30f + (power > 0 ? ((r + power) / 30f) : (r / 20f))) * m;
             m = flak || plast ? 5f : surge ? 4f : 3f;
             if(waveLife == 0) waveLife = r / (m * (1 + rad / 120f));
+            lifetime = maxx(lifetime, smokeLife, waveLife);
             if(sparkLife == 0) sparkLife = lifetime - (lifetime / 3f + (rad / 40f));
 
             m = flak ? 1f : plast ? 2f : 0f;
