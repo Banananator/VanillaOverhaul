@@ -260,7 +260,7 @@ public class VOUnitChanges {
                 });
             });
             Drawf.light(e.x, e.y, 50f, Pal.missileYellowBack, 0.8f * e.fout());
-        }); UnitTypes.zenith.weapons.get(0).bullet.despawnEffect = Fx.none;
+        }); UnitTypes.zenith.weapons.get(0).bullet.despawnEffect = new VOExplosionEffect(25, 15, "blast");
         UnitTypes.antumbra.weapons.get(2).bullet.hitEffect = new MultiEffect(Fx.shootBig, Fx.hitBulletSmall);
         UnitTypes.antumbra.weapons.get(0).bullet.trailWidth = 2.4f;
         UnitTypes.antumbra.weapons.get(1).bullet.trailWidth = 2.4f;

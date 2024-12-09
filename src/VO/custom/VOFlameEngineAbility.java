@@ -17,7 +17,6 @@ import static arc.graphics.g2d.Lines.*;
 import static arc.math.Angles.*;
 
 public class VOFlameEngineAbility extends Ability{
-
     public float x, y, rotation, width, length, effectInterval, cone = 15f;
     public int particles = 1;
     public boolean rotateEffect = false;
