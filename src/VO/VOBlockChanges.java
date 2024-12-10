@@ -1019,6 +1019,40 @@ public class VOBlockChanges {
             }});
         }
 
+        hail: {
+			if(!(Blocks.hail instanceof ItemTurret))break hail;
+			ItemTurret block = (ItemTurret)Blocks.hail;
+            float splash = 25f * 0.75f;
+			
+			block.ammoTypes.put(Items.sporePod, new ArtilleryBulletType(3f, 20){{
+                lifetime = 80f;
+                width = height = 11f;
+                collidesTiles = false;
+                splashDamage = 33f;
+                splashDamageRadius = splash;
+                knockback = 0.8f;
+                hitEffect = new Effect(30, e -> {
+                    color(Pal.missileYellow);
+                    e.scaled(6, i -> {
+                        stroke((wstroke(33)) * i.fout());
+                        Lines.circle(e.x, e.y, 2f + i.fin() * splash);
+                    });
+                    color(Color.gray);
+                    randLenVectors(e.id, 5, 2f + (splash - 5f) * e.finpow(), (x, y) -> {
+                        Fill.circle(e.x + x, e.y + y, e.fout() * 3.5f + 0.5f);
+                    });
+                    color(Pal.missileYellowBack);
+                    e.scaled(20, i -> {stroke(i.fout());
+                        randLenVectors(e.id + 1, 6, 2f + (splash + 4f) * i.finpow(), (x, y) -> {
+                            lineAngle(e.x + x, e.y + y, Mathf.angle(x, y), 1f + i.fout() * 3f);
+                        });
+                    });
+                    Drawf.light(e.x, e.y, splash * 2f, Pal.missileYellowBack, 0.8f * e.fout());
+                });
+                despawnEffect = Fx.none;
+            }});
+        }
+
 //0000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000
 
         breach: {

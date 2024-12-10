@@ -196,7 +196,8 @@ public class VOUnitChanges {
         UnitTypes.atrax.weapons.get(0).shootY = 5.5f;
         UnitTypes.atrax.weapons.get(0).bullet.trailWidth = 3.1f;
         UnitTypes.atrax.weapons.get(0).bullet.trailLength = 4;
-        UnitTypes.arkyid.weapons.get(3).bullet.hitEffect = sapExplosionCloud; UnitTypes.arkyid.weapons.get(3).bullet.despawnEffect = Fx.none;
+        UnitTypes.arkyid.weapons.get(3).bullet.hitEffect = new VOExplosionEffect(70, 65, "sap");
+        UnitTypes.arkyid.weapons.get(3).bullet.despawnEffect = Fx.none;
         UnitTypes.toxopid.weapons.get(1).bullet.hitEffect = new MultiEffect(Fx.sapExplosion, new ParticleEffect(){{
             lifetime = 120;
             particles = 12;

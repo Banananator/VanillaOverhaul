@@ -3,6 +3,7 @@ package VO.custom;
 import arc.graphics.Color;
 import arc.graphics.g2d.*;
 import arc.math.*;
+import arc.util.Tmp;
 import mindustry.entities.Effect;
 import mindustry.graphics.*;
 
@@ -18,7 +19,7 @@ public class VOExplosionEffect extends Effect{
     /** Whether to draw wave. */
     public boolean drawWave = true;
     /** Overrides auto-setup colors if not null. */
-    public Color waveColor = null, smokeColor = null, sparkColor = null, lightColor = null;
+    public Color[] waveColor = null, smokeColor = null, sparkColor = null, lightColor = null;
     /** Easy way to set the explosion type. Write {@code flak}, {@code blast},  {@code pyra} or {@code surge} here. */
     public String type = "";
     /** 
@@ -35,6 +36,8 @@ public class VOExplosionEffect extends Effect{
     public float smokeLife = 0f, smokeSize = 0f, smokeRad = 0f;
     /** Amount of particles. Set to 0 to disable particle. */
     public int smokes = -1, sparks = -1;
+
+    public static final Color tmpC5 = new Color();
 
     /** Creates an advanced explosion effect.
      * @param rad is used for basic auto-setup.
@@ -83,39 +86,46 @@ public class VOExplosionEffect extends Effect{
 
         if(type == "flak"){
             flak = true;
-            blast = pyra = plast = surge = false;
+            blast = pyra = plast = surge = sap = false;
         } else if(type == "blast"){
             blast = true;
-            flak = pyra = plast = surge = false;
+            flak = pyra = plast = surge = sap = false;
         } else if(type == "pyra"){
             pyra = true;
-            flak = blast = plast = surge = false;
+            flak = blast = plast = surge = sap = false;
         } else if(type == "plast"){
             plast = true;
-            flak = blast = pyra = surge = false;
+            flak = blast = pyra = surge = sap = false;
         } else if(type == "surge"){
             surge = true;
-            flak = blast = pyra = plast = false;
+            flak = blast = pyra = plast = sap = false;
+        } else if(type == "sap"){
+            sap = true;
+            flak = blast = pyra = plast = surge = false;
         }
 
-        if(!flak && !blast && !pyra && !plast && !surge) blast = true;
+        if(!flak && !blast && !pyra && !plast && !surge && !sap) blast = true;
 
-        if(smokeColor == null) smokeColor = Color.gray;
+        if(!sap && smokeColor == null) smokeColor = new Color[]{Color.gray};
         if(flak){
-            if(waveColor == null) waveColor = Pal.bulletYellow;
-            if(sparkColor == null) sparkColor = Pal.lighterOrange;
+            if(waveColor == null) waveColor = new Color[]{Pal.bulletYellow};
+            if(sparkColor == null) sparkColor = new Color[]{Pal.lighterOrange};
         } else if(blast){
-            if(waveColor == null) waveColor = Pal.missileYellow;
-            if(sparkColor == null) sparkColor = Pal.missileYellowBack;
+            if(waveColor == null) waveColor = new Color[]{Pal.missileYellow};
+            if(sparkColor == null) sparkColor = new Color[]{Pal.missileYellowBack};
         } else if(pyra){
-            if(waveColor == null) waveColor = Pal.missileYellow;
-            if(sparkColor == null) sparkColor = Pal.lightishOrange;
+            if(waveColor == null) waveColor = new Color[]{Pal.missileYellow};
+            if(sparkColor == null) sparkColor = new Color[]{Pal.lightishOrange};
         } else if(plast){
-            if(waveColor == null) waveColor = Pal.plastaniumFront;
-            if(sparkColor == null) sparkColor = Pal.plastaniumBack;
+            if(waveColor == null) waveColor = new Color[]{Pal.plastaniumFront};
+            if(sparkColor == null) sparkColor = new Color[]{Pal.plastaniumBack};
         } else if(surge){
-            if(waveColor == null) waveColor = Pal.bulletYellow;
-            if(sparkColor == null) sparkColor = Pal.bulletYellowBack;
+            if(waveColor == null) waveColor = new Color[]{Pal.bulletYellow};
+            if(sparkColor == null) sparkColor = new Color[]{Pal.bulletYellowBack};
+        } else if(sap){
+            if(waveColor == null) waveColor = new Color[]{Pal.sapBullet};
+            if(sparkColor == null) sparkColor = new Color[]{Pal.sapBulletBack};
+            if(smokeColor == null) smokeColor = new Color[]{Pal.sap.cpy().a(0.65f), Pal.sap.cpy().a(0.4f)};
         }
         if(lightColor == null) lightColor = sparkColor;
 
@@ -130,8 +140,9 @@ public class VOExplosionEffect extends Effect{
                 if(sparkLen == 0) sparkLen = 1f + (power / 10f);
                 if(sparkStroke == 0) sparkStroke = 2f + (power / 25f);
 
+                if(smokeLife == 0) smokeLife = (r * 1.4f) + (power / 5f);
                 if(smokeRad == 0) smokeRad = Math.max(r / (1.5f + r / 40f), 3f);
-                if(smokeSize == 0) smokeSize = power / 5f;
+                if(smokeSize == 0) smokeSize = power / 6f;
             }
 
             m = flak || plast ? 5f : surge || sap ? 4f : 3f;
@@ -197,30 +208,38 @@ public class VOExplosionEffect extends Effect{
     @Override
     public void render(EffectContainer e){
         if(drawWave){
-            color(waveColor);
             e.scaled(waveLife, i -> {
+                color(Tmp.c1.lerp(waveColor, i.fin()));
                 stroke(waveStroke * (waveStroke > 0 ? i.fout() : i.fin()));
                 Lines.circle(e.x, e.y, waveRad * (waveRad > 0 ? i.fin() : i.fout()));
             });
         }
         if(sparks > 0){
-            color(sparkColor);
             e.scaled(sparkLife, i -> {
+                color(Tmp.c2.lerp(sparkColor, i.fin()));
                 stroke(sparkStroke * (sparkStroke > 0 ? i.fout() : i.fin()));
                 randLenVectors(e.id + 1, sparks, sparkRad * (sparkRad > 0 ? i.finpow() : i.foutpow()), (x, y) -> {
                     lineAngle(e.x + x, e.y + y, Mathf.angle(x, y), sparkLen * (sparkLen > 0 ? i.fout() : i.fout()));
                 });
             });
         }
+        if(smokes > 0 && sap){
+            e.scaled(smokeLife * 0.8f, i -> {
+                color(Tmp.c3.lerp(smokeColor, i.fin()));
+                randLenVectors(e.id, smokes, smokeRad * (smokeRad > 0 ? i.finpow() : i.foutpow()), (x, y) -> {
+                    Fill.circle(e.x + x, e.y + y, (smokeSize * (smokeSize > 0 ? i.fout() : i.fin())) / 2f);
+                });
+            });
+        }
         if(smokes > 0){
-            color(smokeColor);
             e.scaled(smokeLife, i -> {
+                color(Tmp.c4.lerp(smokeColor, i.fin()));
                 randLenVectors(e.id, smokes, smokeRad * (smokeRad > 0 ? i.finpow() : i.foutpow()), (x, y) -> {
                     Fill.circle(e.x + x, e.y + y, smokeSize * (smokeSize > 0 ? i.fout() : i.fin()));
                 });
             });
         }
         float lightRad = 2f * (drawWave ? (waveRad > 0 ? waveRad : -waveRad) : sparks > 0 ? (sparkRad > 0 ? sparkRad : -sparkRad) : 0f);
-        Drawf.light(e.x, e.y, lightRad, lightColor, 0.8f * e.fout());
+        Drawf.light(e.x, e.y, lightRad, tmpC5.lerp(lightColor, e.fin()), 0.8f * e.fout());
     }
 }
