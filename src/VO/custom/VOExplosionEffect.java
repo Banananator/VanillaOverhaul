@@ -11,8 +11,10 @@ import static arc.graphics.g2d.Lines.*;
 import static arc.math.Angles.*;
 
 public class VOExplosionEffect extends Effect{
-    /** Explosion mode. Automaticly sets up colors and affects values of auto-setup */
+    /** Explosion mode. Automaticly sets up colors and affects values of auto-setup. */
     public boolean flak = false, blast = true, pyra = false, plast = false, surge = false;
+    /** Explosion mode. Automaticly sets up colors and affects values of auto-setup, doesn't work without {@code power} being set up. */
+    public boolean sap = false;
     /** Whether to draw wave. */
     public boolean drawWave = true;
     /** Overrides auto-setup colors if not null. */
@@ -34,6 +36,10 @@ public class VOExplosionEffect extends Effect{
     /** Amount of particles. Set to 0 to disable particle. */
     public int smokes = -1, sparks = -1;
 
+    /** Creates an advanced explosion effect.
+     * @param rad is used for basic auto-setup.
+     * @param power is added to {@code rad} for advanced auto-setup. Is usually the explosion's damage.     
+     * @param type sets the explosion type. */
     public VOExplosionEffect(float rad, float power, String type){
         this.rad = rad;
         this.power = power;
@@ -43,14 +49,26 @@ public class VOExplosionEffect extends Effect{
         followParent = rotWithParent = false;
     }
     
+    /** Creates an advanced explosion effect.
+     * @param rad is used for basic auto-setup.
+     * @param power is added to {@code rad} for advanced auto-setup. Is usually the explosion's damage.  */
     public VOExplosionEffect(float rad, float power){
         this(rad, power, "blast");
     }
 
+    /** Creates an advanced explosion effect.
+     * @param rad is used for basic auto-setup. */
     public VOExplosionEffect(float rad){
         this(rad, 0f, "blast");
     }
 
+    /** Creates an advanced explosion effect.
+     * @param type sets the explosion type. */
+    public VOExplosionEffect(String type){
+        this(0f, 0f, type);
+    }
+
+    /** Creates an advanced explosion effect. */
     public VOExplosionEffect(){
         this(0f, 0f, "blast");
     }
@@ -108,12 +126,20 @@ public class VOExplosionEffect extends Effect{
             float r = rad > 0 ? rad : -rad;
             float m = 0f;
 
-            m = flak || plast ? 5f : surge ? 4f : 3f;
-            if(waveLife == 0) waveLife = r / ((rad <= 20f ? 3f : m) * (1 + rad / 120f));
+            if(power > 0 && sap){
+                if(sparkLen == 0) sparkLen = 1f + (power / 10f);
+                if(sparkStroke == 0) sparkStroke = 2f + (power / 25f);
+
+                if(smokeRad == 0) smokeRad = Math.max(r / (1.5f + r / 40f), 3f);
+                if(smokeSize == 0) smokeSize = power / 5f;
+            }
+
+            m = flak || plast ? 5f : surge || sap ? 4f : 3f;
+            if(waveLife == 0) waveLife = r / ((r <= 20f ? 3f : m) * (1 + r / 120f));
             m = flak || plast ? 0.9f : pyra ? 1.2f : 1f;
             if(smokeLife == 0) smokeLife = (30f + (power > 0 ? ((r + power) / 30f) : (r / 20f))) * m;
             lifetime = maxx(lifetime, smokeLife, waveLife);
-            if(sparkLife == 0) sparkLife = lifetime - (lifetime / 3f + (rad / 40f));
+            if(sparkLife == 0) sparkLife = lifetime - (lifetime / 3f + (r / 40f));
 
             m = flak ? 1f : plast ? 2f : 0f;
             if(waveRad == 0) waveRad = r + 2 + m;
@@ -134,7 +160,7 @@ public class VOExplosionEffect extends Effect{
             if(smokes < 0) smokes = round((4f + (power > 0 ? power / 40f : r / 15f)) * m);
             if(smokeRad == 0) smokeRad = r >= 15f ? r - 5f : r >= 10f ? r - 3f : Math.max(r - 1f, 2f);
             m = blast ? 1.25f : pyra ? 1.5f : 1f;
-            if(smokeSize == 0) smokeSize = ((power > 0 ? (r / 15f) + (power / 10f) : r / 10f)) * m;
+            if(smokeSize == 0) smokeSize = ((power > 0 ? (r / 18f) + (power / 7f) : r / 10f)) * m;
         }
 
         if(lifetime == 0) lifetime = 30f;

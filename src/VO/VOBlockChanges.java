@@ -149,6 +149,7 @@ public class VOBlockChanges {
                 pierce = true;
                 status = StatusEffects.burning;
                 statusDuration = 60f * 4;
+                makeFire = true;
                 particleAmount = 20;
                 particleSizeScl = 1.6f;
                 particleSpread = 10f;
@@ -163,6 +164,7 @@ public class VOBlockChanges {
                 pierce = true;
                 status = StatusEffects.burning;
                 statusDuration = 60f * 10;
+                makeFire = true;
                 particleAmount = 20;
                 particleSizeScl = 1.6f;
                 particleSpread = 10f;
@@ -807,7 +809,7 @@ public class VOBlockChanges {
             block.limitRange();
         }
 
-
+//0000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000
 
         breach: {
             if(!(Blocks.breach instanceof ItemTurret))break breach;
@@ -993,7 +995,32 @@ public class VOBlockChanges {
         }
     }
 
+//0000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000
+//0000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000
+//0000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000
+
     public static void loadNew(){
+        scorch: {
+			if(!(Blocks.scorch instanceof ItemTurret))break scorch;
+			ItemTurret block = (ItemTurret)Blocks.scorch;
+			
+			block.ammoTypes.put(Items.sporePod, new VOFlameBulletType(3.35f, 14f){{
+                lifetime = 18f;
+                hitSize = 7f;
+                ammoMultiplier = 2f;
+                pierce = true;
+                status = StatusEffects.sapped;
+                statusDuration = 60f;
+                particleAmount = 20;
+                particleSizeScl = 1.6f;
+                particleSpread = 10f;
+                smokeColors = new Color[]{Color.valueOf("7457ce"), Color.darkGray, Color.gray};
+                colors = new Color[]{Color.white, Color.valueOf("9e78dc"), Color.valueOf("7457ce"), Color.valueOf("5541b1"), Color.gray};
+            }});
+        }
+
+//0000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000
+
         breach: {
             if(!(Blocks.breach instanceof ItemTurret))break breach;
 			ItemTurret block = (ItemTurret)Blocks.breach;
