@@ -125,7 +125,7 @@ public class VOExplosionEffect extends Effect{
         } else if(sap){
             if(waveColor == null) waveColor = new Color[]{Pal.sapBullet};
             if(sparkColor == null) sparkColor = new Color[]{Pal.sapBulletBack};
-            if(smokeColor == null) smokeColor = new Color[]{Pal.sap.cpy().a(0.65f), Pal.sap.cpy().a(0.4f)};
+            if(smokeColor == null) smokeColor = new Color[]{Pal.sap.cpy().a(0.5f), Pal.sap.cpy().a(0.3f)};
         }
         if(lightColor == null) lightColor = sparkColor;
 
@@ -137,20 +137,20 @@ public class VOExplosionEffect extends Effect{
             float m = 0f;
 
             if(power > 0 && sap){
-                if(sparkLen == 0) sparkLen = 1f + (power / 10f);
-                if(sparkStroke == 0) sparkStroke = 2f + (power / 25f);
+                if(sparkLen == 0) sparkLen = 1f + (power / 7f);
+                if(sparkStroke == 0) sparkStroke = 2f + (power / 40f);
 
                 if(smokeLife == 0) smokeLife = (r * 1.4f) + (power / 5f);
-                if(smokeRad == 0) smokeRad = Math.max(r / (1.5f + r / 40f), 3f);
+                if(smokeRad == 0) smokeRad = Math.max(r - (-4f + r / 5f), 3f);
                 if(smokeSize == 0) smokeSize = power / 6f;
             }
 
-            m = flak || plast ? 5f : surge || sap ? 4f : 3f;
+            m = flak || plast || sap ? 5f : surge ? 4f : 3f;
             if(waveLife == 0) waveLife = r / ((r <= 20f ? 3f : m) * (1 + r / 120f));
             m = flak || plast ? 0.9f : pyra ? 1.2f : 1f;
             if(smokeLife == 0) smokeLife = (30f + (power > 0 ? ((r + power) / 30f) : (r / 20f))) * m;
             lifetime = maxx(lifetime, smokeLife, waveLife);
-            if(sparkLife == 0) sparkLife = lifetime - (lifetime / 3f + (r / 40f));
+            if(sparkLife == 0) sparkLife = (lifetime - (lifetime / 3f + (r / 40f))) * (sap ? 0.5f : 1f);
 
             m = flak ? 1f : plast ? 2f : 0f;
             if(waveRad == 0) waveRad = r + 2 + m;
