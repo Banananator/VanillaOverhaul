@@ -3,7 +3,6 @@ package VO.custom;
 import arc.graphics.Color;
 import arc.graphics.g2d.*;
 import arc.math.*;
-import arc.util.Nullable;
 import arc.util.Tmp;
 import mindustry.entities.Effect;
 import mindustry.graphics.*;
@@ -52,7 +51,7 @@ public class VOExplosionEffect extends Effect{
     /** Rotation of the smoke, if has a non-circle region. */
     public float smokeRot = 0f, smokeBaseRot = 0f;
 
-    public static final Color tmpC5 = new Color();
+    public static final Color col = new Color();
 
     /** Creates an advanced explosion effect.
      * @param rad is used for basic auto-setup.
@@ -140,7 +139,7 @@ public class VOExplosionEffect extends Effect{
         } else if(sap){
             if(waveColor == null) waveColor = new Color[]{Pal.sapBullet};
             if(sparkColor == null) sparkColor = new Color[]{Pal.sapBulletBack};
-            if(smokeColor == null) smokeColor = new Color[]{Pal.sap.cpy().a(0.5f), Pal.sap.cpy().a(0.3f)};
+            if(smokeColor == null) smokeColor = new Color[]{Pal.sap.cpy().a(0.5f), Pal.sap.cpy().a(0.0f/*3*/)};
         }
         if(lightColor == null) lightColor = sparkColor;
 
@@ -239,14 +238,14 @@ public class VOExplosionEffect extends Effect{
     public void render(EffectContainer e){
         if(drawWave){
             e.scaled(waveLife, i -> {
-                color(Tmp.c1.lerp(waveColor, i.fin(interpColor ? waveRadInterp : Interp.linear)));
+                color(lerpWithA(waveColor, i.fin(interpColor ? waveRadInterp : Interp.linear)));
                 stroke(waveStroke * (waveStroke > 0 ? i.fout(waveStrokeInterp) : i.fin(waveStrokeInterp)));
                 Lines.circle(e.x, e.y, waveRad * (waveRad > 0 ? i.fin(waveRadInterp) : i.fout(waveRadInterp)));
             });
         }
         if(sparks > 0){
             e.scaled(sparkLife, i -> {
-                color(Tmp.c2.lerp(sparkColor, i.fin(interpColor ? sparkRadInterp : Interp.linear)));
+                color(lerpWithA(sparkColor, i.fin(interpColor ? sparkRadInterp : Interp.linear)));
                 stroke(sparkStroke * (sparkStroke > 0 ? i.fout(sparkSizeInterp) : i.fin(sparkSizeInterp)));
                 randLenVectors(e.id, sparks, sparkRad * (sparkRad > 0 ? i.fin(sparkRadInterp) : i.fout(sparkRadInterp)), (x, y) -> {
                     lineAngle(e.x + x, e.y + y, Mathf.angle(x, y), sparkLen * (sparkLen > 0 ? i.fout(sparkSizeInterp) : i.fout(sparkSizeInterp)));
@@ -255,27 +254,37 @@ public class VOExplosionEffect extends Effect{
         }
         if(smokes > 0 && sap){
             e.scaled(smokeLife * 0.8f, i -> {
-                color(Tmp.c3.lerp(smokeColor, i.fin(interpColor ? smokeRadInterp : Interp.linear)));
+                color(lerpWithA(smokeColor, i.fin(interpColor ? smokeRadInterp : Interp.linear)));
                 randLenVectors(e.id + 2, smokes, smokeRad * (smokeRad > 0 ? i.fin(smokeRadInterp) : i.fout(smokeRadInterp)), (x, y) -> {
                     float r = smokeSize * (smokeSize > 0 ? i.fout(smokeSizeInterp) : i.fin(smokeSizeInterp));
                     //Fill.circle(e.x + x, e.y + y, r);
                     Draw.rect(Core.atlas.find(smokeTex), e.x + x, e.y + y, r, r, smokeBaseRot + (e.time * smokeRot));
-                    if(drawSmokeLight > 0) Drawf.light(e.x + x, e.y + y, r * smokeLightScl, tmpC5.lerp(smokeColor, e.fin()), smokeLightOpacity * Draw.getColor().a);
+                    if(drawSmokeLight > 0) Drawf.light(e.x + x, e.y + y, r * smokeLightScl, lerpWithA(smokeColor, e.fin()), smokeLightOpacity * Draw.getColor().a);
                 });
             });
         }
         if(smokes > 0){
             e.scaled(smokeLife, i -> {
-                color(Tmp.c4.lerp(smokeColor, i.fin(interpColor ? smokeRadInterp : Interp.linear)));
+                color(lerpWithA(smokeColor, i.fin(interpColor ? smokeRadInterp : Interp.linear)));
                 randLenVectors(e.id + 1, smokes, smokeRad * (smokeRad > 0 ? i.fin(smokeRadInterp) : i.fout(smokeRadInterp)), (x, y) -> {
                     float r = (smokeSize * (smokeSize > 0 ? i.fout(smokeSizeInterp) : i.fin(smokeSizeInterp))) * 2f;
                     //Fill.circle(e.x + x, e.y + y, r);
                     Draw.rect(Core.atlas.find(smokeTex), e.x + x, e.y + y, r, r, smokeBaseRot + (e.time * smokeRot));
-                    if(drawSmokeLight > 0) Drawf.light(e.x + x, e.y + y, r * smokeLightScl, tmpC5.lerp(smokeColor, e.fin()), smokeLightOpacity * Draw.getColor().a);
+                    if(drawSmokeLight > 0) Drawf.light(e.x + x, e.y + y, r * smokeLightScl, lerpWithA(smokeColor, e.fin()), smokeLightOpacity * Draw.getColor().a);
                 });
             });
         }
         float lightRad = 2f * (drawWave ? (waveRad > 0 ? waveRad : -waveRad) : sparks > 0 ? (sparkRad > 0 ? sparkRad : -sparkRad) : 0f);
-        Drawf.light(e.x, e.y, lightRad, tmpC5.lerp(lightColor, e.fin()), 0.8f * e.fout());
+        Drawf.light(e.x, e.y, lightRad, lerpWithA(lightColor, e.fin()), 0.8f * e.fout());
+    }
+
+    public Color lerpWithA(Color[] colors, float s){
+        int l = colors.length;
+        Color a = colors[Mathf.clamp((int)(s * (l - 1)), 0, colors.length - 1)];
+        Color b = colors[Mathf.clamp((int)(s * (l - 1) + 1), 0, l - 1)];
+
+        float n = s * (l - 1) - (int)(s * (l - 1));
+        float i = 1f - n;
+        return new Color(a.r * i + b.r * n, a.g * i + b.g * n, a.b * i + b.b * n, a.a * i + b.a * n);
     }
 }
