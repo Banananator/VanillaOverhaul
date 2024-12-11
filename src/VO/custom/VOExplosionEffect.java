@@ -237,24 +237,24 @@ public class VOExplosionEffect extends Effect{
         if(drawWave){
             e.scaled(waveLife, i -> {
                 color(lerpWithA(waveColor, i.fin(interpColor ? waveRadInterp : Interp.linear)));
-                stroke(waveStroke * (waveStroke > 0 ? waveStrokeInterp.apply(0f, 1f, i.fout()) : i.fin(waveStrokeInterp)));
-                Lines.circle(e.x, e.y, waveRad * (waveRad > 0 ? i.fin(waveRadInterp) : waveRadInterp.apply(0f, 1f, i.fout())));
+                stroke(waveStroke * (waveStroke > 0 ? waveStrokeInterp.apply(1f, 0f, i.fout()) : i.fin(waveStrokeInterp)));
+                Lines.circle(e.x, e.y, waveRad * (waveRad > 0 ? i.fin(waveRadInterp) : waveRadInterp.apply(1f, 0f, i.fout())));
             });
         }
         if(sparks > 0){
             e.scaled(sparkLife, i -> {
                 color(lerpWithA(sparkColor, i.fin(interpColor ? sparkRadInterp : Interp.linear)));
-                stroke(sparkStroke * (sparkStroke > 0 ? sparkSizeInterp.apply(0f, 1f, i.fout()) : i.fin(sparkSizeInterp)));
-                randLenVectors(e.id, sparks, sparkRad * (sparkRad > 0 ? i.fin(sparkRadInterp) : sparkRadInterp.apply(0f, 1f, i.fout())), (x, y) -> {
-                    lineAngle(e.x + x, e.y + y, Mathf.angle(x, y), sparkLen * (sparkLen > 0 ? sparkSizeInterp.apply(0f, 1f, i.fout()) : i.fin(sparkSizeInterp)));
+                stroke(sparkStroke * (sparkStroke > 0 ? sparkSizeInterp.apply(1f, 0f, i.fout()) : i.fin(sparkSizeInterp)));
+                randLenVectors(e.id, sparks, sparkRad * (sparkRad > 0 ? i.fin(sparkRadInterp) : sparkRadInterp.apply(1f, 0f, i.fout())), (x, y) -> {
+                    lineAngle(e.x + x, e.y + y, Mathf.angle(x, y), sparkLen * (sparkLen > 0 ? sparkSizeInterp.apply(1f, 0f, i.fout()) : i.fin(sparkSizeInterp)));
                 });
             });
         }
         if(smokes > 0 && sap){
             e.scaled(smokeLife * 0.8f, i -> {
                 color(lerpWithA(smokeColor, i.fin(interpColor ? smokeRadInterp : Interp.linear)));
-                randLenVectors(e.id + 2, smokes, smokeRad * (smokeRad > 0 ? i.fin(smokeRadInterp) : smokeRadInterp.apply(0f, 1f, i.fout())), (x, y) -> {
-                    float r = smokeSize * (smokeSize > 0 ? smokeSizeInterp.apply(0f, 1f, i.fout()) : i.fin(smokeSizeInterp));
+                randLenVectors(e.id + 2, smokes, smokeRad * (smokeRad > 0 ? i.fin(smokeRadInterp) : smokeRadInterp.apply(1f, 0f, i.fout())), (x, y) -> {
+                    float r = smokeSize * (smokeSize > 0 ? smokeSizeInterp.apply(1f, 0f, i.fout()) : i.fin(smokeSizeInterp));
                     //Fill.circle(e.x + x, e.y + y, r);
                     Draw.rect(Core.atlas.find(smokeTex), e.x + x, e.y + y, r, r, smokeBaseRot + (e.time * smokeRot));
                     if(drawSmokeLight > 0) Drawf.light(e.x + x, e.y + y, r * smokeLightScl, lerpWithA(smokeColor, e.fin()), smokeLightOpacity * Draw.getColor().a);
@@ -264,8 +264,8 @@ public class VOExplosionEffect extends Effect{
         if(smokes > 0){
             e.scaled(smokeLife, i -> {
                 color(lerpWithA(smokeColor, i.fin(interpColor ? smokeRadInterp : Interp.linear)));
-                randLenVectors(e.id + 1, smokes, smokeRad * (smokeRad > 0 ? i.fin(smokeRadInterp) : smokeRadInterp.apply(0f, 1f, i.fout())), (x, y) -> {
-                    float r = (smokeSize * (smokeSize > 0 ? smokeSizeInterp.apply(0f, 1f, i.fout()) : i.fin(smokeSizeInterp))) * 2f;
+                randLenVectors(e.id + 1, smokes, smokeRad * (smokeRad > 0 ? i.fin(smokeRadInterp) : smokeRadInterp.apply(1f, 0f, i.fout())), (x, y) -> {
+                    float r = (smokeSize * (smokeSize > 0 ? smokeSizeInterp.apply(1f, 0f, i.fout()) : i.fin(smokeSizeInterp))) * 2f;
                     //Fill.circle(e.x + x, e.y + y, r);
                     Draw.rect(Core.atlas.find(smokeTex), e.x + x, e.y + y, r, r, smokeBaseRot + (e.time * smokeRot));
                     if(drawSmokeLight > 0) Drawf.light(e.x + x, e.y + y, r * smokeLightScl, lerpWithA(smokeColor, e.fin()), smokeLightOpacity * Draw.getColor().a);
