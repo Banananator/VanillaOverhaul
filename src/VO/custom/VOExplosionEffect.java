@@ -254,7 +254,7 @@ public class VOExplosionEffect extends Effect{
             e.scaled(smokeLife * 0.8f, i -> {
                 color(lerpWithA(smokeColor, i.fin(interpColor ? smokeRadInterp : Interp.linear)));
                 randLenVectors(e.id + 2, smokes, smokeRad * (smokeRad > 0 ? i.fin(smokeRadInterp) : 1f - i.fin(smokeSizeInterp)), (x, y) -> {
-                    float r = ((smokeSize * (smokeSize > 0 ? 1f - i.fin(smokeSizeInterp) : i.fin(smokeSizeInterp))) * 2f) / (2f / 3f);
+                    float r = ((smokeSize * 2f) / (2f / 3f)) * (smokeSize > 0 ? 1f - i.fin(smokeSizeInterp) : i.fin(smokeSizeInterp));
                     //Fill.circle(e.x + x, e.y + y, r);
                     Draw.rect(Core.atlas.find(smokeTex), e.x + x, e.y + y, r, r, smokeBaseRot + (e.time * smokeRot));
                     if(drawSmokeLight > 0) Drawf.light(e.x + x, e.y + y, r * smokeLightScl, lerpWithA(smokeColor, e.fin()), smokeLightOpacity * Draw.getColor().a);
@@ -265,7 +265,7 @@ public class VOExplosionEffect extends Effect{
             e.scaled(smokeLife, i -> {
                 color(lerpWithA(smokeColor, i.fin(interpColor ? smokeRadInterp : Interp.linear)));
                 randLenVectors(e.id + 1, smokes, smokeRad * (smokeRad > 0 ? i.fin(smokeRadInterp) : 1f - i.fin(smokeSizeInterp)), (x, y) -> {
-                    float r = (smokeSize * (smokeSize > 0 ? 1f - i.fin(smokeSizeInterp) : i.fin(smokeSizeInterp))) * 2f;
+                    float r = (smokeSize * 2f) * (smokeSize > 0 ? 1f - i.fin(smokeSizeInterp) : i.fin(smokeSizeInterp));
                     //Fill.circle(e.x + x, e.y + y, r);
                     Draw.rect(Core.atlas.find(smokeTex), e.x + x, e.y + y, r, r, smokeBaseRot + (e.time * smokeRot));
                     if(drawSmokeLight > 0) Drawf.light(e.x + x, e.y + y, r * smokeLightScl, lerpWithA(smokeColor, e.fin()), smokeLightOpacity * Draw.getColor().a);
