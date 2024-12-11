@@ -3,6 +3,7 @@ package VO.custom;
 import arc.graphics.Color;
 import arc.graphics.g2d.*;
 import arc.math.*;
+import arc.util.Nullable;
 import arc.util.Tmp;
 import mindustry.entities.Effect;
 import mindustry.graphics.*;
@@ -46,7 +47,10 @@ public class VOExplosionEffect extends Effect{
     public boolean interpColor = false;
     /** Amount of particles. Set to 0 to disable particle. */
     public int smokes = -1, sparks = -1;
+    /** Texture of the smokes. */
+    public String smokeTex = "circle";
 
+    private @Nullable TextureRegion tex;
     public static final Color tmpC5 = new Color();
 
     /** Creates an advanced explosion effect.
@@ -252,9 +256,9 @@ public class VOExplosionEffect extends Effect{
                 color(Tmp.c3.lerp(smokeColor, i.fin(interpColor ? smokeRadInterp : Interp.linear)));
                 randLenVectors(e.id + 2, smokes, smokeRad * (smokeRad > 0 ? i.fin(smokeRadInterp) : i.fout(smokeRadInterp)), (x, y) -> {
                     float r = smokeSize * (smokeSize > 0 ? i.fout(smokeSizeInterp) : i.fin(smokeSizeInterp));
-                    //Fill.circle(e.x + x, e.y + y, r);
-                    Draw.rect(Core.atlas.find("circle"), e.x, e.y, r, r, 0f);
-                    if(drawSmokeLight > 0) Drawf.light(e.x, e.y, r * smokeLightScl, tmpC5.lerp(smokeColor, e.fin()), smokeLightOpacity * Draw.getColor().a);
+                    Fill.circle(e.x + x, e.y + y, r);
+                    //Draw.rect(Core.atlas.find("circle"), e.x + x, e.y + y, r, r, 0f);
+                    if(drawSmokeLight > 0) Drawf.light(e.x + x, e.y + y, r * smokeLightScl, tmpC5.lerp(smokeColor, e.fin()), smokeLightOpacity * Draw.getColor().a);
                 });
             });
         }
@@ -263,9 +267,9 @@ public class VOExplosionEffect extends Effect{
                 color(Tmp.c4.lerp(smokeColor, i.fin(interpColor ? smokeRadInterp : Interp.linear)));
                 randLenVectors(e.id + 1, smokes, smokeRad * (smokeRad > 0 ? i.fin(smokeRadInterp) : i.fout(smokeRadInterp)), (x, y) -> {
                     float r = (smokeSize * (smokeSize > 0 ? i.fout(smokeSizeInterp) : i.fin(smokeSizeInterp))) * 2f;
-                    //Fill.circle(e.x + x, e.y + y, r);
-                    Draw.rect(Core.atlas.find("circle"), e.x, e.y, r, r, 0f);
-                    if(drawSmokeLight > 0) Drawf.light(e.x, e.y, r * smokeLightScl, tmpC5.lerp(smokeColor, e.fin()), smokeLightOpacity * Draw.getColor().a);
+                    Fill.circle(e.x + x, e.y + y, r);
+                    //Draw.rect(Core.atlas.find("circle"), e.x + x, e.y + y, r, r, 0f);
+                    if(drawSmokeLight > 0) Drawf.light(e.x + x, e.y + y, r * smokeLightScl, tmpC5.lerp(smokeColor, e.fin()), smokeLightOpacity * Draw.getColor().a);
                 });
             });
         }
