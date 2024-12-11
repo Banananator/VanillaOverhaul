@@ -165,11 +165,11 @@ public class VOExplosionEffect extends Effect{
 
             if(power > 0 && sap){
                 if(sparkLen == 0) sparkLen = 1f + (power / 7f);
-                if(sparkStroke == 0) sparkStroke = 2f + (power / 40f);
+                if(sparkStroke == 0) sparkStroke = 1f + (power / 50f);
 
                 if(smokeLife == 0) smokeLife = (r * 1.4f) + (power / 5f);
                 if(smokeRad == 0) smokeRad = Math.max(r - (-4f + r / 5f), 3f);
-                if(smokeSize == 0) smokeSize = power / 4f;
+                if(smokeSize == 0) smokeSize = power / 5f;
             }
 
             m = flak || plast || sap ? 5f : surge ? 4f : 3f;
@@ -184,7 +184,7 @@ public class VOExplosionEffect extends Effect{
             m = blast || pyra ? 1f : 0f;
             if(waveStroke == 0) waveStroke = 2 + (power > 0 ? (power / 35f) : (r / 20f)) + m;
 
-            m = flak ? 0.85f : plast ? 2f/3f : surge ? 1.5f : 1f;
+            m = flak ? 0.85f : plast ? 2f / 3f : surge ? 1.5f : 1f;
             if(sparks < 0) sparks = round((5f + (power > 0 ? power / 20f + r / 60f : r / 20f)) * m);
             m = flak || blast ? 1f : pyra ? 1.1f : 1.25f;
             if(sparkRad == 0) sparkRad = (r + (4f + r / 20f)) * m;
@@ -254,7 +254,7 @@ public class VOExplosionEffect extends Effect{
             e.scaled(smokeLife * 0.8f, i -> {
                 color(lerpWithA(smokeColor, i.fin(interpColor ? smokeRadInterp : Interp.linear)));
                 randLenVectors(e.id + 2, smokes, smokeRad * (smokeRad > 0 ? i.fin(smokeRadInterp) : 1f - i.fin(smokeSizeInterp)), (x, y) -> {
-                    float r = smokeSize * (smokeSize > 0 ? 1f - i.fin(smokeSizeInterp) : i.fin(smokeSizeInterp));
+                    float r = ((smokeSize * (smokeSize > 0 ? 1f - i.fin(smokeSizeInterp) : i.fin(smokeSizeInterp))) * 2f) / (2f / 3f);
                     //Fill.circle(e.x + x, e.y + y, r);
                     Draw.rect(Core.atlas.find(smokeTex), e.x + x, e.y + y, r, r, smokeBaseRot + (e.time * smokeRot));
                     if(drawSmokeLight > 0) Drawf.light(e.x + x, e.y + y, r * smokeLightScl, lerpWithA(smokeColor, e.fin()), smokeLightOpacity * Draw.getColor().a);
