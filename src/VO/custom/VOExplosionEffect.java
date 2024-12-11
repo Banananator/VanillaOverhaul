@@ -36,6 +36,9 @@ public class VOExplosionEffect extends Effect{
     public float smokeLife = 0f, smokeSize = 0f, smokeRad = 0f;
     /** Whether to draw light on smoke particles. Set to 0 for {@code false} or >0 for {@code true}. */
     public int drawSmokeLight = -1;
+    /** Values of smoke's light, if drawn. */
+    public float smokeLightScl = 2f, smokeLightOpacity = 0.6f;
+    public Interp waveRadInterp = null, waveStrokeInterp = null, sparkRadInterp = null, sparkSizeInterp = null, smokeRadInterp = null, smokeSizeInterp = null;
     /** Amount of particles. Set to 0 to disable particle. */
     public int smokes = -1, sparks = -1;
 
@@ -130,6 +133,19 @@ public class VOExplosionEffect extends Effect{
             if(smokeColor == null) smokeColor = new Color[]{Pal.sap.cpy().a(0.5f), Pal.sap.cpy().a(0.3f)};
         }
         if(lightColor == null) lightColor = sparkColor;
+
+        if(waveRadInterp == null) waveRadInterp = Interp.linear;
+        if(waveStrokeInterp == null) waveStrokeInterp = Interp.linear;
+        if(sparkRadInterp == null) sparkRadInterp = Interp.linear;
+        if(sparkSizeInterp == null) sparkSizeInterp = Interp.linear;
+        if(!sap){
+            if(smokeRadInterp == null) smokeRadInterp = Interp.linear;
+            if(smokeSizeInterp == null) smokeSizeInterp = Interp.linear;
+        } else{
+            if(smokeRadInterp == null) smokeRadInterp = Interp.pow5Out;
+            if(smokeSizeInterp == null) smokeSizeInterp = Interp.pow3In; 
+        }
+
         if(drawSmokeLight < 0 && sap) drawSmokeLight = 1;
 
         if(power < 0) power *= -1; if(rad < 0) rad *= -1;
@@ -145,7 +161,7 @@ public class VOExplosionEffect extends Effect{
 
                 if(smokeLife == 0) smokeLife = (r * 1.4f) + (power / 5f);
                 if(smokeRad == 0) smokeRad = Math.max(r - (-4f + r / 5f), 3f);
-                if(smokeSize == 0) smokeSize = power / 6f;
+                if(smokeSize == 0) smokeSize = power / 5f;
             }
 
             m = flak || plast || sap ? 5f : surge ? 4f : 3f;
@@ -170,7 +186,7 @@ public class VOExplosionEffect extends Effect{
             m = flak ? 1 : blast ? 1.3f : pyra ? 2.2f : 0.75f;
             if(sparkStroke == 0) sparkStroke = (1f + (power > 0 ? (r / 100f) + (power / 45f) : (r / 40f))) * m;
 
-            m = blast ? 1.1f : pyra || plast ? 1.25f : 1f;
+            m = blast ? 1.1f : pyra || plast || sap ? 1.25f : 1f;
             if(smokes < 0) smokes = round((4f + (power > 0 ? power / 40f : r / 15f)) * m);
             if(smokeRad == 0) smokeRad = r >= 15f ? r - 5f : r >= 10f ? r - 3f : Math.max(r - 1f, 2f);
             m = blast ? 1.25f : pyra ? 1.5f : 1f;
@@ -232,7 +248,7 @@ public class VOExplosionEffect extends Effect{
                 randLenVectors(e.id + 2, smokes, smokeRad * (smokeRad > 0 ? i.finpow() : i.foutpow()), (x, y) -> {
                     float r = (smokeSize * (smokeSize > 0 ? i.fout() : i.fin())) / 2f;
                     Fill.circle(e.x + x, e.y + y, r);
-                    if(drawSmokeLight > 0) Drawf.light(e.x, e.y, r, tmpC5.lerp(smokeColor, e.fin()), 0.8f * e.fout());
+                    if(drawSmokeLight > 0) Drawf.light(e.x, e.y, r * smokeLightScl, tmpC5.lerp(smokeColor, e.fin()), smokeLightOpacity);
                 });
             });
         }
@@ -242,7 +258,7 @@ public class VOExplosionEffect extends Effect{
                 randLenVectors(e.id + 1, smokes, smokeRad * (smokeRad > 0 ? i.finpow() : i.foutpow()), (x, y) -> {
                     float r = smokeSize * (smokeSize > 0 ? i.fout() : i.fin());
                     Fill.circle(e.x + x, e.y + y, r);
-                    if(drawSmokeLight > 0) Drawf.light(e.x, e.y, r, tmpC5.lerp(smokeColor, e.fin()), 0.8f * e.fout());
+                    if(drawSmokeLight > 0) Drawf.light(e.x, e.y, r * smokeLightScl, tmpC5.lerp(smokeColor, e.fin()), smokeLightOpacity);
                 });
             });
         }
