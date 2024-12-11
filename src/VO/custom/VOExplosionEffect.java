@@ -38,7 +38,10 @@ public class VOExplosionEffect extends Effect{
     public int drawSmokeLight = -1;
     /** Values of smoke's light, if drawn. */
     public float smokeLightScl = 2f, smokeLightOpacity = 0.6f;
+    /** Explosion value interpolation. If not {@code null}, overrides itself in auto-setup. */
     public Interp waveRadInterp = null, waveStrokeInterp = null, sparkRadInterp = null, sparkSizeInterp = null, smokeRadInterp = null, smokeSizeInterp = null;
+    /** Whether to interpolate colors. */
+    public boolean interpColor = false;
     /** Amount of particles. Set to 0 to disable particle. */
     public int smokes = -1, sparks = -1;
 
@@ -136,10 +139,10 @@ public class VOExplosionEffect extends Effect{
 
         if(waveRadInterp == null) waveRadInterp = Interp.linear;
         if(waveStrokeInterp == null) waveStrokeInterp = Interp.linear;
-        if(sparkRadInterp == null) sparkRadInterp = Interp.linear;
+        if(sparkRadInterp == null) sparkRadInterp = Interp.pow3Out;
         if(sparkSizeInterp == null) sparkSizeInterp = Interp.linear;
         if(!sap){
-            if(smokeRadInterp == null) smokeRadInterp = Interp.linear;
+            if(smokeRadInterp == null) smokeRadInterp = Interp.pow3Out;
             if(smokeSizeInterp == null) smokeSizeInterp = Interp.linear;
         } else{
             if(smokeRadInterp == null) smokeRadInterp = Interp.pow5Out;
@@ -228,37 +231,37 @@ public class VOExplosionEffect extends Effect{
     public void render(EffectContainer e){
         if(drawWave){
             e.scaled(waveLife, i -> {
-                color(Tmp.c1.lerp(waveColor, i.fin()));
-                stroke(waveStroke * (waveStroke > 0 ? i.fout() : i.fin()));
-                Lines.circle(e.x, e.y, waveRad * (waveRad > 0 ? i.fin() : i.fout()));
+                color(Tmp.c1.lerp(waveColor, i.fin(interpColor ? waveRadInterp : Interp.linear)));
+                stroke(waveStroke * (waveStroke > 0 ? i.fout(waveStrokeInterp) : i.fin(waveStrokeInterp)));
+                Lines.circle(e.x, e.y, waveRad * (waveRad > 0 ? i.fin(waveRadInterp) : i.fout(waveRadInterp)));
             });
         }
         if(sparks > 0){
             e.scaled(sparkLife, i -> {
-                color(Tmp.c2.lerp(sparkColor, i.fin()));
-                stroke(sparkStroke * (sparkStroke > 0 ? i.fout() : i.fin()));
-                randLenVectors(e.id, sparks, sparkRad * (sparkRad > 0 ? i.finpow() : i.foutpow()), (x, y) -> {
-                    lineAngle(e.x + x, e.y + y, Mathf.angle(x, y), sparkLen * (sparkLen > 0 ? i.fout() : i.fout()));
+                color(Tmp.c2.lerp(sparkColor, i.fin(interpColor ? sparkRadInterp : Interp.linear)));
+                stroke(sparkStroke * (sparkStroke > 0 ? i.fout(sparkSizeInterp) : i.fin(sparkSizeInterp)));
+                randLenVectors(e.id, sparks, sparkRad * (sparkRad > 0 ? i.fin(sparkRadInterp) : i.fout(sparkRadInterp)), (x, y) -> {
+                    lineAngle(e.x + x, e.y + y, Mathf.angle(x, y), sparkLen * (sparkLen > 0 ? i.fout(sparkSizeInterp) : i.fout(sparkSizeInterp)));
                 });
             });
         }
         if(smokes > 0 && sap){
             e.scaled(smokeLife * 0.8f, i -> {
-                color(Tmp.c3.lerp(smokeColor, i.fin()));
-                randLenVectors(e.id + 2, smokes, smokeRad * (smokeRad > 0 ? i.finpow() : i.foutpow()), (x, y) -> {
-                    float r = (smokeSize * (smokeSize > 0 ? i.fout() : i.fin())) / 2f;
+                color(Tmp.c3.lerp(smokeColor, i.fin(interpColor ? smokeRadInterp : Interp.linear)));
+                randLenVectors(e.id + 2, smokes, smokeRad * (smokeRad > 0 ? i.fin(smokeRadInterp) : i.fout(smokeRadInterp)), (x, y) -> {
+                    float r = (smokeSize * (smokeSize > 0 ? i.fout(smokeSizeInterp) : i.fin(smokeSizeInterp))) / 2f;
                     Fill.circle(e.x + x, e.y + y, r);
-                    if(drawSmokeLight > 0) Drawf.light(e.x, e.y, r * smokeLightScl, tmpC5.lerp(smokeColor, e.fin()), smokeLightOpacity);
+                    if(drawSmokeLight > 0) Drawf.light(e.x, e.y, r * smokeLightScl, tmpC5.lerp(smokeColor, e.fin()), smokeLightOpacity * Draw.getColor().a);
                 });
             });
         }
         if(smokes > 0){
             e.scaled(smokeLife, i -> {
-                color(Tmp.c4.lerp(smokeColor, i.fin()));
-                randLenVectors(e.id + 1, smokes, smokeRad * (smokeRad > 0 ? i.finpow() : i.foutpow()), (x, y) -> {
-                    float r = smokeSize * (smokeSize > 0 ? i.fout() : i.fin());
+                color(Tmp.c4.lerp(smokeColor, i.fin(interpColor ? smokeRadInterp : Interp.linear)));
+                randLenVectors(e.id + 1, smokes, smokeRad * (smokeRad > 0 ? i.fin(smokeRadInterp) : i.fout(smokeRadInterp)), (x, y) -> {
+                    float r = smokeSize * (smokeSize > 0 ? i.fout(smokeSizeInterp) : i.fin(smokeSizeInterp));
                     Fill.circle(e.x + x, e.y + y, r);
-                    if(drawSmokeLight > 0) Drawf.light(e.x, e.y, r * smokeLightScl, tmpC5.lerp(smokeColor, e.fin()), smokeLightOpacity);
+                    if(drawSmokeLight > 0) Drawf.light(e.x, e.y, r * smokeLightScl, tmpC5.lerp(smokeColor, e.fin()), smokeLightOpacity * Draw.getColor().a);
                 });
             });
         }
