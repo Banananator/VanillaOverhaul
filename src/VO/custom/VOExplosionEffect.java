@@ -34,6 +34,8 @@ public class VOExplosionEffect extends Effect{
     public float sparkLife = 0f, sparkStroke = 0f, sparkRad = 0f, sparkLen = 0f;
     /** Explosion value. If not 0, overrides itself in auto-setup. If negative, effect will be inverted. */
     public float smokeLife = 0f, smokeSize = 0f, smokeRad = 0f;
+    /** Whether to draw light on smoke particles. Set to 0 for {@code false} or >0 for {@code true}. */
+    public int drawSmokeLight = -1;
     /** Amount of particles. Set to 0 to disable particle. */
     public int smokes = -1, sparks = -1;
 
@@ -128,6 +130,7 @@ public class VOExplosionEffect extends Effect{
             if(smokeColor == null) smokeColor = new Color[]{Pal.sap.cpy().a(0.5f), Pal.sap.cpy().a(0.3f)};
         }
         if(lightColor == null) lightColor = sparkColor;
+        if(drawSmokeLight < 0 && sap) drawSmokeLight = 1;
 
         if(power < 0) power *= -1; if(rad < 0) rad *= -1;
 //UnitTypes.zenith.weapons.get(0).bullet.despawnHit = false; UnitTypes.zenith.weapons.get(1).bullet.despawnHit = false;        
@@ -218,7 +221,7 @@ public class VOExplosionEffect extends Effect{
             e.scaled(sparkLife, i -> {
                 color(Tmp.c2.lerp(sparkColor, i.fin()));
                 stroke(sparkStroke * (sparkStroke > 0 ? i.fout() : i.fin()));
-                randLenVectors(e.id + 1, sparks, sparkRad * (sparkRad > 0 ? i.finpow() : i.foutpow()), (x, y) -> {
+                randLenVectors(e.id, sparks, sparkRad * (sparkRad > 0 ? i.finpow() : i.foutpow()), (x, y) -> {
                     lineAngle(e.x + x, e.y + y, Mathf.angle(x, y), sparkLen * (sparkLen > 0 ? i.fout() : i.fout()));
                 });
             });
@@ -226,16 +229,20 @@ public class VOExplosionEffect extends Effect{
         if(smokes > 0 && sap){
             e.scaled(smokeLife * 0.8f, i -> {
                 color(Tmp.c3.lerp(smokeColor, i.fin()));
-                randLenVectors(e.id, smokes, smokeRad * (smokeRad > 0 ? i.finpow() : i.foutpow()), (x, y) -> {
-                    Fill.circle(e.x + x, e.y + y, (smokeSize * (smokeSize > 0 ? i.fout() : i.fin())) / 2f);
+                randLenVectors(e.id + 2, smokes, smokeRad * (smokeRad > 0 ? i.finpow() : i.foutpow()), (x, y) -> {
+                    float r = (smokeSize * (smokeSize > 0 ? i.fout() : i.fin())) / 2f;
+                    Fill.circle(e.x + x, e.y + y, r);
+                    if(drawSmokeLight > 0) Drawf.light(e.x, e.y, r, tmpC5.lerp(smokeColor, e.fin()), 0.8f * e.fout());
                 });
             });
         }
         if(smokes > 0){
             e.scaled(smokeLife, i -> {
                 color(Tmp.c4.lerp(smokeColor, i.fin()));
-                randLenVectors(e.id, smokes, smokeRad * (smokeRad > 0 ? i.finpow() : i.foutpow()), (x, y) -> {
-                    Fill.circle(e.x + x, e.y + y, smokeSize * (smokeSize > 0 ? i.fout() : i.fin()));
+                randLenVectors(e.id + 1, smokes, smokeRad * (smokeRad > 0 ? i.finpow() : i.foutpow()), (x, y) -> {
+                    float r = smokeSize * (smokeSize > 0 ? i.fout() : i.fin());
+                    Fill.circle(e.x + x, e.y + y, r);
+                    if(drawSmokeLight > 0) Drawf.light(e.x, e.y, r, tmpC5.lerp(smokeColor, e.fin()), 0.8f * e.fout());
                 });
             });
         }
