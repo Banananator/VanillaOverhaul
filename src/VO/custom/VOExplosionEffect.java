@@ -11,6 +11,8 @@ import static arc.graphics.g2d.Draw.*;
 import static arc.graphics.g2d.Lines.*;
 import static arc.math.Angles.*;
 
+import arc.Core;
+
 public class VOExplosionEffect extends Effect{
     /** Explosion mode. Automaticly sets up colors and affects values of auto-setup. */
     public boolean flak = false, blast = true, pyra = false, plast = false, surge = false;
@@ -90,7 +92,7 @@ public class VOExplosionEffect extends Effect{
 
     @Override
     public void init(){
-        clip = maxx(clip, waveRad + waveStroke, sparkRad, smokeRad);
+        clip = maxx(clip, waveRad + waveStroke, sparkRad + sparkLen, smokeRad + smokeSize);
 
         if(type == "flak"){
             flak = true;
@@ -193,7 +195,7 @@ public class VOExplosionEffect extends Effect{
             if(smokes < 0) smokes = round((4f + (power > 0 ? power / 40f : r / 15f)) * m);
             if(smokeRad == 0) smokeRad = r >= 15f ? r - 5f : r >= 10f ? r - 3f : Math.max(r - 1f, 2f);
             m = blast ? 1.25f : pyra ? 1.5f : 1f;
-            if(smokeSize == 0) smokeSize = ((power > 0 ? (r / 18f) + (power / 7f) : r / 10f)) * m;
+            if(smokeSize == 0) smokeSize = ((power > 0 ? (r / 36f) + (power / 14f) : r / 20f)) * m;
         }
 
         if(lifetime == 0) lifetime = 30f;
@@ -249,8 +251,9 @@ public class VOExplosionEffect extends Effect{
             e.scaled(smokeLife * 0.8f, i -> {
                 color(Tmp.c3.lerp(smokeColor, i.fin(interpColor ? smokeRadInterp : Interp.linear)));
                 randLenVectors(e.id + 2, smokes, smokeRad * (smokeRad > 0 ? i.fin(smokeRadInterp) : i.fout(smokeRadInterp)), (x, y) -> {
-                    float r = (smokeSize * (smokeSize > 0 ? i.fout(smokeSizeInterp) : i.fin(smokeSizeInterp))) / 2f;
-                    Fill.circle(e.x + x, e.y + y, r);
+                    float r = smokeSize * (smokeSize > 0 ? i.fout(smokeSizeInterp) : i.fin(smokeSizeInterp));
+                    //Fill.circle(e.x + x, e.y + y, r);
+                    Draw.rect(Core.atlas.find("circle"), e.x, e.y, r, r, 0f);
                     if(drawSmokeLight > 0) Drawf.light(e.x, e.y, r * smokeLightScl, tmpC5.lerp(smokeColor, e.fin()), smokeLightOpacity * Draw.getColor().a);
                 });
             });
@@ -259,8 +262,9 @@ public class VOExplosionEffect extends Effect{
             e.scaled(smokeLife, i -> {
                 color(Tmp.c4.lerp(smokeColor, i.fin(interpColor ? smokeRadInterp : Interp.linear)));
                 randLenVectors(e.id + 1, smokes, smokeRad * (smokeRad > 0 ? i.fin(smokeRadInterp) : i.fout(smokeRadInterp)), (x, y) -> {
-                    float r = smokeSize * (smokeSize > 0 ? i.fout(smokeSizeInterp) : i.fin(smokeSizeInterp));
-                    Fill.circle(e.x + x, e.y + y, r);
+                    float r = (smokeSize * (smokeSize > 0 ? i.fout(smokeSizeInterp) : i.fin(smokeSizeInterp))) * 2f;
+                    //Fill.circle(e.x + x, e.y + y, r);
+                    Draw.rect(Core.atlas.find("circle"), e.x, e.y, r, r, 0f);
                     if(drawSmokeLight > 0) Drawf.light(e.x, e.y, r * smokeLightScl, tmpC5.lerp(smokeColor, e.fin()), smokeLightOpacity * Draw.getColor().a);
                 });
             });
