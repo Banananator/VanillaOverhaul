@@ -68,7 +68,7 @@ public class VOBlockChanges {
                 ammoMultiplier = 5;
                 width = 7;
                 height = 9;
-                homingPower = 0.1f;
+                homingPower = 0.1f;;
                 reloadMultiplier = 1.5f;
                 hitEffect = new MultiEffect(Fx.shootSmall, Fx.hitBulletSmall);
             }});
