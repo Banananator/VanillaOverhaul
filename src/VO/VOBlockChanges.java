@@ -1010,7 +1010,7 @@ public class VOBlockChanges {
                 ammoMultiplier = 2f;
                 pierce = true;
                 status = StatusEffects.sapped;
-                statusDuration = 60f;
+                statusDuration = 90f;
                 particleAmount = 20;
                 particleSizeScl = 1.6f;
                 particleSpread = 10f;

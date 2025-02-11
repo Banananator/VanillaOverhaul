@@ -165,11 +165,11 @@ public class VOExplosionEffect extends Effect{
 
             if(power > 0 && sap){
                 if(sparkLen == 0) sparkLen = 1f + (power / 7f);
-                if(sparkStroke == 0) sparkStroke = 1f + (power / 50f);
+                if(sparkStroke == 0) sparkStroke = 0.5f + (power / 75f);
 
                 if(smokeLife == 0) smokeLife = (r * 1.4f) + (power / 5f);
                 if(smokeRad == 0) smokeRad = Math.max(r - (-4f + r / 5f), 3f);
-                if(smokeSize == 0) smokeSize = power / 5f;
+                if(smokeSize == 0) smokeSize = power / 8f;
             }
 
             m = flak || plast || sap ? 5f : surge ? 4f : 3f;
@@ -181,7 +181,7 @@ public class VOExplosionEffect extends Effect{
 
             m = flak ? 1f : plast ? 2f : 0f;
             if(waveRad == 0) waveRad = r + 2 + m;
-            m = blast || pyra ? 1f : 0f;
+            m = blast || pyra ? 1f : sap ? -1f : 0f;
             if(waveStroke == 0) waveStroke = 2 + (power > 0 ? (power / 35f) : (r / 20f)) + m;
 
             m = flak ? 0.85f : plast ? 2f / 3f : surge ? 1.5f : 1f;
