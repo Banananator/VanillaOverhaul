@@ -198,29 +198,10 @@ public class VOUnitChanges {
         UnitTypes.atrax.weapons.get(0).bullet.trailLength = 4;
         UnitTypes.arkyid.weapons.get(3).bullet.hitEffect = new VOExplosionEffect(70, 65, "sap");
         UnitTypes.arkyid.weapons.get(3).bullet.despawnEffect = Fx.none;
-        UnitTypes.toxopid.weapons.get(1).bullet.hitEffect = sapExplosionCloud;/*new MultiEffect(Fx.sapExplosion, new ParticleEffect(){{
-            lifetime = 120;
-            particles = 12;
-            length = 60;
-            sizeFrom = 7;
-            sizeTo = 0;
-            colorFrom = Pal.sap.cpy().a(0.6f);
-            colorTo = Pal.sap.cpy().a(0.3f);
-            interp = Interp.pow5Out;
-            sizeInterp = Interp.pow3In;
-        }},
-        new ParticleEffect(){{
-            lifetime = 150;
-            particles = 12;
-            length = 60;
-            sizeFrom = 12;
-            sizeTo = 0;
-            colorFrom = Pal.sap.cpy().a(0.6f);
-            colorTo = Pal.sap.cpy().a(0.3f);
-            interp = Interp.pow5Out;
-            sizeInterp = Interp.pow3In;
-        }});*/ UnitTypes.toxopid.weapons.get(1).bullet.despawnEffect = Fx.none;
-        UnitTypes.toxopid.weapons.get(1).bullet.fragBullet.hitEffect = sapExplosionCloud; UnitTypes.toxopid.weapons.get(1).bullet.fragBullet.despawnEffect = Fx.none;
+        UnitTypes.toxopid.weapons.get(1).bullet.hitEffect = new VOExplosionEffect(80, 75, "sap");
+        UnitTypes.toxopid.weapons.get(1).bullet.despawnEffect = Fx.none;
+        UnitTypes.toxopid.weapons.get(1).bullet.fragBullet.hitEffect = new VOExplosionEffect(70, 40, "sap");
+        UnitTypes.toxopid.weapons.get(1).bullet.fragBullet.despawnEffect = Fx.none;
 
         UnitTypes.flare.weapons.get(0).bullet.hitEffect = new MultiEffect(Fx.shootSmall, Fx.hitBulletSmall);
         UnitTypes.horizon.weapons.get(0).bullet.hitEffect = new Effect(30, e -> {
