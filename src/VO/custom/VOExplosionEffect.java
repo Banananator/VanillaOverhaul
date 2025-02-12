@@ -169,7 +169,7 @@ public class VOExplosionEffect extends Effect{
 
                 if(smokeLife == 0) smokeLife = (r * 1.4f) + (power / 5f);
                 if(smokeRad == 0) smokeRad = Math.max(r - (-4f + r / 4f), 3f);
-                if(smokeSize == 0) smokeSize = Math.max(Mathf.pow(power, 0.65f) - 1.5f, 5f);
+                if(smokeSize == 0) smokeSize = Math.max(Mathf.pow(power, 0.65f) - Mathf.pow(power, 0.25f), 5f);
             }
 
             m = flak || plast || sap ? 5f : surge ? 4f : 3f;
