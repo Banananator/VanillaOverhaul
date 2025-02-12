@@ -90,28 +90,12 @@ public class VOUnitChanges {
                 colors = new Color[]{Color.white, Color.valueOf("fff4ac"), Pal.lightFlame, Pal.darkFlame, Color.gray};
             }};
         }});
-        UnitTypes.fortress.weapons.get(0).bullet.hitEffect = new VOExplosionEffect(35f, 80f, "blast");/*new Effect(30, e -> {
-            color(Pal.missileYellow);
-            e.scaled(6, i -> {
-                stroke((wstroke(80)) * i.fout());
-                Lines.circle(e.x, e.y, 2f + i.fin() * 35f);
-            });
-            color(Color.gray);
-            randLenVectors(e.id, 6, 2f + 30f * e.finpow(), (x, y) -> {
-                Fill.circle(e.x + x, e.y + y, e.fout() * 4.5f + 0.5f);
-            });
-            color(Pal.missileYellowBack);
-            e.scaled(20, i -> {stroke(i.fout() * 1.5f);
-                randLenVectors(e.id + 1, 6, 2f + 39f * i.finpow(), (x, y) -> {
-                    lineAngle(e.x + x, e.y + y, Mathf.angle(x, y), 1f + i.fout() * 3.5f);
-                });
-            });
-            Drawf.light(e.x, e.y, 70f, Pal.missileYellowBack, 0.8f * e.fout());
-        });*/ UnitTypes.fortress.weapons.get(0).bullet.despawnEffect = Fx.none;
+        UnitTypes.fortress.weapons.get(0).bullet.hitEffect = new VOExplosionEffect(35f, 80f, "blast");
+        UnitTypes.fortress.weapons.get(0).bullet.despawnEffect = Fx.none;
         UnitTypes.scepter.weapons.get(0).bullet.hitEffect = new MultiEffect(Fx.shootBig, Fx.hitBulletSmall);
         UnitTypes.scepter.weapons.get(1).bullet.hitEffect = new MultiEffect(Fx.shootSmall, Fx.hitBulletSmall);
         UnitTypes.scepter.weapons.get(2).bullet.hitEffect = new MultiEffect(Fx.shootSmall, Fx.hitBulletSmall);
-        UnitTypes.reign.weapons.get(0).bullet.hitEffect = new Effect(30, e -> {
+        UnitTypes.reign.weapons.get(0).bullet.hitEffect = new VOExplosionEffect(13f, 18f, "blast");/*new Effect(30, e -> {
             color(Pal.missileYellow);
             e.scaled(6, i -> {
                 stroke((wstroke(18)) * i.fout());
@@ -128,8 +112,9 @@ public class VOUnitChanges {
                 });
             });
             Drawf.light(e.x, e.y, 26f, Pal.missileYellowBack, 0.8f * e.fout());
-        }); UnitTypes.reign.weapons.get(0).bullet.despawnEffect = Fx.none;
-        UnitTypes.reign.weapons.get(0).bullet.fragBullet.hitEffect = new Effect(30, e -> {
+        });*/
+        UnitTypes.reign.weapons.get(0).bullet.despawnEffect = Fx.none;
+        UnitTypes.reign.weapons.get(0).bullet.fragBullet.hitEffect = new VOExplosionEffect(10f, 15f, "flak");/*new Effect(30, e -> {
             color(Pal.bulletYellow);
             e.scaled(6, i -> {
                 stroke((wstroke(15)) * i.fout());
@@ -146,7 +131,8 @@ public class VOUnitChanges {
                 });
             });
             Drawf.light(e.x, e.y, 20f, Pal.lighterOrange, 0.8f * e.fout());
-        }); UnitTypes.reign.weapons.get(0).bullet.fragBullet.despawnEffect = Fx.none;
+        });*/
+        UnitTypes.reign.weapons.get(0).bullet.fragBullet.despawnEffect = Fx.none;
 
         UnitTypes.nova.weapons.get(0).bullet.despawnHit = true;
         UnitTypes.nova.weapons.get(0).bullet.shootEffect = Fx.shootHeal;
