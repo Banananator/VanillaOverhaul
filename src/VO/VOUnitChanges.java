@@ -36,28 +36,6 @@ public class VOUnitChanges {
             new WrapEffect(Fx.shootSmallColor, Pal.heal, 270),
             Fx.hitLaser
         );
-        Effect sapExplosionCloud = new MultiEffect(Fx.sapExplosion, new ParticleEffect(){{
-            lifetime = 90;
-            particles = 7;
-            length = 60;
-            sizeFrom = 7;
-            sizeTo = 0;
-            colorFrom = Pal.sap.cpy().a(0.5f);
-            colorTo = Pal.sap.cpy().a(0.3f);
-            interp = Interp.pow5Out;
-            sizeInterp = Interp.pow3In;
-        }},
-        new ParticleEffect(){{
-            lifetime = 110;
-            particles = 7;
-            length = 60;
-            sizeFrom = 12;
-            sizeTo = 0;
-            colorFrom = Pal.sap.cpy().a(0.5f);
-            colorTo = Pal.sap.cpy().a(0.3f);
-            interp = Interp.pow5Out;
-            sizeInterp = Interp.pow3In;
-        }});
 
         UnitTypes.alpha.trailLength = 40;
         UnitTypes.beta.trailLength = 50;
@@ -112,7 +90,7 @@ public class VOUnitChanges {
                 colors = new Color[]{Color.white, Color.valueOf("fff4ac"), Pal.lightFlame, Pal.darkFlame, Color.gray};
             }};
         }});
-        UnitTypes.fortress.weapons.get(0).bullet.hitEffect = new Effect(30, e -> {
+        UnitTypes.fortress.weapons.get(0).bullet.hitEffect = new VOExplosionEffect(35f, 80f, "blast");/*new Effect(30, e -> {
             color(Pal.missileYellow);
             e.scaled(6, i -> {
                 stroke((wstroke(80)) * i.fout());
@@ -129,7 +107,7 @@ public class VOUnitChanges {
                 });
             });
             Drawf.light(e.x, e.y, 70f, Pal.missileYellowBack, 0.8f * e.fout());
-        }); UnitTypes.fortress.weapons.get(0).bullet.despawnEffect = Fx.none;
+        });*/ UnitTypes.fortress.weapons.get(0).bullet.despawnEffect = Fx.none;
         UnitTypes.scepter.weapons.get(0).bullet.hitEffect = new MultiEffect(Fx.shootBig, Fx.hitBulletSmall);
         UnitTypes.scepter.weapons.get(1).bullet.hitEffect = new MultiEffect(Fx.shootSmall, Fx.hitBulletSmall);
         UnitTypes.scepter.weapons.get(2).bullet.hitEffect = new MultiEffect(Fx.shootSmall, Fx.hitBulletSmall);
