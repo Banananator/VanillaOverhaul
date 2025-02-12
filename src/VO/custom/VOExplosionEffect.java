@@ -198,7 +198,7 @@ public class VOExplosionEffect extends Effect{
             if(smokes < 0) smokes = round((4f + (power > 0 ? power / 40f : r / 15f)) * m);
             if(smokeRad == 0) smokeRad = r >= 15f ? r - 5f : r >= 10f ? r - 3f : Math.max(r - 1f, 2f);
             m = blast ? 1.25f : pyra ? 1.5f : 1f;
-            if(smokeSize == 0) smokeSize = (Mathf.pow(power > 0 ? (r / 10f) + (power / 6f) : r / 5f, 0.65f)) * m;
+            if(smokeSize == 0) smokeSize = Mathf.pow((power > 0 ? (r / 10f) + (power / 5f) : r / 5f) * 1.25f, 0.65f) * m;
         }
 
         if(lifetime == 0) lifetime = 30f;
