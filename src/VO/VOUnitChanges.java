@@ -117,36 +117,26 @@ public class VOUnitChanges {
         UnitTypes.toxopid.weapons.get(1).bullet.fragBullet.despawnEffect = Fx.none;
 
         UnitTypes.flare.weapons.get(0).bullet.hitEffect = new MultiEffect(Fx.shootSmall, Fx.hitBulletSmall);
-        UnitTypes.horizon.weapons.get(0).bullet.hitEffect = new VOExplosionEffect(25, 27, "flak");UnitTypes.horizon.weapons.get(0).bullet.despawnEffect = Fx.none;
+        UnitTypes.horizon.weapons.get(0).bullet.hitEffect = new VOExplosionEffect(25, 27, "flak");
+        UnitTypes.horizon.weapons.get(0).bullet.despawnEffect = Fx.none;
         UnitTypes.zenith.weapons.get(0).shoot = new ShootAlternate(2){{shots = 2;}};
         UnitTypes.zenith.weapons.get(0).bullet.trailWidth = 2.4f;
         UnitTypes.zenith.weapons.get(0).bullet.trailLength = 3;
         UnitTypes.zenith.weapons.get(0).bullet.hitEffect = new VOExplosionEffect(25, 15, "blast");
         UnitTypes.zenith.weapons.get(0).bullet.despawnEffect = Fx.none;
-        UnitTypes.antumbra.weapons.get(2).bullet.hitEffect = new MultiEffect(Fx.shootBig, Fx.hitBulletSmall);
         UnitTypes.antumbra.weapons.get(0).bullet.trailWidth = 2.4f;
         UnitTypes.antumbra.weapons.get(1).bullet.trailWidth = 2.4f;
         UnitTypes.antumbra.weapons.get(0).bullet.trailLength = 3;
         UnitTypes.antumbra.weapons.get(1).bullet.trailLength = 3;
-        UnitTypes.antumbra.weapons.get(0).bullet.hitEffect = UnitTypes.antumbra.weapons.get(1).bullet.hitEffect = new Effect(30, e -> {
-            color(Pal.missileYellow);
-            e.scaled(6, i -> {
-                stroke((wstroke(37)) * i.fout());
-                Lines.circle(e.x, e.y, 2f + i.fin() * 20f);
-            });
-            color(Color.gray);
-            randLenVectors(e.id, 5, 2f + 15f * e.finpow(), (x, y) -> {
-                Fill.circle(e.x + x, e.y + y, e.fout() * 3f + 0.5f);
-            });
-            color(Pal.missileYellowBack);
-            e.scaled(20, i -> {stroke(i.fout());
-                randLenVectors(e.id + 1, 6, 2f + 24f * i.finpow(), (x, y) -> {
-                    lineAngle(e.x + x, e.y + y, Mathf.angle(x, y), 1f + i.fout() * 3f);
-                });
-            });
-            Drawf.light(e.x, e.y, 40f, Pal.missileYellowBack, 0.8f * e.fout());
-        }); UnitTypes.antumbra.weapons.get(0).bullet.despawnEffect = UnitTypes.antumbra.weapons.get(1).bullet.despawnEffect = Fx.none;
-        UnitTypes.eclipse.weapons.get(1).bullet.despawnEffect = UnitTypes.eclipse.weapons.get(2).bullet.despawnEffect = Fx.none;
+        UnitTypes.antumbra.weapons.get(0).bullet.hitEffect = new VOExplosionEffect(20, 37, "blast");
+        UnitTypes.antumbra.weapons.get(1).bullet.hitEffect = new VOExplosionEffect(20, 37, "blast");
+        UnitTypes.antumbra.weapons.get(0).bullet.despawnEffect = Fx.none;
+        UnitTypes.antumbra.weapons.get(1).bullet.despawnEffect = Fx.none;
+        UnitTypes.antumbra.weapons.get(2).bullet.hitEffect = new MultiEffect(Fx.shootBig, Fx.hitBulletSmall);
+        UnitTypes.eclipse.weapons.get(1).bullet.hitEffect = new VOExplosionEffect(25, 65, "flak");
+        UnitTypes.eclipse.weapons.get(2).bullet.hitEffect = new VOExplosionEffect(25, 65, "flak");
+        UnitTypes.eclipse.weapons.get(1).bullet.despawnEffect = Fx.none;
+        UnitTypes.eclipse.weapons.get(2).bullet.despawnEffect = Fx.none;
 
         UnitTypes.poly.weapons.get(0).bullet.despawnHit = true;
         UnitTypes.poly.weapons.get(0).bullet.hitEffect = hitLaserBoltGreen;
