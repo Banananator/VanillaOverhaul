@@ -1,8 +1,6 @@
 package VO;
 
 import arc.graphics.Color;
-import arc.graphics.g2d.Fill;
-import arc.graphics.g2d.Lines;
 import arc.math.*;
 import mindustry.content.*;
 import mindustry.entities.Effect;
@@ -10,7 +8,6 @@ import mindustry.entities.bullet.*;
 import mindustry.entities.effect.*;
 import mindustry.entities.pattern.*;
 import mindustry.gen.Sounds;
-import mindustry.graphics.Drawf;
 import mindustry.graphics.Pal;
 import mindustry.type.UnitType;
 import mindustry.type.Weapon;
@@ -23,10 +20,6 @@ import static arc.math.Angles.*;
 import VO.custom.*;
 
 public class VOUnitChanges {
-
-    private static float wstroke(float val){
-        return 2 + (val / 50);
-    }
 
     public static void loadDefault(){
         Effect hitLaserBoltGreen = new MultiEffect(
@@ -167,64 +160,16 @@ public class VOUnitChanges {
         UnitTypes.bryde.weapons.get(1).bullet.trailWidth = 2.4f;
         UnitTypes.bryde.weapons.get(1).bullet.trailLength =  4;
         UnitTypes.bryde.weapons.get(1).bullet.trailColor = Pal.bulletYellowBack;
-        UnitTypes.bryde.weapons.get(0).bullet.hitEffect = new Effect(30, e -> {
-            color(Pal.missileYellow);
-            e.scaled(7, i -> {
-                stroke((wstroke(70)) * i.fout());
-                Lines.circle(e.x, e.y, 2f + i.fin() * 40f);
-            });
-            color(Color.gray);
-            randLenVectors(e.id, 6, 2f + 35f * e.finpow(), (x, y) -> {
-                Fill.circle(e.x + x, e.y + y, e.fout() * 4.5f + 0.5f);
-            });
-            color(Pal.missileYellowBack);
-            e.scaled(20, i -> {stroke(i.fout() * 1.5f);
-                randLenVectors(e.id + 1, 7, 2f + 44f * i.finpow(), (x, y) -> {
-                    lineAngle(e.x + x, e.y + y, Mathf.angle(x, y), 1f + i.fout() * 3.5f);
-                });
-            });
-            Drawf.light(e.x, e.y, 80f, Pal.missileYellowBack, 0.8f * e.fout());
-        }); UnitTypes.bryde.weapons.get(0).bullet.despawnEffect = Fx.none;
-        UnitTypes.bryde.weapons.get(1).bullet.hitEffect = new Effect(30, e -> {
-            color(Pal.missileYellow);
-            e.scaled(6, i -> {
-                stroke((wstroke(10)) * i.fout());
-                Lines.circle(e.x, e.y, 2f + i.fin() * 25f);
-            });
-            color(Color.gray);
-            randLenVectors(e.id, 5, 2f + 20f * e.finpow(), (x, y) -> {
-                Fill.circle(e.x + x, e.y + y, e.fout() * 3f + 0.5f);
-            });
-            color(Pal.missileYellowBack);
-            e.scaled(20, i -> {stroke(i.fout());
-                randLenVectors(e.id + 1, 6, 2f + 29f * i.finpow(), (x, y) -> {
-                    lineAngle(e.x + x, e.y + y, Mathf.angle(x, y), 1f + i.fout() * 3f);
-                });
-            });
-            Drawf.light(e.x, e.y, 50f, Pal.missileYellowBack, 0.8f * e.fout());
-        }); UnitTypes.bryde.weapons.get(1).bullet.despawnEffect = Fx.none;
+        UnitTypes.bryde.weapons.get(0).bullet.hitEffect = new VOExplosionEffect(40, 70, "blast");
+        UnitTypes.bryde.weapons.get(0).bullet.despawnEffect = Fx.none;
+        UnitTypes.bryde.weapons.get(1).bullet.hitEffect = new VOExplosionEffect(25, 10, "blast");
+        UnitTypes.bryde.weapons.get(1).bullet.despawnEffect = Fx.none;
         UnitTypes.sei.weapons.get(1).bullet.hitEffect = new MultiEffect(Fx.shootBig, Fx.hitBulletSmall);
         UnitTypes.sei.weapons.get(0).bullet.trailWidth = 2.4f;
         UnitTypes.sei.weapons.get(0).bullet.trailLength = 3;
         UnitTypes.sei.weapons.get(0).bullet.trailColor = Pal.bulletYellowBack;
-        UnitTypes.sei.weapons.get(0).bullet.hitEffect = new Effect(30, e -> {
-            color(Pal.missileYellow);
-            e.scaled(6, i -> {
-                stroke((wstroke(45)) * i.fout());
-                Lines.circle(e.x, e.y, 2f + i.fin() * 35f);
-            });
-            color(Color.gray);
-            randLenVectors(e.id, 6, 2f + 30f * e.finpow(), (x, y) -> {
-                Fill.circle(e.x + x, e.y + y, e.fout() * 4f + 0.5f);
-            });
-            color(Pal.missileYellowBack);
-            e.scaled(20, i -> {stroke(i.fout());
-                randLenVectors(e.id + 1, 6, 2f + 39f * i.finpow(), (x, y) -> {
-                    lineAngle(e.x + x, e.y + y, Mathf.angle(x, y), 1f + i.fout() * 3.5f);
-                });
-            });
-            Drawf.light(e.x, e.y, 70f, Pal.missileYellowBack, 0.8f * e.fout());
-        }); UnitTypes.sei.weapons.get(0).bullet.despawnEffect = Fx.none;
+        UnitTypes.sei.weapons.get(0).bullet.hitEffect = new VOExplosionEffect(35, 45, "blast");
+        UnitTypes.sei.weapons.get(0).bullet.despawnEffect = Fx.none;
         UnitTypes.omura.weapons.get(0).bullet = new RailBulletType(){{
             length = 500;
             damage = 1250;
