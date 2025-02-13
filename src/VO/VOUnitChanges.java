@@ -90,14 +90,14 @@ public class VOUnitChanges {
                 colors = new Color[]{Color.white, Color.valueOf("fff4ac"), Pal.lightFlame, Pal.darkFlame, Color.gray};
             }};
         }});
-        UnitTypes.fortress.weapons.get(0).bullet.hitEffect = new VOExplosionEffect(35f, 80f, "blast");
+        UnitTypes.fortress.weapons.get(0).bullet.hitEffect = new VOExplosionEffect(35, 80, "blast");
         UnitTypes.fortress.weapons.get(0).bullet.despawnEffect = Fx.none;
         UnitTypes.scepter.weapons.get(0).bullet.hitEffect = new MultiEffect(Fx.shootBig, Fx.hitBulletSmall);
         UnitTypes.scepter.weapons.get(1).bullet.hitEffect = new MultiEffect(Fx.shootSmall, Fx.hitBulletSmall);
         UnitTypes.scepter.weapons.get(2).bullet.hitEffect = new MultiEffect(Fx.shootSmall, Fx.hitBulletSmall);
-        UnitTypes.reign.weapons.get(0).bullet.hitEffect = new VOExplosionEffect(13f, 18f, "blast");
+        UnitTypes.reign.weapons.get(0).bullet.hitEffect = new VOExplosionEffect(13, 18, "blast");
         UnitTypes.reign.weapons.get(0).bullet.despawnEffect = Fx.none;
-        UnitTypes.reign.weapons.get(0).bullet.fragBullet.hitEffect = new VOExplosionEffect(10f, 15f, "flak");
+        UnitTypes.reign.weapons.get(0).bullet.fragBullet.hitEffect = new VOExplosionEffect(10, 15, "flak");
         UnitTypes.reign.weapons.get(0).bullet.fragBullet.despawnEffect = Fx.none;
 
         UnitTypes.nova.weapons.get(0).bullet.despawnHit = true;
@@ -105,24 +105,7 @@ public class VOUnitChanges {
         UnitTypes.nova.weapons.get(0).bullet.hitEffect = hitLaserBoltGreen;
         UnitTypes.nova.weapons.get(0).bullet.despawnEffect = Fx.none;
 
-        UnitTypes.crawler.deathExplosionEffect = new VOExplosionEffect(55f, 90f, "blast");/*new Effect(30, e -> {
-            color(Pal.missileYellow);
-            e.scaled(6, i -> {
-                stroke((wstroke(90)) * i.fout());
-                Lines.circle(e.x, e.y, 2f + i.fin() * 55f);
-            });
-            color(Color.gray);
-            randLenVectors(e.id, 8, 2f + 40f * e.finpow(), (x, y) -> {
-                Fill.circle(e.x + x, e.y + y, e.fout() * 6f + 0.5f);
-            });
-            color(Pal.missileYellowBack);
-            e.scaled(20, i -> {stroke(i.fout() * 1.75f);
-                randLenVectors(e.id + 1, 7, 2f + 59f * i.finpow(), (x, y) -> {
-                    lineAngle(e.x + x, e.y + y, Mathf.angle(x, y), 1f + i.fout() * 4f);
-                });
-            });
-            Drawf.light(e.x, e.y, 110f, Pal.missileYellowBack, 0.8f * e.fout());
-        });*/
+        UnitTypes.crawler.deathExplosionEffect = new VOExplosionEffect(55, 90, "flak");
         UnitTypes.atrax.weapons.get(0).shootY = 5.5f;
         UnitTypes.atrax.weapons.get(0).bullet.trailWidth = 3.1f;
         UnitTypes.atrax.weapons.get(0).bullet.trailLength = 4;
@@ -134,24 +117,7 @@ public class VOUnitChanges {
         UnitTypes.toxopid.weapons.get(1).bullet.fragBullet.despawnEffect = Fx.none;
 
         UnitTypes.flare.weapons.get(0).bullet.hitEffect = new MultiEffect(Fx.shootSmall, Fx.hitBulletSmall);
-        UnitTypes.horizon.weapons.get(0).bullet.hitEffect = new Effect(30, e -> {
-            color(Pal.missileYellow);
-            e.scaled(6, i -> {
-                stroke((wstroke(27)) * i.fout());
-                Lines.circle(e.x, e.y, 2f + i.fin() * 25f);
-            });
-            color(Color.gray);
-            randLenVectors(e.id, 5, 2f + 20f * e.finpow(), (x, y) -> {
-                Fill.circle(e.x + x, e.y + y, e.fout() * 3f + 0.5f);
-            });
-            color(Pal.missileYellowBack);
-            e.scaled(20, i -> {stroke(i.fout());
-                randLenVectors(e.id + 1, 6, 2f + 29f * i.finpow(), (x, y) -> {
-                    lineAngle(e.x + x, e.y + y, Mathf.angle(x, y), 1f + i.fout() * 3f);
-                });
-            });
-            Drawf.light(e.x, e.y, 50f, Pal.missileYellowBack, 0.8f * e.fout());
-        }); UnitTypes.horizon.weapons.get(0).bullet.despawnEffect = Fx.none;
+        UnitTypes.horizon.weapons.get(0).bullet.hitEffect = new VOExplosionEffect(25, 27, "flak");UnitTypes.horizon.weapons.get(0).bullet.despawnEffect = Fx.none;
         UnitTypes.zenith.weapons.get(0).shoot = new ShootAlternate(2){{shots = 2;}};
         UnitTypes.zenith.weapons.get(0).bullet.trailWidth = 2.4f;
         UnitTypes.zenith.weapons.get(0).bullet.trailLength = 3;
