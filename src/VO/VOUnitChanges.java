@@ -158,61 +158,12 @@ public class VOUnitChanges {
         UnitTypes.risso.weapons.get(1).bullet.trailWidth = 2.4f;
         UnitTypes.risso.weapons.get(1).bullet.trailLength = 4;
         UnitTypes.risso.weapons.get(1).bullet.trailColor = Pal.bulletYellowBack;
-        UnitTypes.risso.weapons.get(1).bullet.hitEffect = new Effect(30, e -> {
-            color(Pal.missileYellow);
-            e.scaled(6, i -> {
-                stroke((wstroke(10)) * i.fout());
-                Lines.circle(e.x, e.y, 2f + i.fin() * 25f);
-            });
-            color(Color.gray);
-            randLenVectors(e.id, 5, 2f + 20f * e.finpow(), (x, y) -> {
-                Fill.circle(e.x + x, e.y + y, e.fout() * 3f + 0.5f);
-            });
-            color(Pal.missileYellowBack);
-            e.scaled(20, i -> {stroke(i.fout());
-                randLenVectors(e.id + 1, 6, 2f + 29f * i.finpow(), (x, y) -> {
-                    lineAngle(e.x + x, e.y + y, Mathf.angle(x, y), 1f + i.fout() * 3f);
-                });
-            });
-            Drawf.light(e.x, e.y, 50f, Pal.missileYellowBack, 0.8f * e.fout());
-        }); UnitTypes.risso.weapons.get(1).bullet.despawnEffect = Fx.none;
-        UnitTypes.minke.weapons.get(0).bullet.hitEffect = new Effect(30, e -> {
-            color(Pal.bulletYellow);
-            e.scaled(6, i -> {
-                stroke((wstroke(40.5f)) * i.fout());
-                Lines.circle(e.x, e.y, 2f + i.fin() * 15f);
-            });
-            color(Color.gray);
-            randLenVectors(e.id, 5, 2f + 12f * e.finpow(), (x, y) -> {
-                Fill.circle(e.x + x, e.y + y, e.fout() * 3f + 0.5f);
-            });
-            color(Pal.lighterOrange);
-            e.scaled(20, i -> {stroke(i.fout());
-                randLenVectors(e.id + 1, 6, 2f + 19f * i.finpow(), (x, y) -> {
-                    lineAngle(e.x + x, e.y + y, Mathf.angle(x, y), 1f + i.fout() * 3f);
-                });
-            });
-            Drawf.light(e.x, e.y, 30f, Pal.lighterOrange, 0.8f * e.fout());
-        }); UnitTypes.minke.weapons.get(0).bullet.despawnEffect = Fx.none;
-        float splash1 = 30f * 0.75f;
-        UnitTypes.minke.weapons.get(1).bullet.hitEffect = new Effect(30, e -> {
-            color(Pal.missileYellow);
-            e.scaled(6, i -> {
-                stroke((wstroke(40)) * i.fout());
-                Lines.circle(e.x, e.y, 2f + i.fin() * splash1);
-            });
-            color(Color.gray);
-            randLenVectors(e.id, 5, 2f + (splash1 - 5f) * e.finpow(), (x, y) -> {
-                Fill.circle(e.x + x, e.y + y, e.fout() * 3f + 0.5f);
-            });
-            color(Pal.missileYellowBack);
-            e.scaled(20, i -> {stroke(i.fout());
-                randLenVectors(e.id + 1, 6, 2f + (splash1 + 4f) * i.finpow(), (x, y) -> {
-                    lineAngle(e.x + x, e.y + y, Mathf.angle(x, y), 1f + i.fout() * 3f);
-                });
-            });
-            Drawf.light(e.x, e.y, splash1 * 2, Pal.missileYellowBack, 0.8f * e.fout());
-        }); UnitTypes.minke.weapons.get(1).bullet.despawnEffect = Fx.none;
+        UnitTypes.risso.weapons.get(1).bullet.hitEffect = new VOExplosionEffect(25, 10, "blast");
+        UnitTypes.risso.weapons.get(1).bullet.despawnEffect = Fx.none;
+        UnitTypes.minke.weapons.get(0).bullet.hitEffect = new VOExplosionEffect(15, 27 * 1.5f, "flak");
+        UnitTypes.minke.weapons.get(0).bullet.despawnEffect = Fx.none;
+        UnitTypes.minke.weapons.get(1).bullet.hitEffect = new VOExplosionEffect(30 * 0.75f, 40, "blast");
+        UnitTypes.minke.weapons.get(1).bullet.despawnEffect = Fx.none;
         UnitTypes.bryde.weapons.get(1).bullet.trailWidth = 2.4f;
         UnitTypes.bryde.weapons.get(1).bullet.trailLength =  4;
         UnitTypes.bryde.weapons.get(1).bullet.trailColor = Pal.bulletYellowBack;
