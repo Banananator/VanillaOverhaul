@@ -95,43 +95,9 @@ public class VOUnitChanges {
         UnitTypes.scepter.weapons.get(0).bullet.hitEffect = new MultiEffect(Fx.shootBig, Fx.hitBulletSmall);
         UnitTypes.scepter.weapons.get(1).bullet.hitEffect = new MultiEffect(Fx.shootSmall, Fx.hitBulletSmall);
         UnitTypes.scepter.weapons.get(2).bullet.hitEffect = new MultiEffect(Fx.shootSmall, Fx.hitBulletSmall);
-        UnitTypes.reign.weapons.get(0).bullet.hitEffect = new VOExplosionEffect(13f, 18f, "blast");/*new Effect(30, e -> {
-            color(Pal.missileYellow);
-            e.scaled(6, i -> {
-                stroke((wstroke(18)) * i.fout());
-                Lines.circle(e.x, e.y, 2f + i.fin() * 13f);
-            });
-            color(Color.gray);
-            randLenVectors(e.id, 4, 2f + 10f * e.finpow(), (x, y) -> {
-                Fill.circle(e.x + x, e.y + y, e.fout() * 2.5f + 0.5f);
-            });
-            color(Pal.missileYellowBack);
-            e.scaled(20, i -> {stroke(i.fout());
-                randLenVectors(e.id + 1, 5, 2f + 16f * i.finpow(), (x, y) -> {
-                    lineAngle(e.x + x, e.y + y, Mathf.angle(x, y), 1f + i.fout() * 3f);
-                });
-            });
-            Drawf.light(e.x, e.y, 26f, Pal.missileYellowBack, 0.8f * e.fout());
-        });*/
+        UnitTypes.reign.weapons.get(0).bullet.hitEffect = new VOExplosionEffect(13f, 18f, "blast");
         UnitTypes.reign.weapons.get(0).bullet.despawnEffect = Fx.none;
-        UnitTypes.reign.weapons.get(0).bullet.fragBullet.hitEffect = new VOExplosionEffect(10f, 15f, "flak");/*new Effect(30, e -> {
-            color(Pal.bulletYellow);
-            e.scaled(6, i -> {
-                stroke((wstroke(15)) * i.fout());
-                Lines.circle(e.x, e.y, 2f + i.fin() * 10f);
-            });
-            color(Color.gray);
-            randLenVectors(e.id, 4, 2f + 9f * e.finpow(), (x, y) -> {
-                Fill.circle(e.x + x, e.y + y, e.fout() * 2f + 0.5f);
-            });
-            color(Pal.lighterOrange);
-            e.scaled(20, i -> {stroke(i.fout());
-                randLenVectors(e.id + 1, 5, 2f + 13f * i.finpow(), (x, y) -> {
-                    lineAngle(e.x + x, e.y + y, Mathf.angle(x, y), 0.5f + i.fout() * 2.5f);
-                });
-            });
-            Drawf.light(e.x, e.y, 20f, Pal.lighterOrange, 0.8f * e.fout());
-        });*/
+        UnitTypes.reign.weapons.get(0).bullet.fragBullet.hitEffect = new VOExplosionEffect(10f, 15f, "flak");
         UnitTypes.reign.weapons.get(0).bullet.fragBullet.despawnEffect = Fx.none;
 
         UnitTypes.nova.weapons.get(0).bullet.despawnHit = true;
@@ -139,7 +105,7 @@ public class VOUnitChanges {
         UnitTypes.nova.weapons.get(0).bullet.hitEffect = hitLaserBoltGreen;
         UnitTypes.nova.weapons.get(0).bullet.despawnEffect = Fx.none;
 
-        UnitTypes.crawler.deathExplosionEffect = new Effect(30, e -> {
+        UnitTypes.crawler.deathExplosionEffect = new VOExplosionEffect(55f, 90f, "blast");/*new Effect(30, e -> {
             color(Pal.missileYellow);
             e.scaled(6, i -> {
                 stroke((wstroke(90)) * i.fout());
@@ -156,7 +122,7 @@ public class VOUnitChanges {
                 });
             });
             Drawf.light(e.x, e.y, 110f, Pal.missileYellowBack, 0.8f * e.fout());
-        });
+        });*/
         UnitTypes.atrax.weapons.get(0).shootY = 5.5f;
         UnitTypes.atrax.weapons.get(0).bullet.trailWidth = 3.1f;
         UnitTypes.atrax.weapons.get(0).bullet.trailLength = 4;
