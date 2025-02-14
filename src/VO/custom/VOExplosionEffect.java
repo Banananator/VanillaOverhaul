@@ -127,7 +127,7 @@ public class VOExplosionEffect extends Effect{
             if(waveColor == null) waveColor = new Color[]{Pal.missileYellow};
             if(sparkColor == null) sparkColor = new Color[]{Pal.missileYellowBack};
         } else if(pyra){
-            if(waveColor == null) waveColor = new Color[]{Pal.missileYellow};
+            if(waveColor == null) waveColor = new Color[]{Pal.lightishOrange};
             if(sparkColor == null) sparkColor = new Color[]{Pal.lightishOrange};
         } else if(plast){
             if(waveColor == null) waveColor = new Color[]{Pal.plastaniumFront};
@@ -181,7 +181,7 @@ public class VOExplosionEffect extends Effect{
 
             m = flak ? 1f : plast ? 2f : 0f;
             if(waveRad == 0) waveRad = r + 2 + m;
-            m = blast || pyra ? 1f : sap ? -1f : 0f;
+            m = blast ? 1f : pyra ? 3f : sap ? -1f : 0f;
             if(waveStroke == 0) waveStroke = 2 + (power > 0 ? (power / 35f) : (r / 20f)) + m;
 
             m = flak ? 0.85f : plast ? 2f / 3f : surge ? 1.5f : 1f;
@@ -194,10 +194,10 @@ public class VOExplosionEffect extends Effect{
             m = flak ? 1 : blast ? 1.3f : pyra ? 2.2f : 0.75f;
             if(sparkStroke == 0) sparkStroke = (1f + (power > 0 ? (r / 100f) + (power / 45f) : (r / 40f))) * m;
 
-            m = blast ? 1.1f : pyra || plast || sap ? 1.25f : 1f;
+            m = blast ? 1.1f : pyra ? 1.6f : plast || sap ? 1.25f : 1f;
             if(smokes < 0) smokes = round((4f + (power > 0 ? power / 40f : r / 15f)) * m);
             if(smokeRad == 0) smokeRad = r >= 15f ? r - 5f : r >= 10f ? r - 3f : Math.max(r - 1f, 2f);
-            m = flak ? 0.9f : blast ? 1.2f : pyra ? 1.5f : 1f;
+            m = flak ? 0.9f : blast || pyra ? 1.2f : 1f;
             if(smokeSize == 0) smokeSize = Mathf.pow((power > 0 ? (r / 10f) + (power / 5f) : r / 5f) * 1.25f, 0.65f) * m;
         }
 
