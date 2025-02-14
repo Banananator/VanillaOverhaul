@@ -368,7 +368,7 @@ public class VOUnitChanges {
         }};
         avert.bullet.lifetime = 22;
         avert.bullet.homingPower = 1; avert.bullet.homingRange = 32; avert.bullet.homingDelay = 5;
-        avert.bullet.trailLength = 15;
+        avert.bullet.trailLength = 40;
     }
 
     public static void loadNewEngines(){
