@@ -191,7 +191,7 @@ public class VOExplosionEffect extends Effect{
             m = flak || blast ? 1f : pyra ? 0.8f : 2f;
             if(surge) if(sparkLen == 0) sparkLen = (1f + (power > 0 ? (r / 40f) + (power / 15f) : (r / 12.5f))) * m;
                 else if(sparkLen == 0) sparkLen = (1f + (power > 0 ? (r / 15f) + (power / 50f) : (r / 12.5f))) * m;
-            m = flak ? 1 : blast ? 1.3f : pyra ? 2.2f : 0.75f;
+            m = flak ? 1 : blast ? 1.3f : pyra ? 1.75f : 0.65f;
             if(sparkStroke == 0) sparkStroke = (1f + (power > 0 ? (r / 100f) + (power / 45f) : (r / 40f))) * m;
 
             m = blast ? 1.1f : pyra ? 1.6f : plast || sap ? 1.25f : 1f;
