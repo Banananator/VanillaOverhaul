@@ -265,8 +265,8 @@ public class VOUnitChanges {
         UnitTypes.elude.weapons.get(0).bullet.hitEffect = new MultiEffect(Fx.shootSmallColor, Fx.hitBulletColor);
         /*Weapon avert = UnitTypes.avert.weapons.get(0);
         avert.shoot = new ShootHelix(){{mag = 1; scl = 4.3f;}};
-        avert.bullet.homingPower = 0.08f; avert.bullet.homingRange = 1;
-        avert.bullet.hitEffect = new MultiEffect(Fx.shootSmallColor, Fx.hitBulletColor);*/
+        avert.bullet.homingPower = 0.08f; avert.bullet.homingRange = 1;*/
+        UnitTypes.avert.weapons.get(0).bullet.hitEffect = new MultiEffect(Fx.shootSmallColor, Fx.hitBulletColor);
     }
 
     public static void loadOverrides(){
@@ -366,7 +366,6 @@ public class VOUnitChanges {
         }};
         avert.bullet.lifetime = 22;
         avert.bullet.homingPower = 1; avert.bullet.homingRange = 32; avert.bullet.homingDelay = 5;
-        avert.bullet.hitEffect = new MultiEffect(Fx.shootSmallColor, Fx.hitBulletColor);
     }
 
     public static void loadNewEngines(){
