@@ -360,11 +360,12 @@ public class VOUnitChanges {
         avert.shoot = new ShootBarrel(){{
             shots = 2;
             barrels =  new float[]{
-                0, 0, 10,
-                0, 0, -10,
+                0, 0, 15,
+                0, 0, -15,
             };
         }};
-        avert.bullet.homingPower = 0.15f; avert.bullet.homingRange = 32;
+        avert.bullet.lifetime = 22;
+        avert.bullet.homingPower = 1; avert.bullet.homingRange = 32; avert.bullet.homingDelay = 5;
         avert.bullet.hitEffect = new MultiEffect(Fx.shootSmallColor, Fx.hitBulletColor);
     }
 
