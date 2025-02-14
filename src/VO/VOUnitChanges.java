@@ -366,7 +366,7 @@ public class VOUnitChanges {
                 0, 0, -15,
             };
         }};
-        avert.bullet.lifetime = 22;
+        avert.bullet.lifetime = 19.5f;
         avert.bullet.homingPower = 1; avert.bullet.homingRange = 32; avert.bullet.homingDelay = 5;
         avert.bullet.trailLength = 40;
     }

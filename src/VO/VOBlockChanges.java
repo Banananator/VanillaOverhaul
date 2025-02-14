@@ -120,7 +120,7 @@ public class VOBlockChanges {
                 explodeDelay = 5.5f;
                 shrinkY = -0.4f;
                 shootEffect = Fx.shootSmall;
-                hitEffect = new VOExplosionEffect(20, 45f, "flak");
+                hitEffect = new VOExplosionEffect(20, 45, "flak");
                 despawnEffect = Fx.none;
 
                 fragBullets = 6;
@@ -185,24 +185,7 @@ public class VOBlockChanges {
                 splashDamage = 33f;
                 splashDamageRadius = splash;
                 knockback = 0.8f;
-                hitEffect = new Effect(30, e -> {
-                    color(Pal.missileYellow);
-                    e.scaled(6, i -> {
-                        stroke((wstroke(33)) * i.fout());
-                        Lines.circle(e.x, e.y, 2f + i.fin() * splash);
-                    });
-                    color(Color.gray);
-                    randLenVectors(e.id, 5, 2f + (splash - 5f) * e.finpow(), (x, y) -> {
-                        Fill.circle(e.x + x, e.y + y, e.fout() * 3.5f + 0.5f);
-                    });
-                    color(Pal.missileYellowBack);
-                    e.scaled(20, i -> {stroke(i.fout());
-                        randLenVectors(e.id + 1, 6, 2f + (splash + 4f) * i.finpow(), (x, y) -> {
-                            lineAngle(e.x + x, e.y + y, Mathf.angle(x, y), 1f + i.fout() * 3f);
-                        });
-                    });
-                    Drawf.light(e.x, e.y, splash * 2f, Pal.missileYellowBack, 0.8f * e.fout());
-                });
+                hitEffect = new VOExplosionEffect(splash, 33, "blast");
                 despawnEffect = Fx.none;
             }},
             Items.silicon, new ArtilleryBulletType(3f, 20){{
@@ -216,24 +199,7 @@ public class VOBlockChanges {
                 splashDamage = 33f;
                 splashDamageRadius = splash;
                 knockback = 0.8f;
-                hitEffect = new Effect(30, e -> {
-                    color(Pal.missileYellow);
-                    e.scaled(6, i -> {
-                        stroke((wstroke(33)) * i.fout());
-                        Lines.circle(e.x, e.y, 2f + i.fin() * splash);
-                    });
-                    color(Color.gray);
-                    randLenVectors(e.id, 5, 2f + (splash - 5f) * e.finpow(), (x, y) -> {
-                        Fill.circle(e.x + x, e.y + y, e.fout() * 3.5f + 0.5f);
-                    });
-                    color(Pal.missileYellowBack);
-                    e.scaled(20, i -> {stroke(i.fout());
-                        randLenVectors(e.id + 1, 6, 2f + (splash + 4f) * i.finpow(), (x, y) -> {
-                            lineAngle(e.x + x, e.y + y, Mathf.angle(x, y), 1f + i.fout() * 3f);
-                        });
-                    });
-                    Drawf.light(e.x, e.y, splash * 2f, Pal.missileYellowBack, 0.8f * e.fout());
-                });
+                hitEffect = new VOExplosionEffect(splash, 33, "blast");
                 despawnEffect = Fx.none;
             }},
             Items.pyratite, new ArtilleryBulletType(3f, 25){{
@@ -250,24 +216,7 @@ public class VOBlockChanges {
                 frontColor = Pal.lightishOrange;
                 backColor = Pal.lightOrange;
                 trailEffect = Fx.incendTrail;
-                hitEffect = new Effect(35, e -> {
-                    color(Pal.missileYellow);
-                    e.scaled(6, i -> {
-                        stroke(wstroke(45) * i.fout());
-                        Lines.circle(e.x, e.y, 2f + i.fin() * splash);
-                    });
-                    color(Color.gray);
-                    randLenVectors(e.id, 6, 2f + (splash - 5f) * e.finpow(), (x, y) -> {
-                        Fill.circle(e.x + x, e.y + y, e.fout() * 4.5f + 0.5f);
-                    });
-                    color(Pal.lightishOrange);
-                    e.scaled(22, i -> {stroke(i.fout() * 2.5f);
-                        randLenVectors(e.id + 1, 8, 2f + (splash + 4f) * i.finpow(), (x, y) -> {
-                            lineAngle(e.x + x, e.y + y, Mathf.angle(x, y), 1f + i.fout() * 3f);
-                        });
-                    });
-                    Drawf.light(e.x, e.y, splash * 3f, Pal.lightishOrange, 0.8f * e.fout());
-                });
+                hitEffect = new VOExplosionEffect(splash, 45, "pyra");
                 despawnEffect = Fx.none;
             }});
             block.limitRange(0f);
