@@ -126,7 +126,7 @@ public class VOShootEffect extends Effect{
 
             m = basic ? 1f : 1f;
             if(smokes < 0) smokes = round((w / l * w * 2f) * m);
-            if(smokeLen == 0) smokeLen = l * 1.2f;
+            if(smokeLen == 0) smokeLen = l * 0.8f;
             m = basic ? 1f : 1f;
             if(smokeSize == 0) smokeSize = Mathf.pow(((l / 20f) + (w / 10f)) * 1.25f, 0.65f) * m;
         }
@@ -161,7 +161,7 @@ public class VOShootEffect extends Effect{
         if(smokes > 0){
             e.scaled(smokeLife * 0.75f, i -> {
                 color(lerpWithA(smokeColor, i.fin(interpColor ? smokeLenInterp : Interp.linear)));
-                customRandLenVectors(e.id, smokes, smokeLen * 1.1f * i.fin(smokeLenInterp), e.rotation, smokeCone * 0.8f * i.finpow(), (x, y) -> {
+                customRandLenVectors(e.id, smokes * 2, smokeLen * 1.1f * i.fin(smokeLenInterp), 0, e.rotation, smokeCone * 0.8f * i.finpow(), (x, y) -> {
                     float r = (smokeSize * 2f) * (smokeSize > 0 ? 1f - i.fin(smokeSizeInterp) : i.fin(smokeSizeInterp));
                     Draw.rect(Core.atlas.find(smokeRegion), e.x + x, e.y + y, r, r, smokeBaseRot + (e.time * smokeRot));
                     if(drawSmokeLight > 0) Drawf.light(e.x + x, e.y + y, r * smokeLightScl, lerpWithA(smokeColor, i.fin()), smokeLightOpacity * Draw.getColor().a);
@@ -169,7 +169,7 @@ public class VOShootEffect extends Effect{
             });
             e.scaled(smokeLife, i -> {
                 color(lerpWithA(smokeColor, i.fin(interpColor ? smokeLenInterp : Interp.linear)));
-                customRandLenVectors(e.id + 1, smokes, smokeLen * i.fin(smokeLenInterp), e.rotation, smokeCone * i.finpow(), (x, y) -> {
+                customRandLenVectors(e.id + 1, smokes, smokeLen * i.fin(smokeLenInterp), 0.5f, e.rotation, smokeCone * i.finpow(), (x, y) -> {
                     float r = (smokeSize * 2f) * (smokeSize > 0 ? 1f - i.fin(smokeSizeInterp) : i.fin(smokeSizeInterp));
                     Draw.rect(Core.atlas.find(smokeRegion), e.x + x, e.y + y, r, r, smokeBaseRot + (e.time * smokeRot));
                     if(drawSmokeLight > 0) Drawf.light(e.x + x, e.y + y, r * smokeLightScl, lerpWithA(smokeColor, i.fin()), smokeLightOpacity * Draw.getColor().a);
@@ -177,7 +177,7 @@ public class VOShootEffect extends Effect{
             });
             e.scaled(smokeLife * 1.25f, i -> {
                 color(lerpWithA(smokeColor, i.fin(interpColor ? smokeLenInterp : Interp.linear)));
-                customRandLenVectors(e.id + 2, smokes, smokeLen * 0.9f * i.fin(smokeLenInterp), e.rotation, smokeCone * 1.2f * i.finpow(), (x, y) -> {
+                customRandLenVectors(e.id + 2, smokes, smokeLen * 0.9f * i.fin(smokeLenInterp), 0.75f, e.rotation, smokeCone * 1.2f * i.finpow(), (x, y) -> {
                     float r = (smokeSize * 2f) * (smokeSize > 0 ? 1f - i.fin(smokeSizeInterp) : i.fin(smokeSizeInterp));
                     Draw.rect(Core.atlas.find(smokeRegion), e.x + x, e.y + y, r, r, smokeBaseRot + (e.time * smokeRot));
                     if(drawSmokeLight > 0) Drawf.light(e.x + x, e.y + y, r * smokeLightScl, lerpWithA(smokeColor, i.fin()), smokeLightOpacity * Draw.getColor().a);
@@ -203,10 +203,10 @@ public class VOShootEffect extends Effect{
         return new Color(a.r * i + b.r * n, a.g * i + b.g * n, a.b * i + b.b * n, a.a * i + b.a * n);
     }
 
-    public static void customRandLenVectors(long seed, int amount, float length, float angle, float range, Floatc2 cons){
+    public static void customRandLenVectors(long seed, int amount, float length, float minLenMult, float angle, float range, Floatc2 cons){
         rand.setSeed(seed);
         for(int i = 0; i < amount; i++){
-            rv.trns(angle + rand.range(range), rand.random(length * 0.75f, length));
+            rv.trns(angle + rand.range(range), rand.random(length * minLenMult, length));
             cons.get(rv.x, rv.y);
         }
     }
