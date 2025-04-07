@@ -205,20 +205,24 @@ public class VOShootEffect extends Effect{
     }
 
     public Color lerpp(Color[] colors, float interp){
+        colors = new Color[]{Color.red, Color.blue, Color.orange, Color.green};
         int ll = colors.length;
         float l = ll * interp;
-        int i = 0;
+        int i = 1;
         Color c = null;
         Color cc = null;
         float interp2 = 0;
-        while(i < ll - 1){
-            if(l >= i && l <= i + 1){
-                c = colors[i];
-                cc = colors[i + 1];
-                interp2 = l - i;
-            }
+        while(i < l){
+            //if(l >= i && l <= i + 1){
+            //    c = colors[i];
+            //    cc = colors[i + 1];
+            //    interp2 = l - i;
+            //}
             i += 1;
         };
+        c = colors[i - 1];
+        cc = colors[i];
+        interp2 = l - i;
         return lerpWithA(new Color[]{c, cc}, interp2);
     }
 
