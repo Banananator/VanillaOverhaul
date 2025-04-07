@@ -159,9 +159,9 @@ public class VOShootEffect extends Effect{
     @Override
     public void render(EffectContainer e){
         if(smokes > 0){
-            e.scaled(smokeLife * 0.75f, i -> {
+            e.scaled(smokeLife * 0.9f, i -> {
                 color(lerpWithA(smokeColor, i.fin(interpColor ? smokeLenInterp : Interp.linear)));
-                customRandLenVectors(e.id, smokes * 2, smokeLen * 1.1f * i.fin(smokeLenInterp), 0, e.rotation, smokeCone * 0.8f * i.finpow(), (x, y) -> {
+                customRandLenVectors(e.id, smokes * 2, smokeLen * 1.25f * i.fin(smokeLenInterp), 0, e.rotation, smokeCone * 0.8f * i.finpow(), (x, y) -> {
                     float r = (smokeSize * 2f) * (smokeSize > 0 ? 1f - i.fin(smokeSizeInterp) : i.fin(smokeSizeInterp));
                     Draw.rect(Core.atlas.find(smokeRegion), e.x + x, e.y + y, r, r, smokeBaseRot + (e.time * smokeRot));
                     if(drawSmokeLight > 0) Drawf.light(e.x + x, e.y + y, r * smokeLightScl, lerpWithA(smokeColor, i.fin()), smokeLightOpacity * Draw.getColor().a);
@@ -175,9 +175,9 @@ public class VOShootEffect extends Effect{
                     if(drawSmokeLight > 0) Drawf.light(e.x + x, e.y + y, r * smokeLightScl, lerpWithA(smokeColor, i.fin()), smokeLightOpacity * Draw.getColor().a);
                 });
             });
-            e.scaled(smokeLife * 1.25f, i -> {
+            e.scaled(smokeLife * 1.1f, i -> {
                 color(lerpWithA(smokeColor, i.fin(interpColor ? smokeLenInterp : Interp.linear)));
-                customRandLenVectors(e.id + 2, smokes, smokeLen * 0.9f * i.fin(smokeLenInterp), 0.75f, e.rotation, smokeCone * 1.2f * i.finpow(), (x, y) -> {
+                customRandLenVectors(e.id + 2, smokes, smokeLen * 0.75f * i.fin(smokeLenInterp), 0.75f, e.rotation, smokeCone * 1.2f * i.finpow(), (x, y) -> {
                     float r = (smokeSize * 2f) * (smokeSize > 0 ? 1f - i.fin(smokeSizeInterp) : i.fin(smokeSizeInterp));
                     Draw.rect(Core.atlas.find(smokeRegion), e.x + x, e.y + y, r, r, smokeBaseRot + (e.time * smokeRot));
                     if(drawSmokeLight > 0) Drawf.light(e.x + x, e.y + y, r * smokeLightScl, lerpWithA(smokeColor, i.fin()), smokeLightOpacity * Draw.getColor().a);
