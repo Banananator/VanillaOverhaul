@@ -199,7 +199,9 @@ public class VOShootEffect extends Effect{
 
         float n = s * (l - 1) - (int)(s * (l - 1));
         float i = 1f - n;
-        return new Color(a.r * i + b.r * n, a.g * i + b.g * n, a.b * i + b.b * n, a.a * i + b.a * n);
+        if(a != null && b != null){
+            return new Color(a.r * i + b.r * n, a.g * i + b.g * n, a.b * i + b.b * n, a.a * i + b.a * n);
+        } else return Color.white;
     }
 
     public Color lerpp(Color[] colors, float interp){
