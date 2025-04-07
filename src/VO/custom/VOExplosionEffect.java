@@ -50,8 +50,6 @@ public class VOExplosionEffect extends Effect{
     /** Rotation of the smoke, if has a non-circle region. */
     public float smokeRot = 0f, smokeBaseRot = 0f;
 
-    public static final Color col = new Color();
-
     /** Creates an advanced explosion effect.
      * @param rad is used for basic auto-setup.
      * @param power is added to {@code rad} for advanced auto-setup. Is usually the explosion's damage.     
