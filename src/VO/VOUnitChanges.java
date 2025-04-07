@@ -53,6 +53,8 @@ public class VOUnitChanges {
         UnitTypes.beta.weapons.get(0).bullet.hitEffect = new MultiEffect(Fx.shootSmall, Fx.hitBulletSmall);
         UnitTypes.gamma.weapons.get(0).bullet.hitEffect = new MultiEffect(Fx.shootSmall, Fx.hitBulletSmall);
 
+        UnitTypes.dagger.weapons.get(0).bullet.shootEffect = new VOShootEffect();
+        UnitTypes.dagger.weapons.get(0).bullet.smokeEffect = Fx.none;
         UnitTypes.dagger.weapons.get(0).bullet.hitEffect = new MultiEffect(Fx.shootSmall, Fx.hitBulletSmall);
         UnitTypes.mace.weapons.clear();
         UnitTypes.mace.weapons.add(new Weapon("flamethrower"){{
