@@ -209,7 +209,7 @@ public class VOShootEffect extends Effect{
         Color c = null;
         Color cc = null;
         float interp2 = 0;
-        while(i < ll){
+        while(i < ll - 1){
             if(l >= i && l <= i + 1){
                 c = colors[i];
                 cc = colors[i + 1];
