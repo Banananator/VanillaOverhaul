@@ -104,7 +104,7 @@ public class VOShootEffect extends Effect{
         if(lightColor == null) lightColor = smokeColor;
 
         if(flashInterp == null) flashInterp = Interp.linear;
-        if(smokeLenInterp == null) smokeLenInterp = Interp.pow3Out;
+        if(smokeLenInterp == null) smokeLenInterp = Interp.pow5Out;
         if(smokeSizeInterp == null) smokeSizeInterp = Interp.linear;
 
         if(len < 0) len *= -1; if(width < 0) width *= -1;
@@ -119,13 +119,13 @@ public class VOShootEffect extends Effect{
             if(flashLife == 0) flashLife = m + (l / 50f) + (w / 50f);
             m = basic ? 2f : 1f;
             if(smokeLife == 0) smokeLife = ((l + w) / (l / 25f + w / 25f)) * m;
-            lifetime = Math.max(lifetime, smokeLife * 1.2f);
+            lifetime = Math.max(lifetime, smokeLife * 1.25f);
 
             m = basic ? 1f : 1f;
-            if(smokes < 0) smokes = round((w / l * w * 2f) * m / 2f);
+            if(smokes < 0) smokes = round((w / l * w * 2f) * m * 2f);
             if(smokeLen == 0) smokeLen = l * 1.2f;
             m = basic ? 1f : 1f;
-            if(smokeSize == 0) smokeSize = Mathf.pow(((l / 15f) + (w / 8f)) * 1.25f, 0.65f) * m;
+            if(smokeSize == 0) smokeSize = Mathf.pow(((l / 20f) + (w / 10f)) * 1.25f, 0.65f) * m;
         }
 
         if(lifetime == 0) lifetime = 20f;
@@ -156,7 +156,7 @@ public class VOShootEffect extends Effect{
     @Override
     public void render(EffectContainer e){
         if(smokes > 0){
-            e.scaled(smokeLife * 0.8f, i -> {
+            e.scaled(smokeLife * 0.75f, i -> {
                 color(lerpWithA(smokeColor, i.fin(interpColor ? smokeLenInterp : Interp.linear)));
                 randLenVectors(e.id, smokes, smokeLen * 1.1f * e.fin(smokeLenInterp), e.rotation, smokeCone * 0.8f, (x, y) -> {
                     float r = (smokeSize * 2f) * (smokeSize > 0 ? 1f - i.fin(smokeSizeInterp) : i.fin(smokeSizeInterp));
@@ -172,7 +172,7 @@ public class VOShootEffect extends Effect{
                     if(drawSmokeLight > 0) Drawf.light(e.x + x, e.y + y, r * smokeLightScl, lerpWithA(smokeColor, e.fin()), smokeLightOpacity * Draw.getColor().a);
                 });
             });
-            e.scaled(smokeLife * 1.2f, i -> {
+            e.scaled(smokeLife * 1.25f, i -> {
                 color(lerpWithA(smokeColor, i.fin(interpColor ? smokeLenInterp : Interp.linear)));
                 randLenVectors(e.id + 2, smokes, smokeLen * 0.9f * e.fin(smokeLenInterp), e.rotation, smokeCone * 1.2f, (x, y) -> {
                     float r = (smokeSize * 2f) * (smokeSize > 0 ? 1f - i.fin(smokeSizeInterp) : i.fin(smokeSizeInterp));
