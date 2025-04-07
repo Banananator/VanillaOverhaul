@@ -122,10 +122,10 @@ public class VOShootEffect extends Effect{
             lifetime = Math.max(lifetime, smokeLife * 1.2f);
 
             m = basic ? 1f : 1f;
-            if(smokes < 0) smokes = round((w / l * w * 2f) * m / 3f);
+            if(smokes < 0) smokes = round((w / l * w * 2f) * m / 2f);
             if(smokeLen == 0) smokeLen = l * 1.2f;
             m = basic ? 1f : 1f;
-            if(smokeSize == 0) smokeSize = Mathf.pow(((l / 25f) + (w / 10f)) * 1.25f, 0.65f) * m;
+            if(smokeSize == 0) smokeSize = Mathf.pow(((l / 15f) + (w / 8f)) * 1.25f, 0.65f) * m;
         }
 
         if(lifetime == 0) lifetime = 20f;
@@ -166,7 +166,7 @@ public class VOShootEffect extends Effect{
             });
             e.scaled(smokeLife, i -> {
                 color(lerpWithA(smokeColor, i.fin(interpColor ? smokeLenInterp : Interp.linear)));
-                randLenVectors(e.id, smokes, smokeLen * e.fin(smokeLenInterp), e.rotation, smokeCone, (x, y) -> {
+                randLenVectors(e.id + 1, smokes, smokeLen * e.fin(smokeLenInterp), e.rotation, smokeCone, (x, y) -> {
                     float r = (smokeSize * 2f) * (smokeSize > 0 ? 1f - i.fin(smokeSizeInterp) : i.fin(smokeSizeInterp));
                     Draw.rect(Core.atlas.find(smokeRegion), e.x + x, e.y + y, r, r, smokeBaseRot + (e.time * smokeRot));
                     if(drawSmokeLight > 0) Drawf.light(e.x + x, e.y + y, r * smokeLightScl, lerpWithA(smokeColor, e.fin()), smokeLightOpacity * Draw.getColor().a);
@@ -174,7 +174,7 @@ public class VOShootEffect extends Effect{
             });
             e.scaled(smokeLife * 1.2f, i -> {
                 color(lerpWithA(smokeColor, i.fin(interpColor ? smokeLenInterp : Interp.linear)));
-                randLenVectors(e.id, smokes, smokeLen * 0.9f * e.fin(smokeLenInterp), e.rotation, smokeCone * 1.2f, (x, y) -> {
+                randLenVectors(e.id + 2, smokes, smokeLen * 0.9f * e.fin(smokeLenInterp), e.rotation, smokeCone * 1.2f, (x, y) -> {
                     float r = (smokeSize * 2f) * (smokeSize > 0 ? 1f - i.fin(smokeSizeInterp) : i.fin(smokeSizeInterp));
                     Draw.rect(Core.atlas.find(smokeRegion), e.x + x, e.y + y, r, r, smokeBaseRot + (e.time * smokeRot));
                     if(drawSmokeLight > 0) Drawf.light(e.x + x, e.y + y, r * smokeLightScl, lerpWithA(smokeColor, e.fin()), smokeLightOpacity * Draw.getColor().a);
