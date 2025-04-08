@@ -131,8 +131,8 @@ public class VOShootEffect extends Effect{
 
             m = basic ? 8f : 9f;
             if(flashLife == 0) flashLife = m + (l / 25f) + (w / 25f);
-            m = basic ? 1.5f : 2.5f;
-            if(smokeLife == 0) smokeLife = ((l + w) / (l / 25f + w / 25f)) * m;
+            m = basic ? 1.5f : 2f;
+            if(smokeLife == 0) smokeLife = ((l + w) / (l / 30f + w / 30f)) * m;
             if(circleLife == 0 && drawCircle > 0) circleLife = flashLife * 1.5f;
             lifetime = max(lifetime, smokeLife * 1.2f, circleLife);
 
