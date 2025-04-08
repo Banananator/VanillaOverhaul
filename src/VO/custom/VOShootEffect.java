@@ -4,6 +4,7 @@ import arc.graphics.Color;
 import arc.graphics.g2d.*;
 import arc.math.*;
 import arc.math.geom.Vec2;
+import arc.util.Tmp;
 import mindustry.entities.Effect;
 import mindustry.graphics.*;
 
@@ -132,7 +133,7 @@ public class VOShootEffect extends Effect{
             if(flashLife == 0) flashLife = m + (l / 25f) + (w / 25f);
             m = basic ? 2f : 2.5f;
             if(smokeLife == 0) smokeLife = ((l + w) / (l / 25f + w / 25f)) * m;
-            if(circleLife == 0 && drawCircle > 0) circleLife = flashLife * 3f;
+            if(circleLife == 0 && drawCircle > 0) circleLife = flashLife;
             lifetime = max(lifetime, smokeLife * 1.2f, circleLife);
 
             if(smokes < 0) smokes = round(w / 2f);
@@ -165,7 +166,8 @@ public class VOShootEffect extends Effect{
             e.scaled(circleLife, i -> {
                 color(lerpp(circleColor, i.fin(circleColorInterp)));
                 Lines.stroke(circleStroke * i.fout(circleInterp));
-                Lines.ellipse(e.x, e.y, 1, circleLength * i.fin(circleInterp), circleWidth * i.fin(circleInterp), e.rotation);
+                Tmp.v1.trns(e.rotation, circleStroke);
+                Lines.ellipse(e.x + Tmp.v1.x, e.y + Tmp.v1.x, 1, circleLength * i.fin(circleInterp), circleWidth * i.fin(circleInterp), e.rotation);
             });
         }
         if(smokes > 0){
