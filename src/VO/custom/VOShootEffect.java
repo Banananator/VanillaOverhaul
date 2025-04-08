@@ -128,23 +128,22 @@ public class VOShootEffect extends Effect{
             float w = width > 0 ? width : -width;
             float m = 0f;
 
-            m = basic ? 8f : 0f;
+            m = basic ? 8f : 9f;
             if(flashLife == 0) flashLife = m + (l / 25f) + (w / 25f);
-            m = basic ? 2f : 1f;
+            m = basic ? 2f : 2.5f;
             if(smokeLife == 0) smokeLife = ((l + w) / (l / 25f + w / 25f)) * m;
             if(circleLife == 0 && drawCircle > 0) circleLife = flashLife * 3f;
             lifetime = max(lifetime, smokeLife * 1.2f, circleLife);
 
-            m = basic ? 1f : 1f;
-            if(smokes < 0) smokes = round((w / 2f) * m);
+            if(smokes < 0) smokes = round(w / 2f);
             if(smokeLen == 0) smokeLen = l * Math.min(2f * (w / 24f), 0.8f);
-            m = basic ? 1f : 1f;
+            m = basic ? 1f : 1.2f;
             if(smokeSize == 0) smokeSize = Mathf.pow((l / 20f) + (w / 10f), 0.85f) * m;
             if(smokeCone == 0) smokeCone = 32f - ((((smokeLen / 100) * smokeLen) / 2f) * 3f) + 2f;
 
             if(drawCircle > 0){
-                if(circleLength == 0) circleLength = w * 0.5f;
-                if(circleWidth == 0) circleWidth = w * 2f;
+                if(circleLength == 0) circleLength = w * 0.4f;
+                if(circleWidth == 0) circleWidth = w * 1.5f;
                 if(circleStroke == 0) circleStroke = w / 2.5f;
             }
         }
