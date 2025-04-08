@@ -14,27 +14,29 @@ import arc.func.Floatc2;
 
 public class VOShootEffect extends Effect{
     /** Explosion mode. Automaticly sets up colors and affects values of auto-setup. */
-    public boolean basic = true, heavy = false, artillery = false, missile = false;
+    public boolean basic = true, heavy = false, missile = false;
     /** Overrides auto-setup colors if not null. */
-    public Color[] flashColor = null, smokeColor = null;
-    /** Easy way to set the explosion type. Write {@code basic}, {@code heavy},  {@code artillery} or {@code missile} here. */
+    public Color[] flashColor = null, smokeColor = null, circleColor = null;
+    /** Easy way to set the explosion type. Write {@code basic}, {@code heavy} or {@code missile} here. */
     public String type = "";
     /** 
      * Values of explosion auto-setup. If {@code rad} is not 0, automaticly sets up all the values depending 
      * on radius ({@code rad}) and damage of the explosion ({@code power}, if set). Can't be negative. Set
      * {@code rad} to 0 to disable auto-setup.
     */
-    public float len = 20, width = 5;
+    public float len = 0, width = 0;
     /** Explosion value. If not 0, overrides itself in auto-setup. If negative, effect will be inverted. */
     public float flashLife = 0f;
     /** Explosion value. If not 0, overrides itself in auto-setup. If negative, effect will be inverted. */
     public float smokeLife = 0f, smokeSize = 0f, smokeLen = 0f, smokeCone = 0f;
-    /** Whether to draw light on smoke particles. */
-    public boolean drawSmokeLight = false;
+    /** Explosion value. If not 0, overrides itself in auto-setup. If negative, effect will be inverted. */
+    public float circleLife = 0f, circleWidth = 0f, circleLength = 0f, circleStroke = 0f;
+    /** Whether to draw light on smoke particles.  Set to 0 for {@code false} or >0 for {@code true}. */
+    public int drawCircle = -1, drawSmokeLight = -1;
     /** Values of smoke's light, if drawn. */
     public float smokeLightScl = 2f, smokeLightOpacity = 0.6f;
     /** Explosion value interpolation. If not {@code null}, overrides itself in auto-setup. */
-    public Interp flashInterp = null, smokeLenInterp = null, smokeSizeInterp = null, smokeColorInterp = null;
+    public Interp flashInterp = null, smokeLenInterp = null, smokeSizeInterp = null, smokeColorInterp = null, circleInterp = null, circleStrokeInterp = null, circleColorInterp = null;
     /** Amount of particles. Set to 0 to disable particle. */
     public int smokes = -1;
     /** Texture of the smokes. */
@@ -49,43 +51,47 @@ public class VOShootEffect extends Effect{
      * @param rad is used for basic auto-setup.
      * @param power is added to {@code rad} for advanced auto-setup. Is usually the explosion's damage.     
      * @param type sets the explosion type. */
-    public VOShootEffect(float len, float width, String type){
+    public VOShootEffect(float len, float width, float smokeCone, String type){
         this.len = len;
         this.width = width;
+        this.smokeCone = smokeCone;
         this.type = type;
         clip = 0;
         lifetime = 0;
         followParent = true;
         rotWithParent = false;
     }
+
+    public VOShootEffect(float len, float width, float smokeCone){
+        this(len, width, smokeCone, "basic");
+    }
+
+    public VOShootEffect(float len, float width, String type){
+        this(len, width, 0, type);
+    }
     
     /** Creates an advanced explosion effect.
      * @param rad is used for basic auto-setup.
      * @param power is added to {@code rad} for advanced auto-setup. Is usually the explosion's damage.  */
     public VOShootEffect(float len, float width){
-        this(len, width, "basic");
+        this(len, width, 0, "basic");
     }
 
     /** Creates an advanced explosion effect. */
     public VOShootEffect(){
-        this(15f, 6f, "basic");
-    }
-
-    public float maxx(float a, float b, float c, float d){
-        return Math.max(Math.max(a, b), Math.max(c, d));
+        this(15f, 6f, 0, "basic");
     }
 
     @Override
     public void init(){
-        if(!basic && !heavy && !artillery && !missile) basic = true;
 
         if(type == "basic"){
             basic = true;
-            heavy = artillery = missile = false;
-        } /*else if(type == "blast"){
-            blast = true;
-            flak = pyra = plast = surge = sap = false;
-        } else if(type == "pyra"){
+            heavy = missile = false;
+        } else if(type == "heavy"){
+            heavy = true;
+            basic = missile = false;
+        } /*else if(type == "pyra"){
             pyra = true;
             flak = blast = plast = surge = sap = false;
         } else if(type == "plast"){
@@ -99,16 +105,23 @@ public class VOShootEffect extends Effect{
             flak = blast = pyra = plast = surge = false;
         }*/
 
+        if(!basic && !heavy && !missile) basic = true;
+
+        if(drawCircle == -1 && heavy) drawCircle = 1;
+
         if(flashColor == null) flashColor = new Color[]{Pal.lighterOrange, Pal.lightOrange};
         if(smokeColor == null) smokeColor = new Color[]{Pal.lightOrange, Pal.lighterOrange, Color.gray, Color.darkGray, Color.darkGray};
+        if(circleColor == null) circleColor = new Color[]{Color.darkGray, Color.gray.cpy().a(0)};
 
         if(flashInterp == null) flashInterp = Interp.linear;
         if(smokeLenInterp == null) smokeLenInterp = Interp.pow5Out;
         if(smokeSizeInterp == null) smokeSizeInterp = Interp.linear;
         if(smokeColorInterp == null) smokeColorInterp = Interp.linear;
+        if(circleInterp == null) circleInterp = Interp.pow2Out;
+        if(circleStrokeInterp == null) circleStrokeInterp = Interp.linear;
+        if(circleColorInterp == null) circleColorInterp = Interp.linear;
 
-        if(len < 0) len *= -1; if(width < 0) width *= -1;
-//UnitTypes.zenith.weapons.get(0).bullet.despawnHit = false; UnitTypes.zenith.weapons.get(1).bullet.despawnHit = false;        
+        if(len < 0) len *= -1; if(width < 0) width *= -1;       
 
         if(len > 0 && width > 0){
             float l = len > 0 ? len : -len;
@@ -119,7 +132,8 @@ public class VOShootEffect extends Effect{
             if(flashLife == 0) flashLife = m + (l / 25f) + (w / 25f);
             m = basic ? 2f : 1f;
             if(smokeLife == 0) smokeLife = ((l + w) / (l / 25f + w / 25f)) * m;
-            lifetime = Math.max(lifetime, smokeLife * 1.25f);
+            if(circleLife == 0 && drawCircle > 0) circleLife = flashLife * 3f;
+            lifetime = max(lifetime, smokeLife * 1.2f, circleLife);
 
             m = basic ? 1f : 1f;
             if(smokes < 0) smokes = round((w / 2f) * m);
@@ -127,6 +141,12 @@ public class VOShootEffect extends Effect{
             m = basic ? 1f : 1f;
             if(smokeSize == 0) smokeSize = Mathf.pow((l / 20f) + (w / 10f), 0.85f) * m;
             if(smokeCone == 0) smokeCone = 32f - ((((smokeLen / 100) * smokeLen) / 2f) * 3f) + 2f;
+
+            if(drawCircle > 0){
+                if(circleWidth == 0) circleWidth = w * 10f;
+                if(circleLength == 0) circleLength = w * 2.5f;
+                if(circleStroke == 0) circleStroke = w;
+            }
         }
 
         if(lifetime == 0) lifetime = 20f;
@@ -137,7 +157,49 @@ public class VOShootEffect extends Effect{
         if(smokeLen == 0) smokeLen = 24f;
         if(smokeSize == 0) smokeSize = 2f;
 
-        clip = maxx(clip, len, width, smokeLen + smokeSize);
+        clip = max(clip, len, width, smokeLen + smokeSize, circleWidth + circleStroke, circleLength + circleStroke);
+    }
+
+    @Override
+    public void render(EffectContainer e){
+        if(smokes > 0){
+            e.scaled(smokeLife * 0.8f, i -> {
+                color(lerpp(smokeColor, i.fin(smokeColorInterp)));
+                customRandLenVectors(e.id, smokes * 2, smokeLen * i.fin(smokeLenInterp), 0, e.rotation, smokeCone * 0.5f, (x, y) -> {
+                    float r = (smokeSize * 2f) * (smokeSize > 0 ? 1f - i.fin(smokeSizeInterp) : i.fin(smokeSizeInterp));
+                    Draw.rect(Core.atlas.find(smokeRegion), e.x + x, e.y + y, r, r, smokeBaseRot + (e.time * smokeRot));
+                    if(drawSmokeLight > 0) Drawf.light(e.x + x, e.y + y, r * smokeLightScl, lerpp(smokeColor, i.fin()), smokeLightOpacity * Draw.getColor().a);
+                });
+            });
+            e.scaled(smokeLife, i -> {
+                color(lerpp(smokeColor, i.fin(smokeColorInterp)));
+                customRandLenVectors(e.id + 1, smokes, smokeLen * 0.85f * i.fin(smokeLenInterp), 0.5f, e.rotation, smokeCone * 0.8f * i.finpow(), (x, y) -> {
+                    float r = (smokeSize * 2f) * (smokeSize > 0 ? 1f - i.fin(smokeSizeInterp) : i.fin(smokeSizeInterp));
+                    Draw.rect(Core.atlas.find(smokeRegion), e.x + x, e.y + y, r, r, smokeBaseRot + (e.time * smokeRot));
+                    if(drawSmokeLight > 0) Drawf.light(e.x + x, e.y + y, r * smokeLightScl, lerpp(smokeColor, i.fin()), smokeLightOpacity * Draw.getColor().a);
+                });
+            });
+            e.scaled(smokeLife * 1.2f, i -> {
+                color(lerpp(smokeColor, i.fin(smokeColorInterp)));
+                customRandLenVectors(e.id + 2, smokes, smokeLen * 0.7f * i.fin(smokeLenInterp), 0.75f, e.rotation, smokeCone * i.finpow(), (x, y) -> {
+                    float r = (smokeSize * 2f) * (smokeSize > 0 ? 1f - i.fin(smokeSizeInterp) : i.fin(smokeSizeInterp));
+                    Draw.rect(Core.atlas.find(smokeRegion), e.x + x, e.y + y, r, r, smokeBaseRot + (e.time * smokeRot));
+                    if(drawSmokeLight > 0) Drawf.light(e.x + x, e.y + y, r * smokeLightScl, lerpp(smokeColor, i.fin()), smokeLightOpacity * Draw.getColor().a);
+                });
+            });
+        }
+        e.scaled(flashLife, i -> {
+            color(lerpp(flashColor, i.fin()));
+            Drawf.tri(e.x, e.y, width * i.fout(flashInterp), len * i.fout(flashInterp), e.rotation);
+            Drawf.tri(e.x, e.y, width * i.fout(flashInterp), 2f + ((len - 5f) / 10f) * i.fout(flashInterp), e.rotation + 180f);
+        });
+        if(drawCircle > 0){
+            e.scaled(circleLife, i -> {
+                color(lerpp(circleColor, i.fin(circleColorInterp)));
+                Lines.stroke(circleStroke * i.fin(circleInterp));
+                Lines.ellipse(e.x, e.y, 0, circleWidth * i.fin(circleInterp), circleLength * i.fin(circleInterp), e.rotation);
+            });
+        }
     }
 
     public int round(float value){
@@ -149,44 +211,16 @@ public class VOShootEffect extends Effect{
         return result;
     }
 
-    public float maxx(float a, float b, float c){
+    public float max(float a, float b, float c){
         return Math.max(a, Math.max(b, c));
     }
 
+    public float max(float a, float b, float c, float d){
+        return Math.max(Math.max(a, b), Math.max(c, d));
+    }
 
-    @Override
-    public void render(EffectContainer e){
-        if(smokes > 0){
-            e.scaled(smokeLife * 0.8f, i -> {
-                color(lerpp(smokeColor, i.fin(smokeColorInterp)));
-                customRandLenVectors(e.id, smokes * 2, smokeLen * i.fin(smokeLenInterp), 0, e.rotation, smokeCone * 0.5f, (x, y) -> {
-                    float r = (smokeSize * 2f) * (smokeSize > 0 ? 1f - i.fin(smokeSizeInterp) : i.fin(smokeSizeInterp));
-                    Draw.rect(Core.atlas.find(smokeRegion), e.x + x, e.y + y, r, r, smokeBaseRot + (e.time * smokeRot));
-                    if(drawSmokeLight) Drawf.light(e.x + x, e.y + y, r * smokeLightScl, lerpp(smokeColor, i.fin()), smokeLightOpacity * Draw.getColor().a);
-                });
-            });
-            e.scaled(smokeLife, i -> {
-                color(lerpp(smokeColor, i.fin(smokeColorInterp)));
-                customRandLenVectors(e.id + 1, smokes, smokeLen * 0.85f * i.fin(smokeLenInterp), 0.5f, e.rotation, smokeCone * 0.8f * i.finpow(), (x, y) -> {
-                    float r = (smokeSize * 2f) * (smokeSize > 0 ? 1f - i.fin(smokeSizeInterp) : i.fin(smokeSizeInterp));
-                    Draw.rect(Core.atlas.find(smokeRegion), e.x + x, e.y + y, r, r, smokeBaseRot + (e.time * smokeRot));
-                    if(drawSmokeLight) Drawf.light(e.x + x, e.y + y, r * smokeLightScl, lerpp(smokeColor, i.fin()), smokeLightOpacity * Draw.getColor().a);
-                });
-            });
-            e.scaled(smokeLife * 1.2f, i -> {
-                color(lerpp(smokeColor, i.fin(smokeColorInterp)));
-                customRandLenVectors(e.id + 2, smokes, smokeLen * 0.7f * i.fin(smokeLenInterp), 0.75f, e.rotation, smokeCone * i.finpow(), (x, y) -> {
-                    float r = (smokeSize * 2f) * (smokeSize > 0 ? 1f - i.fin(smokeSizeInterp) : i.fin(smokeSizeInterp));
-                    Draw.rect(Core.atlas.find(smokeRegion), e.x + x, e.y + y, r, r, smokeBaseRot + (e.time * smokeRot));
-                    if(drawSmokeLight) Drawf.light(e.x + x, e.y + y, r * smokeLightScl, lerpp(smokeColor, i.fin()), smokeLightOpacity * Draw.getColor().a);
-                });
-            });
-        }
-        e.scaled(flashLife, i -> {
-            color(lerpp(flashColor, i.fin()));
-            Drawf.tri(e.x, e.y, width * i.fout(flashInterp), len * i.fout(flashInterp), e.rotation);
-            Drawf.tri(e.x, e.y, width * i.fout(flashInterp), 2f + ((len - 5f) / 10f) * i.fout(flashInterp), e.rotation + 180f);
-        });
+    public float max(float a, float b, float c, float d, float e, float f){
+        return max(Math.max(a, b), Math.max(c, d), Math.max(e, f));
     }
 
     public Color lerpWithA(Color[] colors, float s){

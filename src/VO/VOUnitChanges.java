@@ -92,6 +92,8 @@ public class VOUnitChanges {
         UnitTypes.scepter.weapons.get(0).bullet.hitEffect = new MultiEffect(Fx.shootBig, Fx.hitBulletSmall);
         UnitTypes.scepter.weapons.get(1).bullet.hitEffect = new MultiEffect(Fx.shootSmall, Fx.hitBulletSmall);
         UnitTypes.scepter.weapons.get(2).bullet.hitEffect = new MultiEffect(Fx.shootSmall, Fx.hitBulletSmall);
+        UnitTypes.reign.weapons.get(0).bullet.shootEffect = new VOShootEffect(40, 11, "heavy");
+        UnitTypes.reign.weapons.get(0).bullet.smokeEffect = Fx.none;
         UnitTypes.reign.weapons.get(0).bullet.hitEffect = new VOExplosionEffect(13, 18, "blast");
         UnitTypes.reign.weapons.get(0).bullet.despawnEffect = Fx.none;
         UnitTypes.reign.weapons.get(0).bullet.fragBullet.hitEffect = new VOExplosionEffect(10, 15, "flak");
