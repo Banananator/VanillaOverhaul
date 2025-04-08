@@ -30,7 +30,7 @@ public class VOShootEffect extends Effect{
     /** Explosion value. If not 0, overrides itself in auto-setup. If negative, effect will be inverted. */
     public float smokeLife = 0f, smokeSize = 0f, smokeLen = 0f, smokeCone = 0f;
     /** Explosion value. If not 0, overrides itself in auto-setup. If negative, effect will be inverted. */
-    public float circleLife = 0f, circleWidth = 0f, circleLength = 0f, circleStroke = 0f;
+    public float circleLife = 0f, circleLength = 0f, circleWidth = 0f, circleStroke = 0f;
     /** Whether to draw light on smoke particles.  Set to 0 for {@code false} or >0 for {@code true}. */
     public int drawCircle = -1, drawSmokeLight = -1;
     /** Values of smoke's light, if drawn. */
@@ -111,7 +111,7 @@ public class VOShootEffect extends Effect{
 
         if(flashColor == null) flashColor = new Color[]{Pal.lighterOrange, Pal.lightOrange};
         if(smokeColor == null) smokeColor = new Color[]{Pal.lightOrange, Pal.lighterOrange, Color.gray, Color.darkGray, Color.darkGray};
-        if(circleColor == null) circleColor = new Color[]{Color.darkGray, Color.gray.cpy().a(0)};
+        if(circleColor == null) circleColor = new Color[]{Color.gray.cpy().a(0.8f), Color.darkGray/*.cpy().a(0.5f)*/};
 
         if(flashInterp == null) flashInterp = Interp.linear;
         if(smokeLenInterp == null) smokeLenInterp = Interp.pow5Out;
@@ -143,9 +143,9 @@ public class VOShootEffect extends Effect{
             if(smokeCone == 0) smokeCone = 32f - ((((smokeLen / 100) * smokeLen) / 2f) * 3f) + 2f;
 
             if(drawCircle > 0){
-                if(circleWidth == 0) circleWidth = w * 10f;
-                if(circleLength == 0) circleLength = w * 2.5f;
-                if(circleStroke == 0) circleStroke = w;
+                if(circleLength == 0) circleLength = w * 0.5f;
+                if(circleWidth == 0) circleWidth = w * 2f;
+                if(circleStroke == 0) circleStroke = w / 2.5f;
             }
         }
 
@@ -162,6 +162,13 @@ public class VOShootEffect extends Effect{
 
     @Override
     public void render(EffectContainer e){
+        if(drawCircle > 0){
+            e.scaled(circleLife, i -> {
+                color(lerpp(circleColor, i.fin(circleColorInterp)));
+                Lines.stroke(circleStroke * i.fout(circleInterp));
+                Lines.ellipse(e.x, e.y, 1, circleLength * i.fin(circleInterp), circleWidth * i.fin(circleInterp), e.rotation);
+            });
+        }
         if(smokes > 0){
             e.scaled(smokeLife * 0.8f, i -> {
                 color(lerpp(smokeColor, i.fin(smokeColorInterp)));
@@ -193,13 +200,6 @@ public class VOShootEffect extends Effect{
             Drawf.tri(e.x, e.y, width * i.fout(flashInterp), len * i.fout(flashInterp), e.rotation);
             Drawf.tri(e.x, e.y, width * i.fout(flashInterp), 2f + ((len - 5f) / 10f) * i.fout(flashInterp), e.rotation + 180f);
         });
-        if(drawCircle > 0){
-            e.scaled(circleLife, i -> {
-                color(lerpp(circleColor, i.fin(circleColorInterp)));
-                Lines.stroke(circleStroke * i.fin(circleInterp));
-                Lines.ellipse(e.x, e.y, 1, circleWidth * i.fin(circleInterp), circleLength * i.fin(circleInterp), e.rotation);
-            });
-        }
     }
 
     public int round(float value){
