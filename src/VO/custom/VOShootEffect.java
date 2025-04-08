@@ -4,7 +4,6 @@ import arc.graphics.Color;
 import arc.graphics.g2d.*;
 import arc.math.*;
 import arc.math.geom.Vec2;
-import arc.util.Tmp;
 import mindustry.entities.Effect;
 import mindustry.graphics.*;
 
@@ -166,8 +165,7 @@ public class VOShootEffect extends Effect{
             e.scaled(circleLife, i -> {
                 color(lerpp(circleColor, i.fin(circleColorInterp)));
                 Lines.stroke(circleStroke * i.fout(circleInterp));
-                Tmp.v1.trns(e.rotation, 1f);
-                Lines.ellipse(e.x + Tmp.v1.x, e.y + Tmp.v1.y, 1, circleLength * i.fin(circleInterp), circleWidth * i.fin(circleInterp), e.rotation);
+                Lines.ellipse(e.x, e.y, 1, circleLength * i.fin(circleInterp), circleWidth * i.fin(circleInterp), e.rotation);
             });
         }
         if(smokes > 0){

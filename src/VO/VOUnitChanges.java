@@ -92,10 +92,10 @@ public class VOUnitChanges {
         UnitTypes.scepter.weapons.get(0).bullet.shootEffect = new VOShootEffect(38, 11, "heavy");
         UnitTypes.scepter.weapons.get(0).bullet.smokeEffect = Fx.none;
         UnitTypes.scepter.weapons.get(0).bullet.hitEffect = new MultiEffect(Fx.shootBig, Fx.hitBulletSmall);
-        UnitTypes.scepter.weapons.get(1).bullet.shootEffect = new VOShootEffect(32, 9);
+        UnitTypes.scepter.weapons.get(1).bullet.shootEffect = new VOShootEffect();
         UnitTypes.scepter.weapons.get(1).bullet.smokeEffect = Fx.none;
         UnitTypes.scepter.weapons.get(1).bullet.hitEffect = new MultiEffect(Fx.shootSmall, Fx.hitBulletSmall);
-        UnitTypes.scepter.weapons.get(2).bullet.shootEffect = new VOShootEffect(32, 9);
+        UnitTypes.scepter.weapons.get(2).bullet.shootEffect = new VOShootEffect();
         UnitTypes.scepter.weapons.get(2).bullet.smokeEffect = Fx.none;
         UnitTypes.scepter.weapons.get(2).bullet.hitEffect = new MultiEffect(Fx.shootSmall, Fx.hitBulletSmall);
         UnitTypes.reign.weapons.get(0).shootY = 13;
