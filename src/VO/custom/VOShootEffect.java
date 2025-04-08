@@ -131,7 +131,7 @@ public class VOShootEffect extends Effect{
 
             m = basic ? 8f : 9f;
             if(flashLife == 0) flashLife = m + (l / 25f) + (w / 25f);
-            m = basic ? 2f : 2.5f;
+            m = basic ? 1.5f : 2.5f;
             if(smokeLife == 0) smokeLife = ((l + w) / (l / 25f + w / 25f)) * m;
             if(circleLife == 0 && drawCircle > 0) circleLife = flashLife;
             lifetime = max(lifetime, smokeLife * 1.2f, circleLife);
@@ -166,7 +166,7 @@ public class VOShootEffect extends Effect{
             e.scaled(circleLife, i -> {
                 color(lerpp(circleColor, i.fin(circleColorInterp)));
                 Lines.stroke(circleStroke * i.fout(circleInterp));
-                Tmp.v1.trns(e.rotation, circleStroke);
+                Tmp.v1.trns(e.rotation, 2f);
                 Lines.ellipse(e.x + Tmp.v1.x, e.y + Tmp.v1.y, 1, circleLength * i.fin(circleInterp), circleWidth * i.fin(circleInterp), e.rotation);
             });
         }
