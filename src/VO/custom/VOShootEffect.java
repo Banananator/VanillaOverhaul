@@ -208,22 +208,18 @@ public class VOShootEffect extends Effect{
         colors = new Color[]{Color.red, Color.blue, Color.orange, Color.green};
         int ll = colors.length;
         float l = (ll - 1) * interp;
-        int i = 1;
         Color c = null;
         Color cc = null;
         float interp2 = 0;
-        while(i < l){
-            //if(l >= i && l <= i + 1){
-            //    c = colors[i];
-            //    cc = colors[i + 1];
-            //    interp2 = l - i;
-            //}
-            i += 1;
-        };
-        c = colors[i - 1];
-        cc = colors[i];
-        interp2 = l - i;
-        return lerpWithA(new Color[]{c, cc}, interp2);
+        while(interp < 1){
+            int i = 1;
+            while(i < l) i += 1;
+            c = colors[i - 1];
+            cc = colors[i];
+            interp2 = l - i;
+            return lerpWithA(new Color[]{c, cc}, interp2);
+        }
+        return Color.white;
     }
 
     public static void customRandLenVectors(long seed, int amount, float length, float minLenMult, float angle, float range, Floatc2 cons){
