@@ -197,7 +197,7 @@ public class VOShootEffect extends Effect{
             e.scaled(circleLife, i -> {
                 color(lerpp(circleColor, i.fin(circleColorInterp)));
                 Lines.stroke(circleStroke * i.fin(circleInterp));
-                Lines.ellipse(e.x, e.y, 0, circleWidth * i.fin(circleInterp), circleLength * i.fin(circleInterp), e.rotation);
+                Lines.ellipse(e.x, e.y, 1, circleWidth * i.fin(circleInterp), circleLength * i.fin(circleInterp), e.rotation);
             });
         }
     }
