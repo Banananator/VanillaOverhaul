@@ -116,7 +116,7 @@ public class VOShootEffect extends Effect{
             float m = 0f;
 
             m = basic ? 8f : 0f;
-            if(flashLife == 0) flashLife = m + (l / 50f) + (w / 50f);
+            if(flashLife == 0) flashLife = m + (l / 25f) + (w / 25f);
             m = basic ? 2f : 1f;
             if(smokeLife == 0) smokeLife = ((l + w) / (l / 25f + w / 25f)) * m;
             lifetime = Math.max(lifetime, smokeLife * 1.25f);
@@ -125,7 +125,7 @@ public class VOShootEffect extends Effect{
             if(smokes < 0) smokes = round((w / l * w * 1.5f) * m);
             if(smokeLen == 0) smokeLen = l * 0.5f;
             m = basic ? 1f : 1f;
-            if(smokeSize == 0) smokeSize = Mathf.pow((l / 20f) + (w / 10f), 0.65f) * m;
+            if(smokeSize == 0) smokeSize = Mathf.pow((l / 20f) + (w / 10f), 0.5f) * m;
         }
 
         if(lifetime == 0) lifetime = 20f;
