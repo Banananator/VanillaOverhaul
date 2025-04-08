@@ -28,7 +28,7 @@ public class VOShootEffect extends Effect{
     /** Explosion value. If not 0, overrides itself in auto-setup. If negative, effect will be inverted. */
     public float flashLife = 0f;
     /** Explosion value. If not 0, overrides itself in auto-setup. If negative, effect will be inverted. */
-    public float smokeLife = 0f, smokeSize = 0f, smokeLen = 0f, smokeCone = 25f;
+    public float smokeLife = 0f, smokeSize = 0f, smokeLen = 0f, smokeCone = 32f;
     /** Whether to draw light on smoke particles. */
     public boolean drawSmokeLight = false;
     /** Values of smoke's light, if drawn. */
@@ -100,7 +100,7 @@ public class VOShootEffect extends Effect{
         }*/
 
         if(flashColor == null) flashColor = new Color[]{Pal.lighterOrange, Pal.lightOrange};
-        if(smokeColor == null) smokeColor = new Color[]{Pal.lighterOrange, Color.gray};
+        if(smokeColor == null) smokeColor = new Color[]{Pal.lighterOrange, Pal.lightOrange, Color.gray, Color.gray, Color.lightGray};
 
         if(flashInterp == null) flashInterp = Interp.linear;
         if(smokeLenInterp == null) smokeLenInterp = Interp.pow5Out;
