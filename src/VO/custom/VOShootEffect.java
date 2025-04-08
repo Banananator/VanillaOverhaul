@@ -216,7 +216,7 @@ public class VOShootEffect extends Effect{
             while(i < l) i += 1;
             c = colors[i - 1];
             cc = colors[i];
-            interp2 = l - i;
+            interp2 = 1 - (i - l);
             return lerpWithA(new Color[]{c, cc}, interp2);
         }
         return Color.white;
