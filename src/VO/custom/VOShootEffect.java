@@ -100,7 +100,7 @@ public class VOShootEffect extends Effect{
         }*/
 
         if(flashColor == null) flashColor = new Color[]{Pal.lighterOrange, Pal.lightOrange};
-        if(smokeColor == null) smokeColor = new Color[]{Pal.lightOrange, Pal.lighterOrange, Color.darkGray, Color.gray, Color.lightGray};
+        if(smokeColor == null) smokeColor = new Color[]{Pal.lightOrange, Pal.lighterOrange, Color.gray, Color.darkGray, Color.darkGray};
 
         if(flashInterp == null) flashInterp = Interp.linear;
         if(smokeLenInterp == null) smokeLenInterp = Interp.pow5Out;
