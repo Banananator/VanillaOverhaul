@@ -234,14 +234,14 @@ public class VOExplosionEffect extends Effect{
     public void render(EffectContainer e){
         if(drawWave){
             e.scaled(waveLife, i -> {
-                color(lerpWithA(waveColor, i.fin(interpColor ? waveRadInterp : Interp.linear)));
+                color(lerpp(waveColor, i.fin(interpColor ? waveRadInterp : Interp.linear)));
                 stroke(waveStroke * (waveStroke > 0 ? 1f - i.fin(smokeSizeInterp) : i.fin(waveStrokeInterp)));
                 Lines.circle(e.x, e.y, waveRad * (waveRad > 0 ? i.fin(waveRadInterp) : 1f - i.fin(smokeSizeInterp)));
             });
         }
         if(sparks > 0){
             e.scaled(sparkLife, i -> {
-                color(lerpWithA(sparkColor, i.fin(interpColor ? sparkRadInterp : Interp.linear)));
+                color(lerpp(sparkColor, i.fin(interpColor ? sparkRadInterp : Interp.linear)));
                 stroke(sparkStroke * (sparkStroke > 0 ? 1f - i.fin(smokeSizeInterp) : i.fin(sparkSizeInterp)));
                 randLenVectors(e.id, sparks, sparkRad * (sparkRad > 0 ? i.fin(sparkRadInterp) : 1f - i.fin(smokeSizeInterp)), (x, y) -> {
                     lineAngle(e.x + x, e.y + y, Mathf.angle(x, y), sparkLen * (sparkLen > 0 ? 1f - i.fin(smokeSizeInterp) : i.fin(sparkSizeInterp)));
@@ -250,28 +250,28 @@ public class VOExplosionEffect extends Effect{
         }
         if(smokes > 0 && sap){
             e.scaled(smokeLife * 0.8f, i -> {
-                color(lerpWithA(smokeColor, i.fin(interpColor ? smokeRadInterp : Interp.linear)));
+                color(lerpp(smokeColor, i.fin(interpColor ? smokeRadInterp : Interp.linear)));
                 randLenVectors(e.id + 2, smokes, smokeRad * (smokeRad > 0 ? i.fin(smokeRadInterp) : 1f - i.fin(smokeSizeInterp)), (x, y) -> {
                     float r = ((smokeSize * 2f) / (2f / 3f)) * (smokeSize > 0 ? 1f - i.fin(smokeSizeInterp) : i.fin(smokeSizeInterp));
                     //Fill.circle(e.x + x, e.y + y, r);
                     Draw.rect(Core.atlas.find(smokeRegion), e.x + x, e.y + y, r, r, smokeBaseRot + (e.time * smokeRot));
-                    if(drawSmokeLight > 0) Drawf.light(e.x + x, e.y + y, r * smokeLightScl, lerpWithA(smokeColor, e.fin()), smokeLightOpacity * Draw.getColor().a);
+                    if(drawSmokeLight > 0) Drawf.light(e.x + x, e.y + y, r * smokeLightScl, lerpp(smokeColor, e.fin()), smokeLightOpacity * Draw.getColor().a);
                 });
             });
         }
         if(smokes > 0){
             e.scaled(smokeLife, i -> {
-                color(lerpWithA(smokeColor, i.fin(interpColor ? smokeRadInterp : Interp.linear)));
+                color(lerpp(smokeColor, i.fin(interpColor ? smokeRadInterp : Interp.linear)));
                 randLenVectors(e.id + 1, smokes, smokeRad * (smokeRad > 0 ? i.fin(smokeRadInterp) : 1f - i.fin(smokeSizeInterp)), (x, y) -> {
                     float r = (smokeSize * 2f) * (smokeSize > 0 ? 1f - i.fin(smokeSizeInterp) : i.fin(smokeSizeInterp));
                     //Fill.circle(e.x + x, e.y + y, r);
                     Draw.rect(Core.atlas.find(smokeRegion), e.x + x, e.y + y, r, r, smokeBaseRot + (e.time * smokeRot));
-                    if(drawSmokeLight > 0) Drawf.light(e.x + x, e.y + y, r * smokeLightScl, lerpWithA(smokeColor, e.fin()), smokeLightOpacity * Draw.getColor().a);
+                    if(drawSmokeLight > 0) Drawf.light(e.x + x, e.y + y, r * smokeLightScl, lerpp(smokeColor, e.fin()), smokeLightOpacity * Draw.getColor().a);
                 });
             });
         }
         float lightRad = 2f * (drawWave ? (waveRad > 0 ? waveRad : -waveRad) : sparks > 0 ? (sparkRad > 0 ? sparkRad : -sparkRad) : 0f);
-        Drawf.light(e.x, e.y, lightRad, lerpWithA(lightColor, e.fin()), 0.8f * e.fout());
+        Drawf.light(e.x, e.y, lightRad, lerpp(lightColor, e.fin()), 0.8f * e.fout());
     }
 
     public Color lerpWithA(Color[] colors, float s){
@@ -281,6 +281,26 @@ public class VOExplosionEffect extends Effect{
 
         float n = s * (l - 1) - (int)(s * (l - 1));
         float i = 1f - n;
-        return new Color(a.r * i + b.r * n, a.g * i + b.g * n, a.b * i + b.b * n, a.a * i + b.a * n);
+        if(a != null && b != null){
+            return new Color(a.r * i + b.r * n, a.g * i + b.g * n, a.b * i + b.b * n, a.a * i + b.a * n);
+        } else return Color.white;
+    }
+
+    public Color lerpp(Color[] colors, float interp){
+        int ll = colors.length;
+        float l = (ll - 1) * interp;
+        if(ll <= 1) return colors[0];
+        Color c = null;
+        Color cc = null;
+        float interp2 = 0;
+        while(interp < 1){
+            int i = 1;
+            while(i < l) i += 1;
+            c = colors[i - 1];
+            cc = colors[i];
+            interp2 = 1 - (i - l);
+            return lerpWithA(new Color[]{c, cc}, interp2);
+        }
+        return Color.white;
     }
 }
