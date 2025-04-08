@@ -85,7 +85,7 @@ public class VOUnitChanges {
                 colors = new Color[]{Color.white, Color.valueOf("fff4ac"), Pal.lightFlame, Pal.darkFlame, Color.gray};
             }};
         }});
-        UnitTypes.fortress.weapons.get(0).bullet.shootEffect = new VOShootEffect(32, 9, "heavy");
+        UnitTypes.fortress.weapons.get(0).bullet.shootEffect = new VOShootEffect(32, 9);
         UnitTypes.fortress.weapons.get(0).bullet.smokeEffect = Fx.none;
         UnitTypes.fortress.weapons.get(0).bullet.hitEffect = new VOExplosionEffect(35, 80, "blast");
         UnitTypes.fortress.weapons.get(0).bullet.despawnEffect = Fx.none;
