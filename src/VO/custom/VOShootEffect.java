@@ -126,7 +126,7 @@ public class VOShootEffect extends Effect{
             if(smokeLen == 0) smokeLen = l * Math.min(2f * (w / 24f), 0.8f);
             m = basic ? 1f : 1f;
             if(smokeSize == 0) smokeSize = Mathf.pow((l / 20f) + (w / 10f), 0.75f) * m;
-            if(smokeCone == 0) smokeCone = 32f - (((smokeLen / 50f) * (smokeLen * 2f)) / 2f) + 2f;
+            if(smokeCone == 0) smokeCone = 32f - ((((smokeLen / 100) * smokeLen) / 2f) * 3f) + 2f;
         }
 
         if(lifetime == 0) lifetime = 20f;
