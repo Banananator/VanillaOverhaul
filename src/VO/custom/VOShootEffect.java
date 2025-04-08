@@ -28,15 +28,13 @@ public class VOShootEffect extends Effect{
     /** Explosion value. If not 0, overrides itself in auto-setup. If negative, effect will be inverted. */
     public float flashLife = 0f;
     /** Explosion value. If not 0, overrides itself in auto-setup. If negative, effect will be inverted. */
-    public float smokeLife = 0f, smokeSize = 0f, smokeLen = 0f, smokeCone = 20f;
+    public float smokeLife = 0f, smokeSize = 0f, smokeLen = 0f, smokeCone = 25f;
     /** Whether to draw light on smoke particles. Set to 0 for {@code false} or >0 for {@code true}. */
     public int drawSmokeLight = -1;
     /** Values of smoke's light, if drawn. */
     public float smokeLightScl = 2f, smokeLightOpacity = 0.6f;
     /** Explosion value interpolation. If not {@code null}, overrides itself in auto-setup. */
-    public Interp flashInterp = null, smokeLenInterp = null, smokeSizeInterp = null;
-    /** Whether to interpolate colors. */
-    public boolean interpColor = true;
+    public Interp flashInterp = null, smokeLenInterp = null, smokeSizeInterp = null, smokeColorInterp = null;
     /** Amount of particles. Set to 0 to disable particle. */
     public int smokes = -1;
     /** Texture of the smokes. */
@@ -108,6 +106,7 @@ public class VOShootEffect extends Effect{
         if(flashInterp == null) flashInterp = Interp.linear;
         if(smokeLenInterp == null) smokeLenInterp = Interp.pow5Out;
         if(smokeSizeInterp == null) smokeSizeInterp = Interp.linear;
+        if(smokeColorInterp == null) smokeColorInterp = Interp.linear;
 
         if(len < 0) len *= -1; if(width < 0) width *= -1;
 //UnitTypes.zenith.weapons.get(0).bullet.despawnHit = false; UnitTypes.zenith.weapons.get(1).bullet.despawnHit = false;        
@@ -159,24 +158,24 @@ public class VOShootEffect extends Effect{
     public void render(EffectContainer e){
         if(smokes > 0){
             e.scaled(smokeLife * 0.8f, i -> {
-                color(lerpp(smokeColor, i.fin(interpColor ? smokeLenInterp : Interp.linear)));
-                customRandLenVectors(e.id, smokes * 2, smokeLen * 1.25f * i.fin(smokeLenInterp), 0, e.rotation, smokeCone * 0.75f * i.finpow(), (x, y) -> {
+                color(lerpp(smokeColor, i.fin(smokeColorInterp)));
+                customRandLenVectors(e.id, smokes * 2, smokeLen * 1.25f * i.fin(smokeLenInterp), 0, e.rotation, smokeCone * 0.5f * i.finpow(), (x, y) -> {
                     float r = (smokeSize * 2f) * (smokeSize > 0 ? 1f - i.fin(smokeSizeInterp) : i.fin(smokeSizeInterp));
                     Draw.rect(Core.atlas.find(smokeRegion), e.x + x, e.y + y, r, r, smokeBaseRot + (e.time * smokeRot));
                     if(drawSmokeLight > 0) Drawf.light(e.x + x, e.y + y, r * smokeLightScl, lerpp(smokeColor, i.fin()), smokeLightOpacity * Draw.getColor().a);
                 });
             });
             e.scaled(smokeLife, i -> {
-                color(lerpp(smokeColor, i.fin(interpColor ? smokeLenInterp : Interp.linear)));
-                customRandLenVectors(e.id + 1, smokes, smokeLen * i.fin(smokeLenInterp), 0.5f, e.rotation, smokeCone * i.finpow(), (x, y) -> {
+                color(lerpp(smokeColor, i.fin(smokeColorInterp)));
+                customRandLenVectors(e.id + 1, smokes, smokeLen * i.fin(smokeLenInterp), 0.5f, e.rotation, smokeCone * 0.8f * i.finpow(), (x, y) -> {
                     float r = (smokeSize * 2f) * (smokeSize > 0 ? 1f - i.fin(smokeSizeInterp) : i.fin(smokeSizeInterp));
                     Draw.rect(Core.atlas.find(smokeRegion), e.x + x, e.y + y, r, r, smokeBaseRot + (e.time * smokeRot));
                     if(drawSmokeLight > 0) Drawf.light(e.x + x, e.y + y, r * smokeLightScl, lerpp(smokeColor, i.fin()), smokeLightOpacity * Draw.getColor().a);
                 });
             });
             e.scaled(smokeLife * 1.2f, i -> {
-                color(lerpp(smokeColor, i.fin(interpColor ? smokeLenInterp : Interp.linear)));
-                customRandLenVectors(e.id + 2, smokes, smokeLen * 0.75f * i.fin(smokeLenInterp), 0.75f, e.rotation, smokeCone * 1.25f * i.finpow(), (x, y) -> {
+                color(lerpp(smokeColor, i.fin(smokeColorInterp)));
+                customRandLenVectors(e.id + 2, smokes, smokeLen * 0.75f * i.fin(smokeLenInterp), 0.75f, e.rotation, smokeCone * i.finpow(), (x, y) -> {
                     float r = (smokeSize * 2f) * (smokeSize > 0 ? 1f - i.fin(smokeSizeInterp) : i.fin(smokeSizeInterp));
                     Draw.rect(Core.atlas.find(smokeRegion), e.x + x, e.y + y, r, r, smokeBaseRot + (e.time * smokeRot));
                     if(drawSmokeLight > 0) Drawf.light(e.x + x, e.y + y, r * smokeLightScl, lerpp(smokeColor, i.fin()), smokeLightOpacity * Draw.getColor().a);
@@ -184,7 +183,7 @@ public class VOShootEffect extends Effect{
             });
         }
         e.scaled(flashLife, i -> {
-            color(lerpp(flashColor, i.fin(interpColor ? flashInterp : Interp.linear)));
+            color(lerpp(flashColor, i.fin()));
             Drawf.tri(e.x, e.y, width * i.fout(flashInterp), len * i.fout(flashInterp), e.rotation);
             Drawf.tri(e.x, e.y, width * i.fout(flashInterp), 2f + ((len - 5f) / 10f) * i.fout(flashInterp), e.rotation + 180f);
         });
@@ -205,9 +204,10 @@ public class VOShootEffect extends Effect{
     }
 
     public Color lerpp(Color[] colors, float interp){
-        colors = new Color[]{Color.red, Color.blue, Color.orange, Color.green};
+        colors = new Color[]{Color.red, Color.blue, Color.orange, Color.green, Color.gray};
         int ll = colors.length;
         float l = (ll - 1) * interp;
+        if(ll <= 1) return colors[0];
         Color c = null;
         Color cc = null;
         float interp2 = 0;
