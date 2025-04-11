@@ -98,7 +98,7 @@ public class VOUnitChanges {
         UnitTypes.scepter.weapons.get(2).bullet.shootEffect = new VOShootEffect();
         UnitTypes.scepter.weapons.get(2).bullet.smokeEffect = Fx.none;
         UnitTypes.scepter.weapons.get(2).bullet.hitEffect = new MultiEffect(Fx.shootSmall, Fx.hitBulletSmall);
-        UnitTypes.reign.weapons.get(0).shootY = 13;
+        UnitTypes.reign.weapons.get(0).shootY = 16;
         UnitTypes.reign.weapons.get(0).bullet.shootEffect = new VOShootEffect(44, 13, "heavy");
         UnitTypes.reign.weapons.get(0).bullet.smokeEffect = Fx.none;
         UnitTypes.reign.weapons.get(0).bullet.hitEffect = new VOExplosionEffect(13, 18, "blast");
@@ -113,10 +113,26 @@ public class VOUnitChanges {
 
         UnitTypes.crawler.deathExplosionEffect = new VOExplosionEffect(55, 90, "flak");
         UnitTypes.atrax.weapons.get(0).shootY = 5.5f;
+        UnitTypes.atrax.weapons.get(0).bullet.shootEffect = new MultiEffect(Fx.shootSmall, new ParticleEffect(){{
+            lifetime = 20;
+            particles = 4;
+            cone = 25;
+            sizeFrom = 4;
+            sizeTo = 0;
+            colorFrom = Pal.slagOrange;
+            colorTo = Color.darkGray;
+            interp = Interp.pow3Out;
+            sizeInterp = Interp.pow3In;
+        }});
+        UnitTypes.atrax.weapons.get(0).bullet.smokeEffect = Fx.none;
         UnitTypes.atrax.weapons.get(0).bullet.trailWidth = 3.1f;
         UnitTypes.atrax.weapons.get(0).bullet.trailLength = 4;
+        UnitTypes.arkyid.weapons.get(3).bullet.shootEffect = new VOShootEffect(38, 11, "heavy");
+        UnitTypes.arkyid.weapons.get(3).bullet.smokeEffect = Fx.none;
         UnitTypes.arkyid.weapons.get(3).bullet.hitEffect = new VOExplosionEffect(70, 65, "sap");
         UnitTypes.arkyid.weapons.get(3).bullet.despawnEffect = Fx.none;
+        UnitTypes.toxopid.weapons.get(1).bullet.shootEffect = new VOShootEffect(50, 16, "heavy");
+        UnitTypes.toxopid.weapons.get(1).bullet.smokeEffect = Fx.none;
         UnitTypes.toxopid.weapons.get(1).bullet.hitEffect = new VOExplosionEffect(80, 75, "sap");
         UnitTypes.toxopid.weapons.get(1).bullet.despawnEffect = Fx.none;
         UnitTypes.toxopid.weapons.get(1).bullet.fragBullet.hitEffect = new VOExplosionEffect(70, 40, "sap");
