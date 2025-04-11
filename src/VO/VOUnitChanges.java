@@ -98,7 +98,7 @@ public class VOUnitChanges {
         UnitTypes.scepter.weapons.get(2).bullet.shootEffect = new VOShootEffect();
         UnitTypes.scepter.weapons.get(2).bullet.smokeEffect = Fx.none;
         UnitTypes.scepter.weapons.get(2).bullet.hitEffect = new MultiEffect(Fx.shootSmall, Fx.hitBulletSmall);
-        UnitTypes.reign.weapons.get(0).shootY = 16;
+        UnitTypes.reign.weapons.get(0).shootY = 15;
         UnitTypes.reign.weapons.get(0).bullet.shootEffect = new VOShootEffect(44, 13, "heavy");
         UnitTypes.reign.weapons.get(0).bullet.smokeEffect = Fx.none;
         UnitTypes.reign.weapons.get(0).bullet.hitEffect = new VOExplosionEffect(13, 18, "blast");
@@ -114,13 +114,14 @@ public class VOUnitChanges {
         UnitTypes.crawler.deathExplosionEffect = new VOExplosionEffect(55, 90, "flak");
         UnitTypes.atrax.weapons.get(0).shootY = 5.5f;
         UnitTypes.atrax.weapons.get(0).bullet.shootEffect = new MultiEffect(Fx.shootSmall, new ParticleEffect(){{
-            lifetime = 20;
+            lifetime = 25;
             particles = 4;
             cone = 25;
-            sizeFrom = 4;
+            length = 20;
+            sizeFrom = 1;
             sizeTo = 0;
             colorFrom = Pal.slagOrange;
-            colorTo = Color.darkGray;
+            colorTo = Pal.slagOrange;
             interp = Interp.pow3Out;
             sizeInterp = Interp.pow3In;
         }});
@@ -138,6 +139,8 @@ public class VOUnitChanges {
         UnitTypes.toxopid.weapons.get(1).bullet.fragBullet.hitEffect = new VOExplosionEffect(70, 40, "sap");
         UnitTypes.toxopid.weapons.get(1).bullet.fragBullet.despawnEffect = Fx.none;
 
+        UnitTypes.flare.weapons.get(0).bullet.shootEffect = new VOShootEffect();
+        UnitTypes.flare.weapons.get(0).bullet.despawnEffect = Fx.none;
         UnitTypes.flare.weapons.get(0).bullet.hitEffect = new MultiEffect(Fx.shootSmall, Fx.hitBulletSmall);
         UnitTypes.horizon.weapons.get(0).bullet.hitEffect = new VOExplosionEffect(25, 27, "flak");
         UnitTypes.horizon.weapons.get(0).bullet.despawnEffect = Fx.none;
@@ -154,7 +157,13 @@ public class VOUnitChanges {
         UnitTypes.antumbra.weapons.get(1).bullet.hitEffect = new VOExplosionEffect(20, 37, "blast");
         UnitTypes.antumbra.weapons.get(0).bullet.despawnEffect = Fx.none;
         UnitTypes.antumbra.weapons.get(1).bullet.despawnEffect = Fx.none;
+        UnitTypes.antumbra.weapons.get(2).bullet.shootEffect = new VOShootEffect(35, 10);
+        UnitTypes.antumbra.weapons.get(2).bullet.smokeEffect = Fx.none;
         UnitTypes.antumbra.weapons.get(2).bullet.hitEffect = new MultiEffect(Fx.shootBig, Fx.hitBulletSmall);
+        UnitTypes.eclipse.weapons.get(1).bullet.shootEffect = new VOShootEffect(32, 9);
+        UnitTypes.eclipse.weapons.get(2).bullet.smokeEffect = new VOShootEffect(32, 9);
+        UnitTypes.eclipse.weapons.get(1).bullet.shootEffect = Fx.none;
+        UnitTypes.eclipse.weapons.get(2).bullet.smokeEffect = Fx.none;
         UnitTypes.eclipse.weapons.get(1).bullet.hitEffect = new VOExplosionEffect(25, 65, "flak");
         UnitTypes.eclipse.weapons.get(2).bullet.hitEffect = new VOExplosionEffect(25, 65, "flak");
         UnitTypes.eclipse.weapons.get(1).bullet.despawnEffect = Fx.none;
