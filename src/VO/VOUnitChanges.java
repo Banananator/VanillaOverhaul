@@ -161,8 +161,8 @@ public class VOUnitChanges {
         UnitTypes.antumbra.weapons.get(2).bullet.smokeEffect = Fx.none;
         UnitTypes.antumbra.weapons.get(2).bullet.hitEffect = new MultiEffect(Fx.shootBig, Fx.hitBulletSmall);
         UnitTypes.eclipse.weapons.get(1).bullet.shootEffect = new VOShootEffect(32, 9);
-        UnitTypes.eclipse.weapons.get(2).bullet.smokeEffect = new VOShootEffect(32, 9);
-        UnitTypes.eclipse.weapons.get(1).bullet.shootEffect = Fx.none;
+        UnitTypes.eclipse.weapons.get(2).bullet.shootEffect = new VOShootEffect(32, 9);
+        UnitTypes.eclipse.weapons.get(1).bullet.smokeEffect = Fx.none;
         UnitTypes.eclipse.weapons.get(2).bullet.smokeEffect = Fx.none;
         UnitTypes.eclipse.weapons.get(1).bullet.hitEffect = new VOExplosionEffect(25, 65, "flak");
         UnitTypes.eclipse.weapons.get(2).bullet.hitEffect = new VOExplosionEffect(25, 65, "flak");
