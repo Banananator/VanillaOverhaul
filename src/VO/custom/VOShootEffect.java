@@ -11,13 +11,14 @@ import static arc.graphics.g2d.Draw.*;
 
 import arc.Core;
 import arc.func.Floatc2;
+import static arc.math.Angles.*;
 
 public class VOShootEffect extends Effect{
     /** Explosion mode. Automaticly sets up colors and affects values of auto-setup. */
-    public boolean basic = true, heavy = false, missile = false;
+    public boolean basic = true, heavy = false, missile = false, heal = false;
     /** Overrides auto-setup colors if not null. */
     public Color[] flashColor = null, smokeColor = null, circleColor = null;
-    /** Easy way to set the explosion type. Write {@code basic}, {@code heavy} or {@code missile} here. */
+    /** Easy way to set the explosion type. Write {@code basic}, {@code heavy}, {@code missile} or {@code heal} here. */
     public String type = "";
     /** 
      * Values of explosion auto-setup. If {@code rad} is not 0, automaticly sets up all the values depending 
@@ -28,11 +29,11 @@ public class VOShootEffect extends Effect{
     /** Explosion value. If not 0, overrides itself in auto-setup. If negative, effect will be inverted. */
     public float flashLife = 0f;
     /** Explosion value. If not 0, overrides itself in auto-setup. If negative, effect will be inverted. */
-    public float smokeLife = 0f, smokeSize = 0f, smokeLen = 0f, smokeCone = 0f;
+    public float smokeLife = 0f, smokeSize = 0f, smokeLen = 0f, smokeCone = 0f, sparkStroke = 0f;
     /** Explosion value. If not 0, overrides itself in auto-setup. If negative, effect will be inverted. */
     public float circleLife = 0f, circleLength = 0f, circleWidth = 0f, circleStroke = 0f;
     /** Whether to draw light on smoke particles.  Set to 0 for {@code false} or >0 for {@code true}. */
-    public int drawCircle = -1, drawSmokeLight = -1;
+    public int drawCircle = -1, drawSmokeLight = -1, smokeisSpark = -1;
     /** Values of smoke's light, if drawn. */
     public float smokeLightScl = 2f, smokeLightOpacity = 0.6f;
     /** Explosion value interpolation. If not {@code null}, overrides itself in auto-setup. */
@@ -87,17 +88,17 @@ public class VOShootEffect extends Effect{
 
         if(type == "basic"){
             basic = true;
-            heavy = missile = false;
+            heavy = missile = heal = false;
         } else if(type == "heavy"){
             heavy = true;
-            basic = missile = false;
+            basic = missile = heal = false;
         } /*else if(type == "pyra"){
             pyra = true;
             flak = blast = plast = surge = sap = false;
-        } else if(type == "plast"){
-            plast = true;
-            flak = blast = pyra = surge = sap = false;
-        } else if(type == "surge"){
+        }*/ else if(type == "heal"){
+            heal = true;
+            basic = heavy = missile = false;
+        } /*else if(type == "surge"){
             surge = true;
             flak = blast = pyra = plast = sap = false;
         } else if(type == "sap"){
@@ -108,6 +109,7 @@ public class VOShootEffect extends Effect{
         if(!basic && !heavy && !missile) basic = true;
 
         if(drawCircle == -1 && heavy) drawCircle = 1;
+        if(smokeisSpark == -1 && heal) smokeisSpark = 1;
 
         if(flashColor == null) flashColor = new Color[]{Pal.lighterOrange, Pal.lightOrange};
         if(smokeColor == null) smokeColor = new Color[]{Pal.lightOrange, Pal.lighterOrange, Color.gray, Color.darkGray, Color.darkGray};
@@ -134,6 +136,10 @@ public class VOShootEffect extends Effect{
             if(smokeLife == 0) smokeLife = ((l + w) / (l / 30f + w / 30f)) * m;
             if(circleLife == 0 && drawCircle > 0) circleLife = flashLife * 1.5f;
             lifetime = max(lifetime, smokeLife * 1.2f, circleLife);
+
+            if(smokeisSpark > 0){
+                
+            }
 
             if(smokes < 0) smokes = round(w / 2.25f);
             if(smokeLen == 0) smokeLen = l * Math.min(2f * (w / 24f), 0.8f);
@@ -168,7 +174,7 @@ public class VOShootEffect extends Effect{
                 Lines.ellipse(e.x, e.y, 1, circleLength * i.fin(circleInterp), circleWidth * i.fin(circleInterp), e.rotation);
             });
         }
-        if(smokes > 0){
+        if(smokes > 0 && smokeisSpark <= 0){
             e.scaled(smokeLife * 0.8f, i -> {
                 color(lerpp(smokeColor, i.fin(smokeColorInterp)));
                 customRandLenVectors(e.id, smokes * 2, smokeLen * i.fin(smokeLenInterp), 0, e.rotation, smokeCone * 0.5f, (x, y) -> {
@@ -191,6 +197,26 @@ public class VOShootEffect extends Effect{
                     float r = (smokeSize * 2f) * (smokeSize > 0 ? 1f - i.fin(smokeSizeInterp) : i.fin(smokeSizeInterp));
                     Draw.rect(Core.atlas.find(smokeRegion), e.x + x, e.y + y, r, r, smokeBaseRot + (e.time * smokeRot));
                     if(drawSmokeLight > 0) Drawf.light(e.x + x, e.y + y, r * smokeLightScl, lerpp(smokeColor, i.fin()), smokeLightOpacity * Draw.getColor().a);
+                });
+            });
+        }
+        if(smokes > 0 && smokeisSpark > 0){
+            e.scaled(smokeLife * 0.8f, i -> {
+                color(lerpp(smokeColor, i.fin(smokeColorInterp)));
+                randLenVectors(e.id, smokes, smokeLen * 0.85f * i.fin(smokeLenInterp), e.rotation, smokeCone * 0.8f * i.finpow(), (x, y) -> {
+                    float l = (smokeSize * 2f) * (smokeSize > 0 ? 1f - i.fin(smokeSizeInterp) : i.fin(smokeSizeInterp));
+                    float r = Mathf.angle(x, y);
+                    Lines.stroke(sparkStroke * i.fin(smokeSizeInterp));
+                    Lines.lineAngle(e.x + x, e.y + y, r, l);
+                });
+            });
+            e.scaled(smokeLife, i -> {
+                color(lerpp(smokeColor, i.fin(smokeColorInterp)));
+                randLenVectors(e.id + 1, smokes, smokeLen * 0.7f * i.fin(smokeLenInterp), e.rotation, smokeCone * i.finpow(), (x, y) -> {
+                    float l = (smokeSize * 2f) * (smokeSize > 0 ? 1f - i.fin(smokeSizeInterp) : i.fin(smokeSizeInterp));
+                    float r = Mathf.angle(x, y);
+                    Lines.stroke(sparkStroke * i.fin(smokeSizeInterp));
+                    Lines.lineAngle(e.x + x, e.y + y, r, l);
                 });
             });
         }
