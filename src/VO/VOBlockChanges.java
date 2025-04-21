@@ -53,24 +53,32 @@ public class VOBlockChanges {
                 ammoMultiplier = 2;
                 width = 7;
                 height = 9;
-                hitEffect = new MultiEffect(Fx.shootSmall, Fx.hitBulletSmall);
+                hitEffect = new MultiEffect(Fx.shootSmallColor, Fx.hitBulletColor);
+                hitColor = backColor = trailColor = Pal.copperAmmoBack;
+                frontColor = Pal.copperAmmoFront;
             }},
             Items.graphite, new BasicBulletType(3.5f, 18){{
                 lifetime = 60;
                 ammoMultiplier = 4;
                 width = 9;
                 height = 12;
-                reloadMultiplier = 0.6f;
-                hitEffect = new MultiEffect(Fx.shootSmall, Fx.hitBulletSmall);
+                rangeChange = 16f;
+                hitEffect = new MultiEffect(Fx.shootSmallColor, Fx.hitBulletColor);
+                hitColor = backColor = trailColor = Pal.graphiteAmmoBack;
+                frontColor = Pal.graphiteAmmoFront;
             }},
             Items.silicon, new BasicBulletType(3, 12){{
                 lifetime = 60;
                 ammoMultiplier = 5;
                 width = 7;
                 height = 9;
-                homingPower = 0.1f;;
+                homingPower = 0.2f;
                 reloadMultiplier = 1.5f;
-                hitEffect = new MultiEffect(Fx.shootSmall, Fx.hitBulletSmall);
+                hitEffect = new MultiEffect(Fx.shootSmallColor, Fx.hitBulletColor);
+                trailLength = 5;
+                trailWidth = 1.5f;
+                hitColor = backColor = trailColor = Pal.siliconAmmoBack;
+                frontColor = Pal.siliconAmmoFront;
             }});
             block.limitRange();
 		}
