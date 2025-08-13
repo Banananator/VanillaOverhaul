@@ -53,7 +53,7 @@ public class VOBlockChanges {
                 ammoMultiplier = 2;
                 width = 7;
                 height = 9;
-                shootEffect = new VOShootEffect(0.5f);
+                shootEffect = new VOShootEffect(15, 5, 0.5f);
                 smokeEffect = Fx.none;
                 hitEffect = new MultiEffect(Fx.shootSmallColor, Fx.hitBulletColor);
                 despawnEffect = Fx.hitBulletColor;
@@ -66,7 +66,7 @@ public class VOBlockChanges {
                 width = 9;
                 height = 12;
                 rangeChange = 16f;
-                shootEffect = new VOShootEffect(15, 7, 0.5f);
+                shootEffect = new VOShootEffect(0.5f);
                 smokeEffect = Fx.none;
                 hitEffect = new MultiEffect(Fx.shootSmallColor, Fx.hitBulletColor);
                 despawnEffect = Fx.hitBulletColor;
@@ -80,7 +80,7 @@ public class VOBlockChanges {
                 height = 9;
                 homingPower = 0.2f;
                 reloadMultiplier = 1.5f;
-                shootEffect = new VOShootEffect(18, 5, 0.5f);
+                shootEffect = new VOShootEffect(15, 5, 0.5f);
                 smokeEffect = Fx.none;
                 hitEffect = new MultiEffect(Fx.shootSmallColor, Fx.hitBulletColor);
                 despawnEffect = Fx.hitBulletColor;
@@ -269,27 +269,27 @@ public class VOBlockChanges {
                     drag = 0.01f;
                     layer = Layer.bullet - 2f;
                     trailColor = Liquids.water.color.cpy();
-                    trailWidth = 3.5f;
+                    trailWidth = 3.4f;
                     trailLength = 3;
                 }},
                 Liquids.slag, new LiquidBulletType(Liquids.slag){{
                     damage = 4;
                     drag = 0.01f;
                     trailColor = Liquids.slag.color.cpy();
-                    trailWidth = 3.5f;
+                    trailWidth = 3.4f;
                     trailLength = 3;
                 }},
                 Liquids.cryofluid, new LiquidBulletType(Liquids.cryofluid){{
                     drag = 0.01f;
                     trailColor = Liquids.cryofluid.color.cpy();
-                    trailWidth = 3.5f;
+                    trailWidth = 3.4f;
                     trailLength = 3;
                 }},
                 Liquids.oil, new LiquidBulletType(Liquids.oil){{
                     drag = 0.01f;
                     layer = Layer.bullet - 2f;
                     trailColor = Liquids.oil.color.cpy();
-                    trailWidth = 3.5f;
+                    trailWidth = 3.4f;
                     trailLength = 3;
                 }});
 		}

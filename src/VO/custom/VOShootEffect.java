@@ -139,7 +139,7 @@ public class VOShootEffect extends Effect{
             float m = 0f;
 
             m = basic ? 8f : 9f;
-            if(flashLife == 0) flashLife = m + (l / 25f) + (w / 25f);
+            if(flashLife == 0) flashLife = m + (l / 20f) + (w / 20f);
             m = basic ? 1.5f : 2f;
             if(smokeLife == 0) smokeLife = ((l + w) / (l / 30f + w / 30f)) * m;
             if(circleLife == 0 && drawCircle > 0) circleLife = flashLife * 1.5f;
@@ -232,8 +232,8 @@ public class VOShootEffect extends Effect{
         }
         e.scaled(flashLife, i -> {
             color(lerpp(flashColor, i.fin()));
-            Drawf.tri(ex, ey, width * 1.2f * i.fout(flashInterp), len * 1.2f * i.fout(flashInterp), e.rotation);
-            Drawf.tri(ex, ey, width * 1.2f * i.fout(flashInterp), 2f + ((len - 5f) / 10f) * i.fout(flashInterp), e.rotation + 180f);
+            Drawf.tri(ex, ey, width * 1.5f * i.fout(flashInterp), len * 1.2f * i.fout(flashInterp), e.rotation);
+            Drawf.tri(ex, ey, width * 1.5f * i.fout(flashInterp), 2f + ((len - 5f) / 10f) * i.fout(flashInterp), e.rotation + 180f);
         });
     }
 
