@@ -53,7 +53,9 @@ public class VOBlockChanges {
                 ammoMultiplier = 2;
                 width = 7;
                 height = 9;
+                shootEffect = new VOShootEffect();
                 hitEffect = new MultiEffect(Fx.shootSmallColor, Fx.hitBulletColor);
+                despawnEffect = Fx.hitBulletColor;
                 hitColor = backColor = trailColor = Pal.copperAmmoBack;
                 frontColor = Pal.copperAmmoFront;
             }},
@@ -63,18 +65,22 @@ public class VOBlockChanges {
                 width = 9;
                 height = 12;
                 rangeChange = 16f;
+                shootEffect = new VOShootEffect();
                 hitEffect = new MultiEffect(Fx.shootSmallColor, Fx.hitBulletColor);
+                despawnEffect = Fx.hitBulletColor;
                 hitColor = backColor = trailColor = Pal.graphiteAmmoBack;
                 frontColor = Pal.graphiteAmmoFront;
             }},
-            Items.silicon, new BasicBulletType(3, 12){{
+            Items.silicon, new BasicBulletType(3f, 12){{
                 lifetime = 60;
                 ammoMultiplier = 5;
                 width = 7;
                 height = 9;
                 homingPower = 0.2f;
                 reloadMultiplier = 1.5f;
+                shootEffect = new VOShootEffect();
                 hitEffect = new MultiEffect(Fx.shootSmallColor, Fx.hitBulletColor);
+                despawnEffect = Fx.hitBulletColor;
                 trailLength = 5;
                 trailWidth = 1.5f;
                 hitColor = backColor = trailColor = Pal.siliconAmmoBack;
@@ -90,7 +96,7 @@ public class VOBlockChanges {
 			block.ammoTypes.putAll(Items.scrap, new FlakBulletType(4f, 3){{
                 lifetime = 60f;
                 width = 6f;
-                height = 8f;
+                height = 6f;
                 ammoMultiplier = 5f;
                 reloadMultiplier = 0.5f;
                 splashDamage = 33f;
@@ -98,28 +104,30 @@ public class VOBlockChanges {
                 explodeRange = 26f;
                 explodeDelay = 6f;
                 shrinkY = -0.4f;
-                shootEffect = Fx.shootSmall;
+                shootEffect = new VOShootEffect();
                 hitEffect = new VOExplosionEffect(24, 33, "flak");
                 despawnEffect = Fx.none;
+                frontColor = Pal.scrapAmmoFront;
+                backColor = hitColor = Pal.scrapAmmoBack;
             }},
             Items.lead, new FlakBulletType(4.2f, 3){{
                 lifetime = 60f;
                 width = 6f;
-                height = 8f;
+                height = 6f;
                 ammoMultiplier = 4f;
                 splashDamage = 40.5f;
                 splashDamageRadius = 15f;
                 explodeRange = 17f;
                 explodeDelay = 15f / 4.2f;
                 shrinkY = -0.4f;
-                shootEffect = Fx.shootSmall;
+                shootEffect = new VOShootEffect();
                 hitEffect = new VOExplosionEffect(15, 40.5f, "flak");
                 despawnEffect = Fx.none;
             }},
             Items.metaglass, new FlakBulletType(4f, 3){{
                 lifetime = 60f;
                 width = 6f;
-                height = 8f;
+                height = 6f;
                 ammoMultiplier = 5f;
                 reloadMultiplier = 0.8f;
                 splashDamage = 45f;
@@ -127,9 +135,11 @@ public class VOBlockChanges {
                 explodeRange = 22f;
                 explodeDelay = 5.5f;
                 shrinkY = -0.4f;
-                shootEffect = Fx.shootSmall;
+                shootEffect = new VOShootEffect();
                 hitEffect = new VOExplosionEffect(20, 45, "flak");
                 despawnEffect = Fx.none;
+                backColor = trailColor = Pal.glassAmmoBack;
+                hitColor = frontColor = Pal.glassAmmoFront;
 
                 fragBullets = 6;
                 fragBullet = new BasicBulletType(3f, 5){{
@@ -138,8 +148,8 @@ public class VOBlockChanges {
                     height = 12f;
                     collidesGround = false;
                     shrinkY = 1f;
-                    frontColor = Color.white;
-                    backColor = Pal.gray;
+                    backColor = trailColor = Pal.glassAmmoBack;
+                    hitColor = frontColor = Pal.glassAmmoFront;
                     hitEffect = despawnEffect = Fx.none;
                 }};
             }});
@@ -193,8 +203,11 @@ public class VOBlockChanges {
                 splashDamage = 33f;
                 splashDamageRadius = splash;
                 knockback = 0.8f;
+                shootEffect = new VOShootEffect(15, 6, "heavy");
                 hitEffect = new VOExplosionEffect(splash, 33, "blast");
                 despawnEffect = Fx.none;
+                hitColor = backColor = trailColor = Pal.graphiteAmmoBack;
+                frontColor = Pal.graphiteAmmoFront;
             }},
             Items.silicon, new ArtilleryBulletType(3f, 20){{
                 lifetime = 80f;
@@ -207,8 +220,13 @@ public class VOBlockChanges {
                 splashDamage = 33f;
                 splashDamageRadius = splash;
                 knockback = 0.8f;
+                shootEffect = new VOShootEffect(15, 6, "heavy");
                 hitEffect = new VOExplosionEffect(splash, 33, "blast");
                 despawnEffect = Fx.none;
+                trailLength = 7;
+                trailWidth = 3f;
+                hitColor = backColor = trailColor = Pal.siliconAmmoBack;
+                frontColor = Pal.siliconAmmoFront;
             }},
             Items.pyratite, new ArtilleryBulletType(3f, 25){{
                 lifetime = 80f;
@@ -221,13 +239,50 @@ public class VOBlockChanges {
                 statusDuration = 60f * 12f;
                 makeFire = true;
                 knockback = 0.8f;
-                frontColor = Pal.lightishOrange;
-                backColor = Pal.lightOrange;
                 trailEffect = Fx.incendTrail;
+                shootEffect = new VOShootEffect(15, 6, "heavy");
                 hitEffect = new VOExplosionEffect(splash, 45, "pyra");
                 despawnEffect = Fx.none;
+                trailLength = 6;
+                trailWidth = 3f;
+                frontColor = trailColor = hitColor = Pal.lightishOrange;
+                backColor = Pal.lightOrange;
             }});
             block.limitRange(0f);
+		}
+
+        wave: {
+			if(!(Blocks.wave instanceof LiquidTurret))break wave;
+			LiquidTurret block = (LiquidTurret)Blocks.wave;
+			
+			block.ammoTypes.putAll(Liquids.water,new LiquidBulletType(Liquids.water){{
+                    knockback = 0.7f;
+                    drag = 0.01f;
+                    layer = Layer.bullet - 2f;
+                    trailColor = Liquids.water.color.cpy();
+                    trailWidth = 2.5f;
+                    trailLength = 3;
+                }},
+                Liquids.slag, new LiquidBulletType(Liquids.slag){{
+                    damage = 4;
+                    drag = 0.01f;
+                    trailColor = Liquids.slag.color.cpy();
+                    trailWidth = 2.5f;
+                    trailLength = 3;
+                }},
+                Liquids.cryofluid, new LiquidBulletType(Liquids.cryofluid){{
+                    drag = 0.01f;
+                    trailColor = Liquids.cryofluid.color.cpy();
+                    trailWidth = 2.5f;
+                    trailLength = 3;
+                }},
+                Liquids.oil, new LiquidBulletType(Liquids.oil){{
+                    drag = 0.01f;
+                    layer = Layer.bullet - 2f;
+                    trailColor = Liquids.oil.color.cpy();
+                    trailWidth = 2.5f;
+                    trailLength = 3;
+                }});
 		}
 
         swarmer: {

@@ -33,7 +33,7 @@ public class VOShootEffect extends Effect{
     /** Explosion value. If not 0, overrides itself in auto-setup. If negative, effect will be inverted. */
     public float circleLife = 0f, circleLength = 0f, circleWidth = 0f, circleStroke = 0f;
     /** Whether to draw light on smoke particles.  Set to 0 for {@code false} or >0 for {@code true}. */
-    public int drawCircle = -1, drawSmokeLight = -1, smokeisSpark = -1;
+    public int drawCircle = -1, drawSmokeLight = -1, sparkSmoke = -1;
     /** Values of smoke's light, if drawn. */
     public float smokeLightScl = 2f, smokeLightOpacity = 0.6f;
     /** Explosion value interpolation. If not {@code null}, overrides itself in auto-setup. */
@@ -109,7 +109,7 @@ public class VOShootEffect extends Effect{
         if(!basic && !heavy && !missile) basic = true;
 
         if(drawCircle == -1 && heavy) drawCircle = 1;
-        if(smokeisSpark == -1 && heal) smokeisSpark = 1;
+        if(sparkSmoke == -1 && heal) sparkSmoke = 1;
 
         if(flashColor == null) flashColor = new Color[]{Pal.lighterOrange, Pal.lightOrange};
         if(smokeColor == null) smokeColor = new Color[]{Pal.lightOrange, Pal.lighterOrange, Color.gray, Color.darkGray, Color.darkGray};
@@ -137,7 +137,7 @@ public class VOShootEffect extends Effect{
             if(circleLife == 0 && drawCircle > 0) circleLife = flashLife * 1.5f;
             lifetime = max(lifetime, smokeLife * 1.2f, circleLife);
 
-            if(smokeisSpark > 0){
+            if(sparkSmoke > 0){
                 
             }
 
@@ -174,7 +174,7 @@ public class VOShootEffect extends Effect{
                 Lines.ellipse(e.x, e.y, 1, circleLength * i.fin(circleInterp), circleWidth * i.fin(circleInterp), e.rotation);
             });
         }
-        if(smokes > 0 && smokeisSpark <= 0){
+        if(smokes > 0 && sparkSmoke <= 0){
             e.scaled(smokeLife * 0.8f, i -> {
                 color(lerpp(smokeColor, i.fin(smokeColorInterp)));
                 customRandLenVectors(e.id, smokes * 2, smokeLen * i.fin(smokeLenInterp), 0, e.rotation, smokeCone * 0.5f, (x, y) -> {
@@ -200,7 +200,7 @@ public class VOShootEffect extends Effect{
                 });
             });
         }
-        if(smokes > 0 && smokeisSpark > 0){
+        if(smokes > 0 && sparkSmoke > 0){
             e.scaled(smokeLife * 0.8f, i -> {
                 color(lerpp(smokeColor, i.fin(smokeColorInterp)));
                 randLenVectors(e.id, smokes, smokeLen * 0.85f * i.fin(smokeLenInterp), e.rotation, smokeCone * 0.8f * i.finpow(), (x, y) -> {
