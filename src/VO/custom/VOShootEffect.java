@@ -150,7 +150,7 @@ public class VOShootEffect extends Effect{
             }
 
             if(smokes < 0) smokes = round(w / 2.25f);
-            if(smokeLen == 0) smokeLen = l * Math.min(2f * (w / 24f), 0.8f) * 1.2f;
+            if(smokeLen == 0) smokeLen = l * Math.min(2f * (w / 24f), 0.8f);
             m = basic ? 1f : 1.2f;
             if(smokeSize == 0) smokeSize = Mathf.pow((l / 20f) + (w / 10f), 0.85f) * m;
             if(smokeCone == 0) smokeCone = 32f - ((((smokeLen / 100) * smokeLen) / 2f) * 3f) + 2f;
@@ -232,8 +232,8 @@ public class VOShootEffect extends Effect{
         }
         e.scaled(flashLife, i -> {
             color(lerpp(flashColor, i.fin()));
-            Drawf.tri(ex, ey, width * 1.5f * i.fout(flashInterp), len * 1.5f * i.fout(flashInterp), e.rotation);
-            Drawf.tri(ex, ey, width * 1.5f * i.fout(flashInterp), 2f + ((len - 5f) / 10f) * i.fout(flashInterp), e.rotation + 180f);
+            Drawf.tri(ex, ey, width * 1.2f * i.fout(flashInterp), len * 1.2f * i.fout(flashInterp), e.rotation);
+            Drawf.tri(ex, ey, width * 1.2f * i.fout(flashInterp), 2f + ((len - 5f) / 10f) * i.fout(flashInterp), e.rotation + 180f);
         });
     }
 
