@@ -365,7 +365,7 @@ public class VOBlockChanges {
                 ammoMultiplier = 2;
                 width = 7;
                 height = 9;
-                shootEffect = new VOShootEffect(15, 5);
+                shootEffect = new VOShootEffect(15, 5, -0.5f);
                 smokeEffect = Fx.none;
                 hitEffect = new MultiEffect(Fx.shootSmallColor, Fx.hitBulletColor);
                 despawnEffect = Fx.hitBulletColor;
@@ -378,7 +378,7 @@ public class VOBlockChanges {
                 width = 9;
                 height = 12;
                 rangeChange = 4f * 8f;
-                shootEffect = new VOShootEffect();
+                shootEffect = new VOShootEffect(-0.5f);
                 smokeEffect = Fx.none;
                 hitEffect = new MultiEffect(Fx.shootSmallColor, Fx.hitBulletColor);
                 despawnEffect = Fx.hitBulletColor;
@@ -396,7 +396,7 @@ public class VOBlockChanges {
                 makeFire = true;
                 frontColor = Pal.lightishOrange;
                 backColor = trailColor = Pal.lightOrange;
-                shootEffect = new VOShootEffect();
+                shootEffect = new VOShootEffect(-0.5f);
                 smokeEffect = Fx.none;
                 hitEffect = new MultiEffect(new Effect(18, e -> {
                     color(Pal.lightishOrange); stroke(e.fout() * 2.5f);
@@ -416,7 +416,7 @@ public class VOBlockChanges {
                 height = 10;
                 homingPower = 0.2f;
                 reloadMultiplier = 1.5f;
-                shootEffect = new VOShootEffect();
+                shootEffect = new VOShootEffect(15, 4, -0.5f);
                 smokeEffect = Fx.none;
                 hitEffect = new MultiEffect(Fx.shootSmallColor, Fx.hitBulletColor);
                 despawnEffect = Fx.hitBulletColor;
@@ -430,7 +430,7 @@ public class VOBlockChanges {
                 ammoMultiplier = 4;
                 width = 8;
                 height = 13;
-                shootEffect = new VOShootEffect(25, 8);
+                shootEffect = new VOShootEffect(20, 6.5f, -0.5f);
                 smokeEffect = Fx.none;
                 hitEffect = new MultiEffect(Fx.shootSmallColor, Fx.hitBulletColor);
                 despawnEffect = Fx.hitBulletColor;

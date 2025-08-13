@@ -150,7 +150,7 @@ public class VOShootEffect extends Effect{
             }
 
             if(smokes < 0) smokes = round(w / 2.25f);
-            if(smokeLen == 0) smokeLen = l * Math.min(2f * (w / 24f), 0.8f);
+            if(smokeLen == 0) smokeLen = l * Math.min(2f * (w / 24f), 0.8f) * 1.2f;
             m = basic ? 1f : 1.2f;
             if(smokeSize == 0) smokeSize = Mathf.pow((l / 20f) + (w / 10f), 0.85f) * m;
             if(smokeCone == 0) smokeCone = 32f - ((((smokeLen / 100) * smokeLen) / 2f) * 3f) + 2f;
