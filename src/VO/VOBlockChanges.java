@@ -1033,7 +1033,7 @@ public class VOBlockChanges {
                 lifetime = 80f;
                 width = height = 11f;
                 collidesTiles = false;
-                splashDamage = 15f;
+                splashDamage = 20f;
                 splashDamageRadius = splash;
                 status = StatusEffects.sapped;
                 knockback = 0.8f;
@@ -1055,7 +1055,7 @@ public class VOBlockChanges {
                 lifetime = 80f;
                 width = height = 11f;
                 collidesTiles = false;
-                splashDamage = 15f;
+                splashDamage = 20f;
                 splashDamageRadius = splash2;
                 status = StatusEffects.sapped;
                 knockback = 0.8f;
