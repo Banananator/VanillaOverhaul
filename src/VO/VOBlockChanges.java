@@ -761,7 +761,7 @@ public class VOBlockChanges {
                 knockback = 0.3f;
                 shootEffect = new VOShootEffect(30, 7, -0.5f);
                 smokeEffect = Fx.none;
-                hitEffect = new MultiEffect(Fx.shootBigColor, Fx.hitBulletBig);
+                hitEffect = new MultiEffect(Fx.shootBigColor, VOFx.hitBulletBigColor);
                 despawnEffect = Fx.hitBulletColor;
                 hitColor = backColor = trailColor = Pal.graphiteAmmoBack;
                 frontColor = Pal.graphiteAmmoFront;
@@ -778,7 +778,7 @@ public class VOBlockChanges {
                 knockback = 0.7f;
                 shootEffect = new VOShootEffect(32, 7, -0.5f);
                 smokeEffect = Fx.none;
-                hitEffect = new MultiEffect(Fx.shootBigColor, Fx.hitBulletBig);
+                hitEffect = new MultiEffect(Fx.shootBigColor, VOFx.hitBulletBigColor);
                 despawnEffect = Fx.hitBulletColor;
                 backColor = hitColor = trailColor = Pal.thoriumAmmoBack;
                 frontColor = Pal.thoriumAmmoFront;
@@ -799,7 +799,7 @@ public class VOBlockChanges {
                 knockback = 0.6f;
                 frontColor = Pal.lightishOrange;
                 backColor = trailColor = Pal.lightOrange;
-                shootEffect = new VOShootEffect(30, 7, -0.5f);
+                shootEffect = new VOShootEffect(32, 7, -0.5f);
                 smokeEffect = Fx.none;
                 hitEffect = new MultiEffect(new Effect(18, e -> {
                     color(Pal.lightishOrange); stroke(e.fout() * 3.8f);

@@ -58,6 +58,16 @@ public class VOFx {
         Drawf.tri(e.x, e.y, w, 4f * e.fout(), e.rotation + 180f);
     }),
 
+    hitBulletBigColor = new Effect(13, e -> {
+        color(Color.white, e.color, e.fin());
+        stroke(0.5f + e.fout() * 1.5f);
+
+        randLenVectors(e.id, 8, e.finpow() * 30f, e.rotation, 50f, (x, y) -> {
+            float ang = Mathf.angle(x, y);
+            lineAngle(e.x + x, e.y + y, ang, e.fout() * 4 + 1.5f);
+        });
+    }),
+
     greenBombPlus = new Effect(180f, 150f, e -> {
         float fillCircleRad = new PowOut(15).apply(5f, 80f, e.fin());
         color(Pal.heal.cpy().a(0.15f), Pal.heal.cpy().a(0f), e.fin());
