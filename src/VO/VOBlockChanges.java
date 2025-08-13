@@ -516,7 +516,7 @@ public class VOBlockChanges {
                 splashDamage = 33f;
                 splashDamageRadius = splash1;
                 knockback = 0.8f;
-                shootEffect = new VOShootEffect(30, 7, "heavy");
+                shootEffect = new VOShootEffect(30, 7, -1, "heavy");
                 smokeEffect = Fx.none;
                 hitEffect = new VOExplosionEffect(splash1, 33, "blast");
                 despawnEffect = Fx.none;
@@ -534,7 +534,7 @@ public class VOBlockChanges {
                 homingPower = 0.08f;
                 homingRange = 50f;
                 knockback = 0.8f;
-                shootEffect = new VOShootEffect(30, 7, "heavy");
+                shootEffect = new VOShootEffect(30, 7, -1, "heavy");
                 smokeEffect = Fx.none;
                 hitEffect = new VOExplosionEffect(splash1, 33, "blast");
                 despawnEffect = Fx.none;
@@ -555,7 +555,7 @@ public class VOBlockChanges {
                 makeFire = true;
                 knockback = 0.8f;
                 trailEffect = Fx.incendTrail;
-                shootEffect = new VOShootEffect(35, 7, "heavy");
+                shootEffect = new VOShootEffect(34, 7.5f, -1, "heavy");
                 smokeEffect = Fx.none;
                 hitEffect = new VOExplosionEffect(splash1, 45, "pyra");
                 despawnEffect = Fx.none;
@@ -575,7 +575,7 @@ public class VOBlockChanges {
                 knockback = 0.8f;
                 frontColor = Pal.missileYellow;
                 backColor = Pal.missileYellowBack;
-                shootEffect = new VOShootEffect(35, 7, "heavy");
+                shootEffect = new VOShootEffect(40, 7, -1, "heavy");
                 smokeEffect = Fx.none;
                 hitEffect = new VOExplosionEffect(splash3, 55, "blast");
                 despawnEffect = Fx.none;
@@ -591,7 +591,7 @@ public class VOBlockChanges {
                 knockback = 1f;
                 frontColor = Pal.plastaniumFront;
                 backColor = Pal.plastaniumBack;
-                shootEffect = new VOShootEffect(35, 7, "heavy");
+                shootEffect = new VOShootEffect(34, 7.5f, -1, "heavy");
                 smokeEffect = Fx.none;
                 hitEffect = new VOExplosionEffect(splash2, 45, "plast");
                 despawnEffect = Fx.none;
@@ -623,7 +623,7 @@ public class VOBlockChanges {
                 splashDamage = 45f;
                 splashDamageRadius = 25f;
                 explodeRange = 20f;
-                shootEffect = new VOShootEffect(20, 5);
+                shootEffect = new VOShootEffect(18, 5, 1);
                 smokeEffect = Fx.none;
                 hitEffect = new Effect(30, e -> {
                     color(Pal.bulletYellow);
@@ -664,7 +664,7 @@ public class VOBlockChanges {
                 splashDamage = 45f;
                 splashDamageRadius = 60f;
                 status = StatusEffects.blasted;
-                shootEffect = new VOShootEffect(30, 6.5f);
+                shootEffect = new VOShootEffect(25, 6, 1);
                 smokeEffect = Fx.none;
                 hitEffect = new Effect(30, e -> {
                     color(Pal.missileYellow);
@@ -696,7 +696,7 @@ public class VOBlockChanges {
                 explodeRange = 20f;
                 frontColor = Pal.plastaniumFront;
                 backColor = Pal.plastaniumBack;
-                shootEffect = new VOShootEffect(30, 6.5f);
+                shootEffect = new VOShootEffect(25, 6, 1);
                 smokeEffect = Fx.none;
                 hitEffect = new VOExplosionEffect(40f, 37.5f, "plast");
                 despawnEffect = Fx.none;
@@ -720,7 +720,7 @@ public class VOBlockChanges {
                 lightning = 2;
                 lightningLength = 7;
                 explodeRange = 20f;
-                shootEffect = new VOShootEffect(30, 6.5f);
+                shootEffect = new VOShootEffect(25, 6, 1);
                 smokeEffect = Fx.none;
                 hitEffect = new Effect(30, e -> {
                     color(Pal.bulletYellow);

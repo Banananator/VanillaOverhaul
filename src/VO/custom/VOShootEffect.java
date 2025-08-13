@@ -67,6 +67,10 @@ public class VOShootEffect extends Effect{
         rotWithParent = false;
     }
 
+    public VOShootEffect(float len, float width, float offsetY, String type){
+        this(len, width, 0f, offsetY, type);
+    }
+
     public VOShootEffect(float len, float width, float smokeCone, float offsetY){
         this(len, width, smokeCone, offsetY, "basic");
     }
