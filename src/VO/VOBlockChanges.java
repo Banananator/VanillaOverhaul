@@ -1045,6 +1045,27 @@ public class VOBlockChanges {
             }});
         }
 
+        ripple: {
+			if(!(Blocks.ripple instanceof ItemTurret))break ripple;
+			ItemTurret block = (ItemTurret)Blocks.ripple;
+            float splash2 = 35f * 0.75f;
+			
+			block.ammoTypes.put(Items.sporePod, new ArtilleryBulletType(3f, 20){{
+                lifetime = 80f;
+                width = height = 11f;
+                collidesTiles = false;
+                splashDamage = 33f;
+                splashDamageRadius = splash2;
+                knockback = 0.8f;
+                shootEffect = new VOShootEffect(30, 7, -1.75f, "heavy");
+                smokeEffect = Fx.none;
+                hitEffect = new VOExplosionEffect(splash2, 33, "sap"){{waveColor = new Color[]{Pal.missileYellow};}};
+                despawnEffect = Fx.none;
+                hitColor = backColor = trailColor = Pal.sapBulletBack;
+                frontColor = Pal.sapBullet;
+            }});
+        }
+
 //0000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000
 
         /*breach: {
