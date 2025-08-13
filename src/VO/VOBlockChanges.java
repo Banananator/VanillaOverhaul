@@ -4,7 +4,6 @@ import mindustry.content.*;
 import mindustry.entities.Effect;
 import mindustry.entities.bullet.*;
 import mindustry.entities.effect.*;
-import mindustry.gen.Sounds;
 import mindustry.graphics.*;
 import mindustry.world.blocks.defense.turrets.*;
 import arc.graphics.Color;
@@ -817,7 +816,7 @@ public class VOBlockChanges {
 
 //0000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000
 
-        breach: {
+        /*breach: {
             if(!(Blocks.breach instanceof ItemTurret))break breach;
 			ItemTurret block = (ItemTurret)Blocks.breach;
 
@@ -998,7 +997,7 @@ public class VOBlockChanges {
             }};
             block.shootSound = Sounds.cannon;
             block.limitRange(9f);
-        }
+        }*/
     }
 
 //0000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000
@@ -1037,25 +1036,12 @@ public class VOBlockChanges {
                 splashDamage = 33f;
                 splashDamageRadius = splash;
                 knockback = 0.8f;
-                hitEffect = new Effect(30, e -> {
-                    color(Pal.missileYellow);
-                    e.scaled(6, i -> {
-                        stroke((wstroke(33)) * i.fout());
-                        Lines.circle(e.x, e.y, 2f + i.fin() * splash);
-                    });
-                    color(Color.gray);
-                    randLenVectors(e.id, 5, 2f + (splash - 5f) * e.finpow(), (x, y) -> {
-                        Fill.circle(e.x + x, e.y + y, e.fout() * 3.5f + 0.5f);
-                    });
-                    color(Pal.missileYellowBack);
-                    e.scaled(20, i -> {stroke(i.fout());
-                        randLenVectors(e.id + 1, 6, 2f + (splash + 4f) * i.finpow(), (x, y) -> {
-                            lineAngle(e.x + x, e.y + y, Mathf.angle(x, y), 1f + i.fout() * 3f);
-                        });
-                    });
-                    Drawf.light(e.x, e.y, splash * 2f, Pal.missileYellowBack, 0.8f * e.fout());
-                });
+                shootEffect = new VOShootEffect(30, 5, "heavy");
+                smokeEffect = Fx.none;
+                hitEffect = new VOExplosionEffect(splash, 33, "sap");
                 despawnEffect = Fx.none;
+                hitColor = backColor = trailColor = Pal.sapBulletBack;
+                frontColor = Pal.sapBullet;
             }});
         }
 
