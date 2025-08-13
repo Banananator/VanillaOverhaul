@@ -97,15 +97,23 @@ public class VOUnitChanges {
         UnitTypes.fortress.weapons.get(0).bullet.despawnEffect = Fx.none;
         UnitTypes.scepter.weapons.get(0).bullet.shootEffect = new VOShootEffect(38, 11, "heavy");
         UnitTypes.scepter.weapons.get(0).bullet.smokeEffect = Fx.none;
-        UnitTypes.scepter.weapons.get(0).bullet.hitEffect = new MultiEffect(Fx.shootBig, Fx.hitBulletSmall);
-        UnitTypes.scepter.weapons.get(1).bullet.shootEffect = new VOShootEffect();
+        UnitTypes.scepter.weapons.get(0).bullet.hitEffect = new MultiEffect(Fx.shootBigColor, Fx.hitBulletColor);
+        UnitTypes.scepter.weapons.get(0).bullet.despawnEffect = Fx.hitBulletColor;
+        UnitTypes.scepter.weapons.get(0).bullet.hitColor = Pal.surgeAmmoBack;
+        BulletType b = UnitTypes.scepter.weapons.get(0).bullet;
+        if(b instanceof BasicBulletType){
+            BasicBulletType bb = (BasicBulletType)b;
+            bb.frontColor = Pal.surgeAmmoFront;
+            bb.backColor = Pal.surgeAmmoBack;
+        }
+        UnitTypes.scepter.weapons.get(1).bullet.shootEffect = new VOShootEffect(15, 5, 1);
         UnitTypes.scepter.weapons.get(1).bullet.smokeEffect = Fx.none;
         UnitTypes.scepter.weapons.get(1).bullet.hitEffect = new MultiEffect(Fx.shootSmall, Fx.hitBulletSmall);
-        UnitTypes.scepter.weapons.get(2).bullet.shootEffect = new VOShootEffect();
+        UnitTypes.scepter.weapons.get(2).bullet.shootEffect = new VOShootEffect(15, 5, 1);
         UnitTypes.scepter.weapons.get(2).bullet.smokeEffect = Fx.none;
         UnitTypes.scepter.weapons.get(2).bullet.hitEffect = new MultiEffect(Fx.shootSmall, Fx.hitBulletSmall);
         UnitTypes.reign.weapons.get(0).shootY = 15;
-        UnitTypes.reign.weapons.get(0).bullet.shootEffect = new VOShootEffect(44, 13, "heavy");
+        UnitTypes.reign.weapons.get(0).bullet.shootEffect = new VOShootEffect(44, 11, "heavy");
         UnitTypes.reign.weapons.get(0).bullet.smokeEffect = Fx.none;
         UnitTypes.reign.weapons.get(0).bullet.hitEffect = new VOExplosionEffect(13, 18, "blast");
         UnitTypes.reign.weapons.get(0).bullet.despawnEffect = Fx.none;
