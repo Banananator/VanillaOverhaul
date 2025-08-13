@@ -1029,16 +1029,17 @@ public class VOBlockChanges {
 			ItemTurret block = (ItemTurret)Blocks.hail;
             float splash = 25f * 0.75f;
 			
-			block.ammoTypes.put(Items.sporePod, new ArtilleryBulletType(3f, 20){{
+			block.ammoTypes.put(Items.sporePod, new ArtilleryBulletType(3f, 10){{
                 lifetime = 80f;
                 width = height = 11f;
                 collidesTiles = false;
-                splashDamage = 33f;
+                splashDamage = 15f;
                 splashDamageRadius = splash;
+                status = StatusEffects.sapped;
                 knockback = 0.8f;
                 shootEffect = new VOShootEffect(30, 5, "heavy");
                 smokeEffect = Fx.none;
-                hitEffect = new VOExplosionEffect(splash, 33, "sap"){{waveColor = new Color[]{Pal.missileYellow};}};
+                hitEffect = new VOExplosionEffect(splash, 15, "sap"){{waveColor = new Color[]{Pal.missileYellow};}};
                 despawnEffect = Fx.none;
                 hitColor = backColor = trailColor = Pal.sapBulletBack;
                 frontColor = Pal.sapBullet;
@@ -1050,16 +1051,17 @@ public class VOBlockChanges {
 			ItemTurret block = (ItemTurret)Blocks.ripple;
             float splash2 = 35f * 0.75f;
 			
-			block.ammoTypes.put(Items.sporePod, new ArtilleryBulletType(3f, 20){{
+			block.ammoTypes.put(Items.sporePod, new ArtilleryBulletType(3f, 10){{
                 lifetime = 80f;
                 width = height = 11f;
                 collidesTiles = false;
-                splashDamage = 33f;
+                splashDamage = 15f;
                 splashDamageRadius = splash2;
+                status = StatusEffects.sapped;
                 knockback = 0.8f;
                 shootEffect = new VOShootEffect(30, 7, -1.75f, "heavy");
                 smokeEffect = Fx.none;
-                hitEffect = new VOExplosionEffect(splash2, 33, "sap"){{waveColor = new Color[]{Pal.missileYellow};}};
+                hitEffect = new VOExplosionEffect(splash2, 15, "sap"){{waveColor = new Color[]{Pal.missileYellow};}};
                 despawnEffect = Fx.none;
                 hitColor = backColor = trailColor = Pal.sapBulletBack;
                 frontColor = Pal.sapBullet;
