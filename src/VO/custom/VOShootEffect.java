@@ -4,6 +4,7 @@ import arc.graphics.Color;
 import arc.graphics.g2d.*;
 import arc.math.*;
 import arc.math.geom.Vec2;
+import arc.util.Tmp;
 import mindustry.entities.Effect;
 import mindustry.graphics.*;
 
@@ -26,6 +27,8 @@ public class VOShootEffect extends Effect{
      * {@code rad} to 0 to disable auto-setup.
     */
     public float len = 0, width = 0;
+    /** Effect offset on Y axis. Has nothing to do with auto-setup. */
+    public float offsetY = 0f;
     /** Explosion value. If not 0, overrides itself in auto-setup. If negative, effect will be inverted. */
     public float flashLife = 0f;
     /** Explosion value. If not 0, overrides itself in auto-setup. If negative, effect will be inverted. */
@@ -52,10 +55,11 @@ public class VOShootEffect extends Effect{
      * @param rad is used for basic auto-setup.
      * @param power is added to {@code rad} for advanced auto-setup. Is usually the explosion's damage.     
      * @param type sets the explosion type. */
-    public VOShootEffect(float len, float width, float smokeCone, String type){
+    public VOShootEffect(float len, float width, float smokeCone, float offsetY, String type){
         this.len = len;
         this.width = width;
         this.smokeCone = smokeCone;
+        this.offsetY = offsetY;
         this.type = type;
         clip = 0;
         lifetime = 0;
@@ -63,24 +67,28 @@ public class VOShootEffect extends Effect{
         rotWithParent = false;
     }
 
-    public VOShootEffect(float len, float width, float smokeCone){
-        this(len, width, smokeCone, "basic");
+    public VOShootEffect(float len, float width, float smokeCone, float offsetY){
+        this(len, width, smokeCone, offsetY, "basic");
+    }
+
+    public VOShootEffect(float len, float width, float offsetY){
+        this(len, width, 0f, offsetY, "basic");
     }
 
     public VOShootEffect(float len, float width, String type){
-        this(len, width, 0, type);
+        this(len, width, 0f, 0f, type);
     }
     
-    /** Creates an advanced explosion effect.
-     * @param rad is used for basic auto-setup.
-     * @param power is added to {@code rad} for advanced auto-setup. Is usually the explosion's damage.  */
     public VOShootEffect(float len, float width){
-        this(len, width, 0, "basic");
+        this(len, width, 0f, 0f, "basic");
     }
 
-    /** Creates an advanced explosion effect. */
+    public VOShootEffect(float offsetY){
+        this(15f, 6f, 0f, offsetY, "basic");
+    }
+
     public VOShootEffect(){
-        this(15f, 6f, 0, "basic");
+        this(15f, 6f, 0f, 0f, "basic");
     }
 
     @Override
@@ -167,11 +175,13 @@ public class VOShootEffect extends Effect{
 
     @Override
     public void render(EffectContainer e){
+        Vec2 offset = Tmp.v1.trns(e.rotation, offsetY);
+        float ex = e.x + offset.x, ey = e.y + offset.y;
         if(drawCircle > 0){
             e.scaled(circleLife, i -> {
                 color(lerpp(circleColor, i.fin(circleColorInterp)));
                 Lines.stroke(circleStroke * i.fout(circleInterp));
-                Lines.ellipse(e.x, e.y, 1, circleLength * i.fin(circleInterp), circleWidth * i.fin(circleInterp), e.rotation);
+                Lines.ellipse(ex, ey, 1, circleLength * i.fin(circleInterp), circleWidth * i.fin(circleInterp), e.rotation);
             });
         }
         if(smokes > 0 && sparkSmoke <= 0){
@@ -179,24 +189,24 @@ public class VOShootEffect extends Effect{
                 color(lerpp(smokeColor, i.fin(smokeColorInterp)));
                 customRandLenVectors(e.id, smokes * 2, smokeLen * i.fin(smokeLenInterp), 0, e.rotation, smokeCone * 0.5f, (x, y) -> {
                     float r = (smokeSize * 2f) * (smokeSize > 0 ? 1f - i.fin(smokeSizeInterp) : i.fin(smokeSizeInterp));
-                    Draw.rect(Core.atlas.find(smokeRegion), e.x + x, e.y + y, r, r, smokeBaseRot + (e.time * smokeRot));
-                    if(drawSmokeLight > 0) Drawf.light(e.x + x, e.y + y, r * smokeLightScl, lerpp(smokeColor, i.fin()), smokeLightOpacity * Draw.getColor().a);
+                    Draw.rect(Core.atlas.find(smokeRegion), ex + x, ey + y, r, r, smokeBaseRot + (e.time * smokeRot));
+                    if(drawSmokeLight > 0) Drawf.light(ex + x, ey + y, r * smokeLightScl, lerpp(smokeColor, i.fin()), smokeLightOpacity * Draw.getColor().a);
                 });
             });
             e.scaled(smokeLife, i -> {
                 color(lerpp(smokeColor, i.fin(smokeColorInterp)));
                 customRandLenVectors(e.id + 1, smokes, smokeLen * 0.85f * i.fin(smokeLenInterp), 0.5f, e.rotation, smokeCone * 0.8f * i.finpow(), (x, y) -> {
                     float r = (smokeSize * 2f) * (smokeSize > 0 ? 1f - i.fin(smokeSizeInterp) : i.fin(smokeSizeInterp));
-                    Draw.rect(Core.atlas.find(smokeRegion), e.x + x, e.y + y, r, r, smokeBaseRot + (e.time * smokeRot));
-                    if(drawSmokeLight > 0) Drawf.light(e.x + x, e.y + y, r * smokeLightScl, lerpp(smokeColor, i.fin()), smokeLightOpacity * Draw.getColor().a);
+                    Draw.rect(Core.atlas.find(smokeRegion), ex + x, ey + y, r, r, smokeBaseRot + (e.time * smokeRot));
+                    if(drawSmokeLight > 0) Drawf.light(ex + x, ey + y, r * smokeLightScl, lerpp(smokeColor, i.fin()), smokeLightOpacity * Draw.getColor().a);
                 });
             });
             e.scaled(smokeLife * 1.2f, i -> {
                 color(lerpp(smokeColor, i.fin(smokeColorInterp)));
                 customRandLenVectors(e.id + 2, smokes, smokeLen * 0.7f * i.fin(smokeLenInterp), 0.75f, e.rotation, smokeCone * i.finpow(), (x, y) -> {
                     float r = (smokeSize * 2f) * (smokeSize > 0 ? 1f - i.fin(smokeSizeInterp) : i.fin(smokeSizeInterp));
-                    Draw.rect(Core.atlas.find(smokeRegion), e.x + x, e.y + y, r, r, smokeBaseRot + (e.time * smokeRot));
-                    if(drawSmokeLight > 0) Drawf.light(e.x + x, e.y + y, r * smokeLightScl, lerpp(smokeColor, i.fin()), smokeLightOpacity * Draw.getColor().a);
+                    Draw.rect(Core.atlas.find(smokeRegion), ex + x, ey + y, r, r, smokeBaseRot + (e.time * smokeRot));
+                    if(drawSmokeLight > 0) Drawf.light(ex + x, ey + y, r * smokeLightScl, lerpp(smokeColor, i.fin()), smokeLightOpacity * Draw.getColor().a);
                 });
             });
         }
@@ -207,7 +217,7 @@ public class VOShootEffect extends Effect{
                     float l = (smokeSize * 2f) * (smokeSize > 0 ? 1f - i.fin(smokeSizeInterp) : i.fin(smokeSizeInterp));
                     float r = Mathf.angle(x, y);
                     Lines.stroke(sparkStroke * i.fin(smokeSizeInterp));
-                    Lines.lineAngle(e.x + x, e.y + y, r, l);
+                    Lines.lineAngle(ex + x, ey + y, r, l);
                 });
             });
             e.scaled(smokeLife, i -> {
@@ -216,14 +226,14 @@ public class VOShootEffect extends Effect{
                     float l = (smokeSize * 2f) * (smokeSize > 0 ? 1f - i.fin(smokeSizeInterp) : i.fin(smokeSizeInterp));
                     float r = Mathf.angle(x, y);
                     Lines.stroke(sparkStroke * i.fin(smokeSizeInterp));
-                    Lines.lineAngle(e.x + x, e.y + y, r, l);
+                    Lines.lineAngle(ex + x, ey + y, r, l);
                 });
             });
         }
         e.scaled(flashLife, i -> {
             color(lerpp(flashColor, i.fin()));
-            Drawf.tri(e.x, e.y, width * 1.5f * i.fout(flashInterp), len * 1.5f * i.fout(flashInterp), e.rotation);
-            Drawf.tri(e.x, e.y, width * 1.5f * i.fout(flashInterp), 2f + ((len - 5f) / 10f) * i.fout(flashInterp), e.rotation + 180f);
+            Drawf.tri(ex, ey, width * 1.5f * i.fout(flashInterp), len * 1.5f * i.fout(flashInterp), e.rotation);
+            Drawf.tri(ex, ey, width * 1.5f * i.fout(flashInterp), 2f + ((len - 5f) / 10f) * i.fout(flashInterp), e.rotation + 180f);
         });
     }
 
