@@ -1038,7 +1038,7 @@ public class VOBlockChanges {
                 knockback = 0.8f;
                 shootEffect = new VOShootEffect(30, 5, "heavy");
                 smokeEffect = Fx.none;
-                hitEffect = new VOExplosionEffect(splash, 33, "sap");
+                hitEffect = new VOExplosionEffect(splash, 33, "sap"){{waveColor = new Color[]{Pal.missileYellow};}};
                 despawnEffect = Fx.none;
                 hitColor = backColor = trailColor = Pal.sapBulletBack;
                 frontColor = Pal.sapBullet;
