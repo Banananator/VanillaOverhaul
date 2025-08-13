@@ -516,7 +516,7 @@ public class VOBlockChanges {
                 splashDamage = 33f;
                 splashDamageRadius = splash1;
                 knockback = 0.8f;
-                shootEffect = new VOShootEffect(30, 7, -1, "heavy");
+                shootEffect = new VOShootEffect(30, 7, -1.75f, "heavy");
                 smokeEffect = Fx.none;
                 hitEffect = new VOExplosionEffect(splash1, 33, "blast");
                 despawnEffect = Fx.none;
@@ -534,7 +534,7 @@ public class VOBlockChanges {
                 homingPower = 0.08f;
                 homingRange = 50f;
                 knockback = 0.8f;
-                shootEffect = new VOShootEffect(30, 7, -1, "heavy");
+                shootEffect = new VOShootEffect(30, 7, -1.75f, "heavy");
                 smokeEffect = Fx.none;
                 hitEffect = new VOExplosionEffect(splash1, 33, "blast");
                 despawnEffect = Fx.none;
@@ -555,7 +555,7 @@ public class VOBlockChanges {
                 makeFire = true;
                 knockback = 0.8f;
                 trailEffect = Fx.incendTrail;
-                shootEffect = new VOShootEffect(34, 7.5f, -1, "heavy");
+                shootEffect = new VOShootEffect(34, 7.5f, -1.75f, "heavy");
                 smokeEffect = Fx.none;
                 hitEffect = new VOExplosionEffect(splash1, 45, "pyra");
                 despawnEffect = Fx.none;
@@ -575,7 +575,7 @@ public class VOBlockChanges {
                 knockback = 0.8f;
                 frontColor = Pal.missileYellow;
                 backColor = Pal.missileYellowBack;
-                shootEffect = new VOShootEffect(40, 7, -1, "heavy");
+                shootEffect = new VOShootEffect(40, 7, -1.75f, "heavy");
                 smokeEffect = Fx.none;
                 hitEffect = new VOExplosionEffect(splash3, 55, "blast");
                 despawnEffect = Fx.none;
@@ -591,7 +591,7 @@ public class VOBlockChanges {
                 knockback = 1f;
                 frontColor = Pal.plastaniumFront;
                 backColor = Pal.plastaniumBack;
-                shootEffect = new VOShootEffect(34, 7.5f, -1, "heavy");
+                shootEffect = new VOShootEffect(34, 7.5f, -1.75f, "heavy");
                 smokeEffect = Fx.none;
                 hitEffect = new VOExplosionEffect(splash2, 45, "plast");
                 despawnEffect = Fx.none;
@@ -758,10 +758,13 @@ public class VOBlockChanges {
                 height = 21;
                 hitSize = 4.8f;
                 reloadMultiplier = 1.7f;
-                knockback = 0.7f;
-                shootEffect = Fx.shootBig;
-                smokeEffect = Fx.shootBigSmoke;
-                hitEffect = new MultiEffect(Fx.shootBig, Fx.hitBulletBig);
+                knockback = 0.3f;
+                shootEffect = new VOShootEffect(30, 7, -0.5f);
+                smokeEffect = Fx.none;
+                hitEffect = new MultiEffect(Fx.shootBigColor, Fx.hitBulletBig);
+                despawnEffect = Fx.hitBulletColor;
+                hitColor = backColor = trailColor = Pal.graphiteAmmoBack;
+                frontColor = Pal.graphiteAmmoFront;
             }},
             Items.thorium, new BasicBulletType(8, 80){{
                 lifetime = 60;
@@ -773,9 +776,12 @@ public class VOBlockChanges {
                 pierceBuilding = true;
                 pierceCap = 2;
                 knockback = 0.7f;
-                shootEffect = Fx.shootBig;
-                smokeEffect = Fx.shootBigSmoke;
-                hitEffect = new MultiEffect(Fx.shootBig, Fx.hitBulletBig);
+                shootEffect = new VOShootEffect(32, 7, -0.5f);
+                smokeEffect = Fx.none;
+                hitEffect = new MultiEffect(Fx.shootBigColor, Fx.hitBulletBig);
+                despawnEffect = Fx.hitBulletColor;
+                backColor = hitColor = trailColor = Pal.thoriumAmmoBack;
+                frontColor = Pal.thoriumAmmoFront;
             }},
             Items.pyratite, new BasicBulletType(7, 70){{
                 lifetime = 60;
@@ -793,8 +799,8 @@ public class VOBlockChanges {
                 knockback = 0.6f;
                 frontColor = Pal.lightishOrange;
                 backColor = trailColor = Pal.lightOrange;
-                shootEffect = Fx.shootBig;
-                smokeEffect = Fx.shootBigSmoke;
+                shootEffect = new VOShootEffect(30, 7, -0.5f);
+                smokeEffect = Fx.none;
                 hitEffect = new MultiEffect(new Effect(18, e -> {
                     color(Pal.lightishOrange); stroke(e.fout() * 3.8f);
                     randLenVectors(e.id + 1, 7, 2f + 25f * e.finpow(), (x, y) -> {
