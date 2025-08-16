@@ -263,7 +263,7 @@ public class VOBlockChanges {
 			if(!(Blocks.wave instanceof LiquidTurret))break wave;
 			LiquidTurret block = (LiquidTurret)Blocks.wave;
 			
-			block.ammoTypes.putAll(Liquids.water,new LiquidBulletType(Liquids.water){{
+			block.ammoTypes.putAll(Liquids.water, new LiquidBulletType(Liquids.water){{
                     knockback = 0.7f;
                     drag = 0.01f;
                     layer = Layer.bullet - 2f;

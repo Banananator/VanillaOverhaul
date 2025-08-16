@@ -243,7 +243,9 @@ public class VOUnitChanges {
             pierceEffect = Fx.railHit;
         }};
 
-        UnitTypes.retusa.weapons.get(1).bullet.hitEffect = new MultiEffect(new WrapEffect(Fx.shootBigColor, Pal.heal), new WrapEffect(Fx.shootBigColor, Pal.heal, 90), new WrapEffect(Fx.shootBigColor, Pal.heal, 180), new WrapEffect(Fx.shootBigColor, Pal.heal, 270),
+        UnitTypes.retusa.weapons.get(1).bullet.hitEffect = hitLaserBoltGreen;
+        UnitTypes.retusa.weapons.get(1).bullet.despawnEffect = hitLaserBoltGreen;
+        UnitTypes.retusa.weapons.get(2).bullet.hitEffect = new MultiEffect(new WrapEffect(Fx.shootBigColor, Pal.heal), new WrapEffect(Fx.shootBigColor, Pal.heal, 90), new WrapEffect(Fx.shootBigColor, Pal.heal, 180), new WrapEffect(Fx.shootBigColor, Pal.heal, 270),
             new WaveEffect(){{
                 lifetime = 10;
                 sizeFrom =  1;
@@ -253,7 +255,7 @@ public class VOUnitChanges {
                 colorFrom = Pal.heal;
                 colorTo = Pal.heal;
             }}
-        );UnitTypes.retusa.weapons.get(1).bullet.despawnEffect = Fx.none;
+        );UnitTypes.retusa.weapons.get(2).bullet.despawnEffect = Fx.none;
         UnitTypes.navanax.weapons.get(4).bullet.shootEffect = new MultiEffect(Fx.shootBigColor, Fx.hitEmpSpark);
         UnitTypes.navanax.weapons.get(4).bullet.smokeEffect = new MultiEffect(Fx.shootBigSmoke2, Fx.hitLaser);
         UnitTypes.navanax.weapons.get(4).bullet.lightning = 9;
